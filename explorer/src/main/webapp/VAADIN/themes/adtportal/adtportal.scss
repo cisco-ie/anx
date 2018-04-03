@@ -1,0 +1,36 @@
+$v-app-loading-text: "ANX Netconf Explorer";
+$v-background-color: #f4f4f4;
+$v-app-background-color: #fff;
+/* $valo-menu-background-color: darken($v-focus-color, 10%);*/
+$v-focus-color: #858587;
+$v-gradient: v-linear 3%;
+
+
+@import "../valo/valo.scss";
+
+@mixin adtportal {
+  @include valo;
+
+  .loginview {
+    background: unquote("linear-gradient(to bottom, #646464, #323232)");
+  }
+
+  .loginview .v-captiontext {
+    color: #ffffff;
+  }
+
+  .loginview .welcome {
+    color: #ffffff;
+    font-size: 60px;
+  }
+
+  .topbar {
+    background-color: #464646;
+    padding: 5px;
+    color: #ffffff;
+  }
+
+  .topbar .topbartitle {
+    font-size: 20px;
+  }
+}

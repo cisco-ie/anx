@@ -1,0 +1,7 @@
+version: '2'
+
+services:
+    anx:
+        build: .
+        ports:
+            - 9269:8080

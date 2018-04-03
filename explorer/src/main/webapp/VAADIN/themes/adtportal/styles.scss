@@ -1,0 +1,9 @@
+@import "addons.scss";
+@import "adtportal.scss";
+
+/* This file prefixes all rules with the theme name to avoid causing conflicts with other themes. */
+/* The actual styles should be defined in adtportal.scss */
+.adtportal {
+  @include addons;
+  @include adtportal;
+}
