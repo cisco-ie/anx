@@ -29,10 +29,14 @@ laptop, please increase the RAM assigned to Docker to 3 GB. See https://docs.doc
 https://docs.docker.com/docker-for-mac/#advanced
 
 
-### Docker container
+### Docker and docker-compose
 The easiest way to build and deploy the viewer is using the included Dockerfile.
 If you have docker-compose installed the application can be built and run by issuing a simple `docker-compose up -d`
 and will be available on port 9269. 
+
+### Running with a local JDK and Maven
+If you have a working Java development environment with maven on your machine, you can also launch a webserver with ANX using:
+* `mvn -e -f explorer/pom.xml compile jetty:run`
 
 ### WAR deployment
 Alternatively maven can be used to build a WAR-file which can be deployed using Jetty,
