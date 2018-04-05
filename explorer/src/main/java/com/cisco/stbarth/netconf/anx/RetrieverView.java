@@ -54,7 +54,7 @@ public class RetrieverView extends VerticalLayout {
         
         loginPanel.addComponent(logo);
 
-        Label welcome = new Label("ANX Netconf Explorer");
+        Label welcome = new Label("Netconf Explorer");
         welcome.addStyleName("welcome");
         welcome.addStyleName(ValoTheme.LABEL_H1);
         

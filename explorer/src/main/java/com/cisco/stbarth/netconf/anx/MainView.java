@@ -79,7 +79,7 @@ public final class MainView extends VerticalLayout implements View {
         setMargin(false);
 
         // Build topbar
-        Label title = new Label("ANX Netconf Explorer");
+        Label title = new Label("Netconf Explorer");
         title.addStyleName("topbartitle");
         title.setSizeUndefined();
 

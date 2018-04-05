@@ -51,7 +51,7 @@ public class MainUI extends com.vaadin.ui.UI {
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
-    	Page.getCurrent().setTitle("ANX");
+    	Page.getCurrent().setTitle("Netconf Explorer");
     	addStyleName(ValoTheme.UI_WITH_MENU);
         showMain();
     }
@@ -60,7 +60,7 @@ public class MainUI extends com.vaadin.ui.UI {
         // Show main view or login view depending on state
         if (client != null) {
             setSizeFull();
-            getPage().setTitle("ANX: ".concat(name));
+            getPage().setTitle("Netconf: ".concat(name));
             setContent(new MainView(name, username, password, client, parser, capabilities));
             removeStyleName("loginview");
             addStyleName("mainview");

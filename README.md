@@ -1,8 +1,8 @@
-# ANX
-ADT Netconf client (ANC) and explorer (ANX)
+# Netconf Explorer
+Advanced Netconf client and Netconf explorer
 
 ## Explorer
-ANX is a graphical explorer for YANG models supported by a NETCONF device or service orchestrator. Features include:
+This is a graphical explorer for YANG models supported by a NETCONF device or service orchestrator. Features include:
 * Retrieving all YANG models supported by a device or orchestrator using the NETCONF monitoring standard.
 * Parsing the YANG models (using ODL yangtools) and outputting a tree with all the nodes, which the user can expand / collapse.
 * Filtering the model tree by module name and searching the names and descriptions of the YANG nodes in it (e.g. “neighbor count” or “bgp” “neighbor count”).
@@ -16,8 +16,8 @@ ANX is a graphical explorer for YANG models supported by a NETCONF device or ser
 
 You can easily build and run using docker:
 
-docker build -t anx .
-docker run --name anx -d -p 9269:8080 anx
+docker build -t netconf-explorer .
+docker run --name netconf-exlorer -d -p 9269:8080 netconf-explorer
 
 Afterwards access port 9269 of the docker host using a browser. You can use ANX to connect to any NETCONF / Yang
 enabled device or orchestrator supporting NETCONF Monitoring [RFC 6022](https://tools.ietf.org/html/rfc6022). Enter
