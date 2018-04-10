@@ -47,7 +47,6 @@ public class YangParser implements SchemaSourceProvider<YangTextSchemaSource> {
     private SchemaContext schemaContext;
     private InMemorySchemaSourceCache<ASTSchemaSource> cache;
     private List<String> warnings;
-    private Map<String,String> blacklist;
 
     YangParser() {
         //System.setProperty("org.slf4j.simpleLogger.defaultLogLevel", "debug");
@@ -56,16 +55,6 @@ public class YangParser implements SchemaSourceProvider<YangTextSchemaSource> {
         repository.registerSchemaSourceListener(TextToASTTransformer.create(repository, repository));
         cache = InMemorySchemaSourceCache.createSoftCache(repository, ASTSchemaSource.class);
         warnings = new LinkedList<>();
-        blacklist = new HashMap<>();
-
-        // Some Openconfig YANG models use YANG 1.1 feature, but claim to be YANG 1.0
-        // exclude those, since they mess up the parser
-        blacklist.put("openconfig-telemetry", "2017-02-20");
-        blacklist.put("openconfig-bgp", "2016-06-06");
-        blacklist.put("openconfig-bgp-policy", "2016-06-06");
-        blacklist.put("openconfig-mpls-rsvp", "2016-12-15");
-        blacklist.put("openconfig-mpls-te", "2016-12-15");
-        blacklist.put("openconfig-if-ip", "2016-12-22");
     }
 
     public Collection<YangTextSchemaSource> getSources() {
@@ -88,16 +77,6 @@ public class YangParser implements SchemaSourceProvider<YangTextSchemaSource> {
                 RevisionSourceIdentifier.create(identifier, version), byteSource);
         ASTSchemaSource ast = TextToASTTransformer.transformText(source);
         SourceIdentifier actualIdentifier = ast.getIdentifier();
-
-
-        // Apply blacklist
-        String blacklistVersion = blacklist.get(identifier);
-        if (blacklistVersion != null && version.compareTo(blacklistVersion) < 0) {
-            warnings.add(String.format("%s@%s blacklisted: not YANG compliant", identifier, version));
-            System.err.printf("%TF %TT: %s\n", System.currentTimeMillis(), System.currentTimeMillis(),
-                    warnings.get(warnings.size() - 1));
-            return;
-        }
 
         // Fixup YANG source identifier if the provided YANG model has a different actual identifier
         if (!source.getIdentifier().equals(actualIdentifier))
