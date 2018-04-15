@@ -78,7 +78,7 @@ class WrappedYangNode {
 
     String getCaption() {
         String caption = getName();
-        if (parent != null && !parent.namespace.equals(namespace))
+        if (parent != null && (parent.node == null || !parent.namespace.equals(namespace)))
             caption += " (" + namespace + ")";
         return caption;
     }
@@ -251,12 +251,6 @@ class WrappedYangNode {
         return parent;
     }
 
-    Module getModule() {
-        WrappedYangNode node;
-        for (node = this; node.module == null; node = node.getParent());
-        return node.module;
-    }
-
     // Populate YANG schema nodes, based on a filter applied to names and descriptions
     boolean addToTree(TreeData<WrappedYangNode> data, Collection<String> filter) {
         String nodeName = name.toLowerCase();
@@ -264,7 +258,8 @@ class WrappedYangNode {
         boolean okay = filter.stream().filter(nodeName::contains).count() == filter.size() ||
                 filter.stream().filter(nodeDescription::contains).count() == filter.size();
 
-        data.addItem(parent, this);
+        if (node != null)
+            data.addItem(parent.node != null ? parent : null, this);
 
         if (!filter.isEmpty()) {
             if (parent != null)
