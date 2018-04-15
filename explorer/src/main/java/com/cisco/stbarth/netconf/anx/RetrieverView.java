@@ -25,6 +25,8 @@ import com.vaadin.server.Responsive;
 import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.themes.ValoTheme;
+
+import java.net.Socket;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -101,15 +103,26 @@ public class RetrieverView extends VerticalLayout {
             ui.name = "";
             ui.username = username.getValue();
             ui.password = password.getValue();
-            int port = 22;
+            int port = 0;
 
             try {
                 URI uri = new URI("http://" + hostname.getValue());
                 if (uri.getHost() != null)
                     ui.name = uri.getHost();
 
-                if (uri.getPort() > 0)
+                if (uri.getPort() <= 0) {
+                    try (Socket socket = new Socket(uri.getHost(), 830)) {
+                        port = 830;
+                    } catch (Exception e) {
+                        try (Socket socket = new Socket(uri.getHost(), 2022)) {
+                            port = 2022;
+                        } catch (Exception f) {
+                            port = 22;
+                        }
+                    }
+                } else {
                     port = uri.getPort();
+                }
             } catch (Exception f) {
 
             }
