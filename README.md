@@ -1,4 +1,4 @@
-# Netconf Explorer
+# Advanced Netconf Explorer
 Advanced Netconf explorer and Netconf client library for Java
 
 This is a graphical explorer for YANG models supported by a NETCONF device or service orchestrator. Features include:
