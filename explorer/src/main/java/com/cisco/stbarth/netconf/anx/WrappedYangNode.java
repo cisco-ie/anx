@@ -289,8 +289,12 @@ class WrappedYangNode {
         }
 
         // If neither current element nor children match filter, remove current
-        if (!okay)
-            data.removeItem(this);
+        try {
+            if (!okay)
+                data.removeItem(this);
+        } catch (IllegalArgumentException e) {
+            // ignore if element is not in tree anyway
+        }
 
         return okay;
     }
