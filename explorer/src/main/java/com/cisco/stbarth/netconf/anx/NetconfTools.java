@@ -50,10 +50,25 @@ public class NetconfTools {
     }
 
     void showWindow() {
+        NetconfSession session;
         Window window = new Window("NETCONF console");
         window.setModal(true);
         window.setWidth("1000px");
         window.setHeight("700px");
+
+        try {
+            session = view.client.createSession();
+            window.addCloseListener(x -> {
+                try {
+                    session.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+        } catch (NetconfException e) {
+            Notification.show(e.getMessage(), Notification.Type.ERROR_MESSAGE);
+            return;
+        }
 
         VerticalLayout layout = new VerticalLayout();
         layout.setMargin(true);
@@ -91,7 +106,7 @@ public class NetconfTools {
         requestArea.addValueChangeListener(x -> responseArea.clear());
 
         submit.addClickListener(x -> {
-            try (NetconfSession session = view.client.createSession()) {
+            try {
                 responseArea.setValue(session.call(new XMLElement(requestArea.getValue())).stream()
                         .map(XMLElement::toString).collect(Collectors.joining("\n")));
             } catch (NetconfException.RPCException e) {
