@@ -29,7 +29,6 @@ import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.FileDownloader;
 import com.vaadin.server.Page;
 import com.vaadin.server.StreamResource;
-import com.vaadin.server.ThemeResource;
 import com.vaadin.shared.ui.grid.HeightMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.Notification;
@@ -62,12 +61,12 @@ public final class MainView extends VerticalLayout implements View {
     String username;
     String password;
     NetconfClient client;
-    YangParser parser;
+    NetconfYangParser parser;
     WrappedYangNode selectedNode;
     XMLElement selectedData;
 
     public MainView(String host, String username, String password,
-            NetconfClient client, YangParser parser, Collection<String> capabilities) {
+            NetconfClient client, NetconfYangParser parser, Collection<String> capabilities) {
         this.host = host;
         this.username = username;
         this.password = password;
@@ -323,7 +322,7 @@ public final class MainView extends VerticalLayout implements View {
         TreeData<WrappedYangNode> data = new TreeData<>();
         for (Module module: parser.getSchemaContext().getModules()) {
             String name = module.getName().toLowerCase();
-            String description = Optional.ofNullable(module.getDescription()).orElse("").toLowerCase();
+            String description = module.getDescription().orElse("").toLowerCase();
             if (moduleQuery.stream().filter(name::contains).count() == moduleQuery.size() ||
                     moduleQuery.stream().filter(description::contains).count() == moduleQuery.size())
                 new WrappedYangNode(module).addToTree(data, fieldQuery);

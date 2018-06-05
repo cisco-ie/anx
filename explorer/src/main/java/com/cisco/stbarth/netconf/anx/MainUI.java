@@ -46,7 +46,7 @@ public class MainUI extends com.vaadin.ui.UI {
     String username;
     String password;
     NetconfSSHClient client;
-    YangParser parser;
+    NetconfYangParser parser;
     Collection<String> capabilities;
 
     @Override

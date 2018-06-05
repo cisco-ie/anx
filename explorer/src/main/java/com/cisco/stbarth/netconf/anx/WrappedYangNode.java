@@ -50,7 +50,7 @@ class WrappedYangNode {
         this.node = node;
         this.namespace = node.getQName().getNamespace().toString();
         this.name = node.getQName().getLocalName();
-        this.description = Optional.ofNullable(node.getDescription()).orElse("");
+        this.description = node.getDescription().orElse("");
         this.configuration = node.isConfiguration();
     }
 
@@ -58,7 +58,7 @@ class WrappedYangNode {
         this.module = module;
         this.namespace = module.getNamespace().toString();
         this.name = module.getName();
-        this.description = Optional.ofNullable(module.getDescription()).orElse("");
+        this.description = module.getDescription().orElse("");
         prefixes.put(namespace, module.getPrefix());
     }
 
@@ -86,7 +86,7 @@ class WrappedYangNode {
     String getSensorPath() {
         String path = name;
         for (WrappedYangNode node = this.parent; node != null; node = node.parent)
-            if (!(node.node instanceof ChoiceCaseNode) && !(node.node instanceof ChoiceSchemaNode))
+            if (!(node.node instanceof CaseSchemaNode) && !(node.node instanceof ChoiceSchemaNode))
                 path = node.name + (node.module != null ? ':' : '/') + path;
         return path;
     }
@@ -94,7 +94,7 @@ class WrappedYangNode {
     String getXPath() {
         String path = String.format("%s:%s", prefixes.get(namespace), name);
         for (WrappedYangNode node = this.parent; node != null && node.node != null; node = node.parent) {
-            if (!(node.node instanceof ChoiceCaseNode) && !(node.node instanceof ChoiceSchemaNode))
+            if (!(node.node instanceof CaseSchemaNode) && !(node.node instanceof ChoiceSchemaNode))
                 path = String.format("%s:%s/%s", prefixes.get(node.namespace), node.name, path);
         }
         return "/" + path;
@@ -107,7 +107,7 @@ class WrappedYangNode {
         String path = !qualified ? nodeName :
             String.format("%s__%s", prefixes.get(namespace).replaceAll("[-.]", "_"), nodeName);
         for (WrappedYangNode node = this.parent; node != null && node.node != null; node = node.parent) {
-            if (!(node.node instanceof ChoiceCaseNode) && !(node.node instanceof ChoiceSchemaNode)) {
+            if (!(node.node instanceof CaseSchemaNode) && !(node.node instanceof ChoiceSchemaNode)) {
                 nodeName = node.name.replaceAll("[-.]", "_");
                 if (node.node instanceof ListSchemaNode)
                     nodeName += "[...]";
@@ -121,7 +121,7 @@ class WrappedYangNode {
     String getType() {
         if (node instanceof AnyXmlSchemaNode)
             return "anyxml";
-        else if (node instanceof ChoiceCaseNode)
+        else if (node instanceof CaseSchemaNode)
             return "case";
         else if (node instanceof ChoiceSchemaNode)
             return "choice";
@@ -138,7 +138,7 @@ class WrappedYangNode {
     }
 
     String getDataType() {
-        return (node instanceof TypedSchemaNode) ? ((TypedSchemaNode)node).getType().getPath().getLastComponent().getLocalName() : "";
+        return (node instanceof TypedDataSchemaNode) ? ((TypedDataSchemaNode)node).getType().getPath().getLastComponent().getLocalName() : "";
     }
 
     // Recursively transform YANG schema node into XML pattern (e.g. subtree filters)
@@ -159,7 +159,7 @@ class WrappedYangNode {
 
                 if (!dataChildElement.isPresent()) {
                     if (child instanceof LeafSchemaNode || child instanceof LeafListSchemaNode)
-                        childElement.withText(child.getDescription());
+                        childElement.withText(child.getDescription().orElse(""));
 
                     element.withComment(childElement.toString().replaceAll("\\s+$", ""));
                     childElement.remove();
@@ -200,7 +200,7 @@ class WrappedYangNode {
 
         // If we have associated data from the peer populate it in the XML template
         for (WrappedYangNode node = this.parent; node != null && node.node != null; node = node.parent) {
-            if (!(node.node instanceof ChoiceCaseNode) && !(node.node instanceof ChoiceSchemaNode)) {
+            if (!(node.node instanceof CaseSchemaNode) && !(node.node instanceof ChoiceSchemaNode)) {
                 if (data != null)
                     data = data.getParent();
 

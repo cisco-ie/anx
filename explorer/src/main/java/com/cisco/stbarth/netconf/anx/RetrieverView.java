@@ -160,7 +160,7 @@ public class RetrieverView extends VerticalLayout {
             ui.addWindow(loadingWindow);
             ui.push();
 
-            ui.parser = new YangParser();
+            ui.parser = new NetconfYangParser(ui.client);
 
             try (NetconfSession session = ui.client.createSession()) {
                 // Use NETCONF monitoring to query available schemas for retriving from device
