@@ -1,5 +1,5 @@
 syntax = "proto3";
-option java_package = "com.cisco.stbarth.grpc.agc";
+option java_package = "com.cisco.stbarth.netconf.grpc";
 option java_outer_classname = "XRGRPC";
 
 // Package implements gRPC Model Driven Telemetry service

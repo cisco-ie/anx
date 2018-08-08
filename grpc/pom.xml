@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.cisco.stbarth.netconf</groupId>
-    <artifactId>xrgrpc</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <artifactId>grpc</artifactId>
+    <version>0.2-SNAPSHOT</version>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -15,17 +15,22 @@
         <dependency>
             <groupId>io.grpc</groupId>
             <artifactId>grpc-okhttp</artifactId>
-            <version>1.10.0</version>
+            <version>1.14.0</version>
         </dependency>
         <dependency>
             <groupId>io.grpc</groupId>
             <artifactId>grpc-protobuf</artifactId>
-            <version>1.10.0</version>
+            <version>1.14.0</version>
         </dependency>
         <dependency>
             <groupId>io.grpc</groupId>
             <artifactId>grpc-stub</artifactId>
-            <version>1.10.0</version>
+            <version>1.14.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>3.11.0</version>
         </dependency>
     </dependencies>
 </project>
