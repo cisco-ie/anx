@@ -14,6 +14,6 @@
 	<modules>
 		<module>anc</module>
 		<module>explorer</module>
-		<module>xrgrpc</module>
+		<module>grpc</module>
   </modules>
 </project>
