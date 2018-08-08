@@ -7,7 +7,7 @@ This is a graphical explorer for YANG models supported by a NETCONF device or se
 * Filtering the model tree by module name and searching the names and descriptions of the YANG nodes in it (e.g. “neighbor count” or “bgp” “neighbor count”).
 * Downloading a ZIP-Archive of all YANG-models supported by the device or orchestrator.
 * Showing details and generating metadata for a YANG node, e.g. the description, the (sensor-)path, a subtree-filter (for NETCONF development) etc.
-* Telemetry support tools to edit sensor groups and show live data using GRPC.
+* GNMI and IOS XR Telemetry support tools to edit sensor groups and show live data using GRPC.
 * Browsing and searching live (operational) data for selected YANG models.
 
 ## Setup
