@@ -24,6 +24,7 @@ import com.vaadin.data.TreeData;
 import com.vaadin.ui.Tree;
 import org.opendaylight.yangtools.yang.common.QName;
 import org.opendaylight.yangtools.yang.model.api.*;
+import org.opendaylight.yangtools.yang.model.api.Module;
 
 import java.util.Collection;
 import java.util.Collections;

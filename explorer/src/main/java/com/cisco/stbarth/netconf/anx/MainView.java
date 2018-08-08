@@ -33,7 +33,7 @@ import com.vaadin.shared.ui.grid.HeightMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.themes.ValoTheme;
-import org.opendaylight.yangtools.yang.model.api.*;
+import org.opendaylight.yangtools.yang.model.api.Module;
 import org.opendaylight.yangtools.yang.model.repo.api.YangTextSchemaSource;
 
 import java.io.ByteArrayInputStream;
@@ -198,6 +198,7 @@ public final class MainView extends VerticalLayout implements View {
         sidebar.addComponent(downloadTools);
 
         sidebar.addComponent(new TelemetryTools(this).createComponent());
+        sidebar.addComponent(new GNMITools(this).createComponent());
 
         sidebarPanel = new VerticalLayout();
         sidebarPanel.setMargin(false);

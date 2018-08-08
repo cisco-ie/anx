@@ -18,10 +18,10 @@
 
 package com.cisco.stbarth.netconf.anx;
 
-import com.cisco.stbarth.netconf.grpc.GRPCClient;
-import com.cisco.stbarth.netconf.grpc.GRPCClient.SubscriptionEncoding;
-import com.cisco.stbarth.netconf.grpc.GRPCClient.GRPCException;
-import com.cisco.stbarth.netconf.grpc.GRPCClient.GRPCClientSecurity;
+import com.cisco.stbarth.netconf.xrgrpc.XRGRPCClient;
+import com.cisco.stbarth.netconf.xrgrpc.XRGRPCClient.SubscriptionEncoding;
+import com.cisco.stbarth.netconf.xrgrpc.XRGRPCClient.XRException;
+import com.cisco.stbarth.netconf.xrgrpc.XRGRPCClient.XRGRPCClientSecurity;
 import com.cisco.stbarth.netconf.anc.*;
 import com.cisco.stbarth.netconf.anc.Netconf.Datastore;
 import com.vaadin.data.provider.Query;
@@ -327,10 +327,10 @@ public class TelemetryTools {
                 (long)x.getNumber("msg_timestamp"), x.getString("encoding_path")));
         measurements.addValueChangeListener(x -> data.setValue(JsonUtil.stringify(x.getValue(), 2)));
 
-        GRPCClient tlsClient = new GRPCClient(view.host, grpcPort,
-                view.username, view.password, GRPCClientSecurity.TLS_UNVERIFIED);
-        GRPCClient plainClient = new GRPCClient(view.host, grpcPort,
-                view.username, view.password, GRPCClientSecurity.PLAINTEXT);
+        XRGRPCClient tlsClient = new XRGRPCClient(view.host, grpcPort,
+                view.username, view.password, XRGRPCClientSecurity.TLS_UNVERIFIED);
+        XRGRPCClient plainClient = new XRGRPCClient(view.host, grpcPort,
+                view.username, view.password, XRGRPCClientSecurity.PLAINTEXT);
 
         LinkedList<JsonObject> telemetryData = new LinkedList<>();
         Consumer<byte[]> telemetryConsumer = x -> view.getUI().access(() -> {
@@ -343,7 +343,7 @@ public class TelemetryTools {
         Consumer<Throwable> shutdownConsumer = new Consumer<Throwable>() {
 			@Override
 			public void accept(Throwable t) {
-                if (t instanceof GRPCException) {
+                if (t instanceof XRException) {
                     Notification.show("Subscription error: " + t.getMessage());
                 } else if (t != null && t.getCause() instanceof SSLHandshakeException) {
                     plainClient.createSubscription(subscriptionID, SubscriptionEncoding.JSON,

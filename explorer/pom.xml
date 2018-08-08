@@ -14,8 +14,8 @@
 	</prerequisites>
 
 	<properties>
-		<vaadin.version>8.4.3</vaadin.version>
-		<vaadin.plugin.version>8.4.3</vaadin.plugin.version>
+		<vaadin.version>8.5.1</vaadin.version>
+		<vaadin.plugin.version>8.5.1</vaadin.plugin.version>
 		<jetty.plugin.version>9.4.6.v20170531</jetty.plugin.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
@@ -73,13 +73,18 @@
 		</dependency>
 		<dependency>
 			<groupId>com.cisco.stbarth.netconf</groupId>
-			<artifactId>xrgrpc</artifactId>
-			<version>0.1-SNAPSHOT</version>
+			<artifactId>grpc</artifactId>
+			<version>0.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.opendaylight.yangtools</groupId>
 			<artifactId>yang-parser-impl</artifactId>
-			<version>2.0.5</version>
+			<version>2.0.10</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.protobuf</groupId>
+			<artifactId>protobuf-java-util</artifactId>
+			<version>3.6.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
