@@ -296,7 +296,7 @@ public class TelemetryTools {
         try (NetconfSession session = view.client.createSession()) {
             XMLElement grpc = session.getConfig(Netconf.Datastore.RUNNING,
                     Arrays.asList(new XMLElement(NS_EMS, "grpc"))).getOrEmpty(NS_EMS, "grpc");
-            grpcPort = Integer.parseInt(grpc.getText("port"));
+            grpcPort = Integer.parseInt(grpc.getTextOrDefault("port", "57400"));
 
             session.editConfig(Datastore.CANDIDATE, grpcConfig);
             session.editConfig(Datastore.CANDIDATE, subscriptionConfig);
