@@ -73,7 +73,7 @@ public class NetconfYangParser implements SchemaSourceProvider<YangTextSchemaSou
             // Use NETCONF monitoring to query available schemas for retriving from device
             return session.get(
                     Arrays.asList(new XMLElement(Netconf.NS_NETCONF_MONITORING, "netconf-state").withChild("schemas")))
-                            .withoutNamespaces().find("netconf-state/schemas/schema[format = 'yang']")
+                            .withoutNamespaces().find("netconf-state/schemas/schema[format='yang' or format='ncm:yang']")
                             .collect(Collectors.toMap(x -> x.getText("identifier"), x -> x.getText("version")));
         }
     }
