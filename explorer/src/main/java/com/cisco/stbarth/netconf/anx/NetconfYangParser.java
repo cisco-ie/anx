@@ -71,10 +71,12 @@ public class NetconfYangParser implements SchemaSourceProvider<YangTextSchemaSou
     public Map<String,String> getAvailableSchemas() throws NetconfException {
         try (NetconfSession session = client.createSession()) {
             // Use NETCONF monitoring to query available schemas for retriving from device
-            return session.get(
+            HashMap<String,String> schemas = new HashMap<>();
+            session.get(
                     Arrays.asList(new XMLElement(Netconf.NS_NETCONF_MONITORING, "netconf-state").withChild("schemas")))
-                            .withoutNamespaces().find("netconf-state/schemas/schema[format='yang' or format='ncm:yang']")
-                            .collect(Collectors.toMap(x -> x.getText("identifier"), x -> x.getText("version")));
+                            .withoutNamespaces().find("netconf-state/schemas/schema")
+                            .forEach(x -> schemas.putIfAbsent(x.getText("identifier"), x.getText("version")));
+            return schemas;
         }
     }
 
