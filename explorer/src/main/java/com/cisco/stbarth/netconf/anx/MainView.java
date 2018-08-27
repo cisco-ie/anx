@@ -197,6 +197,11 @@ public final class MainView extends VerticalLayout implements View {
         downloadTools.addComponents(modelSelect, viewButton, downloadButton);
         sidebar.addComponent(downloadTools);
 
+        ComboBox<String> capabilitySelect = new ComboBox<>("NETCONF Capabilities", capabilities);
+        capabilitySelect.setWidth("700px");
+        capabilitySelect.setIcon(VaadinIcons.LINES);
+        sidebar.addComponent(capabilitySelect);
+
         sidebar.addComponent(new TelemetryTools(this).createComponent());
         sidebar.addComponent(new GNMITools(this).createComponent());
 
@@ -532,20 +537,13 @@ public final class MainView extends VerticalLayout implements View {
     private void showHomeScreen() {
 	    sidebarPanel.removeAllComponents();
 
-        VerticalLayout capabilityLayout = new VerticalLayout();
-        for (String capability: capabilities)
-            capabilityLayout.addComponent(new Label(capability));
-        Panel capabilityPanel = new Panel("Capabilities", capabilityLayout);
-        capabilityPanel.setHeight(200, Unit.PIXELS);
-        sidebarPanel.addComponent(capabilityPanel);
-
         VerticalLayout warningLayout = new VerticalLayout();
         for (String warning: parser.getWarnings()) {
             Label warningLabel = new Label(warning);
             warningLabel.addStyleName(ValoTheme.LABEL_FAILURE);
             warningLayout.addComponent(warningLabel);
         }
-        Panel warningPanel = new Panel("Failed YANG models", warningLayout);
+        Panel warningPanel = new Panel("Parser Warnings", warningLayout);
         warningPanel.setHeight(200, Unit.PIXELS);
         sidebarPanel.addComponent(warningPanel);
     }

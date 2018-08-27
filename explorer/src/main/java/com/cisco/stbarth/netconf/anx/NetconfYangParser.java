@@ -56,11 +56,13 @@ public class NetconfYangParser implements SchemaSourceProvider<YangTextSchemaSou
     private SchemaContext schemaContext;
     private InMemorySchemaSourceCache<ASTSchemaSource> cache = InMemorySchemaSourceCache.createSoftCache(repository, ASTSchemaSource.class);
     private List<String> warnings = new LinkedList<>();
-    private NetconfClient client;
 
-    NetconfYangParser(NetconfClient client) {
+    public interface RetrieverCallback {
+        void onSchema(int iteration, String identifier, String version, Exception e);
+    }
+
+    NetconfYangParser() {
         //System.setProperty("org.slf4j.simpleLogger.defaultLogLevel", "debug");
-        this.client = client;
         repository.registerSchemaSourceListener(TextToASTTransformer.create(repository, repository));
     }
 
@@ -68,16 +70,14 @@ public class NetconfYangParser implements SchemaSourceProvider<YangTextSchemaSou
         return sources.values();
     }
 
-    public Map<String,String> getAvailableSchemas() throws NetconfException {
-        try (NetconfSession session = client.createSession()) {
-            // Use NETCONF monitoring to query available schemas for retriving from device
-            HashMap<String,String> schemas = new HashMap<>();
-            session.get(
-                    Arrays.asList(new XMLElement(Netconf.NS_NETCONF_MONITORING, "netconf-state").withChild("schemas")))
-                            .withoutNamespaces().find("netconf-state/schemas/schema")
-                            .forEach(x -> schemas.putIfAbsent(x.getText("identifier"), x.getText("version")));
-            return schemas;
-        }
+    public Map<String,String> getAvailableSchemas(NetconfSession session) throws NetconfException {
+        // Use NETCONF monitoring to query available schemas for retriving from device
+        HashMap<String,String> schemas = new HashMap<>();
+        session.get(
+                Arrays.asList(new XMLElement(Netconf.NS_NETCONF_MONITORING, "netconf-state").withChild("schemas")))
+                        .withoutNamespaces().find("netconf-state/schemas/schema")
+                        .forEach(x -> schemas.putIfAbsent(x.getText("identifier"), x.getText("version")));
+        return schemas;
     }
 
     public void registerSource(String identifier, String version, URL url)
@@ -108,22 +108,24 @@ public class NetconfYangParser implements SchemaSourceProvider<YangTextSchemaSou
                 source.getIdentifier(), YangTextSchemaSource.class, PotentialSchemaSource.Costs.IMMEDIATE.getValue()));
     }
     
-    public void retrieveSchemas(Map<String, String> schemas)
+    public void retrieveSchemas(NetconfSession session, Map<String, String> schemas, RetrieverCallback callback)
             throws SchemaSourceException, IOException, YangSyntaxErrorException, NetconfException {
-        try (NetconfSession session = client.createSession()) {
-            for (Map.Entry<String, String> entry : schemas.entrySet()) {
-                String identifier = entry.getKey();
-                String version = entry.getValue();
+        int iteration = 0;
+        for (Map.Entry<String, String> entry : schemas.entrySet()) {
+            String identifier = entry.getKey();
+            String version = entry.getValue();
 
-                try {
-                    registerSource(identifier, version, session.getSchema(identifier, version, "yang")
-                            .getText().getBytes(StandardCharsets.UTF_8));
-                } catch (NetconfException.RPCException f) {
-                    addWarning(String.format("Failed to get schema for %s:%s (%s)\n",
-                            identifier, version, f.getMessage()));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+            try {
+                registerSource(identifier, version, session.getSchema(identifier, version, "yang")
+                        .getText().getBytes(StandardCharsets.UTF_8));
+                callback.onSchema(++iteration, identifier, version, null);
+            } catch (NetconfException.RPCException f) {
+                addWarning(String.format("Failed to get schema for %s@%s (%s)\n",
+                        identifier, version, f.getMessage()));
+                callback.onSchema(++iteration, identifier, version, f);
+            } catch (Exception e) {
+                e.printStackTrace();
+                callback.onSchema(++iteration, identifier, version, e);
             }
         }
     }

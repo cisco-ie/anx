@@ -160,74 +160,41 @@ public class RetrieverView extends VerticalLayout {
             ui.addWindow(loadingWindow);
             ui.push();
 
-            ui.parser = new NetconfYangParser(ui.client);
+            ui.parser = new NetconfYangParser();
+            progressBar.setIndeterminate(false);
 
             try (NetconfSession session = ui.client.createSession()) {
-                // Use NETCONF monitoring to query available schemas for retriving from device
-                Collection<XMLElement> query = Arrays.asList(
-                        new XMLElement(Netconf.NS_NETCONF_MONITORING, "netconf-state").withChild("schemas"));
-
-                float schemasProcessed = 0;
-                progressBar.setIndeterminate(false);
-
+                Map<String, String> schemas = ui.parser.getAvailableSchemas(session);
                 ui.capabilities = session.getCapabilities().entrySet().stream()
                         .map(x -> x.getKey().concat(x.getValue())).sorted().collect(Collectors.toList());
 
-                Map<String, String> schemas = new HashMap<>();
-                session.get(query).withoutNamespaces()
-                        .find("netconf-state/schemas/schema[format = 'yang']")
-                        .forEach(x -> schemas.put(x.getText("identifier"), x.getText("version")));
-
-                // Workaround for NCS, it is not exporting some essential models so we provide those manually
-                if (schemas.containsKey("tailf-ncs-common") && !schemas.containsKey("tailf-common")) {
-                    ClassLoader classLoader = this.getClass().getClassLoader();
-                    ui.parser.registerSource("tailf-common", "2017-08-23",
-                            classLoader.getResource("tailf-common.yang"));
-                    ui.parser.registerSource("tailf-meta-extensions", "2017-03-08",
-                            classLoader.getResource("tailf-meta-extensions.yang"));
-                    ui.parser.registerSource("tailf-cli-extensions", "2017-08-23",
-                            classLoader.getResource("tailf-cli-extensions.yang"));
-                }
-
-                // Iterate available YANG models, retrieve them using get-schema and add them to the ODL yangtools parser
-                for (Map.Entry<String, String> entry : schemas.entrySet()) {
-                    String identifier = entry.getKey();
-                    String version = entry.getValue();
-                    label.setValue(String.format("Retrieving schema %s@%s...", identifier, version));
+                ui.parser.retrieveSchemas(session, schemas, (iteration, identifier, version, error) -> {
+                    label.setValue(String.format("Retrieving schema %s@%s: %s",
+                            identifier, version, (error != null) ? error.getMessage() : "success"));
+                    progressBar.setValue(((float)iteration) / schemas.size());
                     ui.push();
-
-                    try {
-                        ui.parser.registerSource(identifier, version, session.getSchema(identifier, version, "yang")
-                                .getText().getBytes(StandardCharsets.UTF_8));
-                    } catch (NetconfException.RPCException f) {
-                        ui.parser.addWarning(String.format("Failed to get schema for %s:%s (%s)\n",
-                                identifier, version, f.getMessage()));
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    } finally {
-                        progressBar.setValue(++schemasProcessed / schemas.size());
-                    }
-                }
-
+                });
+    
                 // Actually parse the YANG models using ODL yangtools
-                label.setValue(String.format("Analyzing schemas. This may take a minute..."));
+                label.setValue(String.format("Parsing schemas. This may take a minute..."));
                 progressBar.setIndeterminate(true);
                 ui.push();
-
+    
                 ui.parser.parse();
-
-                if (ui.parser.getSchemaContext() == null)
-                    throw new Exception("Failed to analyze schemas! Please verify that the YANG models of your agent are valid!");
-
-                // Switch to main view
-                ui.showMain();
+    
+                if (ui.parser.getSchemaContext() != null)
+                    ui.showMain();
+                else
+                    Notification.show("Failed to parse schemas: no valid YANG models found!",
+                            Notification.Type.ERROR_MESSAGE);    
             } catch (Exception e) {
-                Notification.show("Failed to connect: " + e.getMessage(), Notification.Type.ERROR_MESSAGE);
+                Notification.show("Failed to retrieve schemas: " + (e.getCause() != null ?
+                        e.getCause().getMessage() : e.getMessage()), Notification.Type.ERROR_MESSAGE);
                 e.printStackTrace();
-            } finally {
-                loadingWindow.close();
-                ui.removeWindow(loadingWindow);
             }
+
+            loadingWindow.close();
+            ui.removeWindow(loadingWindow);
         });
         loginPanel.addComponent(fields);
 
