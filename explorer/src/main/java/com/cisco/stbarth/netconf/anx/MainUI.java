@@ -30,6 +30,7 @@ import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.themes.ValoTheme;
 
 import java.util.Collection;
+import java.util.Map;
 
 /**
  * This MainUI is the application entry point. A MainUI may either represent a browser window
@@ -47,7 +48,7 @@ public class MainUI extends com.vaadin.ui.UI {
     String password;
     NetconfSSHClient client;
     NetconfYangParser parser;
-    Collection<String> capabilities;
+    Map<String,String> capabilities;
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {

@@ -165,8 +165,7 @@ public class RetrieverView extends VerticalLayout {
 
             try (NetconfSession session = ui.client.createSession()) {
                 Map<String, String> schemas = ui.parser.getAvailableSchemas(session);
-                ui.capabilities = session.getCapabilities().entrySet().stream()
-                        .map(x -> x.getKey().concat(x.getValue())).sorted().collect(Collectors.toList());
+                ui.capabilities = session.getCapabilities();
 
                 ui.parser.retrieveSchemas(session, schemas, (iteration, identifier, version, error) -> {
                     label.setValue(String.format("Retrieving schema %s@%s: %s",

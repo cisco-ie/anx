@@ -54,7 +54,6 @@ public final class MainView extends VerticalLayout implements View {
     private VerticalLayout sidebarPanel;
     private Tree<WrappedYangNode> schemaTree;
     private Tree<XMLElement> dataTree;
-    private Collection<String> capabilities;
     private XMLElement dataElements = new XMLElement(null, "data");
     private String dataQuery;
     String host;
@@ -66,13 +65,12 @@ public final class MainView extends VerticalLayout implements View {
     XMLElement selectedData;
 
     public MainView(String host, String username, String password,
-            NetconfClient client, NetconfYangParser parser, Collection<String> capabilities) {
+            NetconfClient client, NetconfYangParser parser, Map<String,String> capabilities) {
         this.host = host;
         this.username = username;
         this.password = password;
 	    this.client = client;
 	    this.parser = parser;
-        this.capabilities = capabilities;
         
         setSizeFull();
         setMargin(false);
@@ -197,12 +195,13 @@ public final class MainView extends VerticalLayout implements View {
         downloadTools.addComponents(modelSelect, viewButton, downloadButton);
         sidebar.addComponent(downloadTools);
 
-        ComboBox<String> capabilitySelect = new ComboBox<>("NETCONF Capabilities", capabilities);
+        ComboBox<String> capabilitySelect = new ComboBox<>("NETCONF Capabilities", capabilities.entrySet().stream()
+                .map(x -> x.getKey().concat(x.getValue())).sorted().collect(Collectors.toList()));
         capabilitySelect.setWidth("700px");
         capabilitySelect.setIcon(VaadinIcons.LINES);
         sidebar.addComponent(capabilitySelect);
 
-        if (capabilities.contains("http://cisco.com/ns/yang/Cisco-IOS-XR-telemetry-model-driven-cfg"))
+        if (capabilities.containsKey("http://cisco.com/ns/yang/Cisco-IOS-XR-telemetry-model-driven-cfg"))
             sidebar.addComponent(new TelemetryTools(this).createComponent());
 
         sidebar.addComponent(new GNMITools(this).createComponent());
