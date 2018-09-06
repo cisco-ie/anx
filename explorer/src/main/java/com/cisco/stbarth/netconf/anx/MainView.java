@@ -202,7 +202,9 @@ public final class MainView extends VerticalLayout implements View {
         capabilitySelect.setIcon(VaadinIcons.LINES);
         sidebar.addComponent(capabilitySelect);
 
-        sidebar.addComponent(new TelemetryTools(this).createComponent());
+        if (capabilities.contains("http://cisco.com/ns/yang/Cisco-IOS-XR-telemetry-model-driven-cfg"))
+            sidebar.addComponent(new TelemetryTools(this).createComponent());
+
         sidebar.addComponent(new GNMITools(this).createComponent());
 
         sidebarPanel = new VerticalLayout();
