@@ -406,20 +406,19 @@ public final class MainView extends VerticalLayout implements View {
         if (!newQuery.equals(dataQuery)) {
             try (NetconfSession session = client.createSession()) {
                 // Query peer using NETCONF to retrieve current data using get or get-config
-                if (subtreeFilter.isEmpty()) {
-                    try {
-                        dataElements = session.get();
-                    } catch (NetconfException.RPCException e) {
-                        Notification.show("The device cowardly refused to send all operational data at once, thus " +
-                                "displaying configuration only. To view operational data, use 'Show Schemas' to go back, " +
-                                "select desired schemas and use 'Show Data' again.", Notification.Type.ERROR_MESSAGE);
-                        dataElements = session.getConfig(Netconf.Datastore.RUNNING);
-                    }
-                } else {
-                    dataElements = session.get(subtreeFilter);
+                try {
+                    dataElements = subtreeFilter.isEmpty() ? session.get() : session.get(subtreeFilter);
+                } catch (NetconfException.RPCException e) {
+                    e.printStackTrace();
+                    Notification.show("The device cowardly refused to send operational data, thus " +
+                            "displaying configuration only. You may use 'Show Schemas' to go back, " +
+                            "select individual supported schemas and try 'Show Data' again.", Notification.Type.ERROR_MESSAGE);
+                    dataElements = subtreeFilter.isEmpty() ? session.getConfig(Netconf.Datastore.RUNNING) :
+                            session.getConfig(Netconf.Datastore.RUNNING, subtreeFilter);
                 }
                 dataQuery = newQuery;
             } catch (NetconfException e) {
+                e.printStackTrace();
                 Notification.show("Failed to get data: " + e.getMessage(), Notification.Type.ERROR_MESSAGE);
             }
         }
