@@ -32,6 +32,7 @@ import com.vaadin.server.StreamResource;
 import com.vaadin.shared.ui.grid.HeightMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.Notification;
+import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.themes.ValoTheme;
 import org.opendaylight.yangtools.yang.model.api.Module;
 import org.opendaylight.yangtools.yang.model.repo.api.YangTextSchemaSource;
@@ -41,6 +42,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
@@ -56,6 +58,7 @@ public final class MainView extends VerticalLayout implements View {
     private Tree<XMLElement> dataTree;
     private XMLElement dataElements = new XMLElement(null, "data");
     private String dataQuery;
+    private Netconf.Datastore dataSource;
     String host;
     String username;
     String password;
@@ -241,10 +244,6 @@ public final class MainView extends VerticalLayout implements View {
         Button schemaFilterClear = new Button("Clear", VaadinIcons.ERASER);
         schemaFilterLayout.addComponent(schemaFilterClear);
 
-        Button showData = new Button("Show Data", VaadinIcons.DATABASE);
-        schemaFilterLayout.addComponent(showData);
-        contentLayout.addComponent(schemaFilterLayout);
-
         HorizontalLayout dataFilterLayout = new HorizontalLayout();
         dataFilterLayout.setDefaultComponentAlignment(Alignment.BOTTOM_CENTER);
         dataFilterLayout.setVisible(false);
@@ -267,6 +266,25 @@ public final class MainView extends VerticalLayout implements View {
         dataFilterLayout.addComponent(dataFilterClear);
         dataFilterLayout.setComponentAlignment(dataFilterClear, Alignment.BOTTOM_CENTER);
 
+        Consumer<Netconf.Datastore> showSourceAction = x -> {
+            if (dataSource != x)
+                dataQuery = null;
+            dataSource = x;
+            schemaFilterLayout.setVisible(false);
+            dataFilterLayout.setVisible(true);
+            dataFilterClear.click();
+        };
+
+        MenuBar showMenu = new MenuBar();
+        schemaFilterLayout.addComponent(showMenu);
+        contentLayout.addComponent(schemaFilterLayout);
+
+        MenuItem showDataMenu = showMenu.addItem("Show Data", VaadinIcons.DATABASE, null);
+        showDataMenu.addItem("Operational", x -> showSourceAction.accept(null));
+        showDataMenu.addItem("Running", x -> showSourceAction.accept(Netconf.Datastore.RUNNING));
+        showDataMenu.addItem("Candidate", x -> showSourceAction.accept(Netconf.Datastore.CANDIDATE));
+        showDataMenu.addItem("Startup", x -> showSourceAction.accept(Netconf.Datastore.STARTUP));
+
         Button showSchemas = new Button("Show Schemas", VaadinIcons.FILE_TREE);
         dataFilterLayout.addComponent(showSchemas);
         dataFilterLayout.setComponentAlignment(showSchemas, Alignment.BOTTOM_CENTER);
@@ -279,7 +297,7 @@ public final class MainView extends VerticalLayout implements View {
         contentLayout.setExpandRatio(treePanel, 1.0f);
 
         schemaFilterApply.addClickListener(e -> treePanel.setContent(
-                showSchemaTree(schemaModuleFilter.getValue(), schemaNodeFilter.getValue(), showData)));
+                showSchemaTree(schemaModuleFilter.getValue(), schemaNodeFilter.getValue())));
 
         dataFilterApply.addClickListener(e -> treePanel.setContent(
                 showDataTree(dataNodeFilter.getValue(), dataValueFilter.getValue())));
@@ -298,12 +316,6 @@ public final class MainView extends VerticalLayout implements View {
            dataFilterApply.click();
         });
 
-        showData.addClickListener(x -> {
-            schemaFilterLayout.setVisible(false);
-            dataFilterLayout.setVisible(true);
-            dataFilterClear.click();
-        });
-
         showSchemas.addClickListener(x -> {
             schemaFilterLayout.setVisible(true);
             dataFilterLayout.setVisible(false);
@@ -311,11 +323,11 @@ public final class MainView extends VerticalLayout implements View {
             selectedData = null;
         });
 
-        treePanel.setContent(showSchemaTree("", "", showData));
+        treePanel.setContent(showSchemaTree("", ""));
     }
 
     // Show the schema tree based on the current collected YANG models
-    private Tree<WrappedYangNode> showSchemaTree(String moduleFilter, String fieldFilter, Button showData) {
+    private Tree<WrappedYangNode> showSchemaTree(String moduleFilter, String fieldFilter) {
         List<String> moduleQuery = Arrays.asList(moduleFilter.toLowerCase().split(" "));
         List<String> fieldQuery = Arrays.asList(fieldFilter.toLowerCase().split(" "));
 
@@ -405,17 +417,22 @@ public final class MainView extends VerticalLayout implements View {
         if (!newQuery.equals(dataQuery)) {
             try (NetconfSession session = client.createSession()) {
                 // Query peer using NETCONF to retrieve current data using get or get-config
-                try {
-                    dataElements = subtreeFilter.isEmpty() ? session.get() : session.get(subtreeFilter);
-                } catch (NetconfException.RPCException e) {
-                    e.printStackTrace();
-                    Notification.show("The device cowardly refused to send operational data, thus " +
-                            "displaying configuration only. You may use 'Show Schemas' to go back, " +
-                            "select individual supported schemas and try 'Show Data' again.", Notification.Type.ERROR_MESSAGE);
-                    dataElements = subtreeFilter.isEmpty() ? session.getConfig(Netconf.Datastore.RUNNING) :
-                            session.getConfig(Netconf.Datastore.RUNNING, subtreeFilter);
+                if (dataSource == null) {
+                    try {
+                        dataElements = subtreeFilter.isEmpty() ? session.get() : session.get(subtreeFilter);
+                    } catch (NetconfException.RPCException e) {
+                        e.printStackTrace();
+                        Notification.show("The device cowardly refused to send operational data, thus " +
+                                "displaying configuration only. You may use 'Show Schemas' to go back, " +
+                                "select individual supported schemas and try 'Show Data' again.", Notification.Type.ERROR_MESSAGE);
+                        dataElements = subtreeFilter.isEmpty() ? session.getConfig(Netconf.Datastore.RUNNING) :
+                                session.getConfig(Netconf.Datastore.RUNNING, subtreeFilter);
+                    }
+                    dataQuery = newQuery;
+                } else {
+                    dataElements = subtreeFilter.isEmpty() ? session.getConfig(dataSource) :
+                                session.getConfig(dataSource, subtreeFilter);
                 }
-                dataQuery = newQuery;
             } catch (NetconfException e) {
                 e.printStackTrace();
                 Notification.show("Failed to get data: " + e.getMessage(), Notification.Type.ERROR_MESSAGE);
