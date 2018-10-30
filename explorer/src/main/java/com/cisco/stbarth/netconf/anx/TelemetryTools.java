@@ -20,6 +20,11 @@ package com.cisco.stbarth.netconf.anx;
 
 import com.cisco.stbarth.netconf.grpc.GRPCClient;
 import com.cisco.stbarth.netconf.grpc.GRPCClient.SubscriptionEncoding;
+import com.jcraft.jsch.Channel;
+import com.jcraft.jsch.ChannelExec;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.JSchException;
+import com.jcraft.jsch.Session;
 import com.cisco.stbarth.netconf.grpc.GRPCClient.GRPCException;
 import com.cisco.stbarth.netconf.grpc.GRPCClient.GRPCClientSecurity;
 import com.cisco.stbarth.netconf.anc.*;
@@ -33,13 +38,24 @@ import elemental.json.*;
 import elemental.json.impl.JsonUtil;
 import org.opendaylight.yangtools.yang.model.api.LeafListSchemaNode;
 import org.opendaylight.yangtools.yang.model.api.LeafSchemaNode;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.function.Consumer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.net.ssl.SSLHandshakeException;
@@ -76,7 +92,7 @@ public class TelemetryTools {
         sensorGroupSelect = new ComboBox<>("Telemetry Tools");
         sensorGroupSelect.setIcon(VaadinIcons.DASHBOARD);
         sensorGroupSelect.setEmptySelectionCaption("Select or input sensor group name");
-        sensorGroupSelect.setWidth("400px");
+        sensorGroupSelect.setWidth("325px");
         sensorGroupSelect.setItemCaptionGenerator(x -> x.getText("sensor-group-identifier"));
         sensorGroupSelect.setNewItemHandler(name -> {
             XMLElement group = new XMLElement(NS_TELEMETRY, "sensor-group")
@@ -89,7 +105,7 @@ public class TelemetryTools {
             sensorGroupSelect.setSelectedItem(group);
         });
 
-        Button sensorGroupEdit = new Button("Edit group", VaadinIcons.EDIT);
+        Button sensorGroupEdit = new Button("Edit", VaadinIcons.EDIT);
         sensorGroupEdit.addClickListener(x -> showGroupEditor(sensorGroupSelect.getValue()));
         sensorGroupEdit.setEnabled(false);
 
@@ -102,8 +118,11 @@ public class TelemetryTools {
             sensorGroupSubscribe.setEnabled(!sensorGroupSelect.isEmpty());
         });
 
+        Button searchCLI = new Button("CLI to YANG", VaadinIcons.INPUT);
+        searchCLI.addClickListener(x -> showCLISearchWindow());
+
         updateComponent();
-        telemetryTools.addComponents(sensorGroupSelect, sensorGroupEdit, sensorGroupSubscribe);
+        telemetryTools.addComponents(sensorGroupSelect, sensorGroupEdit, sensorGroupSubscribe, searchCLI);
         return telemetryTools;
     }
 
@@ -394,4 +413,135 @@ public class TelemetryTools {
         UI.getCurrent().addWindow(liveWindow);
     }
 
+    List<String> execSSHCommand(String command) throws JSchException, IOException {
+        JSch jSch = new JSch();
+
+        Window loadingWindow = showLoadingWindow("SSH exec: " + command);
+
+        Session session = jSch.getSession(view.username, view.host, 22);
+        session.setDaemonThread(true);
+        session.setTimeout(3600000);
+        session.setServerAliveInterval(15000);
+        session.setConfig("StrictHostKeyChecking", "no");
+        session.setPassword(view.password);
+        try {
+            session.connect();
+
+            Channel channel = session.openChannel("exec");
+            ((ChannelExec)channel).setCommand(command);
+            channel.setInputStream(null);
+            InputStream input = channel.getInputStream();
+            channel.connect();
+            List<String> result = new BufferedReader(new InputStreamReader(input)).lines().collect(Collectors.toList());
+
+            channel.disconnect();
+            session.disconnect();
+            return result;
+        } finally {
+            loadingWindow.close();
+        }
+    }
+
+    Map<String,Set<String>> getSearchTerms(String command) throws JSchException, IOException {
+        Pattern pattern = Pattern.compile("'([^']+)': [0-9']");
+        TreeMap<String,Set<String>> terms = new TreeMap<>();
+        for (String describeLine: execSSHCommand("schema-describe " + command)) {
+            String pathLine[] = describeLine.split("\\s+", 2);
+            if (pathLine.length < 2 || !pathLine[0].equals("Path:"))
+                continue;
+
+            LinkedHashSet<String> pathTerms = new LinkedHashSet<>();
+            for (String m2mLine: execSSHCommand("run m2mcon -r get \"" + pathLine[1] + "\"")) {
+                Matcher matcher = pattern.matcher(m2mLine);
+                while (matcher.find()) {
+                    String term = matcher.group(1);
+                    StringBuilder builder = new StringBuilder();
+                    for (int i = 0; i < term.length(); i++) {
+                        char c = term.charAt(i);
+                        if (c == '_') {
+                            if (i + 1 < term.length() && !Character.isUpperCase(term.charAt(i + 1)))
+                                builder.append('-');
+                        } else {    
+                            if (i > 0 && i + 1 < term.length() && Character.isUpperCase(c) &&
+                                    (Character.isLowerCase(term.charAt(i - 1)) || Character.isLowerCase(term.charAt(i + 1))))
+                                builder.append('-');
+                            builder.append(Character.toLowerCase(c));
+                        }
+                    }
+
+                    pathTerms.add(builder.toString());
+                }
+            }
+            
+            if (pathTerms.size() > 0)
+                terms.put(pathLine[1], pathTerms);
+        }
+        return terms;
+    }
+
+    void showCLISearchWindow() {
+        Window window = new Window("CLI to YANG Lookup");
+        window.setPosition(50, 50);
+        window.setResizable(false);
+        window.setWidth("600px");
+        window.setHeight("700px");
+
+        VerticalLayout resultLayout = new VerticalLayout();
+        resultLayout.setMargin(false);
+
+        Label formHelp = new Label("1. Enter a show-command and click Lookup to retrieve normalized field-values for searching the YANG schema tree.");
+        formHelp.setSizeFull();
+
+        TextField commandField = new TextField();
+        commandField.setValue("show interfaces");
+        commandField.setSizeFull();
+
+        Button lookupButton = new Button("Lookup", VaadinIcons.SEARCH);
+        lookupButton.addClickListener(x -> {
+            resultLayout.removeAllComponents();
+
+            try {
+                boolean first = true;
+                Map<String,Set<String>> terms = getSearchTerms(commandField.getValue());
+                for (Map.Entry<String,Set<String>> termEntry: terms.entrySet()) {
+                    ComboBox<String> termSelect = new ComboBox<>("Search fields: " + termEntry.getKey());
+                    termSelect.setItems(termEntry.getValue());
+                    termSelect.setSizeFull();
+                    termSelect.setEmptySelectionAllowed(false);
+                    resultLayout.addComponent(termSelect);
+
+                    if (first) {
+                        for (String term: (Iterable<String>)termEntry.getValue().stream()
+                                .sorted(Comparator.comparing(String::length).reversed())::iterator) {
+                            if (view.searchModels("", term)) {
+                                termSelect.setValue(term);
+                                first = false;
+                                break;
+                            }
+                        }
+                    }
+
+                    termSelect.addValueChangeListener(z -> view.searchModels("", z.getValue()));
+                }
+
+                Label resultHelp = new Label(!first ? 
+                    "2. Select a field-name to search possible matches in the YANG schema tree." :
+                    "No results have been found, sorry!");
+                resultHelp.setSizeFull();
+                resultLayout.addComponentAsFirst(resultHelp);
+            } catch (JSchException | IOException e) {
+                Notification.show("Failed to execute SSH command: " + e.getMessage(), Notification.Type.ERROR_MESSAGE);
+                e.printStackTrace();
+                return;
+            }
+        });
+
+        HorizontalLayout searchForm = new HorizontalLayout(commandField, lookupButton);
+        searchForm.setSizeFull();
+        searchForm.setExpandRatio(commandField, 1.0f);
+
+        window.setContent(new VerticalLayout(formHelp, searchForm, resultLayout));
+        UI.getCurrent().addWindow(window);
+        commandField.focus();
+    }
 }

@@ -20,6 +20,7 @@ package com.cisco.stbarth.netconf.anx;
 
 import com.cisco.stbarth.netconf.anc.*;
 import com.vaadin.data.TreeData;
+import com.vaadin.data.provider.HierarchicalQuery;
 import com.vaadin.data.provider.TreeDataProvider;
 import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.icons.VaadinIcons;
@@ -59,6 +60,7 @@ public final class MainView extends VerticalLayout implements View {
     private XMLElement dataElements = new XMLElement(null, "data");
     private String dataQuery;
     private Netconf.Datastore dataSource;
+    private Panel treePanel = new Panel();
     String host;
     String username;
     String password;
@@ -291,7 +293,6 @@ public final class MainView extends VerticalLayout implements View {
         contentLayout.addComponent(dataFilterLayout);
 
         // Data or schema tree definition
-        Panel treePanel = new Panel();
         treePanel.setHeight("100%");
         contentLayout.addComponent(treePanel);
         contentLayout.setExpandRatio(treePanel, 1.0f);
@@ -610,6 +611,12 @@ public final class MainView extends VerticalLayout implements View {
         subtreeFilter.setWidth("100%");
         subtreeFilter.setRows(3);
         sidebarPanel.addComponent(subtreeFilter);
+    }
+
+    public boolean searchModels(String moduleFilter, String nodeFilter) {
+        Tree<WrappedYangNode> tree = showSchemaTree(moduleFilter, nodeFilter);
+        treePanel.setContent(tree);
+        return tree.getTreeData().getRootItems().size() > 0;
     }
 
     @Override
