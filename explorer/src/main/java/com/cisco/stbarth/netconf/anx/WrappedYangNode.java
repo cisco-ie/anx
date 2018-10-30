@@ -29,6 +29,8 @@ import org.opendaylight.yangtools.yang.model.api.Module;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -283,9 +285,21 @@ class WrappedYangNode {
         DataNodeContainer container = module != null ? module :
                 node instanceof DataNodeContainer ? (DataNodeContainer)node : null;
         if (container != null) {
+            HashSet<DataSchemaNode> addedNodes = new HashSet<>();
             for (DataSchemaNode childNode : container.getChildNodes()) {
-                if (new WrappedYangNode(this, childNode).addToTree(data, filter))
+                WrappedYangNode child = new WrappedYangNode(this, childNode);
+                if (child.addToTree(data, filter)) {
+                    addedNodes.add(childNode);
                     okay = true;
+                }
+            }
+
+            // Some of the children has matched, add adjacent leafs for context
+            if (!filter.isEmpty() && okay) {
+                for (DataSchemaNode childNode : container.getChildNodes())
+                    if (!addedNodes.contains(childNode) &&
+                            (childNode instanceof LeafSchemaNode || childNode instanceof LeafListSchemaNode))
+                        new WrappedYangNode(this, childNode).addToTree(data, Collections.emptyList());
             }
         }
 
