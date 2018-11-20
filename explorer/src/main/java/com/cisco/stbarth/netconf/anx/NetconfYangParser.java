@@ -40,9 +40,11 @@ import org.opendaylight.yangtools.yang.parser.repo.SharedSchemaRepository;
 import org.opendaylight.yangtools.yang.parser.rfc7950.repo.ASTSchemaSource;
 import org.opendaylight.yangtools.yang.parser.rfc7950.repo.TextToASTTransformer;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
@@ -56,6 +58,7 @@ public class NetconfYangParser implements SchemaSourceProvider<YangTextSchemaSou
     private SchemaContext schemaContext;
     private InMemorySchemaSourceCache<ASTSchemaSource> cache = InMemorySchemaSourceCache.createSoftCache(repository, ASTSchemaSource.class);
     private List<String> warnings = new LinkedList<>();
+    private String cacheDirectory;
 
     public interface RetrieverCallback {
         void onSchema(int iteration, String identifier, String version, Exception e);
@@ -64,6 +67,10 @@ public class NetconfYangParser implements SchemaSourceProvider<YangTextSchemaSou
     NetconfYangParser() {
         //System.setProperty("org.slf4j.simpleLogger.defaultLogLevel", "debug");
         repository.registerSchemaSourceListener(TextToASTTransformer.create(repository, repository));
+    }
+
+    public void setCacheDirectory(String cacheDirectory) {
+        this.cacheDirectory = cacheDirectory;
     }
 
     public Collection<YangTextSchemaSource> getSources() {
@@ -116,8 +123,20 @@ public class NetconfYangParser implements SchemaSourceProvider<YangTextSchemaSou
             String version = entry.getValue();
 
             try {
-                registerSource(identifier, version, session.getSchema(identifier, version, "yang")
-                        .getText().getBytes(StandardCharsets.UTF_8));
+                byte[] yangData = null;
+                File cacheFile = new File(cacheDirectory, String.format("%s@%s.yang", identifier, version));
+
+                if (cacheDirectory != null && cacheFile.isFile())
+                    yangData = Files.readAllBytes(cacheFile.toPath());
+
+                if (yangData == null) {
+                    yangData = session.getSchema(identifier, version, "yang").getText().getBytes(StandardCharsets.UTF_8);
+
+                    if (cacheDirectory != null)
+                        Files.write(cacheFile.toPath(), yangData);
+                }
+
+                registerSource(identifier, version, yangData);
                 callback.onSchema(++iteration, identifier, version, null);
             } catch (NetconfException.RPCException f) {
                 addWarning(String.format("Failed to get schema for %s@%s (%s)\n",

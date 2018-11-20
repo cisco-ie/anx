@@ -20,7 +20,6 @@ package com.cisco.stbarth.netconf.anx;
 
 import com.cisco.stbarth.netconf.anc.*;
 import com.vaadin.data.TreeData;
-import com.vaadin.data.provider.HierarchicalQuery;
 import com.vaadin.data.provider.TreeDataProvider;
 import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.icons.VaadinIcons;
@@ -354,13 +353,13 @@ public final class MainView extends VerticalLayout implements View {
                 .thenComparing(WrappedYangNode::getName)::compare);
         schemaTree.setDataProvider(dataProvider);
 
-        // Expand the first 50 direct filter matches automatically
-        int remain = 50;
+        // Expand the first 100 direct filter matches automatically
+        int remain = 100;
         for (WrappedYangNode module: data.getRootItems())
             remain = module.applyExpand(schemaTree, remain);
 
         if (remain <= 0)
-            Notification.show("Too many search results! They are all shown, but only 50 have been auto-expanded.",
+            Notification.show("Too many search results! They are all shown, but only 100 have been auto-expanded.",
                     Notification.Type.TRAY_NOTIFICATION);
 
         return schemaTree;
@@ -450,7 +449,7 @@ public final class MainView extends VerticalLayout implements View {
         dataProvider.setSortComparator(Comparator.comparing(XMLElement::getName)::compare);
         dataTree.setDataProvider(dataProvider);
 
-        int remain = 50;
+        int remain = 100;
 
         // Expand up to 50 direct filter matches from data tree
         if (moduleFilter.isEmpty() && fieldFilter.isEmpty()) {
@@ -465,7 +464,7 @@ public final class MainView extends VerticalLayout implements View {
             remain = applyXMLExpanded(dataTree, element, remain);
 
         if (remain <= 0)
-            Notification.show("Too many results! They are all shown, but only 50 have been auto-expanded.",
+            Notification.show("Too many results! They are all shown, but only 100 have been auto-expanded.",
                     Notification.Type.TRAY_NOTIFICATION);
 
         return dataTree;

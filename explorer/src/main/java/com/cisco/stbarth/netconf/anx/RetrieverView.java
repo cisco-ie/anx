@@ -26,14 +26,15 @@ import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.themes.ValoTheme;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.URI;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 /**
  * View for logging in, retrieving and parsing YANG models
@@ -42,6 +43,7 @@ import java.util.stream.Collectors;
 public class RetrieverView extends VerticalLayout {
 
 	public RetrieverView(MainUI ui) {
+        String profilePath = "profiles.xml";
         setSizeFull();
 
         // Render login form
@@ -78,12 +80,21 @@ public class RetrieverView extends VerticalLayout {
         connect.setClickShortcut(KeyCode.ENTER);
         connect.setEnabled(false);
 
-        final TextField hostname = new TextField("NETCONF Device");
-        hostname.setIcon(VaadinIcons.SERVER);
+        final ComboBox<String> hostname = new ComboBox<>("NETCONF Device");
+        hostname.setNewItemProvider(Optional::ofNullable);
         hostname.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
         hostname.addStyleName("darkicon");
         hostname.focus();
         hostname.addValueChangeListener((e) -> connect.setEnabled(!hostname.getValue().isEmpty()));
+
+        // Read profiles from file
+        XMLElement profiles;
+        try {
+            profiles = new XMLElement(new FileInputStream(new File(profilePath)));
+        } catch (IOException | XMLElement.XMLException e) {
+            profiles = new XMLElement(null, "profiles");
+        }
+        hostname.setItems(profiles.find("profile/hostname").map(XMLElement::getText));
 
         final TextField username = new TextField("Username");
         username.setIcon(VaadinIcons.USER);
@@ -98,6 +109,27 @@ public class RetrieverView extends VerticalLayout {
         fields.addComponents(hostname, username, password, connect);
         fields.setComponentAlignment(connect, Alignment.BOTTOM_LEFT);
 
+        HorizontalLayout extraFields = new HorizontalLayout();
+        extraFields.setSpacing(true);
+        extraFields.addStyleName("fields");
+
+        final CheckBox cacheModels = new CheckBox("Cache YANG models");
+        cacheModels.setValue(true);
+
+        final CheckBox remember = new CheckBox("Remember credentials");
+        extraFields.addComponents(cacheModels, remember);
+
+        
+        // Apply profile credentials if selected
+        XMLElement loadedProfiles = profiles;
+        hostname.addValueChangeListener(x -> {
+            Optional<XMLElement> profile = loadedProfiles.find(
+                String.format("profile[hostname='%s']", hostname.getValue())).findAny();
+            profile.flatMap(p -> p.getFirst("username")).map(XMLElement::getText).ifPresent(username::setValue);
+            profile.flatMap(p -> p.getFirst("password")).map(XMLElement::getText).ifPresent(password::setValue);
+            profile.ifPresent(p -> remember.setValue(true));
+        });
+
         // Connect to device and retrieve YANG models
         connect.addClickListener((ClickListener) event -> {
             ui.name = "";
@@ -105,16 +137,42 @@ public class RetrieverView extends VerticalLayout {
             ui.password = password.getValue();
             int port = 0;
 
+            // Save profiles (there should probably be some file locking here...)
+            XMLElement savedProfiles;
+            try {
+                savedProfiles = new XMLElement(new FileInputStream(new File(profilePath)));
+            } catch (IOException | XMLElement.XMLException e) {
+                savedProfiles = new XMLElement(null, "profiles");
+            }
+
+            savedProfiles.find(String.format("profile[hostname='%s']", hostname.getValue()))
+                .findAny().ifPresent(XMLElement::remove);
+
+            if (remember.getValue()) {
+                savedProfiles.createChild("profile")
+                        .withTextChild("hostname", hostname.getValue())
+                        .withTextChild("username", ui.username)
+                        .withTextChild("password", ui.password);
+            }
+
+            try {
+                savedProfiles.writeTo(new FileOutputStream(new File(profilePath)), true);
+            } catch (IOException | XMLElement.XMLException e) {
+                e.printStackTrace();
+            }
+
             try {
                 URI uri = new URI("http://" + hostname.getValue());
                 if (uri.getHost() != null)
                     ui.name = uri.getHost();
 
                 if (uri.getPort() <= 0) {
-                    try (Socket socket = new Socket(uri.getHost(), 830)) {
+                    try (Socket socket = new Socket()) {
+                        socket.connect(new InetSocketAddress(uri.getHost(), 830), 1000);
                         port = 830;
                     } catch (Exception e) {
-                        try (Socket socket = new Socket(uri.getHost(), 2022)) {
+                        try (Socket socket = new Socket()) {
+                            socket.connect(new InetSocketAddress(uri.getHost(), 2022), 1000);
                             port = 2022;
                         } catch (Exception f) {
                             port = 22;
@@ -163,6 +221,9 @@ public class RetrieverView extends VerticalLayout {
             ui.parser = new NetconfYangParser();
             progressBar.setIndeterminate(false);
 
+            if (cacheModels.getValue())
+                ui.parser.setCacheDirectory(new File("..", "yangcache").toString());
+
             try (NetconfSession session = ui.client.createSession()) {
                 Map<String, String> schemas = ui.parser.getAvailableSchemas(session);
                 ui.capabilities = session.getCapabilities();
@@ -196,6 +257,7 @@ public class RetrieverView extends VerticalLayout {
             ui.removeWindow(loadingWindow);
         });
         loginPanel.addComponent(fields);
+        loginPanel.addComponent(extraFields);
 
 		addComponent(loginPanel);
 		setComponentAlignment(loginPanel, Alignment.MIDDLE_CENTER);
