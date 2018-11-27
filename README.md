@@ -1,5 +1,5 @@
-# Advanced Netconf Explorer
-Advanced Netconf explorer and Netconf client library for Java
+# Advanced NETCONF Explorer
+Advanced NETCONF explorer and NETCONF client library for Java
 
 This is a graphical explorer for YANG models supported by a NETCONF device or service orchestrator. Features include:
 * Retrieving all YANG models supported by a device or orchestrator using the NETCONF monitoring standard.
@@ -49,7 +49,7 @@ enabled device or orchestrator supporting NETCONF Monitoring [RFC 6022](https://
 
 
 
-## ANC - Java Netconf client library
+## ANC - Java NETCONF client library
 ANC is the basis of the explorer and offers abstraction for most of the features of NETCONF.
 It is packaged as a maven artifact so it can be installed using `mvn install` in the `anc` directory. 
 
