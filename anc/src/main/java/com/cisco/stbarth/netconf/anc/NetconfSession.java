@@ -169,7 +169,7 @@ public class NetconfSession implements AutoCloseable {
      */
     public synchronized XMLElement call(XMLElement request) throws NetconfException {
         String rpcID = String.valueOf(++messageID);
-        XMLElement call = new XMLElement(NS_NETCONF, "rpc").withAttribute("message-id", rpcID).withChild(request);
+        XMLElement call = new XMLElement(NS_NETCONF, "rpc").withAttribute("", "message-id", rpcID).withChild(request);
         XMLElement reply = request(call);
 
         while (reply.getNamespace().equals(NS_NETCONF_NOTIFICATION) && reply.getName().equals("notification")) {
@@ -584,7 +584,7 @@ public class NetconfSession implements AutoCloseable {
 
             if (format != null)
                 gs.withTextChild("format", format);
-        })).getFirst(NS_NETCONF_MONITORING, "data")
+        })).withoutNamespaces().getFirst("data")
                 .orElseThrow(() -> new NetconfException("No data-element in reply to get-schema"));
     }
 
