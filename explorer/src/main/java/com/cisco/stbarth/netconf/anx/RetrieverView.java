@@ -22,6 +22,7 @@ import com.cisco.stbarth.netconf.anc.*;
 import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.Responsive;
+import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.themes.ValoTheme;
@@ -42,7 +43,7 @@ import java.util.Optional;
 @SuppressWarnings("serial")
 public class RetrieverView extends VerticalLayout {
 
-	public RetrieverView(MainUI ui) {
+	public RetrieverView(MainUI ui, VaadinRequest request) {
         String profilePath = "profiles.xml";
         setSizeFull();
 
@@ -78,14 +79,13 @@ public class RetrieverView extends VerticalLayout {
         final Button connect = new Button("Login");
         connect.addStyleName(ValoTheme.BUTTON_PRIMARY);
         connect.setClickShortcut(KeyCode.ENTER);
-        connect.setEnabled(false);
 
         final ComboBox<String> hostname = new ComboBox<>("NETCONF Device");
         hostname.setNewItemProvider(Optional::ofNullable);
         hostname.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
         hostname.addStyleName("darkicon");
+        Optional.ofNullable(request.getParameter("hostname")).ifPresent(hostname::setValue);
         hostname.focus();
-        hostname.addValueChangeListener((e) -> connect.setEnabled(!hostname.getValue().isEmpty()));
 
         // Read profiles from file
         XMLElement profiles;
@@ -100,11 +100,13 @@ public class RetrieverView extends VerticalLayout {
         username.setIcon(VaadinIcons.USER);
         username.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
         username.addStyleName("darkicon");
+        Optional.ofNullable(request.getParameter("username")).ifPresent(username::setValue);
 
         final PasswordField password = new PasswordField("Password");
         password.setIcon(VaadinIcons.LOCK);
         password.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
         password.addStyleName("darkicon");
+        Optional.ofNullable(request.getParameter("password")).ifPresent(password::setValue);
 
         fields.addComponents(hostname, username, password, connect);
         fields.setComponentAlignment(connect, Alignment.BOTTOM_LEFT);

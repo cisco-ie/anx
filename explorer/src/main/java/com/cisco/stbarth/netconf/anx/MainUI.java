@@ -53,22 +53,19 @@ public class MainUI extends com.vaadin.ui.UI {
     @Override
     protected void init(VaadinRequest vaadinRequest) {
     	Page.getCurrent().setTitle("Advanced Netconf Explorer");
-    	addStyleName(ValoTheme.UI_WITH_MENU);
-        showMain();
+        addStyleName(ValoTheme.UI_WITH_MENU);
+        
+        setContent(new RetrieverView(this, vaadinRequest));
+        addStyleName("loginview");
     }
 
     public void showMain() {
         // Show main view or login view depending on state
-        if (client != null) {
-            setSizeFull();
-            getPage().setTitle("Netconf: ".concat(name));
-            setContent(new MainView(name, username, password, client, parser, capabilities));
-            removeStyleName("loginview");
-            addStyleName("mainview");
-        } else {
-            setContent(new RetrieverView(this));
-            addStyleName("loginview");
-        }
+        setSizeFull();
+        getPage().setTitle("Netconf: ".concat(name));
+        setContent(new MainView(name, username, password, client, parser, capabilities));
+        removeStyleName("loginview");
+        addStyleName("mainview");
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
