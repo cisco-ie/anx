@@ -27,6 +27,8 @@ https://docs.docker.com/docker-for-mac/#advanced
 
 ### Using JDK and Maven
 If you have a working Java development environment with maven on your machine, you can also launch the explorer with an embedded webserver using:
+* `mvn -e -f anc/pom.xml install`
+* `mvn -e -f grpc/pom.xml install`
 * `mvn -e -f explorer/pom.xml jetty:run`
 
 You can also create a WAR file for deployment in an application server using
