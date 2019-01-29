@@ -81,7 +81,6 @@ public class RetrieverView extends VerticalLayout {
         connect.setClickShortcut(KeyCode.ENTER);
 
         final ComboBox<String> hostname = new ComboBox<>("NETCONF Device");
-        hostname.setNewItemProvider(Optional::ofNullable);
         hostname.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
         hostname.addStyleName("darkicon");
         Optional.ofNullable(request.getParameter("hostname")).ifPresent(hostname::setValue);
@@ -95,6 +94,14 @@ public class RetrieverView extends VerticalLayout {
             profiles = new XMLElement(null, "profiles");
         }
         hostname.setItems(profiles.find("profile/hostname").map(XMLElement::getText));
+
+        XMLElement allProfiles = profiles;
+        hostname.setNewItemProvider(x -> {
+            allProfiles.createChild("profile").createChild("hostname").withText(x);
+            hostname.setItems(allProfiles.find("profile/hostname").map(XMLElement::getText));
+            hostname.setValue(x);
+            return Optional.ofNullable(x);
+        });
 
         final TextField username = new TextField("Username");
         username.setIcon(VaadinIcons.USER);
