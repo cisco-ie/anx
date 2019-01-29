@@ -343,7 +343,7 @@ public class TelemetryTools {
         measurements.setEmptySelectionAllowed(false);
         measurements.setTextInputAllowed(false);
         measurements.setItemCaptionGenerator(x -> String.format("[%tT] %s",
-                (long)x.getNumber("msg_timestamp"), x.getString("encoding_path")));
+                Long.parseLong(x.getString("msg_timestamp")), x.getString("encoding_path")));
         measurements.addValueChangeListener(x -> data.setValue(JsonUtil.stringify(x.getValue(), 2)));
 
         GRPCClient tlsClient = new GRPCClient(view.host, grpcPort,
