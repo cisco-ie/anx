@@ -596,7 +596,7 @@ public class NetconfSession implements AutoCloseable {
      */
     public XMLElement tailfAction(XMLElement data) throws NetconfException {
         return call(new XMLElement(NS_TAILF_ACTIONS, "action").withChild("data", x -> x.withChild(data)))
-                .getFirst("data").orElseThrow(() -> new NetconfException("Missing data element in reply to <get>"));
+            .getFirst("data").orElse(null);
     }
 
     /**
