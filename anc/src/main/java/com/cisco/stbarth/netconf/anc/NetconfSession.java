@@ -286,9 +286,7 @@ public class NetconfSession implements AutoCloseable {
     public void editConfig(Datastore datastore, XMLElement config, EditConfigDefaultOperation defaultOperation,
                            EditConfigOnErrorOption onError, EditConfigTestOption testOption) throws NetconfException {
         call(new XMLElement(NS_NETCONF, "edit-config", ec -> {
-            ec.withChild("target", t -> t
-                    .withChild(datastore.name().toLowerCase()))
-                    .withChild("config", c -> c.withChild(config));
+            ec.withChild("target", t -> t.withChild(datastore.name().toLowerCase()));
 
             if (defaultOperation != null)
                 ec.withTextChild("default-operation", defaultOperation.name().toLowerCase());
@@ -301,6 +299,8 @@ public class NetconfSession implements AutoCloseable {
 
             if (ncsCommitParameter != null)
                 ec.withChild(NS_NCS, ncsCommitParameter.name().toLowerCase().replace('_', '-'));
+
+            ec.withChild("config", c -> c.withChild(config));
         }));
     }
 
