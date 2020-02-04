@@ -29,7 +29,6 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.themes.ValoTheme;
 
-import java.util.Collection;
 import java.util.Map;
 
 /**

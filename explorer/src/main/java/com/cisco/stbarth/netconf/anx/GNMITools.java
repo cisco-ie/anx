@@ -41,6 +41,7 @@ import javax.net.ssl.SSLHandshakeException;
 public class GNMITools {
     private MainView view;
     private static final String NS_EMS = "http://cisco.com/ns/yang/Cisco-IOS-XR-man-ems-cfg";
+    private TextField path;
 
     GNMITools(MainView view) {
         this.view = view;
@@ -53,9 +54,13 @@ public class GNMITools {
         gnmiTools.setDefaultComponentAlignment(Alignment.BOTTOM_LEFT);
 
         TextField interval = new TextField("GNMI Subscribe Interval", "change");
+        interval.setWidth("50px");
         interval.setIcon(VaadinIcons.DASHBOARD);
 
         TextField port = new TextField("GNMI Port", "57400");
+        port.setWidth("50px");
+
+        path = new TextField("GNMI Path");
 
         try (NetconfSession session = view.client.createSession()) {
             XMLElement grpc = session.getConfig(Netconf.Datastore.RUNNING,
@@ -65,17 +70,16 @@ public class GNMITools {
 
         Button subscribe = new Button("GNMI Subscribe", VaadinIcons.PIE_BAR_CHART);
         subscribe.addClickListener(x -> {
-            WrappedYangNode node = view.selectedNode;
-            if (node != null && (node.getNode() instanceof LeafSchemaNode ||
-                    node.getNode() instanceof LeafListSchemaNode))
-                node = node.getParent();
-
-            if (node != null)
-                showSubscribe(Integer.parseInt(port.getValue()), node.getSensorPath(), interval.getValue());
+            showSubscribe(Integer.parseInt(port.getValue()), path.getValue(), interval.getValue());
         });
 
-        gnmiTools.addComponents(interval, port, subscribe);
+        gnmiTools.addComponents(interval, port, path, subscribe);
         return gnmiTools;
+    }
+
+    void updatePath(WrappedYangNode node) {
+        if (path != null)
+            path.setValue(node.getSensorPath());
     }
 
     private void showSubscribe(int port, String path, String interval) {

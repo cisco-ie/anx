@@ -19,7 +19,6 @@
 package com.cisco.stbarth.netconf.anx;
 
 import com.cisco.stbarth.netconf.anc.Netconf;
-import com.cisco.stbarth.netconf.anc.NetconfClient;
 import com.cisco.stbarth.netconf.anc.NetconfException;
 import com.cisco.stbarth.netconf.anc.NetconfSession;
 import com.cisco.stbarth.netconf.anc.XMLElement;
@@ -150,7 +149,7 @@ public class NetconfYangParser implements SchemaSourceProvider<YangTextSchemaSou
     }
 
     public void parse() {
-        SchemaContextFactory factory = repository.createSchemaContextFactory(SchemaContextFactoryConfiguration
+        EffectiveModelContextFactory factory = repository.createEffectiveModelContextFactory(SchemaContextFactoryConfiguration
                 .builder().setFilter(SchemaSourceFilter.ALWAYS_ACCEPT).build());
         Collection<SourceIdentifier> requiredSources = new HashSet<>(sources.keySet());
 
@@ -173,7 +172,7 @@ public class NetconfYangParser implements SchemaSourceProvider<YangTextSchemaSou
         // Parse all available YANG models, if we fail remove failed model and retry with remaining models
         while (!requiredSources.isEmpty()) {
             try {
-                schemaContext = factory.createSchemaContext(requiredSources).get();
+                schemaContext = factory.createEffectiveModelContext(requiredSources).get();
                 break;
             } catch (InterruptedException | ExecutionException f) {
                 f.printStackTrace();

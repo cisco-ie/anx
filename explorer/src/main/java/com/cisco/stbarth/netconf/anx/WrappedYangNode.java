@@ -25,12 +25,12 @@ import com.vaadin.ui.Tree;
 import org.opendaylight.yangtools.yang.common.QName;
 import org.opendaylight.yangtools.yang.model.api.*;
 import org.opendaylight.yangtools.yang.model.api.Module;
+import org.opendaylight.yangtools.yang.model.api.type.LeafrefTypeDefinition;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.Optional;
 import java.util.stream.Stream;
 
@@ -121,8 +121,12 @@ class WrappedYangNode {
         return path;
     }
 
+    Module getModule() {
+        return module;
+    }
+
     String getType() {
-        if (node instanceof AnyXmlSchemaNode)
+        if (node instanceof AnyxmlSchemaNode)
             return "anyxml";
         else if (node instanceof CaseSchemaNode)
             return "case";
@@ -138,6 +142,11 @@ class WrappedYangNode {
             return "list";
         else
             return "module";
+    }
+
+    String getLeafRef() {
+        TypeDefinition<?> type = (node instanceof TypedDataSchemaNode) ? ((TypedDataSchemaNode)node).getType() : null;
+        return (type instanceof LeafrefTypeDefinition) ? ((LeafrefTypeDefinition)type).getPathStatement().getOriginalString() : "";
     }
 
     String getDataType() {
@@ -242,9 +251,9 @@ class WrappedYangNode {
                 ((ListSchemaNode)parent.node).getKeyDefinition().contains(node.getQName());
     }
 
-    boolean isNotKey() {
-        return isKey();
-    }
+    boolean isMandatory() {
+		return node instanceof MandatoryAware && ((MandatoryAware)node).isMandatory();
+	}
 
     DataSchemaNode getNode() {
         return node;
@@ -326,12 +335,16 @@ class WrappedYangNode {
         return namespace;
     }
 
-    Stream<WrappedYangNode> getChildren() {
-        DataNodeContainer container = module != null ? module :
-                node instanceof DataNodeContainer ? (DataNodeContainer)node : null;
-        return (container == null) ? Stream.empty() :
-                container.getChildNodes().stream().map(n -> new WrappedYangNode(this, n));
-    }
+    public Stream<WrappedYangNode> getChildren() {
+		if (node instanceof ChoiceSchemaNode) {
+			return ((ChoiceSchemaNode)node).getCases().values().stream().map(n -> new WrappedYangNode(this, n));
+		} else {
+			DataNodeContainer container = module != null ? module
+					: node instanceof DataNodeContainer ? (DataNodeContainer) node : null;
+			return (container == null) ? Stream.empty()
+					: container.getChildNodes().stream().map(n -> new WrappedYangNode(this, n));
+		}
+	}
 
     Optional<WrappedYangNode> getChild(String name) {
         return getChildren().filter(node -> node.getName().equals(name)).findAny();

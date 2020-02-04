@@ -60,6 +60,8 @@ public final class MainView extends VerticalLayout implements View {
     private String dataQuery;
     private Netconf.Datastore dataSource;
     private Panel treePanel = new Panel();
+    private GNMITools gnmiTools;
+
     String host;
     String username;
     String password;
@@ -208,7 +210,7 @@ public final class MainView extends VerticalLayout implements View {
         if (capabilities.containsKey("http://cisco.com/ns/yang/Cisco-IOS-XR-telemetry-model-driven-cfg"))
             sidebar.addComponent(new TelemetryTools(this).createComponent());
 
-        sidebar.addComponent(new GNMITools(this).createComponent());
+        sidebar.addComponent((gnmiTools = new GNMITools(this)).createComponent());
 
         sidebarPanel = new VerticalLayout();
         sidebarPanel.setMargin(false);
@@ -349,7 +351,7 @@ public final class MainView extends VerticalLayout implements View {
 
         // Define data provide and ordering of YANG nodes and render on tree widget
         TreeDataProvider<WrappedYangNode> dataProvider = new TreeDataProvider<>(data);
-        dataProvider.setSortComparator(Comparator.comparing(WrappedYangNode::isNotKey)
+        dataProvider.setSortComparator(Comparator.comparing(WrappedYangNode::isKey)
                 .thenComparing(WrappedYangNode::getName)::compare);
         schemaTree.setDataProvider(dataProvider);
 
