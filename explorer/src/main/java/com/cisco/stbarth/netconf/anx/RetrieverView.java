@@ -80,7 +80,7 @@ public class RetrieverView extends VerticalLayout {
         connect.addStyleName(ValoTheme.BUTTON_PRIMARY);
         connect.setClickShortcut(KeyCode.ENTER);
 
-        final ComboBox<String> hostname = new ComboBox<>("NETCONF Address (optionally :port)");
+        final ComboBox<String> hostname = new ComboBox<>("NETCONF Host (optional :port)");
         hostname.addStyleName(ValoTheme.TEXTFIELD_INLINE_ICON);
         hostname.addStyleName("darkicon");
         Optional.ofNullable(request.getParameter("hostname")).ifPresent(hostname::setValue);

@@ -572,6 +572,9 @@ public final class MainView extends VerticalLayout implements View {
 	    selectedNode = node;
         sidebarPanel.removeAllComponents();
 
+        if (gnmiTools != null)
+            gnmiTools.updateNode(node);
+
         LinkedList<AbstractMap.SimpleEntry<String,String>> parameters = new LinkedList<>();
         parameters.add(new AbstractMap.SimpleEntry<>("Name", node.getName()));
         parameters.add(new AbstractMap.SimpleEntry<>("Namespace", node.getNamespace()));

@@ -17,9 +17,6 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
 
 /**
  */
-@javax.annotation.Generated(
-    value = "by gRPC proto compiler",
-    comments = "Source: mdt_grpc_dialin.proto")
 public final class gRPCExecGrpc {
 
   private gRPCExecGrpc() {}

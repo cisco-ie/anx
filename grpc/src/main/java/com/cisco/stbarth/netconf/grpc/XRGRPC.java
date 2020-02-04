@@ -57,6 +57,8 @@ public final class XRGRPC {
     }
 
     /**
+     * @param value The numeric wire value of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire value.
      * @deprecated Use {@link #forNumber(int)} instead.
      */
     @java.lang.Deprecated
@@ -64,6 +66,10 @@ public final class XRGRPC {
       return forNumber(value);
     }
 
+    /**
+     * @param value The numeric wire value of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire value.
+     */
     public static CommitResult forNumber(int value) {
       switch (value) {
         case 0: return CHANGE;
@@ -127,15 +133,18 @@ public final class XRGRPC {
 
     /**
      * <code>int64 ReqId = 1;</code>
+     * @return The reqId.
      */
     long getReqId();
 
     /**
      * <code>string yangpathjson = 2;</code>
+     * @return The yangpathjson.
      */
     java.lang.String getYangpathjson();
     /**
      * <code>string yangpathjson = 2;</code>
+     * @return The bytes for yangpathjson.
      */
     com.google.protobuf.ByteString
         getYangpathjsonBytes();
@@ -153,8 +162,14 @@ public final class XRGRPC {
       super(builder);
     }
     private ConfigGetArgs() {
-      reqId_ = 0L;
       yangpathjson_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new ConfigGetArgs();
     }
 
     @java.lang.Override
@@ -167,7 +182,9 @@ public final class XRGRPC {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -178,13 +195,6 @@ public final class XRGRPC {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
 
               reqId_ = input.readInt64();
@@ -194,6 +204,13 @@ public final class XRGRPC {
               java.lang.String s = input.readStringRequireUtf8();
 
               yangpathjson_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -213,6 +230,7 @@ public final class XRGRPC {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ConfigGetArgs_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ConfigGetArgs_fieldAccessorTable
@@ -224,6 +242,7 @@ public final class XRGRPC {
     private long reqId_;
     /**
      * <code>int64 ReqId = 1;</code>
+     * @return The reqId.
      */
     public long getReqId() {
       return reqId_;
@@ -233,6 +252,7 @@ public final class XRGRPC {
     private volatile java.lang.Object yangpathjson_;
     /**
      * <code>string yangpathjson = 2;</code>
+     * @return The yangpathjson.
      */
     public java.lang.String getYangpathjson() {
       java.lang.Object ref = yangpathjson_;
@@ -248,6 +268,7 @@ public final class XRGRPC {
     }
     /**
      * <code>string yangpathjson = 2;</code>
+     * @return The bytes for yangpathjson.
      */
     public com.google.protobuf.ByteString
         getYangpathjsonBytes() {
@@ -264,6 +285,7 @@ public final class XRGRPC {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -273,6 +295,7 @@ public final class XRGRPC {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (reqId_ != 0L) {
@@ -284,6 +307,7 @@ public final class XRGRPC {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -311,13 +335,12 @@ public final class XRGRPC {
       }
       com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigGetArgs other = (com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigGetArgs) obj;
 
-      boolean result = true;
-      result = result && (getReqId()
-          == other.getReqId());
-      result = result && getYangpathjson()
-          .equals(other.getYangpathjson());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (getReqId()
+          != other.getReqId()) return false;
+      if (!getYangpathjson()
+          .equals(other.getYangpathjson())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -407,6 +430,7 @@ public final class XRGRPC {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -414,6 +438,7 @@ public final class XRGRPC {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigGetArgs prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -437,6 +462,7 @@ public final class XRGRPC {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ConfigGetArgs_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ConfigGetArgs_fieldAccessorTable
@@ -459,6 +485,7 @@ public final class XRGRPC {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         reqId_ = 0L;
@@ -468,15 +495,18 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ConfigGetArgs_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigGetArgs getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigGetArgs.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigGetArgs build() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigGetArgs result = buildPartial();
         if (!result.isInitialized()) {
@@ -485,6 +515,7 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigGetArgs buildPartial() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigGetArgs result = new com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigGetArgs(this);
         result.reqId_ = reqId_;
@@ -493,32 +524,39 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigGetArgs) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigGetArgs)other);
@@ -542,10 +580,12 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -567,12 +607,15 @@ public final class XRGRPC {
       private long reqId_ ;
       /**
        * <code>int64 ReqId = 1;</code>
+       * @return The reqId.
        */
       public long getReqId() {
         return reqId_;
       }
       /**
        * <code>int64 ReqId = 1;</code>
+       * @param value The reqId to set.
+       * @return This builder for chaining.
        */
       public Builder setReqId(long value) {
         
@@ -582,6 +625,7 @@ public final class XRGRPC {
       }
       /**
        * <code>int64 ReqId = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearReqId() {
         
@@ -593,6 +637,7 @@ public final class XRGRPC {
       private java.lang.Object yangpathjson_ = "";
       /**
        * <code>string yangpathjson = 2;</code>
+       * @return The yangpathjson.
        */
       public java.lang.String getYangpathjson() {
         java.lang.Object ref = yangpathjson_;
@@ -608,6 +653,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string yangpathjson = 2;</code>
+       * @return The bytes for yangpathjson.
        */
       public com.google.protobuf.ByteString
           getYangpathjsonBytes() {
@@ -624,6 +670,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string yangpathjson = 2;</code>
+       * @param value The yangpathjson to set.
+       * @return This builder for chaining.
        */
       public Builder setYangpathjson(
           java.lang.String value) {
@@ -637,6 +685,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string yangpathjson = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearYangpathjson() {
         
@@ -646,6 +695,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string yangpathjson = 2;</code>
+       * @param value The bytes for yangpathjson to set.
+       * @return This builder for chaining.
        */
       public Builder setYangpathjsonBytes(
           com.google.protobuf.ByteString value) {
@@ -658,11 +709,13 @@ public final class XRGRPC {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -684,11 +737,12 @@ public final class XRGRPC {
 
     private static final com.google.protobuf.Parser<ConfigGetArgs>
         PARSER = new com.google.protobuf.AbstractParser<ConfigGetArgs>() {
+      @java.lang.Override
       public ConfigGetArgs parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ConfigGetArgs(input, extensionRegistry);
+        return new ConfigGetArgs(input, extensionRegistry);
       }
     };
 
@@ -701,6 +755,7 @@ public final class XRGRPC {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigGetArgs getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -713,25 +768,30 @@ public final class XRGRPC {
 
     /**
      * <code>int64 ResReqId = 1;</code>
+     * @return The resReqId.
      */
     long getResReqId();
 
     /**
      * <code>string yangjson = 2;</code>
+     * @return The yangjson.
      */
     java.lang.String getYangjson();
     /**
      * <code>string yangjson = 2;</code>
+     * @return The bytes for yangjson.
      */
     com.google.protobuf.ByteString
         getYangjsonBytes();
 
     /**
      * <code>string errors = 3;</code>
+     * @return The errors.
      */
     java.lang.String getErrors();
     /**
      * <code>string errors = 3;</code>
+     * @return The bytes for errors.
      */
     com.google.protobuf.ByteString
         getErrorsBytes();
@@ -749,9 +809,15 @@ public final class XRGRPC {
       super(builder);
     }
     private ConfigGetReply() {
-      resReqId_ = 0L;
       yangjson_ = "";
       errors_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new ConfigGetReply();
     }
 
     @java.lang.Override
@@ -764,7 +830,9 @@ public final class XRGRPC {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -775,13 +843,6 @@ public final class XRGRPC {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
 
               resReqId_ = input.readInt64();
@@ -797,6 +858,13 @@ public final class XRGRPC {
               java.lang.String s = input.readStringRequireUtf8();
 
               errors_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -816,6 +884,7 @@ public final class XRGRPC {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ConfigGetReply_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ConfigGetReply_fieldAccessorTable
@@ -827,6 +896,7 @@ public final class XRGRPC {
     private long resReqId_;
     /**
      * <code>int64 ResReqId = 1;</code>
+     * @return The resReqId.
      */
     public long getResReqId() {
       return resReqId_;
@@ -836,6 +906,7 @@ public final class XRGRPC {
     private volatile java.lang.Object yangjson_;
     /**
      * <code>string yangjson = 2;</code>
+     * @return The yangjson.
      */
     public java.lang.String getYangjson() {
       java.lang.Object ref = yangjson_;
@@ -851,6 +922,7 @@ public final class XRGRPC {
     }
     /**
      * <code>string yangjson = 2;</code>
+     * @return The bytes for yangjson.
      */
     public com.google.protobuf.ByteString
         getYangjsonBytes() {
@@ -870,6 +942,7 @@ public final class XRGRPC {
     private volatile java.lang.Object errors_;
     /**
      * <code>string errors = 3;</code>
+     * @return The errors.
      */
     public java.lang.String getErrors() {
       java.lang.Object ref = errors_;
@@ -885,6 +958,7 @@ public final class XRGRPC {
     }
     /**
      * <code>string errors = 3;</code>
+     * @return The bytes for errors.
      */
     public com.google.protobuf.ByteString
         getErrorsBytes() {
@@ -901,6 +975,7 @@ public final class XRGRPC {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -910,6 +985,7 @@ public final class XRGRPC {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (resReqId_ != 0L) {
@@ -924,6 +1000,7 @@ public final class XRGRPC {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -954,15 +1031,14 @@ public final class XRGRPC {
       }
       com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigGetReply other = (com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigGetReply) obj;
 
-      boolean result = true;
-      result = result && (getResReqId()
-          == other.getResReqId());
-      result = result && getYangjson()
-          .equals(other.getYangjson());
-      result = result && getErrors()
-          .equals(other.getErrors());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (getResReqId()
+          != other.getResReqId()) return false;
+      if (!getYangjson()
+          .equals(other.getYangjson())) return false;
+      if (!getErrors()
+          .equals(other.getErrors())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -1054,6 +1130,7 @@ public final class XRGRPC {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -1061,6 +1138,7 @@ public final class XRGRPC {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigGetReply prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -1084,6 +1162,7 @@ public final class XRGRPC {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ConfigGetReply_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ConfigGetReply_fieldAccessorTable
@@ -1106,6 +1185,7 @@ public final class XRGRPC {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         resReqId_ = 0L;
@@ -1117,15 +1197,18 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ConfigGetReply_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigGetReply getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigGetReply.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigGetReply build() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigGetReply result = buildPartial();
         if (!result.isInitialized()) {
@@ -1134,6 +1217,7 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigGetReply buildPartial() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigGetReply result = new com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigGetReply(this);
         result.resReqId_ = resReqId_;
@@ -1143,32 +1227,39 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigGetReply) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigGetReply)other);
@@ -1196,10 +1287,12 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1221,12 +1314,15 @@ public final class XRGRPC {
       private long resReqId_ ;
       /**
        * <code>int64 ResReqId = 1;</code>
+       * @return The resReqId.
        */
       public long getResReqId() {
         return resReqId_;
       }
       /**
        * <code>int64 ResReqId = 1;</code>
+       * @param value The resReqId to set.
+       * @return This builder for chaining.
        */
       public Builder setResReqId(long value) {
         
@@ -1236,6 +1332,7 @@ public final class XRGRPC {
       }
       /**
        * <code>int64 ResReqId = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearResReqId() {
         
@@ -1247,6 +1344,7 @@ public final class XRGRPC {
       private java.lang.Object yangjson_ = "";
       /**
        * <code>string yangjson = 2;</code>
+       * @return The yangjson.
        */
       public java.lang.String getYangjson() {
         java.lang.Object ref = yangjson_;
@@ -1262,6 +1360,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string yangjson = 2;</code>
+       * @return The bytes for yangjson.
        */
       public com.google.protobuf.ByteString
           getYangjsonBytes() {
@@ -1278,6 +1377,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string yangjson = 2;</code>
+       * @param value The yangjson to set.
+       * @return This builder for chaining.
        */
       public Builder setYangjson(
           java.lang.String value) {
@@ -1291,6 +1392,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string yangjson = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearYangjson() {
         
@@ -1300,6 +1402,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string yangjson = 2;</code>
+       * @param value The bytes for yangjson to set.
+       * @return This builder for chaining.
        */
       public Builder setYangjsonBytes(
           com.google.protobuf.ByteString value) {
@@ -1316,6 +1420,7 @@ public final class XRGRPC {
       private java.lang.Object errors_ = "";
       /**
        * <code>string errors = 3;</code>
+       * @return The errors.
        */
       public java.lang.String getErrors() {
         java.lang.Object ref = errors_;
@@ -1331,6 +1436,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 3;</code>
+       * @return The bytes for errors.
        */
       public com.google.protobuf.ByteString
           getErrorsBytes() {
@@ -1347,6 +1453,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 3;</code>
+       * @param value The errors to set.
+       * @return This builder for chaining.
        */
       public Builder setErrors(
           java.lang.String value) {
@@ -1360,6 +1468,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 3;</code>
+       * @return This builder for chaining.
        */
       public Builder clearErrors() {
         
@@ -1369,6 +1478,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 3;</code>
+       * @param value The bytes for errors to set.
+       * @return This builder for chaining.
        */
       public Builder setErrorsBytes(
           com.google.protobuf.ByteString value) {
@@ -1381,11 +1492,13 @@ public final class XRGRPC {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -1407,11 +1520,12 @@ public final class XRGRPC {
 
     private static final com.google.protobuf.Parser<ConfigGetReply>
         PARSER = new com.google.protobuf.AbstractParser<ConfigGetReply>() {
+      @java.lang.Override
       public ConfigGetReply parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ConfigGetReply(input, extensionRegistry);
+        return new ConfigGetReply(input, extensionRegistry);
       }
     };
 
@@ -1424,6 +1538,7 @@ public final class XRGRPC {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigGetReply getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -1436,15 +1551,18 @@ public final class XRGRPC {
 
     /**
      * <code>int64 ReqId = 1;</code>
+     * @return The reqId.
      */
     long getReqId();
 
     /**
      * <code>string yangpathjson = 2;</code>
+     * @return The yangpathjson.
      */
     java.lang.String getYangpathjson();
     /**
      * <code>string yangpathjson = 2;</code>
+     * @return The bytes for yangpathjson.
      */
     com.google.protobuf.ByteString
         getYangpathjsonBytes();
@@ -1462,8 +1580,14 @@ public final class XRGRPC {
       super(builder);
     }
     private GetOperArgs() {
-      reqId_ = 0L;
       yangpathjson_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new GetOperArgs();
     }
 
     @java.lang.Override
@@ -1476,7 +1600,9 @@ public final class XRGRPC {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -1487,13 +1613,6 @@ public final class XRGRPC {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
 
               reqId_ = input.readInt64();
@@ -1503,6 +1622,13 @@ public final class XRGRPC {
               java.lang.String s = input.readStringRequireUtf8();
 
               yangpathjson_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -1522,6 +1648,7 @@ public final class XRGRPC {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_GetOperArgs_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_GetOperArgs_fieldAccessorTable
@@ -1533,6 +1660,7 @@ public final class XRGRPC {
     private long reqId_;
     /**
      * <code>int64 ReqId = 1;</code>
+     * @return The reqId.
      */
     public long getReqId() {
       return reqId_;
@@ -1542,6 +1670,7 @@ public final class XRGRPC {
     private volatile java.lang.Object yangpathjson_;
     /**
      * <code>string yangpathjson = 2;</code>
+     * @return The yangpathjson.
      */
     public java.lang.String getYangpathjson() {
       java.lang.Object ref = yangpathjson_;
@@ -1557,6 +1686,7 @@ public final class XRGRPC {
     }
     /**
      * <code>string yangpathjson = 2;</code>
+     * @return The bytes for yangpathjson.
      */
     public com.google.protobuf.ByteString
         getYangpathjsonBytes() {
@@ -1573,6 +1703,7 @@ public final class XRGRPC {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -1582,6 +1713,7 @@ public final class XRGRPC {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (reqId_ != 0L) {
@@ -1593,6 +1725,7 @@ public final class XRGRPC {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -1620,13 +1753,12 @@ public final class XRGRPC {
       }
       com.cisco.stbarth.netconf.grpc.XRGRPC.GetOperArgs other = (com.cisco.stbarth.netconf.grpc.XRGRPC.GetOperArgs) obj;
 
-      boolean result = true;
-      result = result && (getReqId()
-          == other.getReqId());
-      result = result && getYangpathjson()
-          .equals(other.getYangpathjson());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (getReqId()
+          != other.getReqId()) return false;
+      if (!getYangpathjson()
+          .equals(other.getYangpathjson())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -1716,6 +1848,7 @@ public final class XRGRPC {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -1723,6 +1856,7 @@ public final class XRGRPC {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.XRGRPC.GetOperArgs prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -1746,6 +1880,7 @@ public final class XRGRPC {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_GetOperArgs_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_GetOperArgs_fieldAccessorTable
@@ -1768,6 +1903,7 @@ public final class XRGRPC {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         reqId_ = 0L;
@@ -1777,15 +1913,18 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_GetOperArgs_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.GetOperArgs getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.GetOperArgs.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.GetOperArgs build() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.GetOperArgs result = buildPartial();
         if (!result.isInitialized()) {
@@ -1794,6 +1933,7 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.GetOperArgs buildPartial() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.GetOperArgs result = new com.cisco.stbarth.netconf.grpc.XRGRPC.GetOperArgs(this);
         result.reqId_ = reqId_;
@@ -1802,32 +1942,39 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.XRGRPC.GetOperArgs) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.XRGRPC.GetOperArgs)other);
@@ -1851,10 +1998,12 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1876,12 +2025,15 @@ public final class XRGRPC {
       private long reqId_ ;
       /**
        * <code>int64 ReqId = 1;</code>
+       * @return The reqId.
        */
       public long getReqId() {
         return reqId_;
       }
       /**
        * <code>int64 ReqId = 1;</code>
+       * @param value The reqId to set.
+       * @return This builder for chaining.
        */
       public Builder setReqId(long value) {
         
@@ -1891,6 +2043,7 @@ public final class XRGRPC {
       }
       /**
        * <code>int64 ReqId = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearReqId() {
         
@@ -1902,6 +2055,7 @@ public final class XRGRPC {
       private java.lang.Object yangpathjson_ = "";
       /**
        * <code>string yangpathjson = 2;</code>
+       * @return The yangpathjson.
        */
       public java.lang.String getYangpathjson() {
         java.lang.Object ref = yangpathjson_;
@@ -1917,6 +2071,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string yangpathjson = 2;</code>
+       * @return The bytes for yangpathjson.
        */
       public com.google.protobuf.ByteString
           getYangpathjsonBytes() {
@@ -1933,6 +2088,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string yangpathjson = 2;</code>
+       * @param value The yangpathjson to set.
+       * @return This builder for chaining.
        */
       public Builder setYangpathjson(
           java.lang.String value) {
@@ -1946,6 +2103,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string yangpathjson = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearYangpathjson() {
         
@@ -1955,6 +2113,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string yangpathjson = 2;</code>
+       * @param value The bytes for yangpathjson to set.
+       * @return This builder for chaining.
        */
       public Builder setYangpathjsonBytes(
           com.google.protobuf.ByteString value) {
@@ -1967,11 +2127,13 @@ public final class XRGRPC {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -1993,11 +2155,12 @@ public final class XRGRPC {
 
     private static final com.google.protobuf.Parser<GetOperArgs>
         PARSER = new com.google.protobuf.AbstractParser<GetOperArgs>() {
+      @java.lang.Override
       public GetOperArgs parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new GetOperArgs(input, extensionRegistry);
+        return new GetOperArgs(input, extensionRegistry);
       }
     };
 
@@ -2010,6 +2173,7 @@ public final class XRGRPC {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.XRGRPC.GetOperArgs getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -2022,25 +2186,30 @@ public final class XRGRPC {
 
     /**
      * <code>int64 ResReqId = 1;</code>
+     * @return The resReqId.
      */
     long getResReqId();
 
     /**
      * <code>string yangjson = 2;</code>
+     * @return The yangjson.
      */
     java.lang.String getYangjson();
     /**
      * <code>string yangjson = 2;</code>
+     * @return The bytes for yangjson.
      */
     com.google.protobuf.ByteString
         getYangjsonBytes();
 
     /**
      * <code>string errors = 3;</code>
+     * @return The errors.
      */
     java.lang.String getErrors();
     /**
      * <code>string errors = 3;</code>
+     * @return The bytes for errors.
      */
     com.google.protobuf.ByteString
         getErrorsBytes();
@@ -2058,9 +2227,15 @@ public final class XRGRPC {
       super(builder);
     }
     private GetOperReply() {
-      resReqId_ = 0L;
       yangjson_ = "";
       errors_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new GetOperReply();
     }
 
     @java.lang.Override
@@ -2073,7 +2248,9 @@ public final class XRGRPC {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -2084,13 +2261,6 @@ public final class XRGRPC {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
 
               resReqId_ = input.readInt64();
@@ -2106,6 +2276,13 @@ public final class XRGRPC {
               java.lang.String s = input.readStringRequireUtf8();
 
               errors_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -2125,6 +2302,7 @@ public final class XRGRPC {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_GetOperReply_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_GetOperReply_fieldAccessorTable
@@ -2136,6 +2314,7 @@ public final class XRGRPC {
     private long resReqId_;
     /**
      * <code>int64 ResReqId = 1;</code>
+     * @return The resReqId.
      */
     public long getResReqId() {
       return resReqId_;
@@ -2145,6 +2324,7 @@ public final class XRGRPC {
     private volatile java.lang.Object yangjson_;
     /**
      * <code>string yangjson = 2;</code>
+     * @return The yangjson.
      */
     public java.lang.String getYangjson() {
       java.lang.Object ref = yangjson_;
@@ -2160,6 +2340,7 @@ public final class XRGRPC {
     }
     /**
      * <code>string yangjson = 2;</code>
+     * @return The bytes for yangjson.
      */
     public com.google.protobuf.ByteString
         getYangjsonBytes() {
@@ -2179,6 +2360,7 @@ public final class XRGRPC {
     private volatile java.lang.Object errors_;
     /**
      * <code>string errors = 3;</code>
+     * @return The errors.
      */
     public java.lang.String getErrors() {
       java.lang.Object ref = errors_;
@@ -2194,6 +2376,7 @@ public final class XRGRPC {
     }
     /**
      * <code>string errors = 3;</code>
+     * @return The bytes for errors.
      */
     public com.google.protobuf.ByteString
         getErrorsBytes() {
@@ -2210,6 +2393,7 @@ public final class XRGRPC {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -2219,6 +2403,7 @@ public final class XRGRPC {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (resReqId_ != 0L) {
@@ -2233,6 +2418,7 @@ public final class XRGRPC {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -2263,15 +2449,14 @@ public final class XRGRPC {
       }
       com.cisco.stbarth.netconf.grpc.XRGRPC.GetOperReply other = (com.cisco.stbarth.netconf.grpc.XRGRPC.GetOperReply) obj;
 
-      boolean result = true;
-      result = result && (getResReqId()
-          == other.getResReqId());
-      result = result && getYangjson()
-          .equals(other.getYangjson());
-      result = result && getErrors()
-          .equals(other.getErrors());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (getResReqId()
+          != other.getResReqId()) return false;
+      if (!getYangjson()
+          .equals(other.getYangjson())) return false;
+      if (!getErrors()
+          .equals(other.getErrors())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -2363,6 +2548,7 @@ public final class XRGRPC {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -2370,6 +2556,7 @@ public final class XRGRPC {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.XRGRPC.GetOperReply prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -2393,6 +2580,7 @@ public final class XRGRPC {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_GetOperReply_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_GetOperReply_fieldAccessorTable
@@ -2415,6 +2603,7 @@ public final class XRGRPC {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         resReqId_ = 0L;
@@ -2426,15 +2615,18 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_GetOperReply_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.GetOperReply getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.GetOperReply.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.GetOperReply build() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.GetOperReply result = buildPartial();
         if (!result.isInitialized()) {
@@ -2443,6 +2635,7 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.GetOperReply buildPartial() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.GetOperReply result = new com.cisco.stbarth.netconf.grpc.XRGRPC.GetOperReply(this);
         result.resReqId_ = resReqId_;
@@ -2452,32 +2645,39 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.XRGRPC.GetOperReply) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.XRGRPC.GetOperReply)other);
@@ -2505,10 +2705,12 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -2530,12 +2732,15 @@ public final class XRGRPC {
       private long resReqId_ ;
       /**
        * <code>int64 ResReqId = 1;</code>
+       * @return The resReqId.
        */
       public long getResReqId() {
         return resReqId_;
       }
       /**
        * <code>int64 ResReqId = 1;</code>
+       * @param value The resReqId to set.
+       * @return This builder for chaining.
        */
       public Builder setResReqId(long value) {
         
@@ -2545,6 +2750,7 @@ public final class XRGRPC {
       }
       /**
        * <code>int64 ResReqId = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearResReqId() {
         
@@ -2556,6 +2762,7 @@ public final class XRGRPC {
       private java.lang.Object yangjson_ = "";
       /**
        * <code>string yangjson = 2;</code>
+       * @return The yangjson.
        */
       public java.lang.String getYangjson() {
         java.lang.Object ref = yangjson_;
@@ -2571,6 +2778,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string yangjson = 2;</code>
+       * @return The bytes for yangjson.
        */
       public com.google.protobuf.ByteString
           getYangjsonBytes() {
@@ -2587,6 +2795,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string yangjson = 2;</code>
+       * @param value The yangjson to set.
+       * @return This builder for chaining.
        */
       public Builder setYangjson(
           java.lang.String value) {
@@ -2600,6 +2810,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string yangjson = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearYangjson() {
         
@@ -2609,6 +2820,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string yangjson = 2;</code>
+       * @param value The bytes for yangjson to set.
+       * @return This builder for chaining.
        */
       public Builder setYangjsonBytes(
           com.google.protobuf.ByteString value) {
@@ -2625,6 +2838,7 @@ public final class XRGRPC {
       private java.lang.Object errors_ = "";
       /**
        * <code>string errors = 3;</code>
+       * @return The errors.
        */
       public java.lang.String getErrors() {
         java.lang.Object ref = errors_;
@@ -2640,6 +2854,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 3;</code>
+       * @return The bytes for errors.
        */
       public com.google.protobuf.ByteString
           getErrorsBytes() {
@@ -2656,6 +2871,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 3;</code>
+       * @param value The errors to set.
+       * @return This builder for chaining.
        */
       public Builder setErrors(
           java.lang.String value) {
@@ -2669,6 +2886,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 3;</code>
+       * @return This builder for chaining.
        */
       public Builder clearErrors() {
         
@@ -2678,6 +2896,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 3;</code>
+       * @param value The bytes for errors to set.
+       * @return This builder for chaining.
        */
       public Builder setErrorsBytes(
           com.google.protobuf.ByteString value) {
@@ -2690,11 +2910,13 @@ public final class XRGRPC {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -2716,11 +2938,12 @@ public final class XRGRPC {
 
     private static final com.google.protobuf.Parser<GetOperReply>
         PARSER = new com.google.protobuf.AbstractParser<GetOperReply>() {
+      @java.lang.Override
       public GetOperReply parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new GetOperReply(input, extensionRegistry);
+        return new GetOperReply(input, extensionRegistry);
       }
     };
 
@@ -2733,6 +2956,7 @@ public final class XRGRPC {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.XRGRPC.GetOperReply getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -2745,15 +2969,18 @@ public final class XRGRPC {
 
     /**
      * <code>int64 ReqId = 1;</code>
+     * @return The reqId.
      */
     long getReqId();
 
     /**
      * <code>string yangjson = 2;</code>
+     * @return The yangjson.
      */
     java.lang.String getYangjson();
     /**
      * <code>string yangjson = 2;</code>
+     * @return The bytes for yangjson.
      */
     com.google.protobuf.ByteString
         getYangjsonBytes();
@@ -2771,8 +2998,14 @@ public final class XRGRPC {
       super(builder);
     }
     private ConfigArgs() {
-      reqId_ = 0L;
       yangjson_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new ConfigArgs();
     }
 
     @java.lang.Override
@@ -2785,7 +3018,9 @@ public final class XRGRPC {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -2796,13 +3031,6 @@ public final class XRGRPC {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
 
               reqId_ = input.readInt64();
@@ -2812,6 +3040,13 @@ public final class XRGRPC {
               java.lang.String s = input.readStringRequireUtf8();
 
               yangjson_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -2831,6 +3066,7 @@ public final class XRGRPC {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ConfigArgs_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ConfigArgs_fieldAccessorTable
@@ -2842,6 +3078,7 @@ public final class XRGRPC {
     private long reqId_;
     /**
      * <code>int64 ReqId = 1;</code>
+     * @return The reqId.
      */
     public long getReqId() {
       return reqId_;
@@ -2851,6 +3088,7 @@ public final class XRGRPC {
     private volatile java.lang.Object yangjson_;
     /**
      * <code>string yangjson = 2;</code>
+     * @return The yangjson.
      */
     public java.lang.String getYangjson() {
       java.lang.Object ref = yangjson_;
@@ -2866,6 +3104,7 @@ public final class XRGRPC {
     }
     /**
      * <code>string yangjson = 2;</code>
+     * @return The bytes for yangjson.
      */
     public com.google.protobuf.ByteString
         getYangjsonBytes() {
@@ -2882,6 +3121,7 @@ public final class XRGRPC {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -2891,6 +3131,7 @@ public final class XRGRPC {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (reqId_ != 0L) {
@@ -2902,6 +3143,7 @@ public final class XRGRPC {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -2929,13 +3171,12 @@ public final class XRGRPC {
       }
       com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigArgs other = (com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigArgs) obj;
 
-      boolean result = true;
-      result = result && (getReqId()
-          == other.getReqId());
-      result = result && getYangjson()
-          .equals(other.getYangjson());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (getReqId()
+          != other.getReqId()) return false;
+      if (!getYangjson()
+          .equals(other.getYangjson())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -3025,6 +3266,7 @@ public final class XRGRPC {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -3032,6 +3274,7 @@ public final class XRGRPC {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigArgs prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -3055,6 +3298,7 @@ public final class XRGRPC {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ConfigArgs_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ConfigArgs_fieldAccessorTable
@@ -3077,6 +3321,7 @@ public final class XRGRPC {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         reqId_ = 0L;
@@ -3086,15 +3331,18 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ConfigArgs_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigArgs getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigArgs.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigArgs build() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigArgs result = buildPartial();
         if (!result.isInitialized()) {
@@ -3103,6 +3351,7 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigArgs buildPartial() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigArgs result = new com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigArgs(this);
         result.reqId_ = reqId_;
@@ -3111,32 +3360,39 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigArgs) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigArgs)other);
@@ -3160,10 +3416,12 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -3185,12 +3443,15 @@ public final class XRGRPC {
       private long reqId_ ;
       /**
        * <code>int64 ReqId = 1;</code>
+       * @return The reqId.
        */
       public long getReqId() {
         return reqId_;
       }
       /**
        * <code>int64 ReqId = 1;</code>
+       * @param value The reqId to set.
+       * @return This builder for chaining.
        */
       public Builder setReqId(long value) {
         
@@ -3200,6 +3461,7 @@ public final class XRGRPC {
       }
       /**
        * <code>int64 ReqId = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearReqId() {
         
@@ -3211,6 +3473,7 @@ public final class XRGRPC {
       private java.lang.Object yangjson_ = "";
       /**
        * <code>string yangjson = 2;</code>
+       * @return The yangjson.
        */
       public java.lang.String getYangjson() {
         java.lang.Object ref = yangjson_;
@@ -3226,6 +3489,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string yangjson = 2;</code>
+       * @return The bytes for yangjson.
        */
       public com.google.protobuf.ByteString
           getYangjsonBytes() {
@@ -3242,6 +3506,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string yangjson = 2;</code>
+       * @param value The yangjson to set.
+       * @return This builder for chaining.
        */
       public Builder setYangjson(
           java.lang.String value) {
@@ -3255,6 +3521,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string yangjson = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearYangjson() {
         
@@ -3264,6 +3531,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string yangjson = 2;</code>
+       * @param value The bytes for yangjson to set.
+       * @return This builder for chaining.
        */
       public Builder setYangjsonBytes(
           com.google.protobuf.ByteString value) {
@@ -3276,11 +3545,13 @@ public final class XRGRPC {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -3302,11 +3573,12 @@ public final class XRGRPC {
 
     private static final com.google.protobuf.Parser<ConfigArgs>
         PARSER = new com.google.protobuf.AbstractParser<ConfigArgs>() {
+      @java.lang.Override
       public ConfigArgs parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ConfigArgs(input, extensionRegistry);
+        return new ConfigArgs(input, extensionRegistry);
       }
     };
 
@@ -3319,6 +3591,7 @@ public final class XRGRPC {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigArgs getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -3331,15 +3604,18 @@ public final class XRGRPC {
 
     /**
      * <code>int64 ResReqId = 1;</code>
+     * @return The resReqId.
      */
     long getResReqId();
 
     /**
      * <code>string errors = 2;</code>
+     * @return The errors.
      */
     java.lang.String getErrors();
     /**
      * <code>string errors = 2;</code>
+     * @return The bytes for errors.
      */
     com.google.protobuf.ByteString
         getErrorsBytes();
@@ -3357,8 +3633,14 @@ public final class XRGRPC {
       super(builder);
     }
     private ConfigReply() {
-      resReqId_ = 0L;
       errors_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new ConfigReply();
     }
 
     @java.lang.Override
@@ -3371,7 +3653,9 @@ public final class XRGRPC {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -3382,13 +3666,6 @@ public final class XRGRPC {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
 
               resReqId_ = input.readInt64();
@@ -3398,6 +3675,13 @@ public final class XRGRPC {
               java.lang.String s = input.readStringRequireUtf8();
 
               errors_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -3417,6 +3701,7 @@ public final class XRGRPC {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ConfigReply_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ConfigReply_fieldAccessorTable
@@ -3428,6 +3713,7 @@ public final class XRGRPC {
     private long resReqId_;
     /**
      * <code>int64 ResReqId = 1;</code>
+     * @return The resReqId.
      */
     public long getResReqId() {
       return resReqId_;
@@ -3437,6 +3723,7 @@ public final class XRGRPC {
     private volatile java.lang.Object errors_;
     /**
      * <code>string errors = 2;</code>
+     * @return The errors.
      */
     public java.lang.String getErrors() {
       java.lang.Object ref = errors_;
@@ -3452,6 +3739,7 @@ public final class XRGRPC {
     }
     /**
      * <code>string errors = 2;</code>
+     * @return The bytes for errors.
      */
     public com.google.protobuf.ByteString
         getErrorsBytes() {
@@ -3468,6 +3756,7 @@ public final class XRGRPC {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -3477,6 +3766,7 @@ public final class XRGRPC {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (resReqId_ != 0L) {
@@ -3488,6 +3778,7 @@ public final class XRGRPC {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -3515,13 +3806,12 @@ public final class XRGRPC {
       }
       com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigReply other = (com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigReply) obj;
 
-      boolean result = true;
-      result = result && (getResReqId()
-          == other.getResReqId());
-      result = result && getErrors()
-          .equals(other.getErrors());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (getResReqId()
+          != other.getResReqId()) return false;
+      if (!getErrors()
+          .equals(other.getErrors())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -3611,6 +3901,7 @@ public final class XRGRPC {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -3618,6 +3909,7 @@ public final class XRGRPC {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigReply prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -3641,6 +3933,7 @@ public final class XRGRPC {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ConfigReply_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ConfigReply_fieldAccessorTable
@@ -3663,6 +3956,7 @@ public final class XRGRPC {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         resReqId_ = 0L;
@@ -3672,15 +3966,18 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ConfigReply_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigReply getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigReply.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigReply build() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigReply result = buildPartial();
         if (!result.isInitialized()) {
@@ -3689,6 +3986,7 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigReply buildPartial() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigReply result = new com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigReply(this);
         result.resReqId_ = resReqId_;
@@ -3697,32 +3995,39 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigReply) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigReply)other);
@@ -3746,10 +4051,12 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -3771,12 +4078,15 @@ public final class XRGRPC {
       private long resReqId_ ;
       /**
        * <code>int64 ResReqId = 1;</code>
+       * @return The resReqId.
        */
       public long getResReqId() {
         return resReqId_;
       }
       /**
        * <code>int64 ResReqId = 1;</code>
+       * @param value The resReqId to set.
+       * @return This builder for chaining.
        */
       public Builder setResReqId(long value) {
         
@@ -3786,6 +4096,7 @@ public final class XRGRPC {
       }
       /**
        * <code>int64 ResReqId = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearResReqId() {
         
@@ -3797,6 +4108,7 @@ public final class XRGRPC {
       private java.lang.Object errors_ = "";
       /**
        * <code>string errors = 2;</code>
+       * @return The errors.
        */
       public java.lang.String getErrors() {
         java.lang.Object ref = errors_;
@@ -3812,6 +4124,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 2;</code>
+       * @return The bytes for errors.
        */
       public com.google.protobuf.ByteString
           getErrorsBytes() {
@@ -3828,6 +4141,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 2;</code>
+       * @param value The errors to set.
+       * @return This builder for chaining.
        */
       public Builder setErrors(
           java.lang.String value) {
@@ -3841,6 +4156,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearErrors() {
         
@@ -3850,6 +4166,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 2;</code>
+       * @param value The bytes for errors to set.
+       * @return This builder for chaining.
        */
       public Builder setErrorsBytes(
           com.google.protobuf.ByteString value) {
@@ -3862,11 +4180,13 @@ public final class XRGRPC {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -3888,11 +4208,12 @@ public final class XRGRPC {
 
     private static final com.google.protobuf.Parser<ConfigReply>
         PARSER = new com.google.protobuf.AbstractParser<ConfigReply>() {
+      @java.lang.Override
       public ConfigReply parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ConfigReply(input, extensionRegistry);
+        return new ConfigReply(input, extensionRegistry);
       }
     };
 
@@ -3905,6 +4226,7 @@ public final class XRGRPC {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.XRGRPC.ConfigReply getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -3917,15 +4239,18 @@ public final class XRGRPC {
 
     /**
      * <code>int64 ReqId = 1;</code>
+     * @return The reqId.
      */
     long getReqId();
 
     /**
      * <code>string cli = 2;</code>
+     * @return The cli.
      */
     java.lang.String getCli();
     /**
      * <code>string cli = 2;</code>
+     * @return The bytes for cli.
      */
     com.google.protobuf.ByteString
         getCliBytes();
@@ -3943,8 +4268,14 @@ public final class XRGRPC {
       super(builder);
     }
     private CliConfigArgs() {
-      reqId_ = 0L;
       cli_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new CliConfigArgs();
     }
 
     @java.lang.Override
@@ -3957,7 +4288,9 @@ public final class XRGRPC {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -3968,13 +4301,6 @@ public final class XRGRPC {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
 
               reqId_ = input.readInt64();
@@ -3984,6 +4310,13 @@ public final class XRGRPC {
               java.lang.String s = input.readStringRequireUtf8();
 
               cli_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -4003,6 +4336,7 @@ public final class XRGRPC {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CliConfigArgs_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CliConfigArgs_fieldAccessorTable
@@ -4014,6 +4348,7 @@ public final class XRGRPC {
     private long reqId_;
     /**
      * <code>int64 ReqId = 1;</code>
+     * @return The reqId.
      */
     public long getReqId() {
       return reqId_;
@@ -4023,6 +4358,7 @@ public final class XRGRPC {
     private volatile java.lang.Object cli_;
     /**
      * <code>string cli = 2;</code>
+     * @return The cli.
      */
     public java.lang.String getCli() {
       java.lang.Object ref = cli_;
@@ -4038,6 +4374,7 @@ public final class XRGRPC {
     }
     /**
      * <code>string cli = 2;</code>
+     * @return The bytes for cli.
      */
     public com.google.protobuf.ByteString
         getCliBytes() {
@@ -4054,6 +4391,7 @@ public final class XRGRPC {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -4063,6 +4401,7 @@ public final class XRGRPC {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (reqId_ != 0L) {
@@ -4074,6 +4413,7 @@ public final class XRGRPC {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -4101,13 +4441,12 @@ public final class XRGRPC {
       }
       com.cisco.stbarth.netconf.grpc.XRGRPC.CliConfigArgs other = (com.cisco.stbarth.netconf.grpc.XRGRPC.CliConfigArgs) obj;
 
-      boolean result = true;
-      result = result && (getReqId()
-          == other.getReqId());
-      result = result && getCli()
-          .equals(other.getCli());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (getReqId()
+          != other.getReqId()) return false;
+      if (!getCli()
+          .equals(other.getCli())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -4197,6 +4536,7 @@ public final class XRGRPC {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -4204,6 +4544,7 @@ public final class XRGRPC {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.XRGRPC.CliConfigArgs prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -4227,6 +4568,7 @@ public final class XRGRPC {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CliConfigArgs_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CliConfigArgs_fieldAccessorTable
@@ -4249,6 +4591,7 @@ public final class XRGRPC {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         reqId_ = 0L;
@@ -4258,15 +4601,18 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CliConfigArgs_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.CliConfigArgs getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.CliConfigArgs.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.CliConfigArgs build() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.CliConfigArgs result = buildPartial();
         if (!result.isInitialized()) {
@@ -4275,6 +4621,7 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.CliConfigArgs buildPartial() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.CliConfigArgs result = new com.cisco.stbarth.netconf.grpc.XRGRPC.CliConfigArgs(this);
         result.reqId_ = reqId_;
@@ -4283,32 +4630,39 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.XRGRPC.CliConfigArgs) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.XRGRPC.CliConfigArgs)other);
@@ -4332,10 +4686,12 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -4357,12 +4713,15 @@ public final class XRGRPC {
       private long reqId_ ;
       /**
        * <code>int64 ReqId = 1;</code>
+       * @return The reqId.
        */
       public long getReqId() {
         return reqId_;
       }
       /**
        * <code>int64 ReqId = 1;</code>
+       * @param value The reqId to set.
+       * @return This builder for chaining.
        */
       public Builder setReqId(long value) {
         
@@ -4372,6 +4731,7 @@ public final class XRGRPC {
       }
       /**
        * <code>int64 ReqId = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearReqId() {
         
@@ -4383,6 +4743,7 @@ public final class XRGRPC {
       private java.lang.Object cli_ = "";
       /**
        * <code>string cli = 2;</code>
+       * @return The cli.
        */
       public java.lang.String getCli() {
         java.lang.Object ref = cli_;
@@ -4398,6 +4759,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string cli = 2;</code>
+       * @return The bytes for cli.
        */
       public com.google.protobuf.ByteString
           getCliBytes() {
@@ -4414,6 +4776,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string cli = 2;</code>
+       * @param value The cli to set.
+       * @return This builder for chaining.
        */
       public Builder setCli(
           java.lang.String value) {
@@ -4427,6 +4791,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string cli = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearCli() {
         
@@ -4436,6 +4801,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string cli = 2;</code>
+       * @param value The bytes for cli to set.
+       * @return This builder for chaining.
        */
       public Builder setCliBytes(
           com.google.protobuf.ByteString value) {
@@ -4448,11 +4815,13 @@ public final class XRGRPC {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -4474,11 +4843,12 @@ public final class XRGRPC {
 
     private static final com.google.protobuf.Parser<CliConfigArgs>
         PARSER = new com.google.protobuf.AbstractParser<CliConfigArgs>() {
+      @java.lang.Override
       public CliConfigArgs parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new CliConfigArgs(input, extensionRegistry);
+        return new CliConfigArgs(input, extensionRegistry);
       }
     };
 
@@ -4491,6 +4861,7 @@ public final class XRGRPC {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.XRGRPC.CliConfigArgs getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -4503,15 +4874,18 @@ public final class XRGRPC {
 
     /**
      * <code>int64 ResReqId = 1;</code>
+     * @return The resReqId.
      */
     long getResReqId();
 
     /**
      * <code>string errors = 2;</code>
+     * @return The errors.
      */
     java.lang.String getErrors();
     /**
      * <code>string errors = 2;</code>
+     * @return The bytes for errors.
      */
     com.google.protobuf.ByteString
         getErrorsBytes();
@@ -4529,8 +4903,14 @@ public final class XRGRPC {
       super(builder);
     }
     private CliConfigReply() {
-      resReqId_ = 0L;
       errors_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new CliConfigReply();
     }
 
     @java.lang.Override
@@ -4543,7 +4923,9 @@ public final class XRGRPC {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -4554,13 +4936,6 @@ public final class XRGRPC {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
 
               resReqId_ = input.readInt64();
@@ -4570,6 +4945,13 @@ public final class XRGRPC {
               java.lang.String s = input.readStringRequireUtf8();
 
               errors_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -4589,6 +4971,7 @@ public final class XRGRPC {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CliConfigReply_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CliConfigReply_fieldAccessorTable
@@ -4600,6 +4983,7 @@ public final class XRGRPC {
     private long resReqId_;
     /**
      * <code>int64 ResReqId = 1;</code>
+     * @return The resReqId.
      */
     public long getResReqId() {
       return resReqId_;
@@ -4609,6 +4993,7 @@ public final class XRGRPC {
     private volatile java.lang.Object errors_;
     /**
      * <code>string errors = 2;</code>
+     * @return The errors.
      */
     public java.lang.String getErrors() {
       java.lang.Object ref = errors_;
@@ -4624,6 +5009,7 @@ public final class XRGRPC {
     }
     /**
      * <code>string errors = 2;</code>
+     * @return The bytes for errors.
      */
     public com.google.protobuf.ByteString
         getErrorsBytes() {
@@ -4640,6 +5026,7 @@ public final class XRGRPC {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -4649,6 +5036,7 @@ public final class XRGRPC {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (resReqId_ != 0L) {
@@ -4660,6 +5048,7 @@ public final class XRGRPC {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -4687,13 +5076,12 @@ public final class XRGRPC {
       }
       com.cisco.stbarth.netconf.grpc.XRGRPC.CliConfigReply other = (com.cisco.stbarth.netconf.grpc.XRGRPC.CliConfigReply) obj;
 
-      boolean result = true;
-      result = result && (getResReqId()
-          == other.getResReqId());
-      result = result && getErrors()
-          .equals(other.getErrors());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (getResReqId()
+          != other.getResReqId()) return false;
+      if (!getErrors()
+          .equals(other.getErrors())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -4783,6 +5171,7 @@ public final class XRGRPC {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -4790,6 +5179,7 @@ public final class XRGRPC {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.XRGRPC.CliConfigReply prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -4813,6 +5203,7 @@ public final class XRGRPC {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CliConfigReply_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CliConfigReply_fieldAccessorTable
@@ -4835,6 +5226,7 @@ public final class XRGRPC {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         resReqId_ = 0L;
@@ -4844,15 +5236,18 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CliConfigReply_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.CliConfigReply getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.CliConfigReply.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.CliConfigReply build() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.CliConfigReply result = buildPartial();
         if (!result.isInitialized()) {
@@ -4861,6 +5256,7 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.CliConfigReply buildPartial() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.CliConfigReply result = new com.cisco.stbarth.netconf.grpc.XRGRPC.CliConfigReply(this);
         result.resReqId_ = resReqId_;
@@ -4869,32 +5265,39 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.XRGRPC.CliConfigReply) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.XRGRPC.CliConfigReply)other);
@@ -4918,10 +5321,12 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -4943,12 +5348,15 @@ public final class XRGRPC {
       private long resReqId_ ;
       /**
        * <code>int64 ResReqId = 1;</code>
+       * @return The resReqId.
        */
       public long getResReqId() {
         return resReqId_;
       }
       /**
        * <code>int64 ResReqId = 1;</code>
+       * @param value The resReqId to set.
+       * @return This builder for chaining.
        */
       public Builder setResReqId(long value) {
         
@@ -4958,6 +5366,7 @@ public final class XRGRPC {
       }
       /**
        * <code>int64 ResReqId = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearResReqId() {
         
@@ -4969,6 +5378,7 @@ public final class XRGRPC {
       private java.lang.Object errors_ = "";
       /**
        * <code>string errors = 2;</code>
+       * @return The errors.
        */
       public java.lang.String getErrors() {
         java.lang.Object ref = errors_;
@@ -4984,6 +5394,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 2;</code>
+       * @return The bytes for errors.
        */
       public com.google.protobuf.ByteString
           getErrorsBytes() {
@@ -5000,6 +5411,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 2;</code>
+       * @param value The errors to set.
+       * @return This builder for chaining.
        */
       public Builder setErrors(
           java.lang.String value) {
@@ -5013,6 +5426,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearErrors() {
         
@@ -5022,6 +5436,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 2;</code>
+       * @param value The bytes for errors to set.
+       * @return This builder for chaining.
        */
       public Builder setErrorsBytes(
           com.google.protobuf.ByteString value) {
@@ -5034,11 +5450,13 @@ public final class XRGRPC {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -5060,11 +5478,12 @@ public final class XRGRPC {
 
     private static final com.google.protobuf.Parser<CliConfigReply>
         PARSER = new com.google.protobuf.AbstractParser<CliConfigReply>() {
+      @java.lang.Override
       public CliConfigReply parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new CliConfigReply(input, extensionRegistry);
+        return new CliConfigReply(input, extensionRegistry);
       }
     };
 
@@ -5077,6 +5496,7 @@ public final class XRGRPC {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.XRGRPC.CliConfigReply getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -5089,25 +5509,30 @@ public final class XRGRPC {
 
     /**
      * <code>int64 ReqId = 1;</code>
+     * @return The reqId.
      */
     long getReqId();
 
     /**
      * <code>string cli = 2;</code>
+     * @return The cli.
      */
     java.lang.String getCli();
     /**
      * <code>string cli = 2;</code>
+     * @return The bytes for cli.
      */
     com.google.protobuf.ByteString
         getCliBytes();
 
     /**
      * <code>string yangjson = 3;</code>
+     * @return The yangjson.
      */
     java.lang.String getYangjson();
     /**
      * <code>string yangjson = 3;</code>
+     * @return The bytes for yangjson.
      */
     com.google.protobuf.ByteString
         getYangjsonBytes();
@@ -5125,9 +5550,15 @@ public final class XRGRPC {
       super(builder);
     }
     private CommitReplaceArgs() {
-      reqId_ = 0L;
       cli_ = "";
       yangjson_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new CommitReplaceArgs();
     }
 
     @java.lang.Override
@@ -5140,7 +5571,9 @@ public final class XRGRPC {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -5151,13 +5584,6 @@ public final class XRGRPC {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
 
               reqId_ = input.readInt64();
@@ -5173,6 +5599,13 @@ public final class XRGRPC {
               java.lang.String s = input.readStringRequireUtf8();
 
               yangjson_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -5192,6 +5625,7 @@ public final class XRGRPC {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CommitReplaceArgs_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CommitReplaceArgs_fieldAccessorTable
@@ -5203,6 +5637,7 @@ public final class XRGRPC {
     private long reqId_;
     /**
      * <code>int64 ReqId = 1;</code>
+     * @return The reqId.
      */
     public long getReqId() {
       return reqId_;
@@ -5212,6 +5647,7 @@ public final class XRGRPC {
     private volatile java.lang.Object cli_;
     /**
      * <code>string cli = 2;</code>
+     * @return The cli.
      */
     public java.lang.String getCli() {
       java.lang.Object ref = cli_;
@@ -5227,6 +5663,7 @@ public final class XRGRPC {
     }
     /**
      * <code>string cli = 2;</code>
+     * @return The bytes for cli.
      */
     public com.google.protobuf.ByteString
         getCliBytes() {
@@ -5246,6 +5683,7 @@ public final class XRGRPC {
     private volatile java.lang.Object yangjson_;
     /**
      * <code>string yangjson = 3;</code>
+     * @return The yangjson.
      */
     public java.lang.String getYangjson() {
       java.lang.Object ref = yangjson_;
@@ -5261,6 +5699,7 @@ public final class XRGRPC {
     }
     /**
      * <code>string yangjson = 3;</code>
+     * @return The bytes for yangjson.
      */
     public com.google.protobuf.ByteString
         getYangjsonBytes() {
@@ -5277,6 +5716,7 @@ public final class XRGRPC {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -5286,6 +5726,7 @@ public final class XRGRPC {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (reqId_ != 0L) {
@@ -5300,6 +5741,7 @@ public final class XRGRPC {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -5330,15 +5772,14 @@ public final class XRGRPC {
       }
       com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReplaceArgs other = (com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReplaceArgs) obj;
 
-      boolean result = true;
-      result = result && (getReqId()
-          == other.getReqId());
-      result = result && getCli()
-          .equals(other.getCli());
-      result = result && getYangjson()
-          .equals(other.getYangjson());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (getReqId()
+          != other.getReqId()) return false;
+      if (!getCli()
+          .equals(other.getCli())) return false;
+      if (!getYangjson()
+          .equals(other.getYangjson())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -5430,6 +5871,7 @@ public final class XRGRPC {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -5437,6 +5879,7 @@ public final class XRGRPC {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReplaceArgs prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -5460,6 +5903,7 @@ public final class XRGRPC {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CommitReplaceArgs_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CommitReplaceArgs_fieldAccessorTable
@@ -5482,6 +5926,7 @@ public final class XRGRPC {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         reqId_ = 0L;
@@ -5493,15 +5938,18 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CommitReplaceArgs_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReplaceArgs getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReplaceArgs.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReplaceArgs build() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReplaceArgs result = buildPartial();
         if (!result.isInitialized()) {
@@ -5510,6 +5958,7 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReplaceArgs buildPartial() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReplaceArgs result = new com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReplaceArgs(this);
         result.reqId_ = reqId_;
@@ -5519,32 +5968,39 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReplaceArgs) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReplaceArgs)other);
@@ -5572,10 +6028,12 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -5597,12 +6055,15 @@ public final class XRGRPC {
       private long reqId_ ;
       /**
        * <code>int64 ReqId = 1;</code>
+       * @return The reqId.
        */
       public long getReqId() {
         return reqId_;
       }
       /**
        * <code>int64 ReqId = 1;</code>
+       * @param value The reqId to set.
+       * @return This builder for chaining.
        */
       public Builder setReqId(long value) {
         
@@ -5612,6 +6073,7 @@ public final class XRGRPC {
       }
       /**
        * <code>int64 ReqId = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearReqId() {
         
@@ -5623,6 +6085,7 @@ public final class XRGRPC {
       private java.lang.Object cli_ = "";
       /**
        * <code>string cli = 2;</code>
+       * @return The cli.
        */
       public java.lang.String getCli() {
         java.lang.Object ref = cli_;
@@ -5638,6 +6101,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string cli = 2;</code>
+       * @return The bytes for cli.
        */
       public com.google.protobuf.ByteString
           getCliBytes() {
@@ -5654,6 +6118,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string cli = 2;</code>
+       * @param value The cli to set.
+       * @return This builder for chaining.
        */
       public Builder setCli(
           java.lang.String value) {
@@ -5667,6 +6133,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string cli = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearCli() {
         
@@ -5676,6 +6143,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string cli = 2;</code>
+       * @param value The bytes for cli to set.
+       * @return This builder for chaining.
        */
       public Builder setCliBytes(
           com.google.protobuf.ByteString value) {
@@ -5692,6 +6161,7 @@ public final class XRGRPC {
       private java.lang.Object yangjson_ = "";
       /**
        * <code>string yangjson = 3;</code>
+       * @return The yangjson.
        */
       public java.lang.String getYangjson() {
         java.lang.Object ref = yangjson_;
@@ -5707,6 +6177,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string yangjson = 3;</code>
+       * @return The bytes for yangjson.
        */
       public com.google.protobuf.ByteString
           getYangjsonBytes() {
@@ -5723,6 +6194,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string yangjson = 3;</code>
+       * @param value The yangjson to set.
+       * @return This builder for chaining.
        */
       public Builder setYangjson(
           java.lang.String value) {
@@ -5736,6 +6209,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string yangjson = 3;</code>
+       * @return This builder for chaining.
        */
       public Builder clearYangjson() {
         
@@ -5745,6 +6219,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string yangjson = 3;</code>
+       * @param value The bytes for yangjson to set.
+       * @return This builder for chaining.
        */
       public Builder setYangjsonBytes(
           com.google.protobuf.ByteString value) {
@@ -5757,11 +6233,13 @@ public final class XRGRPC {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -5783,11 +6261,12 @@ public final class XRGRPC {
 
     private static final com.google.protobuf.Parser<CommitReplaceArgs>
         PARSER = new com.google.protobuf.AbstractParser<CommitReplaceArgs>() {
+      @java.lang.Override
       public CommitReplaceArgs parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new CommitReplaceArgs(input, extensionRegistry);
+        return new CommitReplaceArgs(input, extensionRegistry);
       }
     };
 
@@ -5800,6 +6279,7 @@ public final class XRGRPC {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReplaceArgs getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -5812,15 +6292,18 @@ public final class XRGRPC {
 
     /**
      * <code>int64 ResReqId = 1;</code>
+     * @return The resReqId.
      */
     long getResReqId();
 
     /**
      * <code>string errors = 2;</code>
+     * @return The errors.
      */
     java.lang.String getErrors();
     /**
      * <code>string errors = 2;</code>
+     * @return The bytes for errors.
      */
     com.google.protobuf.ByteString
         getErrorsBytes();
@@ -5838,8 +6321,14 @@ public final class XRGRPC {
       super(builder);
     }
     private CommitReplaceReply() {
-      resReqId_ = 0L;
       errors_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new CommitReplaceReply();
     }
 
     @java.lang.Override
@@ -5852,7 +6341,9 @@ public final class XRGRPC {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -5863,13 +6354,6 @@ public final class XRGRPC {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
 
               resReqId_ = input.readInt64();
@@ -5879,6 +6363,13 @@ public final class XRGRPC {
               java.lang.String s = input.readStringRequireUtf8();
 
               errors_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -5898,6 +6389,7 @@ public final class XRGRPC {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CommitReplaceReply_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CommitReplaceReply_fieldAccessorTable
@@ -5909,6 +6401,7 @@ public final class XRGRPC {
     private long resReqId_;
     /**
      * <code>int64 ResReqId = 1;</code>
+     * @return The resReqId.
      */
     public long getResReqId() {
       return resReqId_;
@@ -5918,6 +6411,7 @@ public final class XRGRPC {
     private volatile java.lang.Object errors_;
     /**
      * <code>string errors = 2;</code>
+     * @return The errors.
      */
     public java.lang.String getErrors() {
       java.lang.Object ref = errors_;
@@ -5933,6 +6427,7 @@ public final class XRGRPC {
     }
     /**
      * <code>string errors = 2;</code>
+     * @return The bytes for errors.
      */
     public com.google.protobuf.ByteString
         getErrorsBytes() {
@@ -5949,6 +6444,7 @@ public final class XRGRPC {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -5958,6 +6454,7 @@ public final class XRGRPC {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (resReqId_ != 0L) {
@@ -5969,6 +6466,7 @@ public final class XRGRPC {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -5996,13 +6494,12 @@ public final class XRGRPC {
       }
       com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReplaceReply other = (com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReplaceReply) obj;
 
-      boolean result = true;
-      result = result && (getResReqId()
-          == other.getResReqId());
-      result = result && getErrors()
-          .equals(other.getErrors());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (getResReqId()
+          != other.getResReqId()) return false;
+      if (!getErrors()
+          .equals(other.getErrors())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -6092,6 +6589,7 @@ public final class XRGRPC {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -6099,6 +6597,7 @@ public final class XRGRPC {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReplaceReply prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -6122,6 +6621,7 @@ public final class XRGRPC {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CommitReplaceReply_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CommitReplaceReply_fieldAccessorTable
@@ -6144,6 +6644,7 @@ public final class XRGRPC {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         resReqId_ = 0L;
@@ -6153,15 +6654,18 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CommitReplaceReply_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReplaceReply getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReplaceReply.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReplaceReply build() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReplaceReply result = buildPartial();
         if (!result.isInitialized()) {
@@ -6170,6 +6674,7 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReplaceReply buildPartial() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReplaceReply result = new com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReplaceReply(this);
         result.resReqId_ = resReqId_;
@@ -6178,32 +6683,39 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReplaceReply) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReplaceReply)other);
@@ -6227,10 +6739,12 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -6252,12 +6766,15 @@ public final class XRGRPC {
       private long resReqId_ ;
       /**
        * <code>int64 ResReqId = 1;</code>
+       * @return The resReqId.
        */
       public long getResReqId() {
         return resReqId_;
       }
       /**
        * <code>int64 ResReqId = 1;</code>
+       * @param value The resReqId to set.
+       * @return This builder for chaining.
        */
       public Builder setResReqId(long value) {
         
@@ -6267,6 +6784,7 @@ public final class XRGRPC {
       }
       /**
        * <code>int64 ResReqId = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearResReqId() {
         
@@ -6278,6 +6796,7 @@ public final class XRGRPC {
       private java.lang.Object errors_ = "";
       /**
        * <code>string errors = 2;</code>
+       * @return The errors.
        */
       public java.lang.String getErrors() {
         java.lang.Object ref = errors_;
@@ -6293,6 +6812,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 2;</code>
+       * @return The bytes for errors.
        */
       public com.google.protobuf.ByteString
           getErrorsBytes() {
@@ -6309,6 +6829,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 2;</code>
+       * @param value The errors to set.
+       * @return This builder for chaining.
        */
       public Builder setErrors(
           java.lang.String value) {
@@ -6322,6 +6844,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearErrors() {
         
@@ -6331,6 +6854,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 2;</code>
+       * @param value The bytes for errors to set.
+       * @return This builder for chaining.
        */
       public Builder setErrorsBytes(
           com.google.protobuf.ByteString value) {
@@ -6343,11 +6868,13 @@ public final class XRGRPC {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -6369,11 +6896,12 @@ public final class XRGRPC {
 
     private static final com.google.protobuf.Parser<CommitReplaceReply>
         PARSER = new com.google.protobuf.AbstractParser<CommitReplaceReply>() {
+      @java.lang.Override
       public CommitReplaceReply parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new CommitReplaceReply(input, extensionRegistry);
+        return new CommitReplaceReply(input, extensionRegistry);
       }
     };
 
@@ -6386,6 +6914,7 @@ public final class XRGRPC {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReplaceReply getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -6398,20 +6927,24 @@ public final class XRGRPC {
 
     /**
      * <code>string label = 1;</code>
+     * @return The label.
      */
     java.lang.String getLabel();
     /**
      * <code>string label = 1;</code>
+     * @return The bytes for label.
      */
     com.google.protobuf.ByteString
         getLabelBytes();
 
     /**
      * <code>string comment = 2;</code>
+     * @return The comment.
      */
     java.lang.String getComment();
     /**
      * <code>string comment = 2;</code>
+     * @return The bytes for comment.
      */
     com.google.protobuf.ByteString
         getCommentBytes();
@@ -6434,6 +6967,13 @@ public final class XRGRPC {
     }
 
     @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new CommitMsg();
+    }
+
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return this.unknownFields;
@@ -6443,7 +6983,9 @@ public final class XRGRPC {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -6454,13 +6996,6 @@ public final class XRGRPC {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
@@ -6471,6 +7006,13 @@ public final class XRGRPC {
               java.lang.String s = input.readStringRequireUtf8();
 
               comment_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -6490,6 +7032,7 @@ public final class XRGRPC {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CommitMsg_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CommitMsg_fieldAccessorTable
@@ -6501,6 +7044,7 @@ public final class XRGRPC {
     private volatile java.lang.Object label_;
     /**
      * <code>string label = 1;</code>
+     * @return The label.
      */
     public java.lang.String getLabel() {
       java.lang.Object ref = label_;
@@ -6516,6 +7060,7 @@ public final class XRGRPC {
     }
     /**
      * <code>string label = 1;</code>
+     * @return The bytes for label.
      */
     public com.google.protobuf.ByteString
         getLabelBytes() {
@@ -6535,6 +7080,7 @@ public final class XRGRPC {
     private volatile java.lang.Object comment_;
     /**
      * <code>string comment = 2;</code>
+     * @return The comment.
      */
     public java.lang.String getComment() {
       java.lang.Object ref = comment_;
@@ -6550,6 +7096,7 @@ public final class XRGRPC {
     }
     /**
      * <code>string comment = 2;</code>
+     * @return The bytes for comment.
      */
     public com.google.protobuf.ByteString
         getCommentBytes() {
@@ -6566,6 +7113,7 @@ public final class XRGRPC {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -6575,6 +7123,7 @@ public final class XRGRPC {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (!getLabelBytes().isEmpty()) {
@@ -6586,6 +7135,7 @@ public final class XRGRPC {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -6612,13 +7162,12 @@ public final class XRGRPC {
       }
       com.cisco.stbarth.netconf.grpc.XRGRPC.CommitMsg other = (com.cisco.stbarth.netconf.grpc.XRGRPC.CommitMsg) obj;
 
-      boolean result = true;
-      result = result && getLabel()
-          .equals(other.getLabel());
-      result = result && getComment()
-          .equals(other.getComment());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (!getLabel()
+          .equals(other.getLabel())) return false;
+      if (!getComment()
+          .equals(other.getComment())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -6707,6 +7256,7 @@ public final class XRGRPC {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -6714,6 +7264,7 @@ public final class XRGRPC {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.XRGRPC.CommitMsg prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -6737,6 +7288,7 @@ public final class XRGRPC {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CommitMsg_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CommitMsg_fieldAccessorTable
@@ -6759,6 +7311,7 @@ public final class XRGRPC {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         label_ = "";
@@ -6768,15 +7321,18 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CommitMsg_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.CommitMsg getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.CommitMsg.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.CommitMsg build() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.CommitMsg result = buildPartial();
         if (!result.isInitialized()) {
@@ -6785,6 +7341,7 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.CommitMsg buildPartial() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.CommitMsg result = new com.cisco.stbarth.netconf.grpc.XRGRPC.CommitMsg(this);
         result.label_ = label_;
@@ -6793,32 +7350,39 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.XRGRPC.CommitMsg) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.XRGRPC.CommitMsg)other);
@@ -6843,10 +7407,12 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -6868,6 +7434,7 @@ public final class XRGRPC {
       private java.lang.Object label_ = "";
       /**
        * <code>string label = 1;</code>
+       * @return The label.
        */
       public java.lang.String getLabel() {
         java.lang.Object ref = label_;
@@ -6883,6 +7450,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string label = 1;</code>
+       * @return The bytes for label.
        */
       public com.google.protobuf.ByteString
           getLabelBytes() {
@@ -6899,6 +7467,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string label = 1;</code>
+       * @param value The label to set.
+       * @return This builder for chaining.
        */
       public Builder setLabel(
           java.lang.String value) {
@@ -6912,6 +7482,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string label = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearLabel() {
         
@@ -6921,6 +7492,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string label = 1;</code>
+       * @param value The bytes for label to set.
+       * @return This builder for chaining.
        */
       public Builder setLabelBytes(
           com.google.protobuf.ByteString value) {
@@ -6937,6 +7510,7 @@ public final class XRGRPC {
       private java.lang.Object comment_ = "";
       /**
        * <code>string comment = 2;</code>
+       * @return The comment.
        */
       public java.lang.String getComment() {
         java.lang.Object ref = comment_;
@@ -6952,6 +7526,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string comment = 2;</code>
+       * @return The bytes for comment.
        */
       public com.google.protobuf.ByteString
           getCommentBytes() {
@@ -6968,6 +7543,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string comment = 2;</code>
+       * @param value The comment to set.
+       * @return This builder for chaining.
        */
       public Builder setComment(
           java.lang.String value) {
@@ -6981,6 +7558,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string comment = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearComment() {
         
@@ -6990,6 +7568,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string comment = 2;</code>
+       * @param value The bytes for comment to set.
+       * @return This builder for chaining.
        */
       public Builder setCommentBytes(
           com.google.protobuf.ByteString value) {
@@ -7002,11 +7582,13 @@ public final class XRGRPC {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -7028,11 +7610,12 @@ public final class XRGRPC {
 
     private static final com.google.protobuf.Parser<CommitMsg>
         PARSER = new com.google.protobuf.AbstractParser<CommitMsg>() {
+      @java.lang.Override
       public CommitMsg parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new CommitMsg(input, extensionRegistry);
+        return new CommitMsg(input, extensionRegistry);
       }
     };
 
@@ -7045,6 +7628,7 @@ public final class XRGRPC {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.XRGRPC.CommitMsg getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -7057,10 +7641,12 @@ public final class XRGRPC {
 
     /**
      * <code>.IOSXRExtensibleManagabilityService.CommitMsg msg = 1;</code>
+     * @return Whether the msg field is set.
      */
     boolean hasMsg();
     /**
      * <code>.IOSXRExtensibleManagabilityService.CommitMsg msg = 1;</code>
+     * @return The msg.
      */
     com.cisco.stbarth.netconf.grpc.XRGRPC.CommitMsg getMsg();
     /**
@@ -7070,6 +7656,7 @@ public final class XRGRPC {
 
     /**
      * <code>int64 ReqId = 2;</code>
+     * @return The reqId.
      */
     long getReqId();
   }
@@ -7086,7 +7673,13 @@ public final class XRGRPC {
       super(builder);
     }
     private CommitArgs() {
-      reqId_ = 0L;
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new CommitArgs();
     }
 
     @java.lang.Override
@@ -7099,7 +7692,9 @@ public final class XRGRPC {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -7110,13 +7705,6 @@ public final class XRGRPC {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               com.cisco.stbarth.netconf.grpc.XRGRPC.CommitMsg.Builder subBuilder = null;
               if (msg_ != null) {
@@ -7133,6 +7721,13 @@ public final class XRGRPC {
             case 16: {
 
               reqId_ = input.readInt64();
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -7152,6 +7747,7 @@ public final class XRGRPC {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CommitArgs_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CommitArgs_fieldAccessorTable
@@ -7163,12 +7759,14 @@ public final class XRGRPC {
     private com.cisco.stbarth.netconf.grpc.XRGRPC.CommitMsg msg_;
     /**
      * <code>.IOSXRExtensibleManagabilityService.CommitMsg msg = 1;</code>
+     * @return Whether the msg field is set.
      */
     public boolean hasMsg() {
       return msg_ != null;
     }
     /**
      * <code>.IOSXRExtensibleManagabilityService.CommitMsg msg = 1;</code>
+     * @return The msg.
      */
     public com.cisco.stbarth.netconf.grpc.XRGRPC.CommitMsg getMsg() {
       return msg_ == null ? com.cisco.stbarth.netconf.grpc.XRGRPC.CommitMsg.getDefaultInstance() : msg_;
@@ -7184,12 +7782,14 @@ public final class XRGRPC {
     private long reqId_;
     /**
      * <code>int64 ReqId = 2;</code>
+     * @return The reqId.
      */
     public long getReqId() {
       return reqId_;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -7199,6 +7799,7 @@ public final class XRGRPC {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (msg_ != null) {
@@ -7210,6 +7811,7 @@ public final class XRGRPC {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -7238,16 +7840,15 @@ public final class XRGRPC {
       }
       com.cisco.stbarth.netconf.grpc.XRGRPC.CommitArgs other = (com.cisco.stbarth.netconf.grpc.XRGRPC.CommitArgs) obj;
 
-      boolean result = true;
-      result = result && (hasMsg() == other.hasMsg());
+      if (hasMsg() != other.hasMsg()) return false;
       if (hasMsg()) {
-        result = result && getMsg()
-            .equals(other.getMsg());
+        if (!getMsg()
+            .equals(other.getMsg())) return false;
       }
-      result = result && (getReqId()
-          == other.getReqId());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (getReqId()
+          != other.getReqId()) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -7339,6 +7940,7 @@ public final class XRGRPC {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -7346,6 +7948,7 @@ public final class XRGRPC {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.XRGRPC.CommitArgs prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -7369,6 +7972,7 @@ public final class XRGRPC {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CommitArgs_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CommitArgs_fieldAccessorTable
@@ -7391,6 +7995,7 @@ public final class XRGRPC {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         if (msgBuilder_ == null) {
@@ -7404,15 +8009,18 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CommitArgs_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.CommitArgs getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.CommitArgs.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.CommitArgs build() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.CommitArgs result = buildPartial();
         if (!result.isInitialized()) {
@@ -7421,6 +8029,7 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.CommitArgs buildPartial() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.CommitArgs result = new com.cisco.stbarth.netconf.grpc.XRGRPC.CommitArgs(this);
         if (msgBuilder_ == null) {
@@ -7433,32 +8042,39 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.XRGRPC.CommitArgs) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.XRGRPC.CommitArgs)other);
@@ -7481,10 +8097,12 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -7503,17 +8121,19 @@ public final class XRGRPC {
         return this;
       }
 
-      private com.cisco.stbarth.netconf.grpc.XRGRPC.CommitMsg msg_ = null;
+      private com.cisco.stbarth.netconf.grpc.XRGRPC.CommitMsg msg_;
       private com.google.protobuf.SingleFieldBuilderV3<
           com.cisco.stbarth.netconf.grpc.XRGRPC.CommitMsg, com.cisco.stbarth.netconf.grpc.XRGRPC.CommitMsg.Builder, com.cisco.stbarth.netconf.grpc.XRGRPC.CommitMsgOrBuilder> msgBuilder_;
       /**
        * <code>.IOSXRExtensibleManagabilityService.CommitMsg msg = 1;</code>
+       * @return Whether the msg field is set.
        */
       public boolean hasMsg() {
         return msgBuilder_ != null || msg_ != null;
       }
       /**
        * <code>.IOSXRExtensibleManagabilityService.CommitMsg msg = 1;</code>
+       * @return The msg.
        */
       public com.cisco.stbarth.netconf.grpc.XRGRPC.CommitMsg getMsg() {
         if (msgBuilder_ == null) {
@@ -7623,12 +8243,15 @@ public final class XRGRPC {
       private long reqId_ ;
       /**
        * <code>int64 ReqId = 2;</code>
+       * @return The reqId.
        */
       public long getReqId() {
         return reqId_;
       }
       /**
        * <code>int64 ReqId = 2;</code>
+       * @param value The reqId to set.
+       * @return This builder for chaining.
        */
       public Builder setReqId(long value) {
         
@@ -7638,6 +8261,7 @@ public final class XRGRPC {
       }
       /**
        * <code>int64 ReqId = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearReqId() {
         
@@ -7645,11 +8269,13 @@ public final class XRGRPC {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -7671,11 +8297,12 @@ public final class XRGRPC {
 
     private static final com.google.protobuf.Parser<CommitArgs>
         PARSER = new com.google.protobuf.AbstractParser<CommitArgs>() {
+      @java.lang.Override
       public CommitArgs parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new CommitArgs(input, extensionRegistry);
+        return new CommitArgs(input, extensionRegistry);
       }
     };
 
@@ -7688,6 +8315,7 @@ public final class XRGRPC {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.XRGRPC.CommitArgs getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -7700,24 +8328,29 @@ public final class XRGRPC {
 
     /**
      * <code>.IOSXRExtensibleManagabilityService.CommitResult result = 1;</code>
+     * @return The enum numeric value on the wire for result.
      */
     int getResultValue();
     /**
      * <code>.IOSXRExtensibleManagabilityService.CommitResult result = 1;</code>
+     * @return The result.
      */
     com.cisco.stbarth.netconf.grpc.XRGRPC.CommitResult getResult();
 
     /**
      * <code>int64 ResReqId = 2;</code>
+     * @return The resReqId.
      */
     long getResReqId();
 
     /**
      * <code>string errors = 3;</code>
+     * @return The errors.
      */
     java.lang.String getErrors();
     /**
      * <code>string errors = 3;</code>
+     * @return The bytes for errors.
      */
     com.google.protobuf.ByteString
         getErrorsBytes();
@@ -7736,8 +8369,14 @@ public final class XRGRPC {
     }
     private CommitReply() {
       result_ = 0;
-      resReqId_ = 0L;
       errors_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new CommitReply();
     }
 
     @java.lang.Override
@@ -7750,7 +8389,9 @@ public final class XRGRPC {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -7761,13 +8402,6 @@ public final class XRGRPC {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
               int rawValue = input.readEnum();
 
@@ -7783,6 +8417,13 @@ public final class XRGRPC {
               java.lang.String s = input.readStringRequireUtf8();
 
               errors_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -7802,6 +8443,7 @@ public final class XRGRPC {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CommitReply_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CommitReply_fieldAccessorTable
@@ -7813,14 +8455,17 @@ public final class XRGRPC {
     private int result_;
     /**
      * <code>.IOSXRExtensibleManagabilityService.CommitResult result = 1;</code>
+     * @return The enum numeric value on the wire for result.
      */
     public int getResultValue() {
       return result_;
     }
     /**
      * <code>.IOSXRExtensibleManagabilityService.CommitResult result = 1;</code>
+     * @return The result.
      */
     public com.cisco.stbarth.netconf.grpc.XRGRPC.CommitResult getResult() {
+      @SuppressWarnings("deprecation")
       com.cisco.stbarth.netconf.grpc.XRGRPC.CommitResult result = com.cisco.stbarth.netconf.grpc.XRGRPC.CommitResult.valueOf(result_);
       return result == null ? com.cisco.stbarth.netconf.grpc.XRGRPC.CommitResult.UNRECOGNIZED : result;
     }
@@ -7829,6 +8474,7 @@ public final class XRGRPC {
     private long resReqId_;
     /**
      * <code>int64 ResReqId = 2;</code>
+     * @return The resReqId.
      */
     public long getResReqId() {
       return resReqId_;
@@ -7838,6 +8484,7 @@ public final class XRGRPC {
     private volatile java.lang.Object errors_;
     /**
      * <code>string errors = 3;</code>
+     * @return The errors.
      */
     public java.lang.String getErrors() {
       java.lang.Object ref = errors_;
@@ -7853,6 +8500,7 @@ public final class XRGRPC {
     }
     /**
      * <code>string errors = 3;</code>
+     * @return The bytes for errors.
      */
     public com.google.protobuf.ByteString
         getErrorsBytes() {
@@ -7869,6 +8517,7 @@ public final class XRGRPC {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -7878,6 +8527,7 @@ public final class XRGRPC {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (result_ != com.cisco.stbarth.netconf.grpc.XRGRPC.CommitResult.CHANGE.getNumber()) {
@@ -7892,6 +8542,7 @@ public final class XRGRPC {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -7923,14 +8574,13 @@ public final class XRGRPC {
       }
       com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReply other = (com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReply) obj;
 
-      boolean result = true;
-      result = result && result_ == other.result_;
-      result = result && (getResReqId()
-          == other.getResReqId());
-      result = result && getErrors()
-          .equals(other.getErrors());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (result_ != other.result_) return false;
+      if (getResReqId()
+          != other.getResReqId()) return false;
+      if (!getErrors()
+          .equals(other.getErrors())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -8022,6 +8672,7 @@ public final class XRGRPC {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -8029,6 +8680,7 @@ public final class XRGRPC {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReply prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -8052,6 +8704,7 @@ public final class XRGRPC {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CommitReply_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CommitReply_fieldAccessorTable
@@ -8074,6 +8727,7 @@ public final class XRGRPC {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         result_ = 0;
@@ -8085,15 +8739,18 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CommitReply_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReply getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReply.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReply build() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReply result = buildPartial();
         if (!result.isInitialized()) {
@@ -8102,6 +8759,7 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReply buildPartial() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReply result = new com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReply(this);
         result.result_ = result_;
@@ -8111,32 +8769,39 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReply) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReply)other);
@@ -8163,10 +8828,12 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -8188,12 +8855,15 @@ public final class XRGRPC {
       private int result_ = 0;
       /**
        * <code>.IOSXRExtensibleManagabilityService.CommitResult result = 1;</code>
+       * @return The enum numeric value on the wire for result.
        */
       public int getResultValue() {
         return result_;
       }
       /**
        * <code>.IOSXRExtensibleManagabilityService.CommitResult result = 1;</code>
+       * @param value The enum numeric value on the wire for result to set.
+       * @return This builder for chaining.
        */
       public Builder setResultValue(int value) {
         result_ = value;
@@ -8202,13 +8872,17 @@ public final class XRGRPC {
       }
       /**
        * <code>.IOSXRExtensibleManagabilityService.CommitResult result = 1;</code>
+       * @return The result.
        */
       public com.cisco.stbarth.netconf.grpc.XRGRPC.CommitResult getResult() {
+        @SuppressWarnings("deprecation")
         com.cisco.stbarth.netconf.grpc.XRGRPC.CommitResult result = com.cisco.stbarth.netconf.grpc.XRGRPC.CommitResult.valueOf(result_);
         return result == null ? com.cisco.stbarth.netconf.grpc.XRGRPC.CommitResult.UNRECOGNIZED : result;
       }
       /**
        * <code>.IOSXRExtensibleManagabilityService.CommitResult result = 1;</code>
+       * @param value The result to set.
+       * @return This builder for chaining.
        */
       public Builder setResult(com.cisco.stbarth.netconf.grpc.XRGRPC.CommitResult value) {
         if (value == null) {
@@ -8221,6 +8895,7 @@ public final class XRGRPC {
       }
       /**
        * <code>.IOSXRExtensibleManagabilityService.CommitResult result = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearResult() {
         
@@ -8232,12 +8907,15 @@ public final class XRGRPC {
       private long resReqId_ ;
       /**
        * <code>int64 ResReqId = 2;</code>
+       * @return The resReqId.
        */
       public long getResReqId() {
         return resReqId_;
       }
       /**
        * <code>int64 ResReqId = 2;</code>
+       * @param value The resReqId to set.
+       * @return This builder for chaining.
        */
       public Builder setResReqId(long value) {
         
@@ -8247,6 +8925,7 @@ public final class XRGRPC {
       }
       /**
        * <code>int64 ResReqId = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearResReqId() {
         
@@ -8258,6 +8937,7 @@ public final class XRGRPC {
       private java.lang.Object errors_ = "";
       /**
        * <code>string errors = 3;</code>
+       * @return The errors.
        */
       public java.lang.String getErrors() {
         java.lang.Object ref = errors_;
@@ -8273,6 +8953,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 3;</code>
+       * @return The bytes for errors.
        */
       public com.google.protobuf.ByteString
           getErrorsBytes() {
@@ -8289,6 +8970,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 3;</code>
+       * @param value The errors to set.
+       * @return This builder for chaining.
        */
       public Builder setErrors(
           java.lang.String value) {
@@ -8302,6 +8985,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 3;</code>
+       * @return This builder for chaining.
        */
       public Builder clearErrors() {
         
@@ -8311,6 +8995,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 3;</code>
+       * @param value The bytes for errors to set.
+       * @return This builder for chaining.
        */
       public Builder setErrorsBytes(
           com.google.protobuf.ByteString value) {
@@ -8323,11 +9009,13 @@ public final class XRGRPC {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -8349,11 +9037,12 @@ public final class XRGRPC {
 
     private static final com.google.protobuf.Parser<CommitReply>
         PARSER = new com.google.protobuf.AbstractParser<CommitReply>() {
+      @java.lang.Override
       public CommitReply parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new CommitReply(input, extensionRegistry);
+        return new CommitReply(input, extensionRegistry);
       }
     };
 
@@ -8366,6 +9055,7 @@ public final class XRGRPC {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.XRGRPC.CommitReply getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -8378,6 +9068,7 @@ public final class XRGRPC {
 
     /**
      * <code>int64 ReqId = 1;</code>
+     * @return The reqId.
      */
     long getReqId();
   }
@@ -8394,7 +9085,13 @@ public final class XRGRPC {
       super(builder);
     }
     private DiscardChangesArgs() {
-      reqId_ = 0L;
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new DiscardChangesArgs();
     }
 
     @java.lang.Override
@@ -8407,7 +9104,9 @@ public final class XRGRPC {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -8418,16 +9117,16 @@ public final class XRGRPC {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
 
               reqId_ = input.readInt64();
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -8447,6 +9146,7 @@ public final class XRGRPC {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_DiscardChangesArgs_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_DiscardChangesArgs_fieldAccessorTable
@@ -8458,12 +9158,14 @@ public final class XRGRPC {
     private long reqId_;
     /**
      * <code>int64 ReqId = 1;</code>
+     * @return The reqId.
      */
     public long getReqId() {
       return reqId_;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -8473,6 +9175,7 @@ public final class XRGRPC {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (reqId_ != 0L) {
@@ -8481,6 +9184,7 @@ public final class XRGRPC {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -8505,11 +9209,10 @@ public final class XRGRPC {
       }
       com.cisco.stbarth.netconf.grpc.XRGRPC.DiscardChangesArgs other = (com.cisco.stbarth.netconf.grpc.XRGRPC.DiscardChangesArgs) obj;
 
-      boolean result = true;
-      result = result && (getReqId()
-          == other.getReqId());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (getReqId()
+          != other.getReqId()) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -8597,6 +9300,7 @@ public final class XRGRPC {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -8604,6 +9308,7 @@ public final class XRGRPC {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.XRGRPC.DiscardChangesArgs prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -8627,6 +9332,7 @@ public final class XRGRPC {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_DiscardChangesArgs_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_DiscardChangesArgs_fieldAccessorTable
@@ -8649,6 +9355,7 @@ public final class XRGRPC {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         reqId_ = 0L;
@@ -8656,15 +9363,18 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_DiscardChangesArgs_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.DiscardChangesArgs getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.DiscardChangesArgs.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.DiscardChangesArgs build() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.DiscardChangesArgs result = buildPartial();
         if (!result.isInitialized()) {
@@ -8673,6 +9383,7 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.DiscardChangesArgs buildPartial() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.DiscardChangesArgs result = new com.cisco.stbarth.netconf.grpc.XRGRPC.DiscardChangesArgs(this);
         result.reqId_ = reqId_;
@@ -8680,32 +9391,39 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.XRGRPC.DiscardChangesArgs) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.XRGRPC.DiscardChangesArgs)other);
@@ -8725,10 +9443,12 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -8750,12 +9470,15 @@ public final class XRGRPC {
       private long reqId_ ;
       /**
        * <code>int64 ReqId = 1;</code>
+       * @return The reqId.
        */
       public long getReqId() {
         return reqId_;
       }
       /**
        * <code>int64 ReqId = 1;</code>
+       * @param value The reqId to set.
+       * @return This builder for chaining.
        */
       public Builder setReqId(long value) {
         
@@ -8765,6 +9488,7 @@ public final class XRGRPC {
       }
       /**
        * <code>int64 ReqId = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearReqId() {
         
@@ -8772,11 +9496,13 @@ public final class XRGRPC {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -8798,11 +9524,12 @@ public final class XRGRPC {
 
     private static final com.google.protobuf.Parser<DiscardChangesArgs>
         PARSER = new com.google.protobuf.AbstractParser<DiscardChangesArgs>() {
+      @java.lang.Override
       public DiscardChangesArgs parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new DiscardChangesArgs(input, extensionRegistry);
+        return new DiscardChangesArgs(input, extensionRegistry);
       }
     };
 
@@ -8815,6 +9542,7 @@ public final class XRGRPC {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.XRGRPC.DiscardChangesArgs getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -8827,15 +9555,18 @@ public final class XRGRPC {
 
     /**
      * <code>int64 ResReqId = 1;</code>
+     * @return The resReqId.
      */
     long getResReqId();
 
     /**
      * <code>string errors = 2;</code>
+     * @return The errors.
      */
     java.lang.String getErrors();
     /**
      * <code>string errors = 2;</code>
+     * @return The bytes for errors.
      */
     com.google.protobuf.ByteString
         getErrorsBytes();
@@ -8853,8 +9584,14 @@ public final class XRGRPC {
       super(builder);
     }
     private DiscardChangesReply() {
-      resReqId_ = 0L;
       errors_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new DiscardChangesReply();
     }
 
     @java.lang.Override
@@ -8867,7 +9604,9 @@ public final class XRGRPC {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -8878,13 +9617,6 @@ public final class XRGRPC {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
 
               resReqId_ = input.readInt64();
@@ -8894,6 +9626,13 @@ public final class XRGRPC {
               java.lang.String s = input.readStringRequireUtf8();
 
               errors_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -8913,6 +9652,7 @@ public final class XRGRPC {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_DiscardChangesReply_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_DiscardChangesReply_fieldAccessorTable
@@ -8924,6 +9664,7 @@ public final class XRGRPC {
     private long resReqId_;
     /**
      * <code>int64 ResReqId = 1;</code>
+     * @return The resReqId.
      */
     public long getResReqId() {
       return resReqId_;
@@ -8933,6 +9674,7 @@ public final class XRGRPC {
     private volatile java.lang.Object errors_;
     /**
      * <code>string errors = 2;</code>
+     * @return The errors.
      */
     public java.lang.String getErrors() {
       java.lang.Object ref = errors_;
@@ -8948,6 +9690,7 @@ public final class XRGRPC {
     }
     /**
      * <code>string errors = 2;</code>
+     * @return The bytes for errors.
      */
     public com.google.protobuf.ByteString
         getErrorsBytes() {
@@ -8964,6 +9707,7 @@ public final class XRGRPC {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -8973,6 +9717,7 @@ public final class XRGRPC {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (resReqId_ != 0L) {
@@ -8984,6 +9729,7 @@ public final class XRGRPC {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -9011,13 +9757,12 @@ public final class XRGRPC {
       }
       com.cisco.stbarth.netconf.grpc.XRGRPC.DiscardChangesReply other = (com.cisco.stbarth.netconf.grpc.XRGRPC.DiscardChangesReply) obj;
 
-      boolean result = true;
-      result = result && (getResReqId()
-          == other.getResReqId());
-      result = result && getErrors()
-          .equals(other.getErrors());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (getResReqId()
+          != other.getResReqId()) return false;
+      if (!getErrors()
+          .equals(other.getErrors())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -9107,6 +9852,7 @@ public final class XRGRPC {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -9114,6 +9860,7 @@ public final class XRGRPC {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.XRGRPC.DiscardChangesReply prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -9137,6 +9884,7 @@ public final class XRGRPC {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_DiscardChangesReply_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_DiscardChangesReply_fieldAccessorTable
@@ -9159,6 +9907,7 @@ public final class XRGRPC {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         resReqId_ = 0L;
@@ -9168,15 +9917,18 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_DiscardChangesReply_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.DiscardChangesReply getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.DiscardChangesReply.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.DiscardChangesReply build() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.DiscardChangesReply result = buildPartial();
         if (!result.isInitialized()) {
@@ -9185,6 +9937,7 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.DiscardChangesReply buildPartial() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.DiscardChangesReply result = new com.cisco.stbarth.netconf.grpc.XRGRPC.DiscardChangesReply(this);
         result.resReqId_ = resReqId_;
@@ -9193,32 +9946,39 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.XRGRPC.DiscardChangesReply) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.XRGRPC.DiscardChangesReply)other);
@@ -9242,10 +10002,12 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -9267,12 +10029,15 @@ public final class XRGRPC {
       private long resReqId_ ;
       /**
        * <code>int64 ResReqId = 1;</code>
+       * @return The resReqId.
        */
       public long getResReqId() {
         return resReqId_;
       }
       /**
        * <code>int64 ResReqId = 1;</code>
+       * @param value The resReqId to set.
+       * @return This builder for chaining.
        */
       public Builder setResReqId(long value) {
         
@@ -9282,6 +10047,7 @@ public final class XRGRPC {
       }
       /**
        * <code>int64 ResReqId = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearResReqId() {
         
@@ -9293,6 +10059,7 @@ public final class XRGRPC {
       private java.lang.Object errors_ = "";
       /**
        * <code>string errors = 2;</code>
+       * @return The errors.
        */
       public java.lang.String getErrors() {
         java.lang.Object ref = errors_;
@@ -9308,6 +10075,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 2;</code>
+       * @return The bytes for errors.
        */
       public com.google.protobuf.ByteString
           getErrorsBytes() {
@@ -9324,6 +10092,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 2;</code>
+       * @param value The errors to set.
+       * @return This builder for chaining.
        */
       public Builder setErrors(
           java.lang.String value) {
@@ -9337,6 +10107,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearErrors() {
         
@@ -9346,6 +10117,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 2;</code>
+       * @param value The bytes for errors to set.
+       * @return This builder for chaining.
        */
       public Builder setErrorsBytes(
           com.google.protobuf.ByteString value) {
@@ -9358,11 +10131,13 @@ public final class XRGRPC {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -9384,11 +10159,12 @@ public final class XRGRPC {
 
     private static final com.google.protobuf.Parser<DiscardChangesReply>
         PARSER = new com.google.protobuf.AbstractParser<DiscardChangesReply>() {
+      @java.lang.Override
       public DiscardChangesReply parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new DiscardChangesReply(input, extensionRegistry);
+        return new DiscardChangesReply(input, extensionRegistry);
       }
     };
 
@@ -9401,6 +10177,7 @@ public final class XRGRPC {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.XRGRPC.DiscardChangesReply getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -9413,15 +10190,18 @@ public final class XRGRPC {
 
     /**
      * <code>int64 ReqId = 1;</code>
+     * @return The reqId.
      */
     long getReqId();
 
     /**
      * <code>string cli = 2;</code>
+     * @return The cli.
      */
     java.lang.String getCli();
     /**
      * <code>string cli = 2;</code>
+     * @return The bytes for cli.
      */
     com.google.protobuf.ByteString
         getCliBytes();
@@ -9439,8 +10219,14 @@ public final class XRGRPC {
       super(builder);
     }
     private ShowCmdArgs() {
-      reqId_ = 0L;
       cli_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new ShowCmdArgs();
     }
 
     @java.lang.Override
@@ -9453,7 +10239,9 @@ public final class XRGRPC {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -9464,13 +10252,6 @@ public final class XRGRPC {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
 
               reqId_ = input.readInt64();
@@ -9480,6 +10261,13 @@ public final class XRGRPC {
               java.lang.String s = input.readStringRequireUtf8();
 
               cli_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -9499,6 +10287,7 @@ public final class XRGRPC {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ShowCmdArgs_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ShowCmdArgs_fieldAccessorTable
@@ -9510,6 +10299,7 @@ public final class XRGRPC {
     private long reqId_;
     /**
      * <code>int64 ReqId = 1;</code>
+     * @return The reqId.
      */
     public long getReqId() {
       return reqId_;
@@ -9519,6 +10309,7 @@ public final class XRGRPC {
     private volatile java.lang.Object cli_;
     /**
      * <code>string cli = 2;</code>
+     * @return The cli.
      */
     public java.lang.String getCli() {
       java.lang.Object ref = cli_;
@@ -9534,6 +10325,7 @@ public final class XRGRPC {
     }
     /**
      * <code>string cli = 2;</code>
+     * @return The bytes for cli.
      */
     public com.google.protobuf.ByteString
         getCliBytes() {
@@ -9550,6 +10342,7 @@ public final class XRGRPC {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -9559,6 +10352,7 @@ public final class XRGRPC {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (reqId_ != 0L) {
@@ -9570,6 +10364,7 @@ public final class XRGRPC {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -9597,13 +10392,12 @@ public final class XRGRPC {
       }
       com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdArgs other = (com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdArgs) obj;
 
-      boolean result = true;
-      result = result && (getReqId()
-          == other.getReqId());
-      result = result && getCli()
-          .equals(other.getCli());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (getReqId()
+          != other.getReqId()) return false;
+      if (!getCli()
+          .equals(other.getCli())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -9693,6 +10487,7 @@ public final class XRGRPC {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -9700,6 +10495,7 @@ public final class XRGRPC {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdArgs prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -9723,6 +10519,7 @@ public final class XRGRPC {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ShowCmdArgs_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ShowCmdArgs_fieldAccessorTable
@@ -9745,6 +10542,7 @@ public final class XRGRPC {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         reqId_ = 0L;
@@ -9754,15 +10552,18 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ShowCmdArgs_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdArgs getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdArgs.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdArgs build() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdArgs result = buildPartial();
         if (!result.isInitialized()) {
@@ -9771,6 +10572,7 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdArgs buildPartial() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdArgs result = new com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdArgs(this);
         result.reqId_ = reqId_;
@@ -9779,32 +10581,39 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdArgs) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdArgs)other);
@@ -9828,10 +10637,12 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -9853,12 +10664,15 @@ public final class XRGRPC {
       private long reqId_ ;
       /**
        * <code>int64 ReqId = 1;</code>
+       * @return The reqId.
        */
       public long getReqId() {
         return reqId_;
       }
       /**
        * <code>int64 ReqId = 1;</code>
+       * @param value The reqId to set.
+       * @return This builder for chaining.
        */
       public Builder setReqId(long value) {
         
@@ -9868,6 +10682,7 @@ public final class XRGRPC {
       }
       /**
        * <code>int64 ReqId = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearReqId() {
         
@@ -9879,6 +10694,7 @@ public final class XRGRPC {
       private java.lang.Object cli_ = "";
       /**
        * <code>string cli = 2;</code>
+       * @return The cli.
        */
       public java.lang.String getCli() {
         java.lang.Object ref = cli_;
@@ -9894,6 +10710,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string cli = 2;</code>
+       * @return The bytes for cli.
        */
       public com.google.protobuf.ByteString
           getCliBytes() {
@@ -9910,6 +10727,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string cli = 2;</code>
+       * @param value The cli to set.
+       * @return This builder for chaining.
        */
       public Builder setCli(
           java.lang.String value) {
@@ -9923,6 +10742,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string cli = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearCli() {
         
@@ -9932,6 +10752,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string cli = 2;</code>
+       * @param value The bytes for cli to set.
+       * @return This builder for chaining.
        */
       public Builder setCliBytes(
           com.google.protobuf.ByteString value) {
@@ -9944,11 +10766,13 @@ public final class XRGRPC {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -9970,11 +10794,12 @@ public final class XRGRPC {
 
     private static final com.google.protobuf.Parser<ShowCmdArgs>
         PARSER = new com.google.protobuf.AbstractParser<ShowCmdArgs>() {
+      @java.lang.Override
       public ShowCmdArgs parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ShowCmdArgs(input, extensionRegistry);
+        return new ShowCmdArgs(input, extensionRegistry);
       }
     };
 
@@ -9987,6 +10812,7 @@ public final class XRGRPC {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdArgs getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -9999,25 +10825,30 @@ public final class XRGRPC {
 
     /**
      * <code>int64 ResReqId = 1;</code>
+     * @return The resReqId.
      */
     long getResReqId();
 
     /**
      * <code>string output = 2;</code>
+     * @return The output.
      */
     java.lang.String getOutput();
     /**
      * <code>string output = 2;</code>
+     * @return The bytes for output.
      */
     com.google.protobuf.ByteString
         getOutputBytes();
 
     /**
      * <code>string errors = 3;</code>
+     * @return The errors.
      */
     java.lang.String getErrors();
     /**
      * <code>string errors = 3;</code>
+     * @return The bytes for errors.
      */
     com.google.protobuf.ByteString
         getErrorsBytes();
@@ -10035,9 +10866,15 @@ public final class XRGRPC {
       super(builder);
     }
     private ShowCmdTextReply() {
-      resReqId_ = 0L;
       output_ = "";
       errors_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new ShowCmdTextReply();
     }
 
     @java.lang.Override
@@ -10050,7 +10887,9 @@ public final class XRGRPC {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -10061,13 +10900,6 @@ public final class XRGRPC {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
 
               resReqId_ = input.readInt64();
@@ -10083,6 +10915,13 @@ public final class XRGRPC {
               java.lang.String s = input.readStringRequireUtf8();
 
               errors_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -10102,6 +10941,7 @@ public final class XRGRPC {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ShowCmdTextReply_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ShowCmdTextReply_fieldAccessorTable
@@ -10113,6 +10953,7 @@ public final class XRGRPC {
     private long resReqId_;
     /**
      * <code>int64 ResReqId = 1;</code>
+     * @return The resReqId.
      */
     public long getResReqId() {
       return resReqId_;
@@ -10122,6 +10963,7 @@ public final class XRGRPC {
     private volatile java.lang.Object output_;
     /**
      * <code>string output = 2;</code>
+     * @return The output.
      */
     public java.lang.String getOutput() {
       java.lang.Object ref = output_;
@@ -10137,6 +10979,7 @@ public final class XRGRPC {
     }
     /**
      * <code>string output = 2;</code>
+     * @return The bytes for output.
      */
     public com.google.protobuf.ByteString
         getOutputBytes() {
@@ -10156,6 +10999,7 @@ public final class XRGRPC {
     private volatile java.lang.Object errors_;
     /**
      * <code>string errors = 3;</code>
+     * @return The errors.
      */
     public java.lang.String getErrors() {
       java.lang.Object ref = errors_;
@@ -10171,6 +11015,7 @@ public final class XRGRPC {
     }
     /**
      * <code>string errors = 3;</code>
+     * @return The bytes for errors.
      */
     public com.google.protobuf.ByteString
         getErrorsBytes() {
@@ -10187,6 +11032,7 @@ public final class XRGRPC {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -10196,6 +11042,7 @@ public final class XRGRPC {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (resReqId_ != 0L) {
@@ -10210,6 +11057,7 @@ public final class XRGRPC {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -10240,15 +11088,14 @@ public final class XRGRPC {
       }
       com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdTextReply other = (com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdTextReply) obj;
 
-      boolean result = true;
-      result = result && (getResReqId()
-          == other.getResReqId());
-      result = result && getOutput()
-          .equals(other.getOutput());
-      result = result && getErrors()
-          .equals(other.getErrors());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (getResReqId()
+          != other.getResReqId()) return false;
+      if (!getOutput()
+          .equals(other.getOutput())) return false;
+      if (!getErrors()
+          .equals(other.getErrors())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -10340,6 +11187,7 @@ public final class XRGRPC {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -10347,6 +11195,7 @@ public final class XRGRPC {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdTextReply prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -10370,6 +11219,7 @@ public final class XRGRPC {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ShowCmdTextReply_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ShowCmdTextReply_fieldAccessorTable
@@ -10392,6 +11242,7 @@ public final class XRGRPC {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         resReqId_ = 0L;
@@ -10403,15 +11254,18 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ShowCmdTextReply_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdTextReply getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdTextReply.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdTextReply build() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdTextReply result = buildPartial();
         if (!result.isInitialized()) {
@@ -10420,6 +11274,7 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdTextReply buildPartial() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdTextReply result = new com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdTextReply(this);
         result.resReqId_ = resReqId_;
@@ -10429,32 +11284,39 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdTextReply) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdTextReply)other);
@@ -10482,10 +11344,12 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -10507,12 +11371,15 @@ public final class XRGRPC {
       private long resReqId_ ;
       /**
        * <code>int64 ResReqId = 1;</code>
+       * @return The resReqId.
        */
       public long getResReqId() {
         return resReqId_;
       }
       /**
        * <code>int64 ResReqId = 1;</code>
+       * @param value The resReqId to set.
+       * @return This builder for chaining.
        */
       public Builder setResReqId(long value) {
         
@@ -10522,6 +11389,7 @@ public final class XRGRPC {
       }
       /**
        * <code>int64 ResReqId = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearResReqId() {
         
@@ -10533,6 +11401,7 @@ public final class XRGRPC {
       private java.lang.Object output_ = "";
       /**
        * <code>string output = 2;</code>
+       * @return The output.
        */
       public java.lang.String getOutput() {
         java.lang.Object ref = output_;
@@ -10548,6 +11417,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string output = 2;</code>
+       * @return The bytes for output.
        */
       public com.google.protobuf.ByteString
           getOutputBytes() {
@@ -10564,6 +11434,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string output = 2;</code>
+       * @param value The output to set.
+       * @return This builder for chaining.
        */
       public Builder setOutput(
           java.lang.String value) {
@@ -10577,6 +11449,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string output = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearOutput() {
         
@@ -10586,6 +11459,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string output = 2;</code>
+       * @param value The bytes for output to set.
+       * @return This builder for chaining.
        */
       public Builder setOutputBytes(
           com.google.protobuf.ByteString value) {
@@ -10602,6 +11477,7 @@ public final class XRGRPC {
       private java.lang.Object errors_ = "";
       /**
        * <code>string errors = 3;</code>
+       * @return The errors.
        */
       public java.lang.String getErrors() {
         java.lang.Object ref = errors_;
@@ -10617,6 +11493,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 3;</code>
+       * @return The bytes for errors.
        */
       public com.google.protobuf.ByteString
           getErrorsBytes() {
@@ -10633,6 +11510,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 3;</code>
+       * @param value The errors to set.
+       * @return This builder for chaining.
        */
       public Builder setErrors(
           java.lang.String value) {
@@ -10646,6 +11525,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 3;</code>
+       * @return This builder for chaining.
        */
       public Builder clearErrors() {
         
@@ -10655,6 +11535,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 3;</code>
+       * @param value The bytes for errors to set.
+       * @return This builder for chaining.
        */
       public Builder setErrorsBytes(
           com.google.protobuf.ByteString value) {
@@ -10667,11 +11549,13 @@ public final class XRGRPC {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -10693,11 +11577,12 @@ public final class XRGRPC {
 
     private static final com.google.protobuf.Parser<ShowCmdTextReply>
         PARSER = new com.google.protobuf.AbstractParser<ShowCmdTextReply>() {
+      @java.lang.Override
       public ShowCmdTextReply parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ShowCmdTextReply(input, extensionRegistry);
+        return new ShowCmdTextReply(input, extensionRegistry);
       }
     };
 
@@ -10710,6 +11595,7 @@ public final class XRGRPC {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdTextReply getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -10722,25 +11608,30 @@ public final class XRGRPC {
 
     /**
      * <code>int64 ResReqId = 1;</code>
+     * @return The resReqId.
      */
     long getResReqId();
 
     /**
      * <code>string jsonoutput = 2;</code>
+     * @return The jsonoutput.
      */
     java.lang.String getJsonoutput();
     /**
      * <code>string jsonoutput = 2;</code>
+     * @return The bytes for jsonoutput.
      */
     com.google.protobuf.ByteString
         getJsonoutputBytes();
 
     /**
      * <code>string errors = 3;</code>
+     * @return The errors.
      */
     java.lang.String getErrors();
     /**
      * <code>string errors = 3;</code>
+     * @return The bytes for errors.
      */
     com.google.protobuf.ByteString
         getErrorsBytes();
@@ -10758,9 +11649,15 @@ public final class XRGRPC {
       super(builder);
     }
     private ShowCmdJSONReply() {
-      resReqId_ = 0L;
       jsonoutput_ = "";
       errors_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new ShowCmdJSONReply();
     }
 
     @java.lang.Override
@@ -10773,7 +11670,9 @@ public final class XRGRPC {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -10784,13 +11683,6 @@ public final class XRGRPC {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
 
               resReqId_ = input.readInt64();
@@ -10806,6 +11698,13 @@ public final class XRGRPC {
               java.lang.String s = input.readStringRequireUtf8();
 
               errors_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -10825,6 +11724,7 @@ public final class XRGRPC {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ShowCmdJSONReply_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ShowCmdJSONReply_fieldAccessorTable
@@ -10836,6 +11736,7 @@ public final class XRGRPC {
     private long resReqId_;
     /**
      * <code>int64 ResReqId = 1;</code>
+     * @return The resReqId.
      */
     public long getResReqId() {
       return resReqId_;
@@ -10845,6 +11746,7 @@ public final class XRGRPC {
     private volatile java.lang.Object jsonoutput_;
     /**
      * <code>string jsonoutput = 2;</code>
+     * @return The jsonoutput.
      */
     public java.lang.String getJsonoutput() {
       java.lang.Object ref = jsonoutput_;
@@ -10860,6 +11762,7 @@ public final class XRGRPC {
     }
     /**
      * <code>string jsonoutput = 2;</code>
+     * @return The bytes for jsonoutput.
      */
     public com.google.protobuf.ByteString
         getJsonoutputBytes() {
@@ -10879,6 +11782,7 @@ public final class XRGRPC {
     private volatile java.lang.Object errors_;
     /**
      * <code>string errors = 3;</code>
+     * @return The errors.
      */
     public java.lang.String getErrors() {
       java.lang.Object ref = errors_;
@@ -10894,6 +11798,7 @@ public final class XRGRPC {
     }
     /**
      * <code>string errors = 3;</code>
+     * @return The bytes for errors.
      */
     public com.google.protobuf.ByteString
         getErrorsBytes() {
@@ -10910,6 +11815,7 @@ public final class XRGRPC {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -10919,6 +11825,7 @@ public final class XRGRPC {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (resReqId_ != 0L) {
@@ -10933,6 +11840,7 @@ public final class XRGRPC {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -10963,15 +11871,14 @@ public final class XRGRPC {
       }
       com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdJSONReply other = (com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdJSONReply) obj;
 
-      boolean result = true;
-      result = result && (getResReqId()
-          == other.getResReqId());
-      result = result && getJsonoutput()
-          .equals(other.getJsonoutput());
-      result = result && getErrors()
-          .equals(other.getErrors());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (getResReqId()
+          != other.getResReqId()) return false;
+      if (!getJsonoutput()
+          .equals(other.getJsonoutput())) return false;
+      if (!getErrors()
+          .equals(other.getErrors())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -11063,6 +11970,7 @@ public final class XRGRPC {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -11070,6 +11978,7 @@ public final class XRGRPC {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdJSONReply prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -11093,6 +12002,7 @@ public final class XRGRPC {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ShowCmdJSONReply_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ShowCmdJSONReply_fieldAccessorTable
@@ -11115,6 +12025,7 @@ public final class XRGRPC {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         resReqId_ = 0L;
@@ -11126,15 +12037,18 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_ShowCmdJSONReply_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdJSONReply getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdJSONReply.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdJSONReply build() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdJSONReply result = buildPartial();
         if (!result.isInitialized()) {
@@ -11143,6 +12057,7 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdJSONReply buildPartial() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdJSONReply result = new com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdJSONReply(this);
         result.resReqId_ = resReqId_;
@@ -11152,32 +12067,39 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdJSONReply) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdJSONReply)other);
@@ -11205,10 +12127,12 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -11230,12 +12154,15 @@ public final class XRGRPC {
       private long resReqId_ ;
       /**
        * <code>int64 ResReqId = 1;</code>
+       * @return The resReqId.
        */
       public long getResReqId() {
         return resReqId_;
       }
       /**
        * <code>int64 ResReqId = 1;</code>
+       * @param value The resReqId to set.
+       * @return This builder for chaining.
        */
       public Builder setResReqId(long value) {
         
@@ -11245,6 +12172,7 @@ public final class XRGRPC {
       }
       /**
        * <code>int64 ResReqId = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearResReqId() {
         
@@ -11256,6 +12184,7 @@ public final class XRGRPC {
       private java.lang.Object jsonoutput_ = "";
       /**
        * <code>string jsonoutput = 2;</code>
+       * @return The jsonoutput.
        */
       public java.lang.String getJsonoutput() {
         java.lang.Object ref = jsonoutput_;
@@ -11271,6 +12200,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string jsonoutput = 2;</code>
+       * @return The bytes for jsonoutput.
        */
       public com.google.protobuf.ByteString
           getJsonoutputBytes() {
@@ -11287,6 +12217,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string jsonoutput = 2;</code>
+       * @param value The jsonoutput to set.
+       * @return This builder for chaining.
        */
       public Builder setJsonoutput(
           java.lang.String value) {
@@ -11300,6 +12232,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string jsonoutput = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearJsonoutput() {
         
@@ -11309,6 +12242,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string jsonoutput = 2;</code>
+       * @param value The bytes for jsonoutput to set.
+       * @return This builder for chaining.
        */
       public Builder setJsonoutputBytes(
           com.google.protobuf.ByteString value) {
@@ -11325,6 +12260,7 @@ public final class XRGRPC {
       private java.lang.Object errors_ = "";
       /**
        * <code>string errors = 3;</code>
+       * @return The errors.
        */
       public java.lang.String getErrors() {
         java.lang.Object ref = errors_;
@@ -11340,6 +12276,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 3;</code>
+       * @return The bytes for errors.
        */
       public com.google.protobuf.ByteString
           getErrorsBytes() {
@@ -11356,6 +12293,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 3;</code>
+       * @param value The errors to set.
+       * @return This builder for chaining.
        */
       public Builder setErrors(
           java.lang.String value) {
@@ -11369,6 +12308,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 3;</code>
+       * @return This builder for chaining.
        */
       public Builder clearErrors() {
         
@@ -11378,6 +12318,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 3;</code>
+       * @param value The bytes for errors to set.
+       * @return This builder for chaining.
        */
       public Builder setErrorsBytes(
           com.google.protobuf.ByteString value) {
@@ -11390,11 +12332,13 @@ public final class XRGRPC {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -11416,11 +12360,12 @@ public final class XRGRPC {
 
     private static final com.google.protobuf.Parser<ShowCmdJSONReply>
         PARSER = new com.google.protobuf.AbstractParser<ShowCmdJSONReply>() {
+      @java.lang.Override
       public ShowCmdJSONReply parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ShowCmdJSONReply(input, extensionRegistry);
+        return new ShowCmdJSONReply(input, extensionRegistry);
       }
     };
 
@@ -11433,6 +12378,7 @@ public final class XRGRPC {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.XRGRPC.ShowCmdJSONReply getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -11445,20 +12391,24 @@ public final class XRGRPC {
 
     /**
      * <code>int64 ReqId = 1;</code>
+     * @return The reqId.
      */
     long getReqId();
 
     /**
      * <code>int64 encode = 2;</code>
+     * @return The encode.
      */
     long getEncode();
 
     /**
      * <code>string subidstr = 3;</code>
+     * @return The subidstr.
      */
     java.lang.String getSubidstr();
     /**
      * <code>string subidstr = 3;</code>
+     * @return The bytes for subidstr.
      */
     com.google.protobuf.ByteString
         getSubidstrBytes();
@@ -11476,9 +12426,14 @@ public final class XRGRPC {
       super(builder);
     }
     private CreateSubsArgs() {
-      reqId_ = 0L;
-      encode_ = 0L;
       subidstr_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new CreateSubsArgs();
     }
 
     @java.lang.Override
@@ -11491,7 +12446,9 @@ public final class XRGRPC {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -11502,13 +12459,6 @@ public final class XRGRPC {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
 
               reqId_ = input.readInt64();
@@ -11523,6 +12473,13 @@ public final class XRGRPC {
               java.lang.String s = input.readStringRequireUtf8();
 
               subidstr_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -11542,6 +12499,7 @@ public final class XRGRPC {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CreateSubsArgs_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CreateSubsArgs_fieldAccessorTable
@@ -11553,6 +12511,7 @@ public final class XRGRPC {
     private long reqId_;
     /**
      * <code>int64 ReqId = 1;</code>
+     * @return The reqId.
      */
     public long getReqId() {
       return reqId_;
@@ -11562,6 +12521,7 @@ public final class XRGRPC {
     private long encode_;
     /**
      * <code>int64 encode = 2;</code>
+     * @return The encode.
      */
     public long getEncode() {
       return encode_;
@@ -11571,6 +12531,7 @@ public final class XRGRPC {
     private volatile java.lang.Object subidstr_;
     /**
      * <code>string subidstr = 3;</code>
+     * @return The subidstr.
      */
     public java.lang.String getSubidstr() {
       java.lang.Object ref = subidstr_;
@@ -11586,6 +12547,7 @@ public final class XRGRPC {
     }
     /**
      * <code>string subidstr = 3;</code>
+     * @return The bytes for subidstr.
      */
     public com.google.protobuf.ByteString
         getSubidstrBytes() {
@@ -11602,6 +12564,7 @@ public final class XRGRPC {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -11611,6 +12574,7 @@ public final class XRGRPC {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (reqId_ != 0L) {
@@ -11625,6 +12589,7 @@ public final class XRGRPC {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -11656,15 +12621,14 @@ public final class XRGRPC {
       }
       com.cisco.stbarth.netconf.grpc.XRGRPC.CreateSubsArgs other = (com.cisco.stbarth.netconf.grpc.XRGRPC.CreateSubsArgs) obj;
 
-      boolean result = true;
-      result = result && (getReqId()
-          == other.getReqId());
-      result = result && (getEncode()
-          == other.getEncode());
-      result = result && getSubidstr()
-          .equals(other.getSubidstr());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (getReqId()
+          != other.getReqId()) return false;
+      if (getEncode()
+          != other.getEncode()) return false;
+      if (!getSubidstr()
+          .equals(other.getSubidstr())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -11757,6 +12721,7 @@ public final class XRGRPC {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -11764,6 +12729,7 @@ public final class XRGRPC {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.XRGRPC.CreateSubsArgs prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -11787,6 +12753,7 @@ public final class XRGRPC {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CreateSubsArgs_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CreateSubsArgs_fieldAccessorTable
@@ -11809,6 +12776,7 @@ public final class XRGRPC {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         reqId_ = 0L;
@@ -11820,15 +12788,18 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CreateSubsArgs_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.CreateSubsArgs getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.CreateSubsArgs.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.CreateSubsArgs build() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.CreateSubsArgs result = buildPartial();
         if (!result.isInitialized()) {
@@ -11837,6 +12808,7 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.CreateSubsArgs buildPartial() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.CreateSubsArgs result = new com.cisco.stbarth.netconf.grpc.XRGRPC.CreateSubsArgs(this);
         result.reqId_ = reqId_;
@@ -11846,32 +12818,39 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.XRGRPC.CreateSubsArgs) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.XRGRPC.CreateSubsArgs)other);
@@ -11898,10 +12877,12 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -11923,12 +12904,15 @@ public final class XRGRPC {
       private long reqId_ ;
       /**
        * <code>int64 ReqId = 1;</code>
+       * @return The reqId.
        */
       public long getReqId() {
         return reqId_;
       }
       /**
        * <code>int64 ReqId = 1;</code>
+       * @param value The reqId to set.
+       * @return This builder for chaining.
        */
       public Builder setReqId(long value) {
         
@@ -11938,6 +12922,7 @@ public final class XRGRPC {
       }
       /**
        * <code>int64 ReqId = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearReqId() {
         
@@ -11949,12 +12934,15 @@ public final class XRGRPC {
       private long encode_ ;
       /**
        * <code>int64 encode = 2;</code>
+       * @return The encode.
        */
       public long getEncode() {
         return encode_;
       }
       /**
        * <code>int64 encode = 2;</code>
+       * @param value The encode to set.
+       * @return This builder for chaining.
        */
       public Builder setEncode(long value) {
         
@@ -11964,6 +12952,7 @@ public final class XRGRPC {
       }
       /**
        * <code>int64 encode = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearEncode() {
         
@@ -11975,6 +12964,7 @@ public final class XRGRPC {
       private java.lang.Object subidstr_ = "";
       /**
        * <code>string subidstr = 3;</code>
+       * @return The subidstr.
        */
       public java.lang.String getSubidstr() {
         java.lang.Object ref = subidstr_;
@@ -11990,6 +12980,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string subidstr = 3;</code>
+       * @return The bytes for subidstr.
        */
       public com.google.protobuf.ByteString
           getSubidstrBytes() {
@@ -12006,6 +12997,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string subidstr = 3;</code>
+       * @param value The subidstr to set.
+       * @return This builder for chaining.
        */
       public Builder setSubidstr(
           java.lang.String value) {
@@ -12019,6 +13012,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string subidstr = 3;</code>
+       * @return This builder for chaining.
        */
       public Builder clearSubidstr() {
         
@@ -12028,6 +13022,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string subidstr = 3;</code>
+       * @param value The bytes for subidstr to set.
+       * @return This builder for chaining.
        */
       public Builder setSubidstrBytes(
           com.google.protobuf.ByteString value) {
@@ -12040,11 +13036,13 @@ public final class XRGRPC {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -12066,11 +13064,12 @@ public final class XRGRPC {
 
     private static final com.google.protobuf.Parser<CreateSubsArgs>
         PARSER = new com.google.protobuf.AbstractParser<CreateSubsArgs>() {
+      @java.lang.Override
       public CreateSubsArgs parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new CreateSubsArgs(input, extensionRegistry);
+        return new CreateSubsArgs(input, extensionRegistry);
       }
     };
 
@@ -12083,6 +13082,7 @@ public final class XRGRPC {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.XRGRPC.CreateSubsArgs getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -12095,20 +13095,24 @@ public final class XRGRPC {
 
     /**
      * <code>int64 ResReqId = 1;</code>
+     * @return The resReqId.
      */
     long getResReqId();
 
     /**
      * <code>bytes data = 2;</code>
+     * @return The data.
      */
     com.google.protobuf.ByteString getData();
 
     /**
      * <code>string errors = 3;</code>
+     * @return The errors.
      */
     java.lang.String getErrors();
     /**
      * <code>string errors = 3;</code>
+     * @return The bytes for errors.
      */
     com.google.protobuf.ByteString
         getErrorsBytes();
@@ -12126,9 +13130,15 @@ public final class XRGRPC {
       super(builder);
     }
     private CreateSubsReply() {
-      resReqId_ = 0L;
       data_ = com.google.protobuf.ByteString.EMPTY;
       errors_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new CreateSubsReply();
     }
 
     @java.lang.Override
@@ -12141,7 +13151,9 @@ public final class XRGRPC {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -12152,13 +13164,6 @@ public final class XRGRPC {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
 
               resReqId_ = input.readInt64();
@@ -12173,6 +13178,13 @@ public final class XRGRPC {
               java.lang.String s = input.readStringRequireUtf8();
 
               errors_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -12192,6 +13204,7 @@ public final class XRGRPC {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CreateSubsReply_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CreateSubsReply_fieldAccessorTable
@@ -12203,6 +13216,7 @@ public final class XRGRPC {
     private long resReqId_;
     /**
      * <code>int64 ResReqId = 1;</code>
+     * @return The resReqId.
      */
     public long getResReqId() {
       return resReqId_;
@@ -12212,6 +13226,7 @@ public final class XRGRPC {
     private com.google.protobuf.ByteString data_;
     /**
      * <code>bytes data = 2;</code>
+     * @return The data.
      */
     public com.google.protobuf.ByteString getData() {
       return data_;
@@ -12221,6 +13236,7 @@ public final class XRGRPC {
     private volatile java.lang.Object errors_;
     /**
      * <code>string errors = 3;</code>
+     * @return The errors.
      */
     public java.lang.String getErrors() {
       java.lang.Object ref = errors_;
@@ -12236,6 +13252,7 @@ public final class XRGRPC {
     }
     /**
      * <code>string errors = 3;</code>
+     * @return The bytes for errors.
      */
     public com.google.protobuf.ByteString
         getErrorsBytes() {
@@ -12252,6 +13269,7 @@ public final class XRGRPC {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -12261,6 +13279,7 @@ public final class XRGRPC {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (resReqId_ != 0L) {
@@ -12275,6 +13294,7 @@ public final class XRGRPC {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -12306,15 +13326,14 @@ public final class XRGRPC {
       }
       com.cisco.stbarth.netconf.grpc.XRGRPC.CreateSubsReply other = (com.cisco.stbarth.netconf.grpc.XRGRPC.CreateSubsReply) obj;
 
-      boolean result = true;
-      result = result && (getResReqId()
-          == other.getResReqId());
-      result = result && getData()
-          .equals(other.getData());
-      result = result && getErrors()
-          .equals(other.getErrors());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (getResReqId()
+          != other.getResReqId()) return false;
+      if (!getData()
+          .equals(other.getData())) return false;
+      if (!getErrors()
+          .equals(other.getErrors())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -12406,6 +13425,7 @@ public final class XRGRPC {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -12413,6 +13433,7 @@ public final class XRGRPC {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.XRGRPC.CreateSubsReply prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -12436,6 +13457,7 @@ public final class XRGRPC {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CreateSubsReply_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CreateSubsReply_fieldAccessorTable
@@ -12458,6 +13480,7 @@ public final class XRGRPC {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         resReqId_ = 0L;
@@ -12469,15 +13492,18 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.internal_static_IOSXRExtensibleManagabilityService_CreateSubsReply_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.CreateSubsReply getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.XRGRPC.CreateSubsReply.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.CreateSubsReply build() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.CreateSubsReply result = buildPartial();
         if (!result.isInitialized()) {
@@ -12486,6 +13512,7 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.XRGRPC.CreateSubsReply buildPartial() {
         com.cisco.stbarth.netconf.grpc.XRGRPC.CreateSubsReply result = new com.cisco.stbarth.netconf.grpc.XRGRPC.CreateSubsReply(this);
         result.resReqId_ = resReqId_;
@@ -12495,32 +13522,39 @@ public final class XRGRPC {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.XRGRPC.CreateSubsReply) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.XRGRPC.CreateSubsReply)other);
@@ -12547,10 +13581,12 @@ public final class XRGRPC {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -12572,12 +13608,15 @@ public final class XRGRPC {
       private long resReqId_ ;
       /**
        * <code>int64 ResReqId = 1;</code>
+       * @return The resReqId.
        */
       public long getResReqId() {
         return resReqId_;
       }
       /**
        * <code>int64 ResReqId = 1;</code>
+       * @param value The resReqId to set.
+       * @return This builder for chaining.
        */
       public Builder setResReqId(long value) {
         
@@ -12587,6 +13626,7 @@ public final class XRGRPC {
       }
       /**
        * <code>int64 ResReqId = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearResReqId() {
         
@@ -12598,12 +13638,15 @@ public final class XRGRPC {
       private com.google.protobuf.ByteString data_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <code>bytes data = 2;</code>
+       * @return The data.
        */
       public com.google.protobuf.ByteString getData() {
         return data_;
       }
       /**
        * <code>bytes data = 2;</code>
+       * @param value The data to set.
+       * @return This builder for chaining.
        */
       public Builder setData(com.google.protobuf.ByteString value) {
         if (value == null) {
@@ -12616,6 +13659,7 @@ public final class XRGRPC {
       }
       /**
        * <code>bytes data = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearData() {
         
@@ -12627,6 +13671,7 @@ public final class XRGRPC {
       private java.lang.Object errors_ = "";
       /**
        * <code>string errors = 3;</code>
+       * @return The errors.
        */
       public java.lang.String getErrors() {
         java.lang.Object ref = errors_;
@@ -12642,6 +13687,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 3;</code>
+       * @return The bytes for errors.
        */
       public com.google.protobuf.ByteString
           getErrorsBytes() {
@@ -12658,6 +13704,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 3;</code>
+       * @param value The errors to set.
+       * @return This builder for chaining.
        */
       public Builder setErrors(
           java.lang.String value) {
@@ -12671,6 +13719,7 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 3;</code>
+       * @return This builder for chaining.
        */
       public Builder clearErrors() {
         
@@ -12680,6 +13729,8 @@ public final class XRGRPC {
       }
       /**
        * <code>string errors = 3;</code>
+       * @param value The bytes for errors to set.
+       * @return This builder for chaining.
        */
       public Builder setErrorsBytes(
           com.google.protobuf.ByteString value) {
@@ -12692,11 +13743,13 @@ public final class XRGRPC {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -12718,11 +13771,12 @@ public final class XRGRPC {
 
     private static final com.google.protobuf.Parser<CreateSubsReply>
         PARSER = new com.google.protobuf.AbstractParser<CreateSubsReply>() {
+      @java.lang.Override
       public CreateSubsReply parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new CreateSubsReply(input, extensionRegistry);
+        return new CreateSubsReply(input, extensionRegistry);
       }
     };
 
@@ -12735,6 +13789,7 @@ public final class XRGRPC {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.XRGRPC.CreateSubsReply getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -12859,7 +13914,7 @@ public final class XRGRPC {
       "etOperReply\022\020\n\010ResReqId\030\001 \001(\003\022\020\n\010yangjso" +
       "n\030\002 \001(\t\022\016\n\006errors\030\003 \001(\t\"-\n\nConfigArgs\022\r\n" +
       "\005ReqId\030\001 \001(\003\022\020\n\010yangjson\030\002 \001(\t\"/\n\013Config" +
-      "Reply\022\020\n\010ResReqId\030\001 \001(\003\022\016\n\006errors\030\002 \001(\t\"",
+      "Reply\022\020\n\010ResReqId\030\001 \001(\003\022\016\n\006errors\030\002 \001(\t\"" +
       "+\n\rCliConfigArgs\022\r\n\005ReqId\030\001 \001(\003\022\013\n\003cli\030\002" +
       " \001(\t\"2\n\016CliConfigReply\022\020\n\010ResReqId\030\001 \001(\003" +
       "\022\016\n\006errors\030\002 \001(\t\"A\n\021CommitReplaceArgs\022\r\n" +
@@ -12869,7 +13924,7 @@ public final class XRGRPC {
       "l\030\001 \001(\t\022\017\n\007comment\030\002 \001(\t\"W\n\nCommitArgs\022:" +
       "\n\003msg\030\001 \001(\0132-.IOSXRExtensibleManagabilit" +
       "yService.CommitMsg\022\r\n\005ReqId\030\002 \001(\003\"q\n\013Com" +
-      "mitReply\022@\n\006result\030\001 \001(\01620.IOSXRExtensib",
+      "mitReply\022@\n\006result\030\001 \001(\01620.IOSXRExtensib" +
       "leManagabilityService.CommitResult\022\020\n\010Re" +
       "sReqId\030\002 \001(\003\022\016\n\006errors\030\003 \001(\t\"#\n\022DiscardC" +
       "hangesArgs\022\r\n\005ReqId\030\001 \001(\003\"7\n\023DiscardChan" +
@@ -12879,7 +13934,7 @@ public final class XRGRPC {
       "\001(\003\022\016\n\006output\030\002 \001(\t\022\016\n\006errors\030\003 \001(\t\"H\n\020S" +
       "howCmdJSONReply\022\020\n\010ResReqId\030\001 \001(\003\022\022\n\njso" +
       "noutput\030\002 \001(\t\022\016\n\006errors\030\003 \001(\t\"A\n\016CreateS" +
-      "ubsArgs\022\r\n\005ReqId\030\001 \001(\003\022\016\n\006encode\030\002 \001(\003\022\020",
+      "ubsArgs\022\r\n\005ReqId\030\001 \001(\003\022\016\n\006encode\030\002 \001(\003\022\020" +
       "\n\010subidstr\030\003 \001(\t\"A\n\017CreateSubsReply\022\020\n\010R" +
       "esReqId\030\001 \001(\003\022\014\n\004data\030\002 \001(\014\022\016\n\006errors\030\003 " +
       "\001(\t*3\n\014CommitResult\022\n\n\006CHANGE\020\000\022\r\n\tNO_CH" +
@@ -12889,7 +13944,7 @@ public final class XRGRPC {
       "agabilityService.ConfigGetReply\"\0000\001\022p\n\013M" +
       "ergeConfig\022..IOSXRExtensibleManagability" +
       "Service.ConfigArgs\032/.IOSXRExtensibleMana" +
-      "gabilityService.ConfigReply\"\000\022q\n\014DeleteC",
+      "gabilityService.ConfigReply\"\000\022q\n\014DeleteC" +
       "onfig\022..IOSXRExtensibleManagabilityServi" +
       "ce.ConfigArgs\032/.IOSXRExtensibleManagabil" +
       "ityService.ConfigReply\"\000\022r\n\rReplaceConfi" +
@@ -12899,7 +13954,7 @@ public final class XRGRPC {
       "RExtensibleManagabilityService.CliConfig" +
       "Args\0322.IOSXRExtensibleManagabilityServic" +
       "e.CliConfigReply\"\000\022\200\001\n\rCommitReplace\0225.I" +
-      "OSXRExtensibleManagabilityService.Commit",
+      "OSXRExtensibleManagabilityService.Commit" +
       "ReplaceArgs\0326.IOSXRExtensibleManagabilit" +
       "yService.CommitReplaceReply\"\000\022q\n\014CommitC" +
       "onfig\022..IOSXRExtensibleManagabilityServi" +
@@ -12909,7 +13964,7 @@ public final class XRGRPC {
       "ervice.DiscardChangesArgs\0327.IOSXRExtensi" +
       "bleManagabilityService.DiscardChangesRep" +
       "ly\"\000\022p\n\007GetOper\022/.IOSXRExtensibleManagab" +
-      "ilityService.GetOperArgs\0320.IOSXRExtensib",
+      "ilityService.GetOperArgs\0320.IOSXRExtensib" +
       "leManagabilityService.GetOperReply\"\0000\001\022y" +
       "\n\nCreateSubs\0222.IOSXRExtensibleManagabili" +
       "tyService.CreateSubsArgs\0323.IOSXRExtensib" +
@@ -12919,22 +13974,14 @@ public final class XRGRPC {
       "Args\0324.IOSXRExtensibleManagabilityServic" +
       "e.ShowCmdTextReply\"\0000\001\022~\n\021ShowCmdJSONOut" +
       "put\022/.IOSXRExtensibleManagabilityService" +
-      ".ShowCmdArgs\0324.IOSXRExtensibleManagabili",
+      ".ShowCmdArgs\0324.IOSXRExtensibleManagabili" +
       "tyService.ShowCmdJSONReply\"\0000\001B(\n\036com.ci" +
       "sco.stbarth.netconf.grpcB\006XRGRPCb\006proto3"
     };
-    com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
-    com.google.protobuf.Descriptors.FileDescriptor
+    descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-        }, assigner);
+        });
     internal_static_IOSXRExtensibleManagabilityService_ConfigGetArgs_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_IOSXRExtensibleManagabilityService_ConfigGetArgs_fieldAccessorTable = new

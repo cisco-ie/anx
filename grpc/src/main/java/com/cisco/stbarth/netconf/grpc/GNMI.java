@@ -122,6 +122,8 @@ public final class GNMI {
     }
 
     /**
+     * @param value The numeric wire value of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire value.
      * @deprecated Use {@link #forNumber(int)} instead.
      */
     @java.lang.Deprecated
@@ -129,6 +131,10 @@ public final class GNMI {
       return forNumber(value);
     }
 
+    /**
+     * @param value The numeric wire value of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire value.
+     */
     public static Encoding forNumber(int value) {
       switch (value) {
         case 0: return JSON;
@@ -261,6 +267,8 @@ public final class GNMI {
     }
 
     /**
+     * @param value The numeric wire value of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire value.
      * @deprecated Use {@link #forNumber(int)} instead.
      */
     @java.lang.Deprecated
@@ -268,6 +276,10 @@ public final class GNMI {
       return forNumber(value);
     }
 
+    /**
+     * @param value The numeric wire value of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire value.
+     */
     public static SubscriptionMode forNumber(int value) {
       switch (value) {
         case 0: return TARGET_DEFINED;
@@ -335,6 +347,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>int64 timestamp = 1;</code>
+     * @return The timestamp.
      */
     long getTimestamp();
 
@@ -344,6 +357,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path prefix = 2;</code>
+     * @return Whether the prefix field is set.
      */
     boolean hasPrefix();
     /**
@@ -352,6 +366,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path prefix = 2;</code>
+     * @return The prefix.
      */
     com.cisco.stbarth.netconf.grpc.GNMI.Path getPrefix();
     /**
@@ -370,6 +385,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string alias = 3;</code>
+     * @return The alias.
      */
     java.lang.String getAlias();
     /**
@@ -379,6 +395,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string alias = 3;</code>
+     * @return The bytes for alias.
      */
     com.google.protobuf.ByteString
         getAliasBytes();
@@ -478,6 +495,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>bool atomic = 6;</code>
+     * @return The atomic.
      */
     boolean getAtomic();
   }
@@ -505,11 +523,16 @@ public final class GNMI {
       super(builder);
     }
     private Notification() {
-      timestamp_ = 0L;
       alias_ = "";
       update_ = java.util.Collections.emptyList();
       delete_ = java.util.Collections.emptyList();
-      atomic_ = false;
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new Notification();
     }
 
     @java.lang.Override
@@ -522,6 +545,9 @@ public final class GNMI {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -533,13 +559,6 @@ public final class GNMI {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
 
               timestamp_ = input.readInt64();
@@ -565,18 +584,18 @@ public final class GNMI {
               break;
             }
             case 34: {
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
                 update_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMI.Update>();
-                mutable_bitField0_ |= 0x00000008;
+                mutable_bitField0_ |= 0x00000001;
               }
               update_.add(
                   input.readMessage(com.cisco.stbarth.netconf.grpc.GNMI.Update.parser(), extensionRegistry));
               break;
             }
             case 42: {
-              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
                 delete_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMI.Path>();
-                mutable_bitField0_ |= 0x00000010;
+                mutable_bitField0_ |= 0x00000002;
               }
               delete_.add(
                   input.readMessage(com.cisco.stbarth.netconf.grpc.GNMI.Path.parser(), extensionRegistry));
@@ -587,6 +606,13 @@ public final class GNMI {
               atomic_ = input.readBool();
               break;
             }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -595,10 +621,10 @@ public final class GNMI {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
           update_ = java.util.Collections.unmodifiableList(update_);
         }
-        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+        if (((mutable_bitField0_ & 0x00000002) != 0)) {
           delete_ = java.util.Collections.unmodifiableList(delete_);
         }
         this.unknownFields = unknownFields.build();
@@ -610,6 +636,7 @@ public final class GNMI {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Notification_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Notification_fieldAccessorTable
@@ -617,7 +644,6 @@ public final class GNMI {
               com.cisco.stbarth.netconf.grpc.GNMI.Notification.class, com.cisco.stbarth.netconf.grpc.GNMI.Notification.Builder.class);
     }
 
-    private int bitField0_;
     public static final int TIMESTAMP_FIELD_NUMBER = 1;
     private long timestamp_;
     /**
@@ -626,6 +652,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>int64 timestamp = 1;</code>
+     * @return The timestamp.
      */
     public long getTimestamp() {
       return timestamp_;
@@ -639,6 +666,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path prefix = 2;</code>
+     * @return Whether the prefix field is set.
      */
     public boolean hasPrefix() {
       return prefix_ != null;
@@ -649,6 +677,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path prefix = 2;</code>
+     * @return The prefix.
      */
     public com.cisco.stbarth.netconf.grpc.GNMI.Path getPrefix() {
       return prefix_ == null ? com.cisco.stbarth.netconf.grpc.GNMI.Path.getDefaultInstance() : prefix_;
@@ -673,6 +702,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string alias = 3;</code>
+     * @return The alias.
      */
     public java.lang.String getAlias() {
       java.lang.Object ref = alias_;
@@ -693,6 +723,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string alias = 3;</code>
+     * @return The bytes for alias.
      */
     public com.google.protobuf.ByteString
         getAliasBytes() {
@@ -827,12 +858,14 @@ public final class GNMI {
      * </pre>
      *
      * <code>bool atomic = 6;</code>
+     * @return The atomic.
      */
     public boolean getAtomic() {
       return atomic_;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -842,6 +875,7 @@ public final class GNMI {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (timestamp_ != 0L) {
@@ -865,6 +899,7 @@ public final class GNMI {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -908,24 +943,23 @@ public final class GNMI {
       }
       com.cisco.stbarth.netconf.grpc.GNMI.Notification other = (com.cisco.stbarth.netconf.grpc.GNMI.Notification) obj;
 
-      boolean result = true;
-      result = result && (getTimestamp()
-          == other.getTimestamp());
-      result = result && (hasPrefix() == other.hasPrefix());
+      if (getTimestamp()
+          != other.getTimestamp()) return false;
+      if (hasPrefix() != other.hasPrefix()) return false;
       if (hasPrefix()) {
-        result = result && getPrefix()
-            .equals(other.getPrefix());
+        if (!getPrefix()
+            .equals(other.getPrefix())) return false;
       }
-      result = result && getAlias()
-          .equals(other.getAlias());
-      result = result && getUpdateList()
-          .equals(other.getUpdateList());
-      result = result && getDeleteList()
-          .equals(other.getDeleteList());
-      result = result && (getAtomic()
-          == other.getAtomic());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (!getAlias()
+          .equals(other.getAlias())) return false;
+      if (!getUpdateList()
+          .equals(other.getUpdateList())) return false;
+      if (!getDeleteList()
+          .equals(other.getDeleteList())) return false;
+      if (getAtomic()
+          != other.getAtomic()) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -1030,6 +1064,7 @@ public final class GNMI {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -1037,6 +1072,7 @@ public final class GNMI {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.GNMI.Notification prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -1071,6 +1107,7 @@ public final class GNMI {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Notification_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Notification_fieldAccessorTable
@@ -1095,6 +1132,7 @@ public final class GNMI {
           getDeleteFieldBuilder();
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         timestamp_ = 0L;
@@ -1109,13 +1147,13 @@ public final class GNMI {
 
         if (updateBuilder_ == null) {
           update_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000001);
         } else {
           updateBuilder_.clear();
         }
         if (deleteBuilder_ == null) {
           delete_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
+          bitField0_ = (bitField0_ & ~0x00000002);
         } else {
           deleteBuilder_.clear();
         }
@@ -1124,15 +1162,18 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Notification_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.Notification getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.Notification.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.Notification build() {
         com.cisco.stbarth.netconf.grpc.GNMI.Notification result = buildPartial();
         if (!result.isInitialized()) {
@@ -1141,10 +1182,10 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.Notification buildPartial() {
         com.cisco.stbarth.netconf.grpc.GNMI.Notification result = new com.cisco.stbarth.netconf.grpc.GNMI.Notification(this);
         int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
         result.timestamp_ = timestamp_;
         if (prefixBuilder_ == null) {
           result.prefix_ = prefix_;
@@ -1153,55 +1194,61 @@ public final class GNMI {
         }
         result.alias_ = alias_;
         if (updateBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          if (((bitField0_ & 0x00000001) != 0)) {
             update_ = java.util.Collections.unmodifiableList(update_);
-            bitField0_ = (bitField0_ & ~0x00000008);
+            bitField0_ = (bitField0_ & ~0x00000001);
           }
           result.update_ = update_;
         } else {
           result.update_ = updateBuilder_.build();
         }
         if (deleteBuilder_ == null) {
-          if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          if (((bitField0_ & 0x00000002) != 0)) {
             delete_ = java.util.Collections.unmodifiableList(delete_);
-            bitField0_ = (bitField0_ & ~0x00000010);
+            bitField0_ = (bitField0_ & ~0x00000002);
           }
           result.delete_ = delete_;
         } else {
           result.delete_ = deleteBuilder_.build();
         }
         result.atomic_ = atomic_;
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.GNMI.Notification) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.GNMI.Notification)other);
@@ -1227,7 +1274,7 @@ public final class GNMI {
           if (!other.update_.isEmpty()) {
             if (update_.isEmpty()) {
               update_ = other.update_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000001);
             } else {
               ensureUpdateIsMutable();
               update_.addAll(other.update_);
@@ -1240,7 +1287,7 @@ public final class GNMI {
               updateBuilder_.dispose();
               updateBuilder_ = null;
               update_ = other.update_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000001);
               updateBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getUpdateFieldBuilder() : null;
@@ -1253,7 +1300,7 @@ public final class GNMI {
           if (!other.delete_.isEmpty()) {
             if (delete_.isEmpty()) {
               delete_ = other.delete_;
-              bitField0_ = (bitField0_ & ~0x00000010);
+              bitField0_ = (bitField0_ & ~0x00000002);
             } else {
               ensureDeleteIsMutable();
               delete_.addAll(other.delete_);
@@ -1266,7 +1313,7 @@ public final class GNMI {
               deleteBuilder_.dispose();
               deleteBuilder_ = null;
               delete_ = other.delete_;
-              bitField0_ = (bitField0_ & ~0x00000010);
+              bitField0_ = (bitField0_ & ~0x00000002);
               deleteBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getDeleteFieldBuilder() : null;
@@ -1283,10 +1330,12 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1313,6 +1362,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>int64 timestamp = 1;</code>
+       * @return The timestamp.
        */
       public long getTimestamp() {
         return timestamp_;
@@ -1323,6 +1373,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>int64 timestamp = 1;</code>
+       * @param value The timestamp to set.
+       * @return This builder for chaining.
        */
       public Builder setTimestamp(long value) {
         
@@ -1336,6 +1388,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>int64 timestamp = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearTimestamp() {
         
@@ -1344,7 +1397,7 @@ public final class GNMI {
         return this;
       }
 
-      private com.cisco.stbarth.netconf.grpc.GNMI.Path prefix_ = null;
+      private com.cisco.stbarth.netconf.grpc.GNMI.Path prefix_;
       private com.google.protobuf.SingleFieldBuilderV3<
           com.cisco.stbarth.netconf.grpc.GNMI.Path, com.cisco.stbarth.netconf.grpc.GNMI.Path.Builder, com.cisco.stbarth.netconf.grpc.GNMI.PathOrBuilder> prefixBuilder_;
       /**
@@ -1353,6 +1406,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Path prefix = 2;</code>
+       * @return Whether the prefix field is set.
        */
       public boolean hasPrefix() {
         return prefixBuilder_ != null || prefix_ != null;
@@ -1363,6 +1417,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Path prefix = 2;</code>
+       * @return The prefix.
        */
       public com.cisco.stbarth.netconf.grpc.GNMI.Path getPrefix() {
         if (prefixBuilder_ == null) {
@@ -1505,6 +1560,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string alias = 3;</code>
+       * @return The alias.
        */
       public java.lang.String getAlias() {
         java.lang.Object ref = alias_;
@@ -1525,6 +1581,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string alias = 3;</code>
+       * @return The bytes for alias.
        */
       public com.google.protobuf.ByteString
           getAliasBytes() {
@@ -1546,6 +1603,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>string alias = 3;</code>
+       * @param value The alias to set.
+       * @return This builder for chaining.
        */
       public Builder setAlias(
           java.lang.String value) {
@@ -1564,6 +1623,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string alias = 3;</code>
+       * @return This builder for chaining.
        */
       public Builder clearAlias() {
         
@@ -1578,6 +1638,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>string alias = 3;</code>
+       * @param value The bytes for alias to set.
+       * @return This builder for chaining.
        */
       public Builder setAliasBytes(
           com.google.protobuf.ByteString value) {
@@ -1594,9 +1656,9 @@ public final class GNMI {
       private java.util.List<com.cisco.stbarth.netconf.grpc.GNMI.Update> update_ =
         java.util.Collections.emptyList();
       private void ensureUpdateIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+        if (!((bitField0_ & 0x00000001) != 0)) {
           update_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMI.Update>(update_);
-          bitField0_ |= 0x00000008;
+          bitField0_ |= 0x00000001;
          }
       }
 
@@ -1790,7 +1852,7 @@ public final class GNMI {
       public Builder clearUpdate() {
         if (updateBuilder_ == null) {
           update_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000001);
           onChanged();
         } else {
           updateBuilder_.clear();
@@ -1895,7 +1957,7 @@ public final class GNMI {
           updateBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.cisco.stbarth.netconf.grpc.GNMI.Update, com.cisco.stbarth.netconf.grpc.GNMI.Update.Builder, com.cisco.stbarth.netconf.grpc.GNMI.UpdateOrBuilder>(
                   update_,
-                  ((bitField0_ & 0x00000008) == 0x00000008),
+                  ((bitField0_ & 0x00000001) != 0),
                   getParentForChildren(),
                   isClean());
           update_ = null;
@@ -1906,9 +1968,9 @@ public final class GNMI {
       private java.util.List<com.cisco.stbarth.netconf.grpc.GNMI.Path> delete_ =
         java.util.Collections.emptyList();
       private void ensureDeleteIsMutable() {
-        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+        if (!((bitField0_ & 0x00000002) != 0)) {
           delete_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMI.Path>(delete_);
-          bitField0_ |= 0x00000010;
+          bitField0_ |= 0x00000002;
          }
       }
 
@@ -2102,7 +2164,7 @@ public final class GNMI {
       public Builder clearDelete() {
         if (deleteBuilder_ == null) {
           delete_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
+          bitField0_ = (bitField0_ & ~0x00000002);
           onChanged();
         } else {
           deleteBuilder_.clear();
@@ -2207,7 +2269,7 @@ public final class GNMI {
           deleteBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.cisco.stbarth.netconf.grpc.GNMI.Path, com.cisco.stbarth.netconf.grpc.GNMI.Path.Builder, com.cisco.stbarth.netconf.grpc.GNMI.PathOrBuilder>(
                   delete_,
-                  ((bitField0_ & 0x00000010) == 0x00000010),
+                  ((bitField0_ & 0x00000002) != 0),
                   getParentForChildren(),
                   isClean());
           delete_ = null;
@@ -2223,6 +2285,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>bool atomic = 6;</code>
+       * @return The atomic.
        */
       public boolean getAtomic() {
         return atomic_;
@@ -2234,6 +2297,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>bool atomic = 6;</code>
+       * @param value The atomic to set.
+       * @return This builder for chaining.
        */
       public Builder setAtomic(boolean value) {
         
@@ -2248,6 +2313,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>bool atomic = 6;</code>
+       * @return This builder for chaining.
        */
       public Builder clearAtomic() {
         
@@ -2255,11 +2321,13 @@ public final class GNMI {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -2281,11 +2349,12 @@ public final class GNMI {
 
     private static final com.google.protobuf.Parser<Notification>
         PARSER = new com.google.protobuf.AbstractParser<Notification>() {
+      @java.lang.Override
       public Notification parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Notification(input, extensionRegistry);
+        return new Notification(input, extensionRegistry);
       }
     };
 
@@ -2298,6 +2367,7 @@ public final class GNMI {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.GNMI.Notification getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -2314,6 +2384,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path path = 1;</code>
+     * @return Whether the path field is set.
      */
     boolean hasPath();
     /**
@@ -2322,6 +2393,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path path = 1;</code>
+     * @return The path.
      */
     com.cisco.stbarth.netconf.grpc.GNMI.Path getPath();
     /**
@@ -2339,6 +2411,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Value value = 2 [deprecated = true];</code>
+     * @return Whether the value field is set.
      */
     @java.lang.Deprecated boolean hasValue();
     /**
@@ -2347,6 +2420,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Value value = 2 [deprecated = true];</code>
+     * @return The value.
      */
     @java.lang.Deprecated com.cisco.stbarth.netconf.grpc.GNMI.Value getValue();
     /**
@@ -2364,6 +2438,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.TypedValue val = 3;</code>
+     * @return Whether the val field is set.
      */
     boolean hasVal();
     /**
@@ -2372,6 +2447,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.TypedValue val = 3;</code>
+     * @return The val.
      */
     com.cisco.stbarth.netconf.grpc.GNMI.TypedValue getVal();
     /**
@@ -2389,6 +2465,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>uint32 duplicates = 4;</code>
+     * @return The duplicates.
      */
     int getDuplicates();
   }
@@ -2411,7 +2488,13 @@ public final class GNMI {
       super(builder);
     }
     private Update() {
-      duplicates_ = 0;
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new Update();
     }
 
     @java.lang.Override
@@ -2424,7 +2507,9 @@ public final class GNMI {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -2435,13 +2520,6 @@ public final class GNMI {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               com.cisco.stbarth.netconf.grpc.GNMI.Path.Builder subBuilder = null;
               if (path_ != null) {
@@ -2486,6 +2564,13 @@ public final class GNMI {
               duplicates_ = input.readUInt32();
               break;
             }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -2503,6 +2588,7 @@ public final class GNMI {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Update_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Update_fieldAccessorTable
@@ -2518,6 +2604,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path path = 1;</code>
+     * @return Whether the path field is set.
      */
     public boolean hasPath() {
       return path_ != null;
@@ -2528,6 +2615,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path path = 1;</code>
+     * @return The path.
      */
     public com.cisco.stbarth.netconf.grpc.GNMI.Path getPath() {
       return path_ == null ? com.cisco.stbarth.netconf.grpc.GNMI.Path.getDefaultInstance() : path_;
@@ -2551,6 +2639,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Value value = 2 [deprecated = true];</code>
+     * @return Whether the value field is set.
      */
     @java.lang.Deprecated public boolean hasValue() {
       return value_ != null;
@@ -2561,6 +2650,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Value value = 2 [deprecated = true];</code>
+     * @return The value.
      */
     @java.lang.Deprecated public com.cisco.stbarth.netconf.grpc.GNMI.Value getValue() {
       return value_ == null ? com.cisco.stbarth.netconf.grpc.GNMI.Value.getDefaultInstance() : value_;
@@ -2584,6 +2674,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.TypedValue val = 3;</code>
+     * @return Whether the val field is set.
      */
     public boolean hasVal() {
       return val_ != null;
@@ -2594,6 +2685,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.TypedValue val = 3;</code>
+     * @return The val.
      */
     public com.cisco.stbarth.netconf.grpc.GNMI.TypedValue getVal() {
       return val_ == null ? com.cisco.stbarth.netconf.grpc.GNMI.TypedValue.getDefaultInstance() : val_;
@@ -2617,12 +2709,14 @@ public final class GNMI {
      * </pre>
      *
      * <code>uint32 duplicates = 4;</code>
+     * @return The duplicates.
      */
     public int getDuplicates() {
       return duplicates_;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -2632,6 +2726,7 @@ public final class GNMI {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (path_ != null) {
@@ -2649,6 +2744,7 @@ public final class GNMI {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -2685,26 +2781,25 @@ public final class GNMI {
       }
       com.cisco.stbarth.netconf.grpc.GNMI.Update other = (com.cisco.stbarth.netconf.grpc.GNMI.Update) obj;
 
-      boolean result = true;
-      result = result && (hasPath() == other.hasPath());
+      if (hasPath() != other.hasPath()) return false;
       if (hasPath()) {
-        result = result && getPath()
-            .equals(other.getPath());
+        if (!getPath()
+            .equals(other.getPath())) return false;
       }
-      result = result && (hasValue() == other.hasValue());
+      if (hasValue() != other.hasValue()) return false;
       if (hasValue()) {
-        result = result && getValue()
-            .equals(other.getValue());
+        if (!getValue()
+            .equals(other.getValue())) return false;
       }
-      result = result && (hasVal() == other.hasVal());
+      if (hasVal() != other.hasVal()) return false;
       if (hasVal()) {
-        result = result && getVal()
-            .equals(other.getVal());
+        if (!getVal()
+            .equals(other.getVal())) return false;
       }
-      result = result && (getDuplicates()
-          == other.getDuplicates());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (getDuplicates()
+          != other.getDuplicates()) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -2803,6 +2898,7 @@ public final class GNMI {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -2810,6 +2906,7 @@ public final class GNMI {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.GNMI.Update prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -2839,6 +2936,7 @@ public final class GNMI {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Update_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Update_fieldAccessorTable
@@ -2861,6 +2959,7 @@ public final class GNMI {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         if (pathBuilder_ == null) {
@@ -2886,15 +2985,18 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Update_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.Update getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.Update.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.Update build() {
         com.cisco.stbarth.netconf.grpc.GNMI.Update result = buildPartial();
         if (!result.isInitialized()) {
@@ -2903,6 +3005,7 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.Update buildPartial() {
         com.cisco.stbarth.netconf.grpc.GNMI.Update result = new com.cisco.stbarth.netconf.grpc.GNMI.Update(this);
         if (pathBuilder_ == null) {
@@ -2925,32 +3028,39 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.GNMI.Update) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.GNMI.Update)other);
@@ -2979,10 +3089,12 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -3001,7 +3113,7 @@ public final class GNMI {
         return this;
       }
 
-      private com.cisco.stbarth.netconf.grpc.GNMI.Path path_ = null;
+      private com.cisco.stbarth.netconf.grpc.GNMI.Path path_;
       private com.google.protobuf.SingleFieldBuilderV3<
           com.cisco.stbarth.netconf.grpc.GNMI.Path, com.cisco.stbarth.netconf.grpc.GNMI.Path.Builder, com.cisco.stbarth.netconf.grpc.GNMI.PathOrBuilder> pathBuilder_;
       /**
@@ -3010,6 +3122,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Path path = 1;</code>
+       * @return Whether the path field is set.
        */
       public boolean hasPath() {
         return pathBuilder_ != null || path_ != null;
@@ -3020,6 +3133,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Path path = 1;</code>
+       * @return The path.
        */
       public com.cisco.stbarth.netconf.grpc.GNMI.Path getPath() {
         if (pathBuilder_ == null) {
@@ -3154,7 +3268,7 @@ public final class GNMI {
         return pathBuilder_;
       }
 
-      private com.cisco.stbarth.netconf.grpc.GNMI.Value value_ = null;
+      private com.cisco.stbarth.netconf.grpc.GNMI.Value value_;
       private com.google.protobuf.SingleFieldBuilderV3<
           com.cisco.stbarth.netconf.grpc.GNMI.Value, com.cisco.stbarth.netconf.grpc.GNMI.Value.Builder, com.cisco.stbarth.netconf.grpc.GNMI.ValueOrBuilder> valueBuilder_;
       /**
@@ -3163,6 +3277,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Value value = 2 [deprecated = true];</code>
+       * @return Whether the value field is set.
        */
       @java.lang.Deprecated public boolean hasValue() {
         return valueBuilder_ != null || value_ != null;
@@ -3173,6 +3288,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Value value = 2 [deprecated = true];</code>
+       * @return The value.
        */
       @java.lang.Deprecated public com.cisco.stbarth.netconf.grpc.GNMI.Value getValue() {
         if (valueBuilder_ == null) {
@@ -3307,7 +3423,7 @@ public final class GNMI {
         return valueBuilder_;
       }
 
-      private com.cisco.stbarth.netconf.grpc.GNMI.TypedValue val_ = null;
+      private com.cisco.stbarth.netconf.grpc.GNMI.TypedValue val_;
       private com.google.protobuf.SingleFieldBuilderV3<
           com.cisco.stbarth.netconf.grpc.GNMI.TypedValue, com.cisco.stbarth.netconf.grpc.GNMI.TypedValue.Builder, com.cisco.stbarth.netconf.grpc.GNMI.TypedValueOrBuilder> valBuilder_;
       /**
@@ -3316,6 +3432,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.TypedValue val = 3;</code>
+       * @return Whether the val field is set.
        */
       public boolean hasVal() {
         return valBuilder_ != null || val_ != null;
@@ -3326,6 +3443,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.TypedValue val = 3;</code>
+       * @return The val.
        */
       public com.cisco.stbarth.netconf.grpc.GNMI.TypedValue getVal() {
         if (valBuilder_ == null) {
@@ -3467,6 +3585,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>uint32 duplicates = 4;</code>
+       * @return The duplicates.
        */
       public int getDuplicates() {
         return duplicates_;
@@ -3477,6 +3596,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>uint32 duplicates = 4;</code>
+       * @param value The duplicates to set.
+       * @return This builder for chaining.
        */
       public Builder setDuplicates(int value) {
         
@@ -3490,6 +3611,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>uint32 duplicates = 4;</code>
+       * @return This builder for chaining.
        */
       public Builder clearDuplicates() {
         
@@ -3497,11 +3619,13 @@ public final class GNMI {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -3523,11 +3647,12 @@ public final class GNMI {
 
     private static final com.google.protobuf.Parser<Update>
         PARSER = new com.google.protobuf.AbstractParser<Update>() {
+      @java.lang.Override
       public Update parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Update(input, extensionRegistry);
+        return new Update(input, extensionRegistry);
       }
     };
 
@@ -3540,6 +3665,7 @@ public final class GNMI {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.GNMI.Update getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -3556,6 +3682,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string string_val = 1;</code>
+     * @return The stringVal.
      */
     java.lang.String getStringVal();
     /**
@@ -3564,6 +3691,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string string_val = 1;</code>
+     * @return The bytes for stringVal.
      */
     com.google.protobuf.ByteString
         getStringValBytes();
@@ -3574,6 +3702,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>int64 int_val = 2;</code>
+     * @return The intVal.
      */
     long getIntVal();
 
@@ -3583,6 +3712,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>uint64 uint_val = 3;</code>
+     * @return The uintVal.
      */
     long getUintVal();
 
@@ -3592,6 +3722,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>bool bool_val = 4;</code>
+     * @return The boolVal.
      */
     boolean getBoolVal();
 
@@ -3601,6 +3732,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>bytes bytes_val = 5;</code>
+     * @return The bytesVal.
      */
     com.google.protobuf.ByteString getBytesVal();
 
@@ -3610,6 +3742,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>float float_val = 6;</code>
+     * @return The floatVal.
      */
     float getFloatVal();
 
@@ -3619,6 +3752,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Decimal64 decimal_val = 7;</code>
+     * @return Whether the decimalVal field is set.
      */
     boolean hasDecimalVal();
     /**
@@ -3627,6 +3761,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Decimal64 decimal_val = 7;</code>
+     * @return The decimalVal.
      */
     com.cisco.stbarth.netconf.grpc.GNMI.Decimal64 getDecimalVal();
     /**
@@ -3644,6 +3779,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.ScalarArray leaflist_val = 8;</code>
+     * @return Whether the leaflistVal field is set.
      */
     boolean hasLeaflistVal();
     /**
@@ -3652,6 +3788,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.ScalarArray leaflist_val = 8;</code>
+     * @return The leaflistVal.
      */
     com.cisco.stbarth.netconf.grpc.GNMI.ScalarArray getLeaflistVal();
     /**
@@ -3669,6 +3806,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.google.protobuf.Any any_val = 9;</code>
+     * @return Whether the anyVal field is set.
      */
     boolean hasAnyVal();
     /**
@@ -3677,6 +3815,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.google.protobuf.Any any_val = 9;</code>
+     * @return The anyVal.
      */
     com.google.protobuf.Any getAnyVal();
     /**
@@ -3694,6 +3833,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>bytes json_val = 10;</code>
+     * @return The jsonVal.
      */
     com.google.protobuf.ByteString getJsonVal();
 
@@ -3703,6 +3843,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>bytes json_ietf_val = 11;</code>
+     * @return The jsonIetfVal.
      */
     com.google.protobuf.ByteString getJsonIetfVal();
 
@@ -3712,6 +3853,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string ascii_val = 12;</code>
+     * @return The asciiVal.
      */
     java.lang.String getAsciiVal();
     /**
@@ -3720,6 +3862,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string ascii_val = 12;</code>
+     * @return The bytes for asciiVal.
      */
     com.google.protobuf.ByteString
         getAsciiValBytes();
@@ -3733,6 +3876,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>bytes proto_bytes = 13;</code>
+     * @return The protoBytes.
      */
     com.google.protobuf.ByteString getProtoBytes();
 
@@ -3759,6 +3903,13 @@ public final class GNMI {
     }
 
     @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new TypedValue();
+    }
+
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return this.unknownFields;
@@ -3768,7 +3919,9 @@ public final class GNMI {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -3779,13 +3932,6 @@ public final class GNMI {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
               valueCase_ = 1;
@@ -3880,6 +4026,13 @@ public final class GNMI {
               value_ = input.readBytes();
               break;
             }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -3897,6 +4050,7 @@ public final class GNMI {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_TypedValue_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_TypedValue_fieldAccessorTable
@@ -3907,7 +4061,8 @@ public final class GNMI {
     private int valueCase_ = 0;
     private java.lang.Object value_;
     public enum ValueCase
-        implements com.google.protobuf.Internal.EnumLite {
+        implements com.google.protobuf.Internal.EnumLite,
+            com.google.protobuf.AbstractMessage.InternalOneOfEnum {
       STRING_VAL(1),
       INT_VAL(2),
       UINT_VAL(3),
@@ -3927,6 +4082,8 @@ public final class GNMI {
         this.value = value;
       }
       /**
+       * @param value The number of the enum to look for.
+       * @return The enum associated with the given number.
        * @deprecated Use {@link #forNumber(int)} instead.
        */
       @java.lang.Deprecated
@@ -3971,6 +4128,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string string_val = 1;</code>
+     * @return The stringVal.
      */
     public java.lang.String getStringVal() {
       java.lang.Object ref = "";
@@ -3995,6 +4153,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string string_val = 1;</code>
+     * @return The bytes for stringVal.
      */
     public com.google.protobuf.ByteString
         getStringValBytes() {
@@ -4022,6 +4181,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>int64 int_val = 2;</code>
+     * @return The intVal.
      */
     public long getIntVal() {
       if (valueCase_ == 2) {
@@ -4037,6 +4197,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>uint64 uint_val = 3;</code>
+     * @return The uintVal.
      */
     public long getUintVal() {
       if (valueCase_ == 3) {
@@ -4052,6 +4213,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>bool bool_val = 4;</code>
+     * @return The boolVal.
      */
     public boolean getBoolVal() {
       if (valueCase_ == 4) {
@@ -4067,6 +4229,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>bytes bytes_val = 5;</code>
+     * @return The bytesVal.
      */
     public com.google.protobuf.ByteString getBytesVal() {
       if (valueCase_ == 5) {
@@ -4082,6 +4245,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>float float_val = 6;</code>
+     * @return The floatVal.
      */
     public float getFloatVal() {
       if (valueCase_ == 6) {
@@ -4097,6 +4261,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Decimal64 decimal_val = 7;</code>
+     * @return Whether the decimalVal field is set.
      */
     public boolean hasDecimalVal() {
       return valueCase_ == 7;
@@ -4107,6 +4272,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Decimal64 decimal_val = 7;</code>
+     * @return The decimalVal.
      */
     public com.cisco.stbarth.netconf.grpc.GNMI.Decimal64 getDecimalVal() {
       if (valueCase_ == 7) {
@@ -4135,6 +4301,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.ScalarArray leaflist_val = 8;</code>
+     * @return Whether the leaflistVal field is set.
      */
     public boolean hasLeaflistVal() {
       return valueCase_ == 8;
@@ -4145,6 +4312,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.ScalarArray leaflist_val = 8;</code>
+     * @return The leaflistVal.
      */
     public com.cisco.stbarth.netconf.grpc.GNMI.ScalarArray getLeaflistVal() {
       if (valueCase_ == 8) {
@@ -4173,6 +4341,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.google.protobuf.Any any_val = 9;</code>
+     * @return Whether the anyVal field is set.
      */
     public boolean hasAnyVal() {
       return valueCase_ == 9;
@@ -4183,6 +4352,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.google.protobuf.Any any_val = 9;</code>
+     * @return The anyVal.
      */
     public com.google.protobuf.Any getAnyVal() {
       if (valueCase_ == 9) {
@@ -4211,6 +4381,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>bytes json_val = 10;</code>
+     * @return The jsonVal.
      */
     public com.google.protobuf.ByteString getJsonVal() {
       if (valueCase_ == 10) {
@@ -4226,6 +4397,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>bytes json_ietf_val = 11;</code>
+     * @return The jsonIetfVal.
      */
     public com.google.protobuf.ByteString getJsonIetfVal() {
       if (valueCase_ == 11) {
@@ -4241,6 +4413,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string ascii_val = 12;</code>
+     * @return The asciiVal.
      */
     public java.lang.String getAsciiVal() {
       java.lang.Object ref = "";
@@ -4265,6 +4438,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string ascii_val = 12;</code>
+     * @return The bytes for asciiVal.
      */
     public com.google.protobuf.ByteString
         getAsciiValBytes() {
@@ -4295,6 +4469,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>bytes proto_bytes = 13;</code>
+     * @return The protoBytes.
      */
     public com.google.protobuf.ByteString getProtoBytes() {
       if (valueCase_ == 13) {
@@ -4304,6 +4479,7 @@ public final class GNMI {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -4313,6 +4489,7 @@ public final class GNMI {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (valueCase_ == 1) {
@@ -4365,6 +4542,7 @@ public final class GNMI {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -4443,70 +4621,66 @@ public final class GNMI {
       }
       com.cisco.stbarth.netconf.grpc.GNMI.TypedValue other = (com.cisco.stbarth.netconf.grpc.GNMI.TypedValue) obj;
 
-      boolean result = true;
-      result = result && getValueCase().equals(
-          other.getValueCase());
-      if (!result) return false;
+      if (!getValueCase().equals(other.getValueCase())) return false;
       switch (valueCase_) {
         case 1:
-          result = result && getStringVal()
-              .equals(other.getStringVal());
+          if (!getStringVal()
+              .equals(other.getStringVal())) return false;
           break;
         case 2:
-          result = result && (getIntVal()
-              == other.getIntVal());
+          if (getIntVal()
+              != other.getIntVal()) return false;
           break;
         case 3:
-          result = result && (getUintVal()
-              == other.getUintVal());
+          if (getUintVal()
+              != other.getUintVal()) return false;
           break;
         case 4:
-          result = result && (getBoolVal()
-              == other.getBoolVal());
+          if (getBoolVal()
+              != other.getBoolVal()) return false;
           break;
         case 5:
-          result = result && getBytesVal()
-              .equals(other.getBytesVal());
+          if (!getBytesVal()
+              .equals(other.getBytesVal())) return false;
           break;
         case 6:
-          result = result && (
-              java.lang.Float.floatToIntBits(getFloatVal())
-              == java.lang.Float.floatToIntBits(
-                  other.getFloatVal()));
+          if (java.lang.Float.floatToIntBits(getFloatVal())
+              != java.lang.Float.floatToIntBits(
+                  other.getFloatVal())) return false;
           break;
         case 7:
-          result = result && getDecimalVal()
-              .equals(other.getDecimalVal());
+          if (!getDecimalVal()
+              .equals(other.getDecimalVal())) return false;
           break;
         case 8:
-          result = result && getLeaflistVal()
-              .equals(other.getLeaflistVal());
+          if (!getLeaflistVal()
+              .equals(other.getLeaflistVal())) return false;
           break;
         case 9:
-          result = result && getAnyVal()
-              .equals(other.getAnyVal());
+          if (!getAnyVal()
+              .equals(other.getAnyVal())) return false;
           break;
         case 10:
-          result = result && getJsonVal()
-              .equals(other.getJsonVal());
+          if (!getJsonVal()
+              .equals(other.getJsonVal())) return false;
           break;
         case 11:
-          result = result && getJsonIetfVal()
-              .equals(other.getJsonIetfVal());
+          if (!getJsonIetfVal()
+              .equals(other.getJsonIetfVal())) return false;
           break;
         case 12:
-          result = result && getAsciiVal()
-              .equals(other.getAsciiVal());
+          if (!getAsciiVal()
+              .equals(other.getAsciiVal())) return false;
           break;
         case 13:
-          result = result && getProtoBytes()
-              .equals(other.getProtoBytes());
+          if (!getProtoBytes()
+              .equals(other.getProtoBytes())) return false;
           break;
         case 0:
         default:
       }
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -4651,6 +4825,7 @@ public final class GNMI {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -4658,6 +4833,7 @@ public final class GNMI {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.GNMI.TypedValue prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -4686,6 +4862,7 @@ public final class GNMI {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_TypedValue_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_TypedValue_fieldAccessorTable
@@ -4708,6 +4885,7 @@ public final class GNMI {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         valueCase_ = 0;
@@ -4715,15 +4893,18 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_TypedValue_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.TypedValue getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.TypedValue.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.TypedValue build() {
         com.cisco.stbarth.netconf.grpc.GNMI.TypedValue result = buildPartial();
         if (!result.isInitialized()) {
@@ -4732,6 +4913,7 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.TypedValue buildPartial() {
         com.cisco.stbarth.netconf.grpc.GNMI.TypedValue result = new com.cisco.stbarth.netconf.grpc.GNMI.TypedValue(this);
         if (valueCase_ == 1) {
@@ -4790,32 +4972,39 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.GNMI.TypedValue) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.GNMI.TypedValue)other);
@@ -4893,10 +5082,12 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -4936,6 +5127,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string string_val = 1;</code>
+       * @return The stringVal.
        */
       public java.lang.String getStringVal() {
         java.lang.Object ref = "";
@@ -4960,6 +5152,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string string_val = 1;</code>
+       * @return The bytes for stringVal.
        */
       public com.google.protobuf.ByteString
           getStringValBytes() {
@@ -4985,6 +5178,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>string string_val = 1;</code>
+       * @param value The stringVal to set.
+       * @return This builder for chaining.
        */
       public Builder setStringVal(
           java.lang.String value) {
@@ -5002,6 +5197,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string string_val = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearStringVal() {
         if (valueCase_ == 1) {
@@ -5017,6 +5213,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>string string_val = 1;</code>
+       * @param value The bytes for stringVal to set.
+       * @return This builder for chaining.
        */
       public Builder setStringValBytes(
           com.google.protobuf.ByteString value) {
@@ -5036,6 +5234,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>int64 int_val = 2;</code>
+       * @return The intVal.
        */
       public long getIntVal() {
         if (valueCase_ == 2) {
@@ -5049,6 +5248,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>int64 int_val = 2;</code>
+       * @param value The intVal to set.
+       * @return This builder for chaining.
        */
       public Builder setIntVal(long value) {
         valueCase_ = 2;
@@ -5062,6 +5263,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>int64 int_val = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearIntVal() {
         if (valueCase_ == 2) {
@@ -5078,6 +5280,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>uint64 uint_val = 3;</code>
+       * @return The uintVal.
        */
       public long getUintVal() {
         if (valueCase_ == 3) {
@@ -5091,6 +5294,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>uint64 uint_val = 3;</code>
+       * @param value The uintVal to set.
+       * @return This builder for chaining.
        */
       public Builder setUintVal(long value) {
         valueCase_ = 3;
@@ -5104,6 +5309,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>uint64 uint_val = 3;</code>
+       * @return This builder for chaining.
        */
       public Builder clearUintVal() {
         if (valueCase_ == 3) {
@@ -5120,6 +5326,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>bool bool_val = 4;</code>
+       * @return The boolVal.
        */
       public boolean getBoolVal() {
         if (valueCase_ == 4) {
@@ -5133,6 +5340,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>bool bool_val = 4;</code>
+       * @param value The boolVal to set.
+       * @return This builder for chaining.
        */
       public Builder setBoolVal(boolean value) {
         valueCase_ = 4;
@@ -5146,6 +5355,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>bool bool_val = 4;</code>
+       * @return This builder for chaining.
        */
       public Builder clearBoolVal() {
         if (valueCase_ == 4) {
@@ -5162,6 +5372,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>bytes bytes_val = 5;</code>
+       * @return The bytesVal.
        */
       public com.google.protobuf.ByteString getBytesVal() {
         if (valueCase_ == 5) {
@@ -5175,6 +5386,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>bytes bytes_val = 5;</code>
+       * @param value The bytesVal to set.
+       * @return This builder for chaining.
        */
       public Builder setBytesVal(com.google.protobuf.ByteString value) {
         if (value == null) {
@@ -5191,6 +5404,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>bytes bytes_val = 5;</code>
+       * @return This builder for chaining.
        */
       public Builder clearBytesVal() {
         if (valueCase_ == 5) {
@@ -5207,6 +5421,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>float float_val = 6;</code>
+       * @return The floatVal.
        */
       public float getFloatVal() {
         if (valueCase_ == 6) {
@@ -5220,6 +5435,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>float float_val = 6;</code>
+       * @param value The floatVal to set.
+       * @return This builder for chaining.
        */
       public Builder setFloatVal(float value) {
         valueCase_ = 6;
@@ -5233,6 +5450,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>float float_val = 6;</code>
+       * @return This builder for chaining.
        */
       public Builder clearFloatVal() {
         if (valueCase_ == 6) {
@@ -5251,6 +5469,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Decimal64 decimal_val = 7;</code>
+       * @return Whether the decimalVal field is set.
        */
       public boolean hasDecimalVal() {
         return valueCase_ == 7;
@@ -5261,6 +5480,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Decimal64 decimal_val = 7;</code>
+       * @return The decimalVal.
        */
       public com.cisco.stbarth.netconf.grpc.GNMI.Decimal64 getDecimalVal() {
         if (decimalValBuilder_ == null) {
@@ -5423,6 +5643,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.ScalarArray leaflist_val = 8;</code>
+       * @return Whether the leaflistVal field is set.
        */
       public boolean hasLeaflistVal() {
         return valueCase_ == 8;
@@ -5433,6 +5654,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.ScalarArray leaflist_val = 8;</code>
+       * @return The leaflistVal.
        */
       public com.cisco.stbarth.netconf.grpc.GNMI.ScalarArray getLeaflistVal() {
         if (leaflistValBuilder_ == null) {
@@ -5595,6 +5817,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.google.protobuf.Any any_val = 9;</code>
+       * @return Whether the anyVal field is set.
        */
       public boolean hasAnyVal() {
         return valueCase_ == 9;
@@ -5605,6 +5828,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.google.protobuf.Any any_val = 9;</code>
+       * @return The anyVal.
        */
       public com.google.protobuf.Any getAnyVal() {
         if (anyValBuilder_ == null) {
@@ -5765,6 +5989,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>bytes json_val = 10;</code>
+       * @return The jsonVal.
        */
       public com.google.protobuf.ByteString getJsonVal() {
         if (valueCase_ == 10) {
@@ -5778,6 +6003,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>bytes json_val = 10;</code>
+       * @param value The jsonVal to set.
+       * @return This builder for chaining.
        */
       public Builder setJsonVal(com.google.protobuf.ByteString value) {
         if (value == null) {
@@ -5794,6 +6021,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>bytes json_val = 10;</code>
+       * @return This builder for chaining.
        */
       public Builder clearJsonVal() {
         if (valueCase_ == 10) {
@@ -5810,6 +6038,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>bytes json_ietf_val = 11;</code>
+       * @return The jsonIetfVal.
        */
       public com.google.protobuf.ByteString getJsonIetfVal() {
         if (valueCase_ == 11) {
@@ -5823,6 +6052,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>bytes json_ietf_val = 11;</code>
+       * @param value The jsonIetfVal to set.
+       * @return This builder for chaining.
        */
       public Builder setJsonIetfVal(com.google.protobuf.ByteString value) {
         if (value == null) {
@@ -5839,6 +6070,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>bytes json_ietf_val = 11;</code>
+       * @return This builder for chaining.
        */
       public Builder clearJsonIetfVal() {
         if (valueCase_ == 11) {
@@ -5855,6 +6087,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string ascii_val = 12;</code>
+       * @return The asciiVal.
        */
       public java.lang.String getAsciiVal() {
         java.lang.Object ref = "";
@@ -5879,6 +6112,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string ascii_val = 12;</code>
+       * @return The bytes for asciiVal.
        */
       public com.google.protobuf.ByteString
           getAsciiValBytes() {
@@ -5904,6 +6138,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>string ascii_val = 12;</code>
+       * @param value The asciiVal to set.
+       * @return This builder for chaining.
        */
       public Builder setAsciiVal(
           java.lang.String value) {
@@ -5921,6 +6157,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string ascii_val = 12;</code>
+       * @return This builder for chaining.
        */
       public Builder clearAsciiVal() {
         if (valueCase_ == 12) {
@@ -5936,6 +6173,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>string ascii_val = 12;</code>
+       * @param value The bytes for asciiVal to set.
+       * @return This builder for chaining.
        */
       public Builder setAsciiValBytes(
           com.google.protobuf.ByteString value) {
@@ -5958,6 +6197,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>bytes proto_bytes = 13;</code>
+       * @return The protoBytes.
        */
       public com.google.protobuf.ByteString getProtoBytes() {
         if (valueCase_ == 13) {
@@ -5974,6 +6214,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>bytes proto_bytes = 13;</code>
+       * @param value The protoBytes to set.
+       * @return This builder for chaining.
        */
       public Builder setProtoBytes(com.google.protobuf.ByteString value) {
         if (value == null) {
@@ -5993,6 +6235,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>bytes proto_bytes = 13;</code>
+       * @return This builder for chaining.
        */
       public Builder clearProtoBytes() {
         if (valueCase_ == 13) {
@@ -6002,11 +6245,13 @@ public final class GNMI {
         }
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -6028,11 +6273,12 @@ public final class GNMI {
 
     private static final com.google.protobuf.Parser<TypedValue>
         PARSER = new com.google.protobuf.AbstractParser<TypedValue>() {
+      @java.lang.Override
       public TypedValue parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new TypedValue(input, extensionRegistry);
+        return new TypedValue(input, extensionRegistry);
       }
     };
 
@@ -6045,6 +6291,7 @@ public final class GNMI {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.GNMI.TypedValue getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -6062,6 +6309,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>repeated string element = 1 [deprecated = true];</code>
+     * @return A list containing the element.
      */
     @java.lang.Deprecated java.util.List<java.lang.String>
         getElementList();
@@ -6072,6 +6320,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>repeated string element = 1 [deprecated = true];</code>
+     * @return The count of element.
      */
     @java.lang.Deprecated int getElementCount();
     /**
@@ -6081,6 +6330,8 @@ public final class GNMI {
      * </pre>
      *
      * <code>repeated string element = 1 [deprecated = true];</code>
+     * @param index The index of the element to return.
+     * @return The element at the given index.
      */
     @java.lang.Deprecated java.lang.String getElement(int index);
     /**
@@ -6090,6 +6341,8 @@ public final class GNMI {
      * </pre>
      *
      * <code>repeated string element = 1 [deprecated = true];</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the element at the given index.
      */
     @java.lang.Deprecated com.google.protobuf.ByteString
         getElementBytes(int index);
@@ -6100,6 +6353,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string origin = 2;</code>
+     * @return The origin.
      */
     java.lang.String getOrigin();
     /**
@@ -6108,6 +6362,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string origin = 2;</code>
+     * @return The bytes for origin.
      */
     com.google.protobuf.ByteString
         getOriginBytes();
@@ -6162,6 +6417,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string target = 4;</code>
+     * @return The target.
      */
     java.lang.String getTarget();
     /**
@@ -6170,6 +6426,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string target = 4;</code>
+     * @return The bytes for target.
      */
     com.google.protobuf.ByteString
         getTargetBytes();
@@ -6201,6 +6458,13 @@ public final class GNMI {
     }
 
     @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new Path();
+    }
+
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return this.unknownFields;
@@ -6210,6 +6474,9 @@ public final class GNMI {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -6221,16 +6488,9 @@ public final class GNMI {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
                 element_ = new com.google.protobuf.LazyStringArrayList();
                 mutable_bitField0_ |= 0x00000001;
               }
@@ -6244,9 +6504,9 @@ public final class GNMI {
               break;
             }
             case 26: {
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
                 elem_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMI.PathElem>();
-                mutable_bitField0_ |= 0x00000004;
+                mutable_bitField0_ |= 0x00000002;
               }
               elem_.add(
                   input.readMessage(com.cisco.stbarth.netconf.grpc.GNMI.PathElem.parser(), extensionRegistry));
@@ -6258,6 +6518,13 @@ public final class GNMI {
               target_ = s;
               break;
             }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -6266,10 +6533,10 @@ public final class GNMI {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
           element_ = element_.getUnmodifiableView();
         }
-        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+        if (((mutable_bitField0_ & 0x00000002) != 0)) {
           elem_ = java.util.Collections.unmodifiableList(elem_);
         }
         this.unknownFields = unknownFields.build();
@@ -6281,6 +6548,7 @@ public final class GNMI {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Path_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Path_fieldAccessorTable
@@ -6288,7 +6556,6 @@ public final class GNMI {
               com.cisco.stbarth.netconf.grpc.GNMI.Path.class, com.cisco.stbarth.netconf.grpc.GNMI.Path.Builder.class);
     }
 
-    private int bitField0_;
     public static final int ELEMENT_FIELD_NUMBER = 1;
     private com.google.protobuf.LazyStringList element_;
     /**
@@ -6298,6 +6565,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>repeated string element = 1 [deprecated = true];</code>
+     * @return A list containing the element.
      */
     @java.lang.Deprecated public com.google.protobuf.ProtocolStringList
         getElementList() {
@@ -6310,6 +6578,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>repeated string element = 1 [deprecated = true];</code>
+     * @return The count of element.
      */
     @java.lang.Deprecated public int getElementCount() {
       return element_.size();
@@ -6321,6 +6590,8 @@ public final class GNMI {
      * </pre>
      *
      * <code>repeated string element = 1 [deprecated = true];</code>
+     * @param index The index of the element to return.
+     * @return The element at the given index.
      */
     @java.lang.Deprecated public java.lang.String getElement(int index) {
       return element_.get(index);
@@ -6332,6 +6603,8 @@ public final class GNMI {
      * </pre>
      *
      * <code>repeated string element = 1 [deprecated = true];</code>
+     * @param index The index of the value to return.
+     * @return The bytes of the element at the given index.
      */
     @java.lang.Deprecated public com.google.protobuf.ByteString
         getElementBytes(int index) {
@@ -6346,6 +6619,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string origin = 2;</code>
+     * @return The origin.
      */
     public java.lang.String getOrigin() {
       java.lang.Object ref = origin_;
@@ -6365,6 +6639,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string origin = 2;</code>
+     * @return The bytes for origin.
      */
     public com.google.protobuf.ByteString
         getOriginBytes() {
@@ -6443,6 +6718,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string target = 4;</code>
+     * @return The target.
      */
     public java.lang.String getTarget() {
       java.lang.Object ref = target_;
@@ -6462,6 +6738,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string target = 4;</code>
+     * @return The bytes for target.
      */
     public com.google.protobuf.ByteString
         getTargetBytes() {
@@ -6478,6 +6755,7 @@ public final class GNMI {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -6487,6 +6765,7 @@ public final class GNMI {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       for (int i = 0; i < element_.size(); i++) {
@@ -6504,6 +6783,7 @@ public final class GNMI {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -6542,17 +6822,16 @@ public final class GNMI {
       }
       com.cisco.stbarth.netconf.grpc.GNMI.Path other = (com.cisco.stbarth.netconf.grpc.GNMI.Path) obj;
 
-      boolean result = true;
-      result = result && getElementList()
-          .equals(other.getElementList());
-      result = result && getOrigin()
-          .equals(other.getOrigin());
-      result = result && getElemList()
-          .equals(other.getElemList());
-      result = result && getTarget()
-          .equals(other.getTarget());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (!getElementList()
+          .equals(other.getElementList())) return false;
+      if (!getOrigin()
+          .equals(other.getOrigin())) return false;
+      if (!getElemList()
+          .equals(other.getElemList())) return false;
+      if (!getTarget()
+          .equals(other.getTarget())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -6649,6 +6928,7 @@ public final class GNMI {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -6656,6 +6936,7 @@ public final class GNMI {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.GNMI.Path prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -6686,6 +6967,7 @@ public final class GNMI {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Path_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Path_fieldAccessorTable
@@ -6709,6 +6991,7 @@ public final class GNMI {
           getElemFieldBuilder();
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         element_ = com.google.protobuf.LazyStringArrayList.EMPTY;
@@ -6717,7 +7000,7 @@ public final class GNMI {
 
         if (elemBuilder_ == null) {
           elem_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000002);
         } else {
           elemBuilder_.clear();
         }
@@ -6726,15 +7009,18 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Path_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.Path getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.Path.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.Path build() {
         com.cisco.stbarth.netconf.grpc.GNMI.Path result = buildPartial();
         if (!result.isInitialized()) {
@@ -6743,57 +7029,63 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.Path buildPartial() {
         com.cisco.stbarth.netconf.grpc.GNMI.Path result = new com.cisco.stbarth.netconf.grpc.GNMI.Path(this);
         int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        if (((bitField0_ & 0x00000001) != 0)) {
           element_ = element_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x00000001);
         }
         result.element_ = element_;
         result.origin_ = origin_;
         if (elemBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          if (((bitField0_ & 0x00000002) != 0)) {
             elem_ = java.util.Collections.unmodifiableList(elem_);
-            bitField0_ = (bitField0_ & ~0x00000004);
+            bitField0_ = (bitField0_ & ~0x00000002);
           }
           result.elem_ = elem_;
         } else {
           result.elem_ = elemBuilder_.build();
         }
         result.target_ = target_;
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.GNMI.Path) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.GNMI.Path)other);
@@ -6823,7 +7115,7 @@ public final class GNMI {
           if (!other.elem_.isEmpty()) {
             if (elem_.isEmpty()) {
               elem_ = other.elem_;
-              bitField0_ = (bitField0_ & ~0x00000004);
+              bitField0_ = (bitField0_ & ~0x00000002);
             } else {
               ensureElemIsMutable();
               elem_.addAll(other.elem_);
@@ -6836,7 +7128,7 @@ public final class GNMI {
               elemBuilder_.dispose();
               elemBuilder_ = null;
               elem_ = other.elem_;
-              bitField0_ = (bitField0_ & ~0x00000004);
+              bitField0_ = (bitField0_ & ~0x00000002);
               elemBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getElemFieldBuilder() : null;
@@ -6854,10 +7146,12 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -6879,7 +7173,7 @@ public final class GNMI {
 
       private com.google.protobuf.LazyStringList element_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureElementIsMutable() {
-        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+        if (!((bitField0_ & 0x00000001) != 0)) {
           element_ = new com.google.protobuf.LazyStringArrayList(element_);
           bitField0_ |= 0x00000001;
          }
@@ -6891,6 +7185,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>repeated string element = 1 [deprecated = true];</code>
+       * @return A list containing the element.
        */
       @java.lang.Deprecated public com.google.protobuf.ProtocolStringList
           getElementList() {
@@ -6903,6 +7198,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>repeated string element = 1 [deprecated = true];</code>
+       * @return The count of element.
        */
       @java.lang.Deprecated public int getElementCount() {
         return element_.size();
@@ -6914,6 +7210,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>repeated string element = 1 [deprecated = true];</code>
+       * @param index The index of the element to return.
+       * @return The element at the given index.
        */
       @java.lang.Deprecated public java.lang.String getElement(int index) {
         return element_.get(index);
@@ -6925,6 +7223,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>repeated string element = 1 [deprecated = true];</code>
+       * @param index The index of the value to return.
+       * @return The bytes of the element at the given index.
        */
       @java.lang.Deprecated public com.google.protobuf.ByteString
           getElementBytes(int index) {
@@ -6937,6 +7237,9 @@ public final class GNMI {
        * </pre>
        *
        * <code>repeated string element = 1 [deprecated = true];</code>
+       * @param index The index to set the value at.
+       * @param value The element to set.
+       * @return This builder for chaining.
        */
       @java.lang.Deprecated public Builder setElement(
           int index, java.lang.String value) {
@@ -6955,6 +7258,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>repeated string element = 1 [deprecated = true];</code>
+       * @param value The element to add.
+       * @return This builder for chaining.
        */
       @java.lang.Deprecated public Builder addElement(
           java.lang.String value) {
@@ -6973,6 +7278,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>repeated string element = 1 [deprecated = true];</code>
+       * @param values The element to add.
+       * @return This builder for chaining.
        */
       @java.lang.Deprecated public Builder addAllElement(
           java.lang.Iterable<java.lang.String> values) {
@@ -6989,6 +7296,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>repeated string element = 1 [deprecated = true];</code>
+       * @return This builder for chaining.
        */
       @java.lang.Deprecated public Builder clearElement() {
         element_ = com.google.protobuf.LazyStringArrayList.EMPTY;
@@ -7003,6 +7311,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>repeated string element = 1 [deprecated = true];</code>
+       * @param value The bytes of the element to add.
+       * @return This builder for chaining.
        */
       @java.lang.Deprecated public Builder addElementBytes(
           com.google.protobuf.ByteString value) {
@@ -7023,6 +7333,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string origin = 2;</code>
+       * @return The origin.
        */
       public java.lang.String getOrigin() {
         java.lang.Object ref = origin_;
@@ -7042,6 +7353,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string origin = 2;</code>
+       * @return The bytes for origin.
        */
       public com.google.protobuf.ByteString
           getOriginBytes() {
@@ -7062,6 +7374,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>string origin = 2;</code>
+       * @param value The origin to set.
+       * @return This builder for chaining.
        */
       public Builder setOrigin(
           java.lang.String value) {
@@ -7079,6 +7393,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string origin = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearOrigin() {
         
@@ -7092,6 +7407,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>string origin = 2;</code>
+       * @param value The bytes for origin to set.
+       * @return This builder for chaining.
        */
       public Builder setOriginBytes(
           com.google.protobuf.ByteString value) {
@@ -7108,9 +7425,9 @@ public final class GNMI {
       private java.util.List<com.cisco.stbarth.netconf.grpc.GNMI.PathElem> elem_ =
         java.util.Collections.emptyList();
       private void ensureElemIsMutable() {
-        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+        if (!((bitField0_ & 0x00000002) != 0)) {
           elem_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMI.PathElem>(elem_);
-          bitField0_ |= 0x00000004;
+          bitField0_ |= 0x00000002;
          }
       }
 
@@ -7304,7 +7621,7 @@ public final class GNMI {
       public Builder clearElem() {
         if (elemBuilder_ == null) {
           elem_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000002);
           onChanged();
         } else {
           elemBuilder_.clear();
@@ -7409,7 +7726,7 @@ public final class GNMI {
           elemBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.cisco.stbarth.netconf.grpc.GNMI.PathElem, com.cisco.stbarth.netconf.grpc.GNMI.PathElem.Builder, com.cisco.stbarth.netconf.grpc.GNMI.PathElemOrBuilder>(
                   elem_,
-                  ((bitField0_ & 0x00000004) == 0x00000004),
+                  ((bitField0_ & 0x00000002) != 0),
                   getParentForChildren(),
                   isClean());
           elem_ = null;
@@ -7424,6 +7741,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string target = 4;</code>
+       * @return The target.
        */
       public java.lang.String getTarget() {
         java.lang.Object ref = target_;
@@ -7443,6 +7761,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string target = 4;</code>
+       * @return The bytes for target.
        */
       public com.google.protobuf.ByteString
           getTargetBytes() {
@@ -7463,6 +7782,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>string target = 4;</code>
+       * @param value The target to set.
+       * @return This builder for chaining.
        */
       public Builder setTarget(
           java.lang.String value) {
@@ -7480,6 +7801,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string target = 4;</code>
+       * @return This builder for chaining.
        */
       public Builder clearTarget() {
         
@@ -7493,6 +7815,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>string target = 4;</code>
+       * @param value The bytes for target to set.
+       * @return This builder for chaining.
        */
       public Builder setTargetBytes(
           com.google.protobuf.ByteString value) {
@@ -7505,11 +7829,13 @@ public final class GNMI {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -7531,11 +7857,12 @@ public final class GNMI {
 
     private static final com.google.protobuf.Parser<Path>
         PARSER = new com.google.protobuf.AbstractParser<Path>() {
+      @java.lang.Override
       public Path parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Path(input, extensionRegistry);
+        return new Path(input, extensionRegistry);
       }
     };
 
@@ -7548,6 +7875,7 @@ public final class GNMI {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.GNMI.Path getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -7564,6 +7892,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string name = 1;</code>
+     * @return The name.
      */
     java.lang.String getName();
     /**
@@ -7572,6 +7901,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string name = 1;</code>
+     * @return The bytes for name.
      */
     com.google.protobuf.ByteString
         getNameBytes();
@@ -7653,6 +7983,13 @@ public final class GNMI {
     }
 
     @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new PathElem();
+    }
+
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return this.unknownFields;
@@ -7662,6 +7999,9 @@ public final class GNMI {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -7673,13 +8013,6 @@ public final class GNMI {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
@@ -7687,16 +8020,23 @@ public final class GNMI {
               break;
             }
             case 18: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
                 key_ = com.google.protobuf.MapField.newMapField(
                     KeyDefaultEntryHolder.defaultEntry);
-                mutable_bitField0_ |= 0x00000002;
+                mutable_bitField0_ |= 0x00000001;
               }
               com.google.protobuf.MapEntry<java.lang.String, java.lang.String>
               key__ = input.readMessage(
                   KeyDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
               key_.getMutableMap().put(
                   key__.getKey(), key__.getValue());
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -7717,6 +8057,7 @@ public final class GNMI {
     }
 
     @SuppressWarnings({"rawtypes"})
+    @java.lang.Override
     protected com.google.protobuf.MapField internalGetMapField(
         int number) {
       switch (number) {
@@ -7727,6 +8068,7 @@ public final class GNMI {
               "Invalid map field number: " + number);
       }
     }
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_PathElem_fieldAccessorTable
@@ -7734,7 +8076,6 @@ public final class GNMI {
               com.cisco.stbarth.netconf.grpc.GNMI.PathElem.class, com.cisco.stbarth.netconf.grpc.GNMI.PathElem.Builder.class);
     }
 
-    private int bitField0_;
     public static final int NAME_FIELD_NUMBER = 1;
     private volatile java.lang.Object name_;
     /**
@@ -7743,6 +8084,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string name = 1;</code>
+     * @return The name.
      */
     public java.lang.String getName() {
       java.lang.Object ref = name_;
@@ -7762,6 +8104,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string name = 1;</code>
+     * @return The bytes for name.
      */
     public com.google.protobuf.ByteString
         getNameBytes() {
@@ -7870,6 +8213,7 @@ public final class GNMI {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -7879,6 +8223,7 @@ public final class GNMI {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (!getNameBytes().isEmpty()) {
@@ -7893,6 +8238,7 @@ public final class GNMI {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -7926,13 +8272,12 @@ public final class GNMI {
       }
       com.cisco.stbarth.netconf.grpc.GNMI.PathElem other = (com.cisco.stbarth.netconf.grpc.GNMI.PathElem) obj;
 
-      boolean result = true;
-      result = result && getName()
-          .equals(other.getName());
-      result = result && internalGetKey().equals(
-          other.internalGetKey());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (!getName()
+          .equals(other.getName())) return false;
+      if (!internalGetKey().equals(
+          other.internalGetKey())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -8023,6 +8368,7 @@ public final class GNMI {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -8030,6 +8376,7 @@ public final class GNMI {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.GNMI.PathElem prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -8081,6 +8428,7 @@ public final class GNMI {
                 "Invalid map field number: " + number);
         }
       }
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_PathElem_fieldAccessorTable
@@ -8103,6 +8451,7 @@ public final class GNMI {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         name_ = "";
@@ -8111,15 +8460,18 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_PathElem_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.PathElem getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.PathElem.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.PathElem build() {
         com.cisco.stbarth.netconf.grpc.GNMI.PathElem result = buildPartial();
         if (!result.isInitialized()) {
@@ -8128,44 +8480,50 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.PathElem buildPartial() {
         com.cisco.stbarth.netconf.grpc.GNMI.PathElem result = new com.cisco.stbarth.netconf.grpc.GNMI.PathElem(this);
         int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
         result.name_ = name_;
         result.key_ = internalGetKey();
         result.key_.makeImmutable();
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.GNMI.PathElem) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.GNMI.PathElem)other);
@@ -8188,10 +8546,12 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -8218,6 +8578,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string name = 1;</code>
+       * @return The name.
        */
       public java.lang.String getName() {
         java.lang.Object ref = name_;
@@ -8237,6 +8598,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string name = 1;</code>
+       * @return The bytes for name.
        */
       public com.google.protobuf.ByteString
           getNameBytes() {
@@ -8257,6 +8619,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>string name = 1;</code>
+       * @param value The name to set.
+       * @return This builder for chaining.
        */
       public Builder setName(
           java.lang.String value) {
@@ -8274,6 +8638,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string name = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearName() {
         
@@ -8287,6 +8652,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>string name = 1;</code>
+       * @param value The bytes for name to set.
+       * @return This builder for chaining.
        */
       public Builder setNameBytes(
           com.google.protobuf.ByteString value) {
@@ -8450,11 +8817,13 @@ public final class GNMI {
             .putAll(values);
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -8476,11 +8845,12 @@ public final class GNMI {
 
     private static final com.google.protobuf.Parser<PathElem>
         PARSER = new com.google.protobuf.AbstractParser<PathElem>() {
+      @java.lang.Override
       public PathElem parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new PathElem(input, extensionRegistry);
+        return new PathElem(input, extensionRegistry);
       }
     };
 
@@ -8493,6 +8863,7 @@ public final class GNMI {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.GNMI.PathElem getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -8509,6 +8880,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>bytes value = 1;</code>
+     * @return The value.
      */
     com.google.protobuf.ByteString getValue();
 
@@ -8518,6 +8890,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Encoding type = 2;</code>
+     * @return The enum numeric value on the wire for type.
      */
     int getTypeValue();
     /**
@@ -8526,6 +8899,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Encoding type = 2;</code>
+     * @return The type.
      */
     com.cisco.stbarth.netconf.grpc.GNMI.Encoding getType();
   }
@@ -8553,6 +8927,13 @@ public final class GNMI {
     }
 
     @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new Value();
+    }
+
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return this.unknownFields;
@@ -8562,7 +8943,9 @@ public final class GNMI {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -8573,13 +8956,6 @@ public final class GNMI {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
 
               value_ = input.readBytes();
@@ -8589,6 +8965,13 @@ public final class GNMI {
               int rawValue = input.readEnum();
 
               type_ = rawValue;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -8608,6 +8991,7 @@ public final class GNMI {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Value_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Value_fieldAccessorTable
@@ -8623,6 +9007,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>bytes value = 1;</code>
+     * @return The value.
      */
     public com.google.protobuf.ByteString getValue() {
       return value_;
@@ -8636,6 +9021,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Encoding type = 2;</code>
+     * @return The enum numeric value on the wire for type.
      */
     public int getTypeValue() {
       return type_;
@@ -8646,13 +9032,16 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Encoding type = 2;</code>
+     * @return The type.
      */
     public com.cisco.stbarth.netconf.grpc.GNMI.Encoding getType() {
+      @SuppressWarnings("deprecation")
       com.cisco.stbarth.netconf.grpc.GNMI.Encoding result = com.cisco.stbarth.netconf.grpc.GNMI.Encoding.valueOf(type_);
       return result == null ? com.cisco.stbarth.netconf.grpc.GNMI.Encoding.UNRECOGNIZED : result;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -8662,6 +9051,7 @@ public final class GNMI {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (!value_.isEmpty()) {
@@ -8673,6 +9063,7 @@ public final class GNMI {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -8701,12 +9092,11 @@ public final class GNMI {
       }
       com.cisco.stbarth.netconf.grpc.GNMI.Value other = (com.cisco.stbarth.netconf.grpc.GNMI.Value) obj;
 
-      boolean result = true;
-      result = result && getValue()
-          .equals(other.getValue());
-      result = result && type_ == other.type_;
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (!getValue()
+          .equals(other.getValue())) return false;
+      if (type_ != other.type_) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -8795,6 +9185,7 @@ public final class GNMI {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -8802,6 +9193,7 @@ public final class GNMI {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.GNMI.Value prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -8831,6 +9223,7 @@ public final class GNMI {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Value_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Value_fieldAccessorTable
@@ -8853,6 +9246,7 @@ public final class GNMI {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         value_ = com.google.protobuf.ByteString.EMPTY;
@@ -8862,15 +9256,18 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Value_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.Value getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.Value.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.Value build() {
         com.cisco.stbarth.netconf.grpc.GNMI.Value result = buildPartial();
         if (!result.isInitialized()) {
@@ -8879,6 +9276,7 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.Value buildPartial() {
         com.cisco.stbarth.netconf.grpc.GNMI.Value result = new com.cisco.stbarth.netconf.grpc.GNMI.Value(this);
         result.value_ = value_;
@@ -8887,32 +9285,39 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.GNMI.Value) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.GNMI.Value)other);
@@ -8935,10 +9340,12 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -8964,6 +9371,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>bytes value = 1;</code>
+       * @return The value.
        */
       public com.google.protobuf.ByteString getValue() {
         return value_;
@@ -8974,6 +9382,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>bytes value = 1;</code>
+       * @param value The value to set.
+       * @return This builder for chaining.
        */
       public Builder setValue(com.google.protobuf.ByteString value) {
         if (value == null) {
@@ -8990,6 +9400,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>bytes value = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearValue() {
         
@@ -9005,6 +9416,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Encoding type = 2;</code>
+       * @return The enum numeric value on the wire for type.
        */
       public int getTypeValue() {
         return type_;
@@ -9015,6 +9427,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Encoding type = 2;</code>
+       * @param value The enum numeric value on the wire for type to set.
+       * @return This builder for chaining.
        */
       public Builder setTypeValue(int value) {
         type_ = value;
@@ -9027,8 +9441,10 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Encoding type = 2;</code>
+       * @return The type.
        */
       public com.cisco.stbarth.netconf.grpc.GNMI.Encoding getType() {
+        @SuppressWarnings("deprecation")
         com.cisco.stbarth.netconf.grpc.GNMI.Encoding result = com.cisco.stbarth.netconf.grpc.GNMI.Encoding.valueOf(type_);
         return result == null ? com.cisco.stbarth.netconf.grpc.GNMI.Encoding.UNRECOGNIZED : result;
       }
@@ -9038,6 +9454,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Encoding type = 2;</code>
+       * @param value The type to set.
+       * @return This builder for chaining.
        */
       public Builder setType(com.cisco.stbarth.netconf.grpc.GNMI.Encoding value) {
         if (value == null) {
@@ -9054,6 +9472,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Encoding type = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearType() {
         
@@ -9061,11 +9480,13 @@ public final class GNMI {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -9087,11 +9508,12 @@ public final class GNMI {
 
     private static final com.google.protobuf.Parser<Value>
         PARSER = new com.google.protobuf.AbstractParser<Value>() {
+      @java.lang.Override
       public Value parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Value(input, extensionRegistry);
+        return new Value(input, extensionRegistry);
       }
     };
 
@@ -9104,6 +9526,7 @@ public final class GNMI {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.GNMI.Value getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -9120,6 +9543,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>uint32 code = 1;</code>
+     * @return The code.
      */
     int getCode();
 
@@ -9129,6 +9553,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string message = 2;</code>
+     * @return The message.
      */
     java.lang.String getMessage();
     /**
@@ -9137,6 +9562,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string message = 2;</code>
+     * @return The bytes for message.
      */
     com.google.protobuf.ByteString
         getMessageBytes();
@@ -9147,6 +9573,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.google.protobuf.Any data = 3;</code>
+     * @return Whether the data field is set.
      */
     boolean hasData();
     /**
@@ -9155,6 +9582,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.google.protobuf.Any data = 3;</code>
+     * @return The data.
      */
     com.google.protobuf.Any getData();
     /**
@@ -9186,8 +9614,14 @@ public final class GNMI {
       super(builder);
     }
     private Error() {
-      code_ = 0;
       message_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new Error();
     }
 
     @java.lang.Override
@@ -9200,7 +9634,9 @@ public final class GNMI {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -9211,13 +9647,6 @@ public final class GNMI {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
 
               code_ = input.readUInt32();
@@ -9242,6 +9671,13 @@ public final class GNMI {
 
               break;
             }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -9259,6 +9695,7 @@ public final class GNMI {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Error_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Error_fieldAccessorTable
@@ -9274,6 +9711,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>uint32 code = 1;</code>
+     * @return The code.
      */
     public int getCode() {
       return code_;
@@ -9287,6 +9725,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string message = 2;</code>
+     * @return The message.
      */
     public java.lang.String getMessage() {
       java.lang.Object ref = message_;
@@ -9306,6 +9745,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string message = 2;</code>
+     * @return The bytes for message.
      */
     public com.google.protobuf.ByteString
         getMessageBytes() {
@@ -9329,6 +9769,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.google.protobuf.Any data = 3;</code>
+     * @return Whether the data field is set.
      */
     public boolean hasData() {
       return data_ != null;
@@ -9339,6 +9780,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.google.protobuf.Any data = 3;</code>
+     * @return The data.
      */
     public com.google.protobuf.Any getData() {
       return data_ == null ? com.google.protobuf.Any.getDefaultInstance() : data_;
@@ -9355,6 +9797,7 @@ public final class GNMI {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -9364,6 +9807,7 @@ public final class GNMI {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (code_ != 0) {
@@ -9378,6 +9822,7 @@ public final class GNMI {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -9409,18 +9854,17 @@ public final class GNMI {
       }
       com.cisco.stbarth.netconf.grpc.GNMI.Error other = (com.cisco.stbarth.netconf.grpc.GNMI.Error) obj;
 
-      boolean result = true;
-      result = result && (getCode()
-          == other.getCode());
-      result = result && getMessage()
-          .equals(other.getMessage());
-      result = result && (hasData() == other.hasData());
+      if (getCode()
+          != other.getCode()) return false;
+      if (!getMessage()
+          .equals(other.getMessage())) return false;
+      if (hasData() != other.hasData()) return false;
       if (hasData()) {
-        result = result && getData()
-            .equals(other.getData());
+        if (!getData()
+            .equals(other.getData())) return false;
       }
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -9513,6 +9957,7 @@ public final class GNMI {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -9520,6 +9965,7 @@ public final class GNMI {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.GNMI.Error prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -9550,6 +9996,7 @@ public final class GNMI {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Error_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Error_fieldAccessorTable
@@ -9572,6 +10019,7 @@ public final class GNMI {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         code_ = 0;
@@ -9587,15 +10035,18 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Error_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.Error getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.Error.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.Error build() {
         com.cisco.stbarth.netconf.grpc.GNMI.Error result = buildPartial();
         if (!result.isInitialized()) {
@@ -9604,6 +10055,7 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.Error buildPartial() {
         com.cisco.stbarth.netconf.grpc.GNMI.Error result = new com.cisco.stbarth.netconf.grpc.GNMI.Error(this);
         result.code_ = code_;
@@ -9617,32 +10069,39 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.GNMI.Error) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.GNMI.Error)other);
@@ -9669,10 +10128,12 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -9698,6 +10159,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>uint32 code = 1;</code>
+       * @return The code.
        */
       public int getCode() {
         return code_;
@@ -9708,6 +10170,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>uint32 code = 1;</code>
+       * @param value The code to set.
+       * @return This builder for chaining.
        */
       public Builder setCode(int value) {
         
@@ -9721,6 +10185,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>uint32 code = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearCode() {
         
@@ -9736,6 +10201,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string message = 2;</code>
+       * @return The message.
        */
       public java.lang.String getMessage() {
         java.lang.Object ref = message_;
@@ -9755,6 +10221,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string message = 2;</code>
+       * @return The bytes for message.
        */
       public com.google.protobuf.ByteString
           getMessageBytes() {
@@ -9775,6 +10242,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>string message = 2;</code>
+       * @param value The message to set.
+       * @return This builder for chaining.
        */
       public Builder setMessage(
           java.lang.String value) {
@@ -9792,6 +10261,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string message = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearMessage() {
         
@@ -9805,6 +10275,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>string message = 2;</code>
+       * @param value The bytes for message to set.
+       * @return This builder for chaining.
        */
       public Builder setMessageBytes(
           com.google.protobuf.ByteString value) {
@@ -9818,7 +10290,7 @@ public final class GNMI {
         return this;
       }
 
-      private com.google.protobuf.Any data_ = null;
+      private com.google.protobuf.Any data_;
       private com.google.protobuf.SingleFieldBuilderV3<
           com.google.protobuf.Any, com.google.protobuf.Any.Builder, com.google.protobuf.AnyOrBuilder> dataBuilder_;
       /**
@@ -9827,6 +10299,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.google.protobuf.Any data = 3;</code>
+       * @return Whether the data field is set.
        */
       public boolean hasData() {
         return dataBuilder_ != null || data_ != null;
@@ -9837,6 +10310,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.google.protobuf.Any data = 3;</code>
+       * @return The data.
        */
       public com.google.protobuf.Any getData() {
         if (dataBuilder_ == null) {
@@ -9970,11 +10444,13 @@ public final class GNMI {
         }
         return dataBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -9996,11 +10472,12 @@ public final class GNMI {
 
     private static final com.google.protobuf.Parser<Error>
         PARSER = new com.google.protobuf.AbstractParser<Error>() {
+      @java.lang.Override
       public Error parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Error(input, extensionRegistry);
+        return new Error(input, extensionRegistry);
       }
     };
 
@@ -10013,6 +10490,7 @@ public final class GNMI {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.GNMI.Error getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -10029,6 +10507,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>int64 digits = 1;</code>
+     * @return The digits.
      */
     long getDigits();
 
@@ -10038,6 +10517,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>uint32 precision = 2;</code>
+     * @return The precision.
      */
     int getPrecision();
   }
@@ -10060,8 +10540,13 @@ public final class GNMI {
       super(builder);
     }
     private Decimal64() {
-      digits_ = 0L;
-      precision_ = 0;
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new Decimal64();
     }
 
     @java.lang.Override
@@ -10074,7 +10559,9 @@ public final class GNMI {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -10085,13 +10572,6 @@ public final class GNMI {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
 
               digits_ = input.readInt64();
@@ -10100,6 +10580,13 @@ public final class GNMI {
             case 16: {
 
               precision_ = input.readUInt32();
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -10119,6 +10606,7 @@ public final class GNMI {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Decimal64_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Decimal64_fieldAccessorTable
@@ -10134,6 +10622,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>int64 digits = 1;</code>
+     * @return The digits.
      */
     public long getDigits() {
       return digits_;
@@ -10147,12 +10636,14 @@ public final class GNMI {
      * </pre>
      *
      * <code>uint32 precision = 2;</code>
+     * @return The precision.
      */
     public int getPrecision() {
       return precision_;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -10162,6 +10653,7 @@ public final class GNMI {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (digits_ != 0L) {
@@ -10173,6 +10665,7 @@ public final class GNMI {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -10201,13 +10694,12 @@ public final class GNMI {
       }
       com.cisco.stbarth.netconf.grpc.GNMI.Decimal64 other = (com.cisco.stbarth.netconf.grpc.GNMI.Decimal64) obj;
 
-      boolean result = true;
-      result = result && (getDigits()
-          == other.getDigits());
-      result = result && (getPrecision()
-          == other.getPrecision());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (getDigits()
+          != other.getDigits()) return false;
+      if (getPrecision()
+          != other.getPrecision()) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -10297,6 +10789,7 @@ public final class GNMI {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -10304,6 +10797,7 @@ public final class GNMI {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.GNMI.Decimal64 prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -10333,6 +10827,7 @@ public final class GNMI {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Decimal64_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Decimal64_fieldAccessorTable
@@ -10355,6 +10850,7 @@ public final class GNMI {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         digits_ = 0L;
@@ -10364,15 +10860,18 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Decimal64_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.Decimal64 getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.Decimal64.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.Decimal64 build() {
         com.cisco.stbarth.netconf.grpc.GNMI.Decimal64 result = buildPartial();
         if (!result.isInitialized()) {
@@ -10381,6 +10880,7 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.Decimal64 buildPartial() {
         com.cisco.stbarth.netconf.grpc.GNMI.Decimal64 result = new com.cisco.stbarth.netconf.grpc.GNMI.Decimal64(this);
         result.digits_ = digits_;
@@ -10389,32 +10889,39 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.GNMI.Decimal64) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.GNMI.Decimal64)other);
@@ -10437,10 +10944,12 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -10466,6 +10975,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>int64 digits = 1;</code>
+       * @return The digits.
        */
       public long getDigits() {
         return digits_;
@@ -10476,6 +10986,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>int64 digits = 1;</code>
+       * @param value The digits to set.
+       * @return This builder for chaining.
        */
       public Builder setDigits(long value) {
         
@@ -10489,6 +11001,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>int64 digits = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearDigits() {
         
@@ -10504,6 +11017,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>uint32 precision = 2;</code>
+       * @return The precision.
        */
       public int getPrecision() {
         return precision_;
@@ -10514,6 +11028,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>uint32 precision = 2;</code>
+       * @param value The precision to set.
+       * @return This builder for chaining.
        */
       public Builder setPrecision(int value) {
         
@@ -10527,6 +11043,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>uint32 precision = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearPrecision() {
         
@@ -10534,11 +11051,13 @@ public final class GNMI {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -10560,11 +11079,12 @@ public final class GNMI {
 
     private static final com.google.protobuf.Parser<Decimal64>
         PARSER = new com.google.protobuf.AbstractParser<Decimal64>() {
+      @java.lang.Override
       public Decimal64 parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Decimal64(input, extensionRegistry);
+        return new Decimal64(input, extensionRegistry);
       }
     };
 
@@ -10577,6 +11097,7 @@ public final class GNMI {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.GNMI.Decimal64 getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -10662,6 +11183,13 @@ public final class GNMI {
     }
 
     @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new ScalarArray();
+    }
+
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return this.unknownFields;
@@ -10671,6 +11199,9 @@ public final class GNMI {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -10682,20 +11213,20 @@ public final class GNMI {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
-              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
                 element_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMI.TypedValue>();
                 mutable_bitField0_ |= 0x00000001;
               }
               element_.add(
                   input.readMessage(com.cisco.stbarth.netconf.grpc.GNMI.TypedValue.parser(), extensionRegistry));
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -10706,7 +11237,7 @@ public final class GNMI {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
           element_ = java.util.Collections.unmodifiableList(element_);
         }
         this.unknownFields = unknownFields.build();
@@ -10718,6 +11249,7 @@ public final class GNMI {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_ScalarArray_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_ScalarArray_fieldAccessorTable
@@ -10791,6 +11323,7 @@ public final class GNMI {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -10800,6 +11333,7 @@ public final class GNMI {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       for (int i = 0; i < element_.size(); i++) {
@@ -10808,6 +11342,7 @@ public final class GNMI {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -10832,11 +11367,10 @@ public final class GNMI {
       }
       com.cisco.stbarth.netconf.grpc.GNMI.ScalarArray other = (com.cisco.stbarth.netconf.grpc.GNMI.ScalarArray) obj;
 
-      boolean result = true;
-      result = result && getElementList()
-          .equals(other.getElementList());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (!getElementList()
+          .equals(other.getElementList())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -10925,6 +11459,7 @@ public final class GNMI {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -10932,6 +11467,7 @@ public final class GNMI {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.GNMI.ScalarArray prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -10959,6 +11495,7 @@ public final class GNMI {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_ScalarArray_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_ScalarArray_fieldAccessorTable
@@ -10982,6 +11519,7 @@ public final class GNMI {
           getElementFieldBuilder();
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         if (elementBuilder_ == null) {
@@ -10993,15 +11531,18 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_ScalarArray_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.ScalarArray getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.ScalarArray.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.ScalarArray build() {
         com.cisco.stbarth.netconf.grpc.GNMI.ScalarArray result = buildPartial();
         if (!result.isInitialized()) {
@@ -11010,11 +11551,12 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.ScalarArray buildPartial() {
         com.cisco.stbarth.netconf.grpc.GNMI.ScalarArray result = new com.cisco.stbarth.netconf.grpc.GNMI.ScalarArray(this);
         int from_bitField0_ = bitField0_;
         if (elementBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          if (((bitField0_ & 0x00000001) != 0)) {
             element_ = java.util.Collections.unmodifiableList(element_);
             bitField0_ = (bitField0_ & ~0x00000001);
           }
@@ -11026,32 +11568,39 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.GNMI.ScalarArray) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.GNMI.ScalarArray)other);
@@ -11094,10 +11643,12 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -11120,7 +11671,7 @@ public final class GNMI {
       private java.util.List<com.cisco.stbarth.netconf.grpc.GNMI.TypedValue> element_ =
         java.util.Collections.emptyList();
       private void ensureElementIsMutable() {
-        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+        if (!((bitField0_ & 0x00000001) != 0)) {
           element_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMI.TypedValue>(element_);
           bitField0_ |= 0x00000001;
          }
@@ -11457,18 +12008,20 @@ public final class GNMI {
           elementBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.cisco.stbarth.netconf.grpc.GNMI.TypedValue, com.cisco.stbarth.netconf.grpc.GNMI.TypedValue.Builder, com.cisco.stbarth.netconf.grpc.GNMI.TypedValueOrBuilder>(
                   element_,
-                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  ((bitField0_ & 0x00000001) != 0),
                   getParentForChildren(),
                   isClean());
           element_ = null;
         }
         return elementBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -11490,11 +12043,12 @@ public final class GNMI {
 
     private static final com.google.protobuf.Parser<ScalarArray>
         PARSER = new com.google.protobuf.AbstractParser<ScalarArray>() {
+      @java.lang.Override
       public ScalarArray parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ScalarArray(input, extensionRegistry);
+        return new ScalarArray(input, extensionRegistry);
       }
     };
 
@@ -11507,6 +12061,7 @@ public final class GNMI {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.GNMI.ScalarArray getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -11523,6 +12078,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.SubscriptionList subscribe = 1;</code>
+     * @return Whether the subscribe field is set.
      */
     boolean hasSubscribe();
     /**
@@ -11531,6 +12087,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.SubscriptionList subscribe = 1;</code>
+     * @return The subscribe.
      */
     com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionList getSubscribe();
     /**
@@ -11548,6 +12105,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Poll poll = 3;</code>
+     * @return Whether the poll field is set.
      */
     boolean hasPoll();
     /**
@@ -11556,6 +12114,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Poll poll = 3;</code>
+     * @return The poll.
      */
     com.cisco.stbarth.netconf.grpc.GNMI.Poll getPoll();
     /**
@@ -11573,6 +12132,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.AliasList aliases = 4;</code>
+     * @return Whether the aliases field is set.
      */
     boolean hasAliases();
     /**
@@ -11581,6 +12141,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.AliasList aliases = 4;</code>
+     * @return The aliases.
      */
     com.cisco.stbarth.netconf.grpc.GNMI.AliasList getAliases();
     /**
@@ -11669,6 +12230,13 @@ public final class GNMI {
     }
 
     @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new SubscribeRequest();
+    }
+
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return this.unknownFields;
@@ -11678,6 +12246,9 @@ public final class GNMI {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -11689,13 +12260,6 @@ public final class GNMI {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionList.Builder subBuilder = null;
               if (requestCase_ == 1) {
@@ -11739,12 +12303,19 @@ public final class GNMI {
               break;
             }
             case 42: {
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
                 extension_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMIExt.Extension>();
-                mutable_bitField0_ |= 0x00000008;
+                mutable_bitField0_ |= 0x00000001;
               }
               extension_.add(
                   input.readMessage(com.cisco.stbarth.netconf.grpc.GNMIExt.Extension.parser(), extensionRegistry));
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -11755,7 +12326,7 @@ public final class GNMI {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
           extension_ = java.util.Collections.unmodifiableList(extension_);
         }
         this.unknownFields = unknownFields.build();
@@ -11767,6 +12338,7 @@ public final class GNMI {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_SubscribeRequest_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_SubscribeRequest_fieldAccessorTable
@@ -11774,11 +12346,11 @@ public final class GNMI {
               com.cisco.stbarth.netconf.grpc.GNMI.SubscribeRequest.class, com.cisco.stbarth.netconf.grpc.GNMI.SubscribeRequest.Builder.class);
     }
 
-    private int bitField0_;
     private int requestCase_ = 0;
     private java.lang.Object request_;
     public enum RequestCase
-        implements com.google.protobuf.Internal.EnumLite {
+        implements com.google.protobuf.Internal.EnumLite,
+            com.google.protobuf.AbstractMessage.InternalOneOfEnum {
       SUBSCRIBE(1),
       POLL(3),
       ALIASES(4),
@@ -11788,6 +12360,8 @@ public final class GNMI {
         this.value = value;
       }
       /**
+       * @param value The number of the enum to look for.
+       * @return The enum associated with the given number.
        * @deprecated Use {@link #forNumber(int)} instead.
        */
       @java.lang.Deprecated
@@ -11822,6 +12396,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.SubscriptionList subscribe = 1;</code>
+     * @return Whether the subscribe field is set.
      */
     public boolean hasSubscribe() {
       return requestCase_ == 1;
@@ -11832,6 +12407,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.SubscriptionList subscribe = 1;</code>
+     * @return The subscribe.
      */
     public com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionList getSubscribe() {
       if (requestCase_ == 1) {
@@ -11860,6 +12436,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Poll poll = 3;</code>
+     * @return Whether the poll field is set.
      */
     public boolean hasPoll() {
       return requestCase_ == 3;
@@ -11870,6 +12447,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Poll poll = 3;</code>
+     * @return The poll.
      */
     public com.cisco.stbarth.netconf.grpc.GNMI.Poll getPoll() {
       if (requestCase_ == 3) {
@@ -11898,6 +12476,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.AliasList aliases = 4;</code>
+     * @return Whether the aliases field is set.
      */
     public boolean hasAliases() {
       return requestCase_ == 4;
@@ -11908,6 +12487,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.AliasList aliases = 4;</code>
+     * @return The aliases.
      */
     public com.cisco.stbarth.netconf.grpc.GNMI.AliasList getAliases() {
       if (requestCase_ == 4) {
@@ -11990,6 +12570,7 @@ public final class GNMI {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -11999,6 +12580,7 @@ public final class GNMI {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (requestCase_ == 1) {
@@ -12016,6 +12598,7 @@ public final class GNMI {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -12052,30 +12635,27 @@ public final class GNMI {
       }
       com.cisco.stbarth.netconf.grpc.GNMI.SubscribeRequest other = (com.cisco.stbarth.netconf.grpc.GNMI.SubscribeRequest) obj;
 
-      boolean result = true;
-      result = result && getExtensionList()
-          .equals(other.getExtensionList());
-      result = result && getRequestCase().equals(
-          other.getRequestCase());
-      if (!result) return false;
+      if (!getExtensionList()
+          .equals(other.getExtensionList())) return false;
+      if (!getRequestCase().equals(other.getRequestCase())) return false;
       switch (requestCase_) {
         case 1:
-          result = result && getSubscribe()
-              .equals(other.getSubscribe());
+          if (!getSubscribe()
+              .equals(other.getSubscribe())) return false;
           break;
         case 3:
-          result = result && getPoll()
-              .equals(other.getPoll());
+          if (!getPoll()
+              .equals(other.getPoll())) return false;
           break;
         case 4:
-          result = result && getAliases()
-              .equals(other.getAliases());
+          if (!getAliases()
+              .equals(other.getAliases())) return false;
           break;
         case 0:
         default:
       }
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -12180,6 +12760,7 @@ public final class GNMI {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -12187,6 +12768,7 @@ public final class GNMI {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.GNMI.SubscribeRequest prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -12219,6 +12801,7 @@ public final class GNMI {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_SubscribeRequest_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_SubscribeRequest_fieldAccessorTable
@@ -12242,11 +12825,12 @@ public final class GNMI {
           getExtensionFieldBuilder();
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         if (extensionBuilder_ == null) {
           extension_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000001);
         } else {
           extensionBuilder_.clear();
         }
@@ -12255,15 +12839,18 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_SubscribeRequest_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.SubscribeRequest getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.SubscribeRequest.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.SubscribeRequest build() {
         com.cisco.stbarth.netconf.grpc.GNMI.SubscribeRequest result = buildPartial();
         if (!result.isInitialized()) {
@@ -12272,10 +12859,10 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.SubscribeRequest buildPartial() {
         com.cisco.stbarth.netconf.grpc.GNMI.SubscribeRequest result = new com.cisco.stbarth.netconf.grpc.GNMI.SubscribeRequest(this);
         int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
         if (requestCase_ == 1) {
           if (subscribeBuilder_ == null) {
             result.request_ = request_;
@@ -12298,46 +12885,52 @@ public final class GNMI {
           }
         }
         if (extensionBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          if (((bitField0_ & 0x00000001) != 0)) {
             extension_ = java.util.Collections.unmodifiableList(extension_);
-            bitField0_ = (bitField0_ & ~0x00000008);
+            bitField0_ = (bitField0_ & ~0x00000001);
           }
           result.extension_ = extension_;
         } else {
           result.extension_ = extensionBuilder_.build();
         }
-        result.bitField0_ = to_bitField0_;
         result.requestCase_ = requestCase_;
         onBuilt();
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.GNMI.SubscribeRequest) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.GNMI.SubscribeRequest)other);
@@ -12353,7 +12946,7 @@ public final class GNMI {
           if (!other.extension_.isEmpty()) {
             if (extension_.isEmpty()) {
               extension_ = other.extension_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000001);
             } else {
               ensureExtensionIsMutable();
               extension_.addAll(other.extension_);
@@ -12366,7 +12959,7 @@ public final class GNMI {
               extensionBuilder_.dispose();
               extensionBuilder_ = null;
               extension_ = other.extension_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000001);
               extensionBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getExtensionFieldBuilder() : null;
@@ -12397,10 +12990,12 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -12443,6 +13038,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.SubscriptionList subscribe = 1;</code>
+       * @return Whether the subscribe field is set.
        */
       public boolean hasSubscribe() {
         return requestCase_ == 1;
@@ -12453,6 +13049,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.SubscriptionList subscribe = 1;</code>
+       * @return The subscribe.
        */
       public com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionList getSubscribe() {
         if (subscribeBuilder_ == null) {
@@ -12615,6 +13212,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Poll poll = 3;</code>
+       * @return Whether the poll field is set.
        */
       public boolean hasPoll() {
         return requestCase_ == 3;
@@ -12625,6 +13223,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Poll poll = 3;</code>
+       * @return The poll.
        */
       public com.cisco.stbarth.netconf.grpc.GNMI.Poll getPoll() {
         if (pollBuilder_ == null) {
@@ -12787,6 +13386,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.AliasList aliases = 4;</code>
+       * @return Whether the aliases field is set.
        */
       public boolean hasAliases() {
         return requestCase_ == 4;
@@ -12797,6 +13397,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.AliasList aliases = 4;</code>
+       * @return The aliases.
        */
       public com.cisco.stbarth.netconf.grpc.GNMI.AliasList getAliases() {
         if (aliasesBuilder_ == null) {
@@ -12954,9 +13555,9 @@ public final class GNMI {
       private java.util.List<com.cisco.stbarth.netconf.grpc.GNMIExt.Extension> extension_ =
         java.util.Collections.emptyList();
       private void ensureExtensionIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+        if (!((bitField0_ & 0x00000001) != 0)) {
           extension_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMIExt.Extension>(extension_);
-          bitField0_ |= 0x00000008;
+          bitField0_ |= 0x00000001;
          }
       }
 
@@ -13161,7 +13762,7 @@ public final class GNMI {
       public Builder clearExtension() {
         if (extensionBuilder_ == null) {
           extension_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000001);
           onChanged();
         } else {
           extensionBuilder_.clear();
@@ -13273,18 +13874,20 @@ public final class GNMI {
           extensionBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.cisco.stbarth.netconf.grpc.GNMIExt.Extension, com.cisco.stbarth.netconf.grpc.GNMIExt.Extension.Builder, com.cisco.stbarth.netconf.grpc.GNMIExt.ExtensionOrBuilder>(
                   extension_,
-                  ((bitField0_ & 0x00000008) == 0x00000008),
+                  ((bitField0_ & 0x00000001) != 0),
                   getParentForChildren(),
                   isClean());
           extension_ = null;
         }
         return extensionBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -13306,11 +13909,12 @@ public final class GNMI {
 
     private static final com.google.protobuf.Parser<SubscribeRequest>
         PARSER = new com.google.protobuf.AbstractParser<SubscribeRequest>() {
+      @java.lang.Override
       public SubscribeRequest parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new SubscribeRequest(input, extensionRegistry);
+        return new SubscribeRequest(input, extensionRegistry);
       }
     };
 
@@ -13323,6 +13927,7 @@ public final class GNMI {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.GNMI.SubscribeRequest getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -13356,6 +13961,13 @@ public final class GNMI {
     }
 
     @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new Poll();
+    }
+
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return this.unknownFields;
@@ -13365,6 +13977,9 @@ public final class GNMI {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -13376,7 +13991,7 @@ public final class GNMI {
               done = true;
               break;
             default: {
-              if (!parseUnknownFieldProto3(
+              if (!parseUnknownField(
                   input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
@@ -13399,6 +14014,7 @@ public final class GNMI {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Poll_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Poll_fieldAccessorTable
@@ -13407,6 +14023,7 @@ public final class GNMI {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -13416,11 +14033,13 @@ public final class GNMI {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -13441,9 +14060,8 @@ public final class GNMI {
       }
       com.cisco.stbarth.netconf.grpc.GNMI.Poll other = (com.cisco.stbarth.netconf.grpc.GNMI.Poll) obj;
 
-      boolean result = true;
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -13528,6 +14146,7 @@ public final class GNMI {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -13535,6 +14154,7 @@ public final class GNMI {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.GNMI.Poll prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -13565,6 +14185,7 @@ public final class GNMI {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Poll_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Poll_fieldAccessorTable
@@ -13587,20 +14208,24 @@ public final class GNMI {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Poll_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.Poll getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.Poll.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.Poll build() {
         com.cisco.stbarth.netconf.grpc.GNMI.Poll result = buildPartial();
         if (!result.isInitialized()) {
@@ -13609,38 +14234,46 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.Poll buildPartial() {
         com.cisco.stbarth.netconf.grpc.GNMI.Poll result = new com.cisco.stbarth.netconf.grpc.GNMI.Poll(this);
         onBuilt();
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.GNMI.Poll) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.GNMI.Poll)other);
@@ -13657,10 +14290,12 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -13678,11 +14313,13 @@ public final class GNMI {
         }
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -13704,11 +14341,12 @@ public final class GNMI {
 
     private static final com.google.protobuf.Parser<Poll>
         PARSER = new com.google.protobuf.AbstractParser<Poll>() {
+      @java.lang.Override
       public Poll parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Poll(input, extensionRegistry);
+        return new Poll(input, extensionRegistry);
       }
     };
 
@@ -13721,6 +14359,7 @@ public final class GNMI {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.GNMI.Poll getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -13737,6 +14376,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Notification update = 1;</code>
+     * @return Whether the update field is set.
      */
     boolean hasUpdate();
     /**
@@ -13745,6 +14385,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Notification update = 1;</code>
+     * @return The update.
      */
     com.cisco.stbarth.netconf.grpc.GNMI.Notification getUpdate();
     /**
@@ -13763,6 +14404,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>bool sync_response = 3;</code>
+     * @return The syncResponse.
      */
     boolean getSyncResponse();
 
@@ -13772,6 +14414,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Error error = 4 [deprecated = true];</code>
+     * @return Whether the error field is set.
      */
     @java.lang.Deprecated boolean hasError();
     /**
@@ -13780,6 +14423,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Error error = 4 [deprecated = true];</code>
+     * @return The error.
      */
     @java.lang.Deprecated com.cisco.stbarth.netconf.grpc.GNMI.Error getError();
     /**
@@ -13868,6 +14512,13 @@ public final class GNMI {
     }
 
     @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new SubscribeResponse();
+    }
+
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return this.unknownFields;
@@ -13877,6 +14528,9 @@ public final class GNMI {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -13888,13 +14542,6 @@ public final class GNMI {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               com.cisco.stbarth.netconf.grpc.GNMI.Notification.Builder subBuilder = null;
               if (responseCase_ == 1) {
@@ -13929,12 +14576,19 @@ public final class GNMI {
               break;
             }
             case 42: {
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
                 extension_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMIExt.Extension>();
-                mutable_bitField0_ |= 0x00000008;
+                mutable_bitField0_ |= 0x00000001;
               }
               extension_.add(
                   input.readMessage(com.cisco.stbarth.netconf.grpc.GNMIExt.Extension.parser(), extensionRegistry));
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -13945,7 +14599,7 @@ public final class GNMI {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
           extension_ = java.util.Collections.unmodifiableList(extension_);
         }
         this.unknownFields = unknownFields.build();
@@ -13957,6 +14611,7 @@ public final class GNMI {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_SubscribeResponse_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_SubscribeResponse_fieldAccessorTable
@@ -13964,20 +14619,22 @@ public final class GNMI {
               com.cisco.stbarth.netconf.grpc.GNMI.SubscribeResponse.class, com.cisco.stbarth.netconf.grpc.GNMI.SubscribeResponse.Builder.class);
     }
 
-    private int bitField0_;
     private int responseCase_ = 0;
     private java.lang.Object response_;
     public enum ResponseCase
-        implements com.google.protobuf.Internal.EnumLite {
+        implements com.google.protobuf.Internal.EnumLite,
+            com.google.protobuf.AbstractMessage.InternalOneOfEnum {
       UPDATE(1),
       SYNC_RESPONSE(3),
-      ERROR(4),
+      @java.lang.Deprecated ERROR(4),
       RESPONSE_NOT_SET(0);
       private final int value;
       private ResponseCase(int value) {
         this.value = value;
       }
       /**
+       * @param value The number of the enum to look for.
+       * @return The enum associated with the given number.
        * @deprecated Use {@link #forNumber(int)} instead.
        */
       @java.lang.Deprecated
@@ -14012,6 +14669,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Notification update = 1;</code>
+     * @return Whether the update field is set.
      */
     public boolean hasUpdate() {
       return responseCase_ == 1;
@@ -14022,6 +14680,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Notification update = 1;</code>
+     * @return The update.
      */
     public com.cisco.stbarth.netconf.grpc.GNMI.Notification getUpdate() {
       if (responseCase_ == 1) {
@@ -14051,6 +14710,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>bool sync_response = 3;</code>
+     * @return The syncResponse.
      */
     public boolean getSyncResponse() {
       if (responseCase_ == 3) {
@@ -14066,6 +14726,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Error error = 4 [deprecated = true];</code>
+     * @return Whether the error field is set.
      */
     @java.lang.Deprecated public boolean hasError() {
       return responseCase_ == 4;
@@ -14076,6 +14737,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Error error = 4 [deprecated = true];</code>
+     * @return The error.
      */
     @java.lang.Deprecated public com.cisco.stbarth.netconf.grpc.GNMI.Error getError() {
       if (responseCase_ == 4) {
@@ -14158,6 +14820,7 @@ public final class GNMI {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -14167,6 +14830,7 @@ public final class GNMI {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (responseCase_ == 1) {
@@ -14185,6 +14849,7 @@ public final class GNMI {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -14222,30 +14887,27 @@ public final class GNMI {
       }
       com.cisco.stbarth.netconf.grpc.GNMI.SubscribeResponse other = (com.cisco.stbarth.netconf.grpc.GNMI.SubscribeResponse) obj;
 
-      boolean result = true;
-      result = result && getExtensionList()
-          .equals(other.getExtensionList());
-      result = result && getResponseCase().equals(
-          other.getResponseCase());
-      if (!result) return false;
+      if (!getExtensionList()
+          .equals(other.getExtensionList())) return false;
+      if (!getResponseCase().equals(other.getResponseCase())) return false;
       switch (responseCase_) {
         case 1:
-          result = result && getUpdate()
-              .equals(other.getUpdate());
+          if (!getUpdate()
+              .equals(other.getUpdate())) return false;
           break;
         case 3:
-          result = result && (getSyncResponse()
-              == other.getSyncResponse());
+          if (getSyncResponse()
+              != other.getSyncResponse()) return false;
           break;
         case 4:
-          result = result && getError()
-              .equals(other.getError());
+          if (!getError()
+              .equals(other.getError())) return false;
           break;
         case 0:
         default:
       }
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -14351,6 +15013,7 @@ public final class GNMI {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -14358,6 +15021,7 @@ public final class GNMI {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.GNMI.SubscribeResponse prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -14390,6 +15054,7 @@ public final class GNMI {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_SubscribeResponse_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_SubscribeResponse_fieldAccessorTable
@@ -14413,11 +15078,12 @@ public final class GNMI {
           getExtensionFieldBuilder();
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         if (extensionBuilder_ == null) {
           extension_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000001);
         } else {
           extensionBuilder_.clear();
         }
@@ -14426,15 +15092,18 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_SubscribeResponse_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.SubscribeResponse getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.SubscribeResponse.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.SubscribeResponse build() {
         com.cisco.stbarth.netconf.grpc.GNMI.SubscribeResponse result = buildPartial();
         if (!result.isInitialized()) {
@@ -14443,10 +15112,10 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.SubscribeResponse buildPartial() {
         com.cisco.stbarth.netconf.grpc.GNMI.SubscribeResponse result = new com.cisco.stbarth.netconf.grpc.GNMI.SubscribeResponse(this);
         int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
         if (responseCase_ == 1) {
           if (updateBuilder_ == null) {
             result.response_ = response_;
@@ -14465,46 +15134,52 @@ public final class GNMI {
           }
         }
         if (extensionBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          if (((bitField0_ & 0x00000001) != 0)) {
             extension_ = java.util.Collections.unmodifiableList(extension_);
-            bitField0_ = (bitField0_ & ~0x00000008);
+            bitField0_ = (bitField0_ & ~0x00000001);
           }
           result.extension_ = extension_;
         } else {
           result.extension_ = extensionBuilder_.build();
         }
-        result.bitField0_ = to_bitField0_;
         result.responseCase_ = responseCase_;
         onBuilt();
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.GNMI.SubscribeResponse) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.GNMI.SubscribeResponse)other);
@@ -14520,7 +15195,7 @@ public final class GNMI {
           if (!other.extension_.isEmpty()) {
             if (extension_.isEmpty()) {
               extension_ = other.extension_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000001);
             } else {
               ensureExtensionIsMutable();
               extension_.addAll(other.extension_);
@@ -14533,7 +15208,7 @@ public final class GNMI {
               extensionBuilder_.dispose();
               extensionBuilder_ = null;
               extension_ = other.extension_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000001);
               extensionBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getExtensionFieldBuilder() : null;
@@ -14564,10 +15239,12 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -14610,6 +15287,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Notification update = 1;</code>
+       * @return Whether the update field is set.
        */
       public boolean hasUpdate() {
         return responseCase_ == 1;
@@ -14620,6 +15298,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Notification update = 1;</code>
+       * @return The update.
        */
       public com.cisco.stbarth.netconf.grpc.GNMI.Notification getUpdate() {
         if (updateBuilder_ == null) {
@@ -14781,6 +15460,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>bool sync_response = 3;</code>
+       * @return The syncResponse.
        */
       public boolean getSyncResponse() {
         if (responseCase_ == 3) {
@@ -14795,6 +15475,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>bool sync_response = 3;</code>
+       * @param value The syncResponse to set.
+       * @return This builder for chaining.
        */
       public Builder setSyncResponse(boolean value) {
         responseCase_ = 3;
@@ -14809,6 +15491,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>bool sync_response = 3;</code>
+       * @return This builder for chaining.
        */
       public Builder clearSyncResponse() {
         if (responseCase_ == 3) {
@@ -14827,6 +15510,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Error error = 4 [deprecated = true];</code>
+       * @return Whether the error field is set.
        */
       @java.lang.Deprecated public boolean hasError() {
         return responseCase_ == 4;
@@ -14837,6 +15521,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Error error = 4 [deprecated = true];</code>
+       * @return The error.
        */
       @java.lang.Deprecated public com.cisco.stbarth.netconf.grpc.GNMI.Error getError() {
         if (errorBuilder_ == null) {
@@ -14994,9 +15679,9 @@ public final class GNMI {
       private java.util.List<com.cisco.stbarth.netconf.grpc.GNMIExt.Extension> extension_ =
         java.util.Collections.emptyList();
       private void ensureExtensionIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+        if (!((bitField0_ & 0x00000001) != 0)) {
           extension_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMIExt.Extension>(extension_);
-          bitField0_ |= 0x00000008;
+          bitField0_ |= 0x00000001;
          }
       }
 
@@ -15201,7 +15886,7 @@ public final class GNMI {
       public Builder clearExtension() {
         if (extensionBuilder_ == null) {
           extension_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000001);
           onChanged();
         } else {
           extensionBuilder_.clear();
@@ -15313,18 +15998,20 @@ public final class GNMI {
           extensionBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.cisco.stbarth.netconf.grpc.GNMIExt.Extension, com.cisco.stbarth.netconf.grpc.GNMIExt.Extension.Builder, com.cisco.stbarth.netconf.grpc.GNMIExt.ExtensionOrBuilder>(
                   extension_,
-                  ((bitField0_ & 0x00000008) == 0x00000008),
+                  ((bitField0_ & 0x00000001) != 0),
                   getParentForChildren(),
                   isClean());
           extension_ = null;
         }
         return extensionBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -15346,11 +16033,12 @@ public final class GNMI {
 
     private static final com.google.protobuf.Parser<SubscribeResponse>
         PARSER = new com.google.protobuf.AbstractParser<SubscribeResponse>() {
+      @java.lang.Override
       public SubscribeResponse parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new SubscribeResponse(input, extensionRegistry);
+        return new SubscribeResponse(input, extensionRegistry);
       }
     };
 
@@ -15363,6 +16051,7 @@ public final class GNMI {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.GNMI.SubscribeResponse getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -15379,6 +16068,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path prefix = 1;</code>
+     * @return Whether the prefix field is set.
      */
     boolean hasPrefix();
     /**
@@ -15387,6 +16077,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path prefix = 1;</code>
+     * @return The prefix.
      */
     com.cisco.stbarth.netconf.grpc.GNMI.Path getPrefix();
     /**
@@ -15448,6 +16139,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>bool use_aliases = 3;</code>
+     * @return The useAliases.
      */
     boolean getUseAliases();
 
@@ -15457,6 +16149,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.QOSMarking qos = 4;</code>
+     * @return Whether the qos field is set.
      */
     boolean hasQos();
     /**
@@ -15465,6 +16158,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.QOSMarking qos = 4;</code>
+     * @return The qos.
      */
     com.cisco.stbarth.netconf.grpc.GNMI.QOSMarking getQos();
     /**
@@ -15478,10 +16172,12 @@ public final class GNMI {
 
     /**
      * <code>.gnmi.SubscriptionList.Mode mode = 5;</code>
+     * @return The enum numeric value on the wire for mode.
      */
     int getModeValue();
     /**
      * <code>.gnmi.SubscriptionList.Mode mode = 5;</code>
+     * @return The mode.
      */
     com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionList.Mode getMode();
 
@@ -15492,6 +16188,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>bool allow_aggregation = 6;</code>
+     * @return The allowAggregation.
      */
     boolean getAllowAggregation();
 
@@ -15551,6 +16248,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Encoding encoding = 8;</code>
+     * @return The enum numeric value on the wire for encoding.
      */
     int getEncodingValue();
     /**
@@ -15560,6 +16258,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Encoding encoding = 8;</code>
+     * @return The encoding.
      */
     com.cisco.stbarth.netconf.grpc.GNMI.Encoding getEncoding();
 
@@ -15573,6 +16272,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>bool updates_only = 9;</code>
+     * @return The updatesOnly.
      */
     boolean getUpdatesOnly();
   }
@@ -15598,12 +16298,16 @@ public final class GNMI {
     }
     private SubscriptionList() {
       subscription_ = java.util.Collections.emptyList();
-      useAliases_ = false;
       mode_ = 0;
-      allowAggregation_ = false;
       useModels_ = java.util.Collections.emptyList();
       encoding_ = 0;
-      updatesOnly_ = false;
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new SubscriptionList();
     }
 
     @java.lang.Override
@@ -15616,6 +16320,9 @@ public final class GNMI {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -15627,13 +16334,6 @@ public final class GNMI {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               com.cisco.stbarth.netconf.grpc.GNMI.Path.Builder subBuilder = null;
               if (prefix_ != null) {
@@ -15648,9 +16348,9 @@ public final class GNMI {
               break;
             }
             case 18: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
                 subscription_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMI.Subscription>();
-                mutable_bitField0_ |= 0x00000002;
+                mutable_bitField0_ |= 0x00000001;
               }
               subscription_.add(
                   input.readMessage(com.cisco.stbarth.netconf.grpc.GNMI.Subscription.parser(), extensionRegistry));
@@ -15686,9 +16386,9 @@ public final class GNMI {
               break;
             }
             case 58: {
-              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
                 useModels_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMI.ModelData>();
-                mutable_bitField0_ |= 0x00000040;
+                mutable_bitField0_ |= 0x00000002;
               }
               useModels_.add(
                   input.readMessage(com.cisco.stbarth.netconf.grpc.GNMI.ModelData.parser(), extensionRegistry));
@@ -15705,6 +16405,13 @@ public final class GNMI {
               updatesOnly_ = input.readBool();
               break;
             }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -15713,10 +16420,10 @@ public final class GNMI {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
           subscription_ = java.util.Collections.unmodifiableList(subscription_);
         }
-        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
+        if (((mutable_bitField0_ & 0x00000002) != 0)) {
           useModels_ = java.util.Collections.unmodifiableList(useModels_);
         }
         this.unknownFields = unknownFields.build();
@@ -15728,6 +16435,7 @@ public final class GNMI {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_SubscriptionList_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_SubscriptionList_fieldAccessorTable
@@ -15806,6 +16514,8 @@ public final class GNMI {
       }
 
       /**
+       * @param value The numeric wire value of the corresponding enum entry.
+       * @return The enum associated with the given numeric wire value.
        * @deprecated Use {@link #forNumber(int)} instead.
        */
       @java.lang.Deprecated
@@ -15813,6 +16523,10 @@ public final class GNMI {
         return forNumber(value);
       }
 
+      /**
+       * @param value The numeric wire value of the corresponding enum entry.
+       * @return The enum associated with the given numeric wire value.
+       */
       public static Mode forNumber(int value) {
         switch (value) {
           case 0: return STREAM;
@@ -15870,7 +16584,6 @@ public final class GNMI {
       // @@protoc_insertion_point(enum_scope:gnmi.SubscriptionList.Mode)
     }
 
-    private int bitField0_;
     public static final int PREFIX_FIELD_NUMBER = 1;
     private com.cisco.stbarth.netconf.grpc.GNMI.Path prefix_;
     /**
@@ -15879,6 +16592,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path prefix = 1;</code>
+     * @return Whether the prefix field is set.
      */
     public boolean hasPrefix() {
       return prefix_ != null;
@@ -15889,6 +16603,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path prefix = 1;</code>
+     * @return The prefix.
      */
     public com.cisco.stbarth.netconf.grpc.GNMI.Path getPrefix() {
       return prefix_ == null ? com.cisco.stbarth.netconf.grpc.GNMI.Path.getDefaultInstance() : prefix_;
@@ -15967,6 +16682,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>bool use_aliases = 3;</code>
+     * @return The useAliases.
      */
     public boolean getUseAliases() {
       return useAliases_;
@@ -15980,6 +16696,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.QOSMarking qos = 4;</code>
+     * @return Whether the qos field is set.
      */
     public boolean hasQos() {
       return qos_ != null;
@@ -15990,6 +16707,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.QOSMarking qos = 4;</code>
+     * @return The qos.
      */
     public com.cisco.stbarth.netconf.grpc.GNMI.QOSMarking getQos() {
       return qos_ == null ? com.cisco.stbarth.netconf.grpc.GNMI.QOSMarking.getDefaultInstance() : qos_;
@@ -16009,14 +16727,17 @@ public final class GNMI {
     private int mode_;
     /**
      * <code>.gnmi.SubscriptionList.Mode mode = 5;</code>
+     * @return The enum numeric value on the wire for mode.
      */
     public int getModeValue() {
       return mode_;
     }
     /**
      * <code>.gnmi.SubscriptionList.Mode mode = 5;</code>
+     * @return The mode.
      */
     public com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionList.Mode getMode() {
+      @SuppressWarnings("deprecation")
       com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionList.Mode result = com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionList.Mode.valueOf(mode_);
       return result == null ? com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionList.Mode.UNRECOGNIZED : result;
     }
@@ -16030,6 +16751,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>bool allow_aggregation = 6;</code>
+     * @return The allowAggregation.
      */
     public boolean getAllowAggregation() {
       return allowAggregation_;
@@ -16104,6 +16826,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Encoding encoding = 8;</code>
+     * @return The enum numeric value on the wire for encoding.
      */
     public int getEncodingValue() {
       return encoding_;
@@ -16115,8 +16838,10 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Encoding encoding = 8;</code>
+     * @return The encoding.
      */
     public com.cisco.stbarth.netconf.grpc.GNMI.Encoding getEncoding() {
+      @SuppressWarnings("deprecation")
       com.cisco.stbarth.netconf.grpc.GNMI.Encoding result = com.cisco.stbarth.netconf.grpc.GNMI.Encoding.valueOf(encoding_);
       return result == null ? com.cisco.stbarth.netconf.grpc.GNMI.Encoding.UNRECOGNIZED : result;
     }
@@ -16133,12 +16858,14 @@ public final class GNMI {
      * </pre>
      *
      * <code>bool updates_only = 9;</code>
+     * @return The updatesOnly.
      */
     public boolean getUpdatesOnly() {
       return updatesOnly_;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -16148,6 +16875,7 @@ public final class GNMI {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (prefix_ != null) {
@@ -16180,6 +16908,7 @@ public final class GNMI {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -16236,31 +16965,30 @@ public final class GNMI {
       }
       com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionList other = (com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionList) obj;
 
-      boolean result = true;
-      result = result && (hasPrefix() == other.hasPrefix());
+      if (hasPrefix() != other.hasPrefix()) return false;
       if (hasPrefix()) {
-        result = result && getPrefix()
-            .equals(other.getPrefix());
+        if (!getPrefix()
+            .equals(other.getPrefix())) return false;
       }
-      result = result && getSubscriptionList()
-          .equals(other.getSubscriptionList());
-      result = result && (getUseAliases()
-          == other.getUseAliases());
-      result = result && (hasQos() == other.hasQos());
+      if (!getSubscriptionList()
+          .equals(other.getSubscriptionList())) return false;
+      if (getUseAliases()
+          != other.getUseAliases()) return false;
+      if (hasQos() != other.hasQos()) return false;
       if (hasQos()) {
-        result = result && getQos()
-            .equals(other.getQos());
+        if (!getQos()
+            .equals(other.getQos())) return false;
       }
-      result = result && mode_ == other.mode_;
-      result = result && (getAllowAggregation()
-          == other.getAllowAggregation());
-      result = result && getUseModelsList()
-          .equals(other.getUseModelsList());
-      result = result && encoding_ == other.encoding_;
-      result = result && (getUpdatesOnly()
-          == other.getUpdatesOnly());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (mode_ != other.mode_) return false;
+      if (getAllowAggregation()
+          != other.getAllowAggregation()) return false;
+      if (!getUseModelsList()
+          .equals(other.getUseModelsList())) return false;
+      if (encoding_ != other.encoding_) return false;
+      if (getUpdatesOnly()
+          != other.getUpdatesOnly()) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -16374,6 +17102,7 @@ public final class GNMI {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -16381,6 +17110,7 @@ public final class GNMI {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionList prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -16412,6 +17142,7 @@ public final class GNMI {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_SubscriptionList_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_SubscriptionList_fieldAccessorTable
@@ -16436,6 +17167,7 @@ public final class GNMI {
           getUseModelsFieldBuilder();
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         if (prefixBuilder_ == null) {
@@ -16446,7 +17178,7 @@ public final class GNMI {
         }
         if (subscriptionBuilder_ == null) {
           subscription_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000001);
         } else {
           subscriptionBuilder_.clear();
         }
@@ -16464,7 +17196,7 @@ public final class GNMI {
 
         if (useModelsBuilder_ == null) {
           useModels_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000040);
+          bitField0_ = (bitField0_ & ~0x00000002);
         } else {
           useModelsBuilder_.clear();
         }
@@ -16475,15 +17207,18 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_SubscriptionList_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionList getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionList.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionList build() {
         com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionList result = buildPartial();
         if (!result.isInitialized()) {
@@ -16492,19 +17227,19 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionList buildPartial() {
         com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionList result = new com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionList(this);
         int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
         if (prefixBuilder_ == null) {
           result.prefix_ = prefix_;
         } else {
           result.prefix_ = prefixBuilder_.build();
         }
         if (subscriptionBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          if (((bitField0_ & 0x00000001) != 0)) {
             subscription_ = java.util.Collections.unmodifiableList(subscription_);
-            bitField0_ = (bitField0_ & ~0x00000002);
+            bitField0_ = (bitField0_ & ~0x00000001);
           }
           result.subscription_ = subscription_;
         } else {
@@ -16519,9 +17254,9 @@ public final class GNMI {
         result.mode_ = mode_;
         result.allowAggregation_ = allowAggregation_;
         if (useModelsBuilder_ == null) {
-          if (((bitField0_ & 0x00000040) == 0x00000040)) {
+          if (((bitField0_ & 0x00000002) != 0)) {
             useModels_ = java.util.Collections.unmodifiableList(useModels_);
-            bitField0_ = (bitField0_ & ~0x00000040);
+            bitField0_ = (bitField0_ & ~0x00000002);
           }
           result.useModels_ = useModels_;
         } else {
@@ -16529,37 +17264,43 @@ public final class GNMI {
         }
         result.encoding_ = encoding_;
         result.updatesOnly_ = updatesOnly_;
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionList) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionList)other);
@@ -16578,7 +17319,7 @@ public final class GNMI {
           if (!other.subscription_.isEmpty()) {
             if (subscription_.isEmpty()) {
               subscription_ = other.subscription_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000001);
             } else {
               ensureSubscriptionIsMutable();
               subscription_.addAll(other.subscription_);
@@ -16591,7 +17332,7 @@ public final class GNMI {
               subscriptionBuilder_.dispose();
               subscriptionBuilder_ = null;
               subscription_ = other.subscription_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000001);
               subscriptionBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getSubscriptionFieldBuilder() : null;
@@ -16616,7 +17357,7 @@ public final class GNMI {
           if (!other.useModels_.isEmpty()) {
             if (useModels_.isEmpty()) {
               useModels_ = other.useModels_;
-              bitField0_ = (bitField0_ & ~0x00000040);
+              bitField0_ = (bitField0_ & ~0x00000002);
             } else {
               ensureUseModelsIsMutable();
               useModels_.addAll(other.useModels_);
@@ -16629,7 +17370,7 @@ public final class GNMI {
               useModelsBuilder_.dispose();
               useModelsBuilder_ = null;
               useModels_ = other.useModels_;
-              bitField0_ = (bitField0_ & ~0x00000040);
+              bitField0_ = (bitField0_ & ~0x00000002);
               useModelsBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getUseModelsFieldBuilder() : null;
@@ -16649,10 +17390,12 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -16672,7 +17415,7 @@ public final class GNMI {
       }
       private int bitField0_;
 
-      private com.cisco.stbarth.netconf.grpc.GNMI.Path prefix_ = null;
+      private com.cisco.stbarth.netconf.grpc.GNMI.Path prefix_;
       private com.google.protobuf.SingleFieldBuilderV3<
           com.cisco.stbarth.netconf.grpc.GNMI.Path, com.cisco.stbarth.netconf.grpc.GNMI.Path.Builder, com.cisco.stbarth.netconf.grpc.GNMI.PathOrBuilder> prefixBuilder_;
       /**
@@ -16681,6 +17424,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Path prefix = 1;</code>
+       * @return Whether the prefix field is set.
        */
       public boolean hasPrefix() {
         return prefixBuilder_ != null || prefix_ != null;
@@ -16691,6 +17435,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Path prefix = 1;</code>
+       * @return The prefix.
        */
       public com.cisco.stbarth.netconf.grpc.GNMI.Path getPrefix() {
         if (prefixBuilder_ == null) {
@@ -16828,9 +17573,9 @@ public final class GNMI {
       private java.util.List<com.cisco.stbarth.netconf.grpc.GNMI.Subscription> subscription_ =
         java.util.Collections.emptyList();
       private void ensureSubscriptionIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+        if (!((bitField0_ & 0x00000001) != 0)) {
           subscription_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMI.Subscription>(subscription_);
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000001;
          }
       }
 
@@ -17024,7 +17769,7 @@ public final class GNMI {
       public Builder clearSubscription() {
         if (subscriptionBuilder_ == null) {
           subscription_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000001);
           onChanged();
         } else {
           subscriptionBuilder_.clear();
@@ -17129,7 +17874,7 @@ public final class GNMI {
           subscriptionBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.cisco.stbarth.netconf.grpc.GNMI.Subscription, com.cisco.stbarth.netconf.grpc.GNMI.Subscription.Builder, com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionOrBuilder>(
                   subscription_,
-                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  ((bitField0_ & 0x00000001) != 0),
                   getParentForChildren(),
                   isClean());
           subscription_ = null;
@@ -17144,6 +17889,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>bool use_aliases = 3;</code>
+       * @return The useAliases.
        */
       public boolean getUseAliases() {
         return useAliases_;
@@ -17154,6 +17900,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>bool use_aliases = 3;</code>
+       * @param value The useAliases to set.
+       * @return This builder for chaining.
        */
       public Builder setUseAliases(boolean value) {
         
@@ -17167,6 +17915,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>bool use_aliases = 3;</code>
+       * @return This builder for chaining.
        */
       public Builder clearUseAliases() {
         
@@ -17175,7 +17924,7 @@ public final class GNMI {
         return this;
       }
 
-      private com.cisco.stbarth.netconf.grpc.GNMI.QOSMarking qos_ = null;
+      private com.cisco.stbarth.netconf.grpc.GNMI.QOSMarking qos_;
       private com.google.protobuf.SingleFieldBuilderV3<
           com.cisco.stbarth.netconf.grpc.GNMI.QOSMarking, com.cisco.stbarth.netconf.grpc.GNMI.QOSMarking.Builder, com.cisco.stbarth.netconf.grpc.GNMI.QOSMarkingOrBuilder> qosBuilder_;
       /**
@@ -17184,6 +17933,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.QOSMarking qos = 4;</code>
+       * @return Whether the qos field is set.
        */
       public boolean hasQos() {
         return qosBuilder_ != null || qos_ != null;
@@ -17194,6 +17944,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.QOSMarking qos = 4;</code>
+       * @return The qos.
        */
       public com.cisco.stbarth.netconf.grpc.GNMI.QOSMarking getQos() {
         if (qosBuilder_ == null) {
@@ -17331,12 +18082,15 @@ public final class GNMI {
       private int mode_ = 0;
       /**
        * <code>.gnmi.SubscriptionList.Mode mode = 5;</code>
+       * @return The enum numeric value on the wire for mode.
        */
       public int getModeValue() {
         return mode_;
       }
       /**
        * <code>.gnmi.SubscriptionList.Mode mode = 5;</code>
+       * @param value The enum numeric value on the wire for mode to set.
+       * @return This builder for chaining.
        */
       public Builder setModeValue(int value) {
         mode_ = value;
@@ -17345,13 +18099,17 @@ public final class GNMI {
       }
       /**
        * <code>.gnmi.SubscriptionList.Mode mode = 5;</code>
+       * @return The mode.
        */
       public com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionList.Mode getMode() {
+        @SuppressWarnings("deprecation")
         com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionList.Mode result = com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionList.Mode.valueOf(mode_);
         return result == null ? com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionList.Mode.UNRECOGNIZED : result;
       }
       /**
        * <code>.gnmi.SubscriptionList.Mode mode = 5;</code>
+       * @param value The mode to set.
+       * @return This builder for chaining.
        */
       public Builder setMode(com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionList.Mode value) {
         if (value == null) {
@@ -17364,6 +18122,7 @@ public final class GNMI {
       }
       /**
        * <code>.gnmi.SubscriptionList.Mode mode = 5;</code>
+       * @return This builder for chaining.
        */
       public Builder clearMode() {
         
@@ -17380,6 +18139,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>bool allow_aggregation = 6;</code>
+       * @return The allowAggregation.
        */
       public boolean getAllowAggregation() {
         return allowAggregation_;
@@ -17391,6 +18151,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>bool allow_aggregation = 6;</code>
+       * @param value The allowAggregation to set.
+       * @return This builder for chaining.
        */
       public Builder setAllowAggregation(boolean value) {
         
@@ -17405,6 +18167,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>bool allow_aggregation = 6;</code>
+       * @return This builder for chaining.
        */
       public Builder clearAllowAggregation() {
         
@@ -17416,9 +18179,9 @@ public final class GNMI {
       private java.util.List<com.cisco.stbarth.netconf.grpc.GNMI.ModelData> useModels_ =
         java.util.Collections.emptyList();
       private void ensureUseModelsIsMutable() {
-        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
+        if (!((bitField0_ & 0x00000002) != 0)) {
           useModels_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMI.ModelData>(useModels_);
-          bitField0_ |= 0x00000040;
+          bitField0_ |= 0x00000002;
          }
       }
 
@@ -17623,7 +18386,7 @@ public final class GNMI {
       public Builder clearUseModels() {
         if (useModelsBuilder_ == null) {
           useModels_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000040);
+          bitField0_ = (bitField0_ & ~0x00000002);
           onChanged();
         } else {
           useModelsBuilder_.clear();
@@ -17735,7 +18498,7 @@ public final class GNMI {
           useModelsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.cisco.stbarth.netconf.grpc.GNMI.ModelData, com.cisco.stbarth.netconf.grpc.GNMI.ModelData.Builder, com.cisco.stbarth.netconf.grpc.GNMI.ModelDataOrBuilder>(
                   useModels_,
-                  ((bitField0_ & 0x00000040) == 0x00000040),
+                  ((bitField0_ & 0x00000002) != 0),
                   getParentForChildren(),
                   isClean());
           useModels_ = null;
@@ -17751,6 +18514,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Encoding encoding = 8;</code>
+       * @return The enum numeric value on the wire for encoding.
        */
       public int getEncodingValue() {
         return encoding_;
@@ -17762,6 +18526,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Encoding encoding = 8;</code>
+       * @param value The enum numeric value on the wire for encoding to set.
+       * @return This builder for chaining.
        */
       public Builder setEncodingValue(int value) {
         encoding_ = value;
@@ -17775,8 +18541,10 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Encoding encoding = 8;</code>
+       * @return The encoding.
        */
       public com.cisco.stbarth.netconf.grpc.GNMI.Encoding getEncoding() {
+        @SuppressWarnings("deprecation")
         com.cisco.stbarth.netconf.grpc.GNMI.Encoding result = com.cisco.stbarth.netconf.grpc.GNMI.Encoding.valueOf(encoding_);
         return result == null ? com.cisco.stbarth.netconf.grpc.GNMI.Encoding.UNRECOGNIZED : result;
       }
@@ -17787,6 +18555,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Encoding encoding = 8;</code>
+       * @param value The encoding to set.
+       * @return This builder for chaining.
        */
       public Builder setEncoding(com.cisco.stbarth.netconf.grpc.GNMI.Encoding value) {
         if (value == null) {
@@ -17804,6 +18574,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Encoding encoding = 8;</code>
+       * @return This builder for chaining.
        */
       public Builder clearEncoding() {
         
@@ -17823,6 +18594,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>bool updates_only = 9;</code>
+       * @return The updatesOnly.
        */
       public boolean getUpdatesOnly() {
         return updatesOnly_;
@@ -17837,6 +18609,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>bool updates_only = 9;</code>
+       * @param value The updatesOnly to set.
+       * @return This builder for chaining.
        */
       public Builder setUpdatesOnly(boolean value) {
         
@@ -17854,6 +18628,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>bool updates_only = 9;</code>
+       * @return This builder for chaining.
        */
       public Builder clearUpdatesOnly() {
         
@@ -17861,11 +18636,13 @@ public final class GNMI {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -17887,11 +18664,12 @@ public final class GNMI {
 
     private static final com.google.protobuf.Parser<SubscriptionList>
         PARSER = new com.google.protobuf.AbstractParser<SubscriptionList>() {
+      @java.lang.Override
       public SubscriptionList parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new SubscriptionList(input, extensionRegistry);
+        return new SubscriptionList(input, extensionRegistry);
       }
     };
 
@@ -17904,6 +18682,7 @@ public final class GNMI {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionList getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -17920,6 +18699,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path path = 1;</code>
+     * @return Whether the path field is set.
      */
     boolean hasPath();
     /**
@@ -17928,6 +18708,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path path = 1;</code>
+     * @return The path.
      */
     com.cisco.stbarth.netconf.grpc.GNMI.Path getPath();
     /**
@@ -17945,6 +18726,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.SubscriptionMode mode = 2;</code>
+     * @return The enum numeric value on the wire for mode.
      */
     int getModeValue();
     /**
@@ -17953,6 +18735,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.SubscriptionMode mode = 2;</code>
+     * @return The mode.
      */
     com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionMode getMode();
 
@@ -17962,6 +18745,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>uint64 sample_interval = 3;</code>
+     * @return The sampleInterval.
      */
     long getSampleInterval();
 
@@ -17972,6 +18756,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>bool suppress_redundant = 4;</code>
+     * @return The suppressRedundant.
      */
     boolean getSuppressRedundant();
 
@@ -17983,6 +18768,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>uint64 heartbeat_interval = 5;</code>
+     * @return The heartbeatInterval.
      */
     long getHeartbeatInterval();
   }
@@ -18008,9 +18794,13 @@ public final class GNMI {
     }
     private Subscription() {
       mode_ = 0;
-      sampleInterval_ = 0L;
-      suppressRedundant_ = false;
-      heartbeatInterval_ = 0L;
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new Subscription();
     }
 
     @java.lang.Override
@@ -18023,7 +18813,9 @@ public final class GNMI {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -18034,13 +18826,6 @@ public final class GNMI {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               com.cisco.stbarth.netconf.grpc.GNMI.Path.Builder subBuilder = null;
               if (path_ != null) {
@@ -18075,6 +18860,13 @@ public final class GNMI {
               heartbeatInterval_ = input.readUInt64();
               break;
             }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -18092,6 +18884,7 @@ public final class GNMI {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Subscription_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Subscription_fieldAccessorTable
@@ -18107,6 +18900,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path path = 1;</code>
+     * @return Whether the path field is set.
      */
     public boolean hasPath() {
       return path_ != null;
@@ -18117,6 +18911,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path path = 1;</code>
+     * @return The path.
      */
     public com.cisco.stbarth.netconf.grpc.GNMI.Path getPath() {
       return path_ == null ? com.cisco.stbarth.netconf.grpc.GNMI.Path.getDefaultInstance() : path_;
@@ -18140,6 +18935,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.SubscriptionMode mode = 2;</code>
+     * @return The enum numeric value on the wire for mode.
      */
     public int getModeValue() {
       return mode_;
@@ -18150,8 +18946,10 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.SubscriptionMode mode = 2;</code>
+     * @return The mode.
      */
     public com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionMode getMode() {
+      @SuppressWarnings("deprecation")
       com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionMode result = com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionMode.valueOf(mode_);
       return result == null ? com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionMode.UNRECOGNIZED : result;
     }
@@ -18164,6 +18962,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>uint64 sample_interval = 3;</code>
+     * @return The sampleInterval.
      */
     public long getSampleInterval() {
       return sampleInterval_;
@@ -18178,6 +18977,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>bool suppress_redundant = 4;</code>
+     * @return The suppressRedundant.
      */
     public boolean getSuppressRedundant() {
       return suppressRedundant_;
@@ -18193,12 +18993,14 @@ public final class GNMI {
      * </pre>
      *
      * <code>uint64 heartbeat_interval = 5;</code>
+     * @return The heartbeatInterval.
      */
     public long getHeartbeatInterval() {
       return heartbeatInterval_;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -18208,6 +19010,7 @@ public final class GNMI {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (path_ != null) {
@@ -18228,6 +19031,7 @@ public final class GNMI {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -18268,21 +19072,20 @@ public final class GNMI {
       }
       com.cisco.stbarth.netconf.grpc.GNMI.Subscription other = (com.cisco.stbarth.netconf.grpc.GNMI.Subscription) obj;
 
-      boolean result = true;
-      result = result && (hasPath() == other.hasPath());
+      if (hasPath() != other.hasPath()) return false;
       if (hasPath()) {
-        result = result && getPath()
-            .equals(other.getPath());
+        if (!getPath()
+            .equals(other.getPath())) return false;
       }
-      result = result && mode_ == other.mode_;
-      result = result && (getSampleInterval()
-          == other.getSampleInterval());
-      result = result && (getSuppressRedundant()
-          == other.getSuppressRedundant());
-      result = result && (getHeartbeatInterval()
-          == other.getHeartbeatInterval());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (mode_ != other.mode_) return false;
+      if (getSampleInterval()
+          != other.getSampleInterval()) return false;
+      if (getSuppressRedundant()
+          != other.getSuppressRedundant()) return false;
+      if (getHeartbeatInterval()
+          != other.getHeartbeatInterval()) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -18382,6 +19185,7 @@ public final class GNMI {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -18389,6 +19193,7 @@ public final class GNMI {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.GNMI.Subscription prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -18420,6 +19225,7 @@ public final class GNMI {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Subscription_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Subscription_fieldAccessorTable
@@ -18442,6 +19248,7 @@ public final class GNMI {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         if (pathBuilder_ == null) {
@@ -18461,15 +19268,18 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Subscription_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.Subscription getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.Subscription.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.Subscription build() {
         com.cisco.stbarth.netconf.grpc.GNMI.Subscription result = buildPartial();
         if (!result.isInitialized()) {
@@ -18478,6 +19288,7 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.Subscription buildPartial() {
         com.cisco.stbarth.netconf.grpc.GNMI.Subscription result = new com.cisco.stbarth.netconf.grpc.GNMI.Subscription(this);
         if (pathBuilder_ == null) {
@@ -18493,32 +19304,39 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.GNMI.Subscription) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.GNMI.Subscription)other);
@@ -18550,10 +19368,12 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -18572,7 +19392,7 @@ public final class GNMI {
         return this;
       }
 
-      private com.cisco.stbarth.netconf.grpc.GNMI.Path path_ = null;
+      private com.cisco.stbarth.netconf.grpc.GNMI.Path path_;
       private com.google.protobuf.SingleFieldBuilderV3<
           com.cisco.stbarth.netconf.grpc.GNMI.Path, com.cisco.stbarth.netconf.grpc.GNMI.Path.Builder, com.cisco.stbarth.netconf.grpc.GNMI.PathOrBuilder> pathBuilder_;
       /**
@@ -18581,6 +19401,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Path path = 1;</code>
+       * @return Whether the path field is set.
        */
       public boolean hasPath() {
         return pathBuilder_ != null || path_ != null;
@@ -18591,6 +19412,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Path path = 1;</code>
+       * @return The path.
        */
       public com.cisco.stbarth.netconf.grpc.GNMI.Path getPath() {
         if (pathBuilder_ == null) {
@@ -18732,6 +19554,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.SubscriptionMode mode = 2;</code>
+       * @return The enum numeric value on the wire for mode.
        */
       public int getModeValue() {
         return mode_;
@@ -18742,6 +19565,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.SubscriptionMode mode = 2;</code>
+       * @param value The enum numeric value on the wire for mode to set.
+       * @return This builder for chaining.
        */
       public Builder setModeValue(int value) {
         mode_ = value;
@@ -18754,8 +19579,10 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.SubscriptionMode mode = 2;</code>
+       * @return The mode.
        */
       public com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionMode getMode() {
+        @SuppressWarnings("deprecation")
         com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionMode result = com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionMode.valueOf(mode_);
         return result == null ? com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionMode.UNRECOGNIZED : result;
       }
@@ -18765,6 +19592,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.SubscriptionMode mode = 2;</code>
+       * @param value The mode to set.
+       * @return This builder for chaining.
        */
       public Builder setMode(com.cisco.stbarth.netconf.grpc.GNMI.SubscriptionMode value) {
         if (value == null) {
@@ -18781,6 +19610,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.SubscriptionMode mode = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearMode() {
         
@@ -18796,6 +19626,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>uint64 sample_interval = 3;</code>
+       * @return The sampleInterval.
        */
       public long getSampleInterval() {
         return sampleInterval_;
@@ -18806,6 +19637,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>uint64 sample_interval = 3;</code>
+       * @param value The sampleInterval to set.
+       * @return This builder for chaining.
        */
       public Builder setSampleInterval(long value) {
         
@@ -18819,6 +19652,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>uint64 sample_interval = 3;</code>
+       * @return This builder for chaining.
        */
       public Builder clearSampleInterval() {
         
@@ -18835,6 +19669,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>bool suppress_redundant = 4;</code>
+       * @return The suppressRedundant.
        */
       public boolean getSuppressRedundant() {
         return suppressRedundant_;
@@ -18846,6 +19681,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>bool suppress_redundant = 4;</code>
+       * @param value The suppressRedundant to set.
+       * @return This builder for chaining.
        */
       public Builder setSuppressRedundant(boolean value) {
         
@@ -18860,6 +19697,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>bool suppress_redundant = 4;</code>
+       * @return This builder for chaining.
        */
       public Builder clearSuppressRedundant() {
         
@@ -18877,6 +19715,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>uint64 heartbeat_interval = 5;</code>
+       * @return The heartbeatInterval.
        */
       public long getHeartbeatInterval() {
         return heartbeatInterval_;
@@ -18889,6 +19728,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>uint64 heartbeat_interval = 5;</code>
+       * @param value The heartbeatInterval to set.
+       * @return This builder for chaining.
        */
       public Builder setHeartbeatInterval(long value) {
         
@@ -18904,6 +19745,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>uint64 heartbeat_interval = 5;</code>
+       * @return This builder for chaining.
        */
       public Builder clearHeartbeatInterval() {
         
@@ -18911,11 +19753,13 @@ public final class GNMI {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -18937,11 +19781,12 @@ public final class GNMI {
 
     private static final com.google.protobuf.Parser<Subscription>
         PARSER = new com.google.protobuf.AbstractParser<Subscription>() {
+      @java.lang.Override
       public Subscription parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Subscription(input, extensionRegistry);
+        return new Subscription(input, extensionRegistry);
       }
     };
 
@@ -18954,6 +19799,7 @@ public final class GNMI {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.GNMI.Subscription getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -18966,6 +19812,7 @@ public final class GNMI {
 
     /**
      * <code>uint32 marking = 1;</code>
+     * @return The marking.
      */
     int getMarking();
   }
@@ -18988,7 +19835,13 @@ public final class GNMI {
       super(builder);
     }
     private QOSMarking() {
-      marking_ = 0;
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new QOSMarking();
     }
 
     @java.lang.Override
@@ -19001,7 +19854,9 @@ public final class GNMI {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -19012,16 +19867,16 @@ public final class GNMI {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
 
               marking_ = input.readUInt32();
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -19041,6 +19896,7 @@ public final class GNMI {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_QOSMarking_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_QOSMarking_fieldAccessorTable
@@ -19052,12 +19908,14 @@ public final class GNMI {
     private int marking_;
     /**
      * <code>uint32 marking = 1;</code>
+     * @return The marking.
      */
     public int getMarking() {
       return marking_;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -19067,6 +19925,7 @@ public final class GNMI {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (marking_ != 0) {
@@ -19075,6 +19934,7 @@ public final class GNMI {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -19099,11 +19959,10 @@ public final class GNMI {
       }
       com.cisco.stbarth.netconf.grpc.GNMI.QOSMarking other = (com.cisco.stbarth.netconf.grpc.GNMI.QOSMarking) obj;
 
-      boolean result = true;
-      result = result && (getMarking()
-          == other.getMarking());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (getMarking()
+          != other.getMarking()) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -19190,6 +20049,7 @@ public final class GNMI {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -19197,6 +20057,7 @@ public final class GNMI {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.GNMI.QOSMarking prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -19226,6 +20087,7 @@ public final class GNMI {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_QOSMarking_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_QOSMarking_fieldAccessorTable
@@ -19248,6 +20110,7 @@ public final class GNMI {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         marking_ = 0;
@@ -19255,15 +20118,18 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_QOSMarking_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.QOSMarking getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.QOSMarking.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.QOSMarking build() {
         com.cisco.stbarth.netconf.grpc.GNMI.QOSMarking result = buildPartial();
         if (!result.isInitialized()) {
@@ -19272,6 +20138,7 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.QOSMarking buildPartial() {
         com.cisco.stbarth.netconf.grpc.GNMI.QOSMarking result = new com.cisco.stbarth.netconf.grpc.GNMI.QOSMarking(this);
         result.marking_ = marking_;
@@ -19279,32 +20146,39 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.GNMI.QOSMarking) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.GNMI.QOSMarking)other);
@@ -19324,10 +20198,12 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -19349,12 +20225,15 @@ public final class GNMI {
       private int marking_ ;
       /**
        * <code>uint32 marking = 1;</code>
+       * @return The marking.
        */
       public int getMarking() {
         return marking_;
       }
       /**
        * <code>uint32 marking = 1;</code>
+       * @param value The marking to set.
+       * @return This builder for chaining.
        */
       public Builder setMarking(int value) {
         
@@ -19364,6 +20243,7 @@ public final class GNMI {
       }
       /**
        * <code>uint32 marking = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearMarking() {
         
@@ -19371,11 +20251,13 @@ public final class GNMI {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -19397,11 +20279,12 @@ public final class GNMI {
 
     private static final com.google.protobuf.Parser<QOSMarking>
         PARSER = new com.google.protobuf.AbstractParser<QOSMarking>() {
+      @java.lang.Override
       public QOSMarking parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new QOSMarking(input, extensionRegistry);
+        return new QOSMarking(input, extensionRegistry);
       }
     };
 
@@ -19414,6 +20297,7 @@ public final class GNMI {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.GNMI.QOSMarking getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -19430,6 +20314,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path path = 1;</code>
+     * @return Whether the path field is set.
      */
     boolean hasPath();
     /**
@@ -19438,6 +20323,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path path = 1;</code>
+     * @return The path.
      */
     com.cisco.stbarth.netconf.grpc.GNMI.Path getPath();
     /**
@@ -19455,6 +20341,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string alias = 2;</code>
+     * @return The alias.
      */
     java.lang.String getAlias();
     /**
@@ -19463,6 +20350,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string alias = 2;</code>
+     * @return The bytes for alias.
      */
     com.google.protobuf.ByteString
         getAliasBytes();
@@ -19492,6 +20380,13 @@ public final class GNMI {
     }
 
     @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new Alias();
+    }
+
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return this.unknownFields;
@@ -19501,7 +20396,9 @@ public final class GNMI {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -19512,13 +20409,6 @@ public final class GNMI {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               com.cisco.stbarth.netconf.grpc.GNMI.Path.Builder subBuilder = null;
               if (path_ != null) {
@@ -19538,6 +20428,13 @@ public final class GNMI {
               alias_ = s;
               break;
             }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -19555,6 +20452,7 @@ public final class GNMI {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Alias_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Alias_fieldAccessorTable
@@ -19570,6 +20468,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path path = 1;</code>
+     * @return Whether the path field is set.
      */
     public boolean hasPath() {
       return path_ != null;
@@ -19580,6 +20479,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path path = 1;</code>
+     * @return The path.
      */
     public com.cisco.stbarth.netconf.grpc.GNMI.Path getPath() {
       return path_ == null ? com.cisco.stbarth.netconf.grpc.GNMI.Path.getDefaultInstance() : path_;
@@ -19603,6 +20503,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string alias = 2;</code>
+     * @return The alias.
      */
     public java.lang.String getAlias() {
       java.lang.Object ref = alias_;
@@ -19622,6 +20523,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string alias = 2;</code>
+     * @return The bytes for alias.
      */
     public com.google.protobuf.ByteString
         getAliasBytes() {
@@ -19638,6 +20540,7 @@ public final class GNMI {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -19647,6 +20550,7 @@ public final class GNMI {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (path_ != null) {
@@ -19658,6 +20562,7 @@ public final class GNMI {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -19685,16 +20590,15 @@ public final class GNMI {
       }
       com.cisco.stbarth.netconf.grpc.GNMI.Alias other = (com.cisco.stbarth.netconf.grpc.GNMI.Alias) obj;
 
-      boolean result = true;
-      result = result && (hasPath() == other.hasPath());
+      if (hasPath() != other.hasPath()) return false;
       if (hasPath()) {
-        result = result && getPath()
-            .equals(other.getPath());
+        if (!getPath()
+            .equals(other.getPath())) return false;
       }
-      result = result && getAlias()
-          .equals(other.getAlias());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (!getAlias()
+          .equals(other.getAlias())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -19785,6 +20689,7 @@ public final class GNMI {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -19792,6 +20697,7 @@ public final class GNMI {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.GNMI.Alias prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -19823,6 +20729,7 @@ public final class GNMI {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Alias_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Alias_fieldAccessorTable
@@ -19845,6 +20752,7 @@ public final class GNMI {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         if (pathBuilder_ == null) {
@@ -19858,15 +20766,18 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_Alias_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.Alias getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.Alias.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.Alias build() {
         com.cisco.stbarth.netconf.grpc.GNMI.Alias result = buildPartial();
         if (!result.isInitialized()) {
@@ -19875,6 +20786,7 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.Alias buildPartial() {
         com.cisco.stbarth.netconf.grpc.GNMI.Alias result = new com.cisco.stbarth.netconf.grpc.GNMI.Alias(this);
         if (pathBuilder_ == null) {
@@ -19887,32 +20799,39 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.GNMI.Alias) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.GNMI.Alias)other);
@@ -19936,10 +20855,12 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -19958,7 +20879,7 @@ public final class GNMI {
         return this;
       }
 
-      private com.cisco.stbarth.netconf.grpc.GNMI.Path path_ = null;
+      private com.cisco.stbarth.netconf.grpc.GNMI.Path path_;
       private com.google.protobuf.SingleFieldBuilderV3<
           com.cisco.stbarth.netconf.grpc.GNMI.Path, com.cisco.stbarth.netconf.grpc.GNMI.Path.Builder, com.cisco.stbarth.netconf.grpc.GNMI.PathOrBuilder> pathBuilder_;
       /**
@@ -19967,6 +20888,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Path path = 1;</code>
+       * @return Whether the path field is set.
        */
       public boolean hasPath() {
         return pathBuilder_ != null || path_ != null;
@@ -19977,6 +20899,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Path path = 1;</code>
+       * @return The path.
        */
       public com.cisco.stbarth.netconf.grpc.GNMI.Path getPath() {
         if (pathBuilder_ == null) {
@@ -20118,6 +21041,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string alias = 2;</code>
+       * @return The alias.
        */
       public java.lang.String getAlias() {
         java.lang.Object ref = alias_;
@@ -20137,6 +21061,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string alias = 2;</code>
+       * @return The bytes for alias.
        */
       public com.google.protobuf.ByteString
           getAliasBytes() {
@@ -20157,6 +21082,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>string alias = 2;</code>
+       * @param value The alias to set.
+       * @return This builder for chaining.
        */
       public Builder setAlias(
           java.lang.String value) {
@@ -20174,6 +21101,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string alias = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearAlias() {
         
@@ -20187,6 +21115,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>string alias = 2;</code>
+       * @param value The bytes for alias to set.
+       * @return This builder for chaining.
        */
       public Builder setAliasBytes(
           com.google.protobuf.ByteString value) {
@@ -20199,11 +21129,13 @@ public final class GNMI {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -20225,11 +21157,12 @@ public final class GNMI {
 
     private static final com.google.protobuf.Parser<Alias>
         PARSER = new com.google.protobuf.AbstractParser<Alias>() {
+      @java.lang.Override
       public Alias parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Alias(input, extensionRegistry);
+        return new Alias(input, extensionRegistry);
       }
     };
 
@@ -20242,6 +21175,7 @@ public final class GNMI {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.GNMI.Alias getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -20319,6 +21253,13 @@ public final class GNMI {
     }
 
     @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new AliasList();
+    }
+
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return this.unknownFields;
@@ -20328,6 +21269,9 @@ public final class GNMI {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -20339,20 +21283,20 @@ public final class GNMI {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
-              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
                 alias_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMI.Alias>();
                 mutable_bitField0_ |= 0x00000001;
               }
               alias_.add(
                   input.readMessage(com.cisco.stbarth.netconf.grpc.GNMI.Alias.parser(), extensionRegistry));
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -20363,7 +21307,7 @@ public final class GNMI {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
           alias_ = java.util.Collections.unmodifiableList(alias_);
         }
         this.unknownFields = unknownFields.build();
@@ -20375,6 +21319,7 @@ public final class GNMI {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_AliasList_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_AliasList_fieldAccessorTable
@@ -20438,6 +21383,7 @@ public final class GNMI {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -20447,6 +21393,7 @@ public final class GNMI {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       for (int i = 0; i < alias_.size(); i++) {
@@ -20455,6 +21402,7 @@ public final class GNMI {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -20479,11 +21427,10 @@ public final class GNMI {
       }
       com.cisco.stbarth.netconf.grpc.GNMI.AliasList other = (com.cisco.stbarth.netconf.grpc.GNMI.AliasList) obj;
 
-      boolean result = true;
-      result = result && getAliasList()
-          .equals(other.getAliasList());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (!getAliasList()
+          .equals(other.getAliasList())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -20572,6 +21519,7 @@ public final class GNMI {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -20579,6 +21527,7 @@ public final class GNMI {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.GNMI.AliasList prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -20608,6 +21557,7 @@ public final class GNMI {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_AliasList_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_AliasList_fieldAccessorTable
@@ -20631,6 +21581,7 @@ public final class GNMI {
           getAliasFieldBuilder();
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         if (aliasBuilder_ == null) {
@@ -20642,15 +21593,18 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_AliasList_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.AliasList getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.AliasList.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.AliasList build() {
         com.cisco.stbarth.netconf.grpc.GNMI.AliasList result = buildPartial();
         if (!result.isInitialized()) {
@@ -20659,11 +21613,12 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.AliasList buildPartial() {
         com.cisco.stbarth.netconf.grpc.GNMI.AliasList result = new com.cisco.stbarth.netconf.grpc.GNMI.AliasList(this);
         int from_bitField0_ = bitField0_;
         if (aliasBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          if (((bitField0_ & 0x00000001) != 0)) {
             alias_ = java.util.Collections.unmodifiableList(alias_);
             bitField0_ = (bitField0_ & ~0x00000001);
           }
@@ -20675,32 +21630,39 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.GNMI.AliasList) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.GNMI.AliasList)other);
@@ -20743,10 +21705,12 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -20769,7 +21733,7 @@ public final class GNMI {
       private java.util.List<com.cisco.stbarth.netconf.grpc.GNMI.Alias> alias_ =
         java.util.Collections.emptyList();
       private void ensureAliasIsMutable() {
-        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+        if (!((bitField0_ & 0x00000001) != 0)) {
           alias_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMI.Alias>(alias_);
           bitField0_ |= 0x00000001;
          }
@@ -21070,18 +22034,20 @@ public final class GNMI {
           aliasBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.cisco.stbarth.netconf.grpc.GNMI.Alias, com.cisco.stbarth.netconf.grpc.GNMI.Alias.Builder, com.cisco.stbarth.netconf.grpc.GNMI.AliasOrBuilder>(
                   alias_,
-                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  ((bitField0_ & 0x00000001) != 0),
                   getParentForChildren(),
                   isClean());
           alias_ = null;
         }
         return aliasBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -21103,11 +22069,12 @@ public final class GNMI {
 
     private static final com.google.protobuf.Parser<AliasList>
         PARSER = new com.google.protobuf.AbstractParser<AliasList>() {
+      @java.lang.Override
       public AliasList parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new AliasList(input, extensionRegistry);
+        return new AliasList(input, extensionRegistry);
       }
     };
 
@@ -21120,6 +22087,7 @@ public final class GNMI {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.GNMI.AliasList getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -21136,6 +22104,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path prefix = 1;</code>
+     * @return Whether the prefix field is set.
      */
     boolean hasPrefix();
     /**
@@ -21144,6 +22113,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path prefix = 1;</code>
+     * @return The prefix.
      */
     com.cisco.stbarth.netconf.grpc.GNMI.Path getPrefix();
     /**
@@ -21366,6 +22336,13 @@ public final class GNMI {
     }
 
     @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new SetRequest();
+    }
+
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return this.unknownFields;
@@ -21375,6 +22352,9 @@ public final class GNMI {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -21386,13 +22366,6 @@ public final class GNMI {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               com.cisco.stbarth.netconf.grpc.GNMI.Path.Builder subBuilder = null;
               if (prefix_ != null) {
@@ -21407,39 +22380,46 @@ public final class GNMI {
               break;
             }
             case 18: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
                 delete_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMI.Path>();
-                mutable_bitField0_ |= 0x00000002;
+                mutable_bitField0_ |= 0x00000001;
               }
               delete_.add(
                   input.readMessage(com.cisco.stbarth.netconf.grpc.GNMI.Path.parser(), extensionRegistry));
               break;
             }
             case 26: {
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
                 replace_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMI.Update>();
-                mutable_bitField0_ |= 0x00000004;
+                mutable_bitField0_ |= 0x00000002;
               }
               replace_.add(
                   input.readMessage(com.cisco.stbarth.netconf.grpc.GNMI.Update.parser(), extensionRegistry));
               break;
             }
             case 34: {
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+              if (!((mutable_bitField0_ & 0x00000004) != 0)) {
                 update_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMI.Update>();
-                mutable_bitField0_ |= 0x00000008;
+                mutable_bitField0_ |= 0x00000004;
               }
               update_.add(
                   input.readMessage(com.cisco.stbarth.netconf.grpc.GNMI.Update.parser(), extensionRegistry));
               break;
             }
             case 42: {
-              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+              if (!((mutable_bitField0_ & 0x00000008) != 0)) {
                 extension_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMIExt.Extension>();
-                mutable_bitField0_ |= 0x00000010;
+                mutable_bitField0_ |= 0x00000008;
               }
               extension_.add(
                   input.readMessage(com.cisco.stbarth.netconf.grpc.GNMIExt.Extension.parser(), extensionRegistry));
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -21450,16 +22430,16 @@ public final class GNMI {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
           delete_ = java.util.Collections.unmodifiableList(delete_);
         }
-        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+        if (((mutable_bitField0_ & 0x00000002) != 0)) {
           replace_ = java.util.Collections.unmodifiableList(replace_);
         }
-        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+        if (((mutable_bitField0_ & 0x00000004) != 0)) {
           update_ = java.util.Collections.unmodifiableList(update_);
         }
-        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+        if (((mutable_bitField0_ & 0x00000008) != 0)) {
           extension_ = java.util.Collections.unmodifiableList(extension_);
         }
         this.unknownFields = unknownFields.build();
@@ -21471,6 +22451,7 @@ public final class GNMI {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_SetRequest_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_SetRequest_fieldAccessorTable
@@ -21478,7 +22459,6 @@ public final class GNMI {
               com.cisco.stbarth.netconf.grpc.GNMI.SetRequest.class, com.cisco.stbarth.netconf.grpc.GNMI.SetRequest.Builder.class);
     }
 
-    private int bitField0_;
     public static final int PREFIX_FIELD_NUMBER = 1;
     private com.cisco.stbarth.netconf.grpc.GNMI.Path prefix_;
     /**
@@ -21487,6 +22467,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path prefix = 1;</code>
+     * @return Whether the prefix field is set.
      */
     public boolean hasPrefix() {
       return prefix_ != null;
@@ -21497,6 +22478,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path prefix = 1;</code>
+     * @return The prefix.
      */
     public com.cisco.stbarth.netconf.grpc.GNMI.Path getPrefix() {
       return prefix_ == null ? com.cisco.stbarth.netconf.grpc.GNMI.Path.getDefaultInstance() : prefix_;
@@ -21738,6 +22720,7 @@ public final class GNMI {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -21747,6 +22730,7 @@ public final class GNMI {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (prefix_ != null) {
@@ -21767,6 +22751,7 @@ public final class GNMI {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -21807,22 +22792,21 @@ public final class GNMI {
       }
       com.cisco.stbarth.netconf.grpc.GNMI.SetRequest other = (com.cisco.stbarth.netconf.grpc.GNMI.SetRequest) obj;
 
-      boolean result = true;
-      result = result && (hasPrefix() == other.hasPrefix());
+      if (hasPrefix() != other.hasPrefix()) return false;
       if (hasPrefix()) {
-        result = result && getPrefix()
-            .equals(other.getPrefix());
+        if (!getPrefix()
+            .equals(other.getPrefix())) return false;
       }
-      result = result && getDeleteList()
-          .equals(other.getDeleteList());
-      result = result && getReplaceList()
-          .equals(other.getReplaceList());
-      result = result && getUpdateList()
-          .equals(other.getUpdateList());
-      result = result && getExtensionList()
-          .equals(other.getExtensionList());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (!getDeleteList()
+          .equals(other.getDeleteList())) return false;
+      if (!getReplaceList()
+          .equals(other.getReplaceList())) return false;
+      if (!getUpdateList()
+          .equals(other.getUpdateList())) return false;
+      if (!getExtensionList()
+          .equals(other.getExtensionList())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -21927,6 +22911,7 @@ public final class GNMI {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -21934,6 +22919,7 @@ public final class GNMI {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.GNMI.SetRequest prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -21967,6 +22953,7 @@ public final class GNMI {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_SetRequest_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_SetRequest_fieldAccessorTable
@@ -21993,6 +22980,7 @@ public final class GNMI {
           getExtensionFieldBuilder();
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         if (prefixBuilder_ == null) {
@@ -22003,40 +22991,43 @@ public final class GNMI {
         }
         if (deleteBuilder_ == null) {
           delete_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000001);
         } else {
           deleteBuilder_.clear();
         }
         if (replaceBuilder_ == null) {
           replace_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000002);
         } else {
           replaceBuilder_.clear();
         }
         if (updateBuilder_ == null) {
           update_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000004);
         } else {
           updateBuilder_.clear();
         }
         if (extensionBuilder_ == null) {
           extension_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
+          bitField0_ = (bitField0_ & ~0x00000008);
         } else {
           extensionBuilder_.clear();
         }
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_SetRequest_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.SetRequest getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.SetRequest.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.SetRequest build() {
         com.cisco.stbarth.netconf.grpc.GNMI.SetRequest result = buildPartial();
         if (!result.isInitialized()) {
@@ -22045,82 +23036,88 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.SetRequest buildPartial() {
         com.cisco.stbarth.netconf.grpc.GNMI.SetRequest result = new com.cisco.stbarth.netconf.grpc.GNMI.SetRequest(this);
         int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
         if (prefixBuilder_ == null) {
           result.prefix_ = prefix_;
         } else {
           result.prefix_ = prefixBuilder_.build();
         }
         if (deleteBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          if (((bitField0_ & 0x00000001) != 0)) {
             delete_ = java.util.Collections.unmodifiableList(delete_);
-            bitField0_ = (bitField0_ & ~0x00000002);
+            bitField0_ = (bitField0_ & ~0x00000001);
           }
           result.delete_ = delete_;
         } else {
           result.delete_ = deleteBuilder_.build();
         }
         if (replaceBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          if (((bitField0_ & 0x00000002) != 0)) {
             replace_ = java.util.Collections.unmodifiableList(replace_);
-            bitField0_ = (bitField0_ & ~0x00000004);
+            bitField0_ = (bitField0_ & ~0x00000002);
           }
           result.replace_ = replace_;
         } else {
           result.replace_ = replaceBuilder_.build();
         }
         if (updateBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          if (((bitField0_ & 0x00000004) != 0)) {
             update_ = java.util.Collections.unmodifiableList(update_);
-            bitField0_ = (bitField0_ & ~0x00000008);
+            bitField0_ = (bitField0_ & ~0x00000004);
           }
           result.update_ = update_;
         } else {
           result.update_ = updateBuilder_.build();
         }
         if (extensionBuilder_ == null) {
-          if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          if (((bitField0_ & 0x00000008) != 0)) {
             extension_ = java.util.Collections.unmodifiableList(extension_);
-            bitField0_ = (bitField0_ & ~0x00000010);
+            bitField0_ = (bitField0_ & ~0x00000008);
           }
           result.extension_ = extension_;
         } else {
           result.extension_ = extensionBuilder_.build();
         }
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.GNMI.SetRequest) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.GNMI.SetRequest)other);
@@ -22139,7 +23136,7 @@ public final class GNMI {
           if (!other.delete_.isEmpty()) {
             if (delete_.isEmpty()) {
               delete_ = other.delete_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000001);
             } else {
               ensureDeleteIsMutable();
               delete_.addAll(other.delete_);
@@ -22152,7 +23149,7 @@ public final class GNMI {
               deleteBuilder_.dispose();
               deleteBuilder_ = null;
               delete_ = other.delete_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000001);
               deleteBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getDeleteFieldBuilder() : null;
@@ -22165,7 +23162,7 @@ public final class GNMI {
           if (!other.replace_.isEmpty()) {
             if (replace_.isEmpty()) {
               replace_ = other.replace_;
-              bitField0_ = (bitField0_ & ~0x00000004);
+              bitField0_ = (bitField0_ & ~0x00000002);
             } else {
               ensureReplaceIsMutable();
               replace_.addAll(other.replace_);
@@ -22178,7 +23175,7 @@ public final class GNMI {
               replaceBuilder_.dispose();
               replaceBuilder_ = null;
               replace_ = other.replace_;
-              bitField0_ = (bitField0_ & ~0x00000004);
+              bitField0_ = (bitField0_ & ~0x00000002);
               replaceBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getReplaceFieldBuilder() : null;
@@ -22191,7 +23188,7 @@ public final class GNMI {
           if (!other.update_.isEmpty()) {
             if (update_.isEmpty()) {
               update_ = other.update_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000004);
             } else {
               ensureUpdateIsMutable();
               update_.addAll(other.update_);
@@ -22204,7 +23201,7 @@ public final class GNMI {
               updateBuilder_.dispose();
               updateBuilder_ = null;
               update_ = other.update_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000004);
               updateBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getUpdateFieldBuilder() : null;
@@ -22217,7 +23214,7 @@ public final class GNMI {
           if (!other.extension_.isEmpty()) {
             if (extension_.isEmpty()) {
               extension_ = other.extension_;
-              bitField0_ = (bitField0_ & ~0x00000010);
+              bitField0_ = (bitField0_ & ~0x00000008);
             } else {
               ensureExtensionIsMutable();
               extension_.addAll(other.extension_);
@@ -22230,7 +23227,7 @@ public final class GNMI {
               extensionBuilder_.dispose();
               extensionBuilder_ = null;
               extension_ = other.extension_;
-              bitField0_ = (bitField0_ & ~0x00000010);
+              bitField0_ = (bitField0_ & ~0x00000008);
               extensionBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getExtensionFieldBuilder() : null;
@@ -22244,10 +23241,12 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -22267,7 +23266,7 @@ public final class GNMI {
       }
       private int bitField0_;
 
-      private com.cisco.stbarth.netconf.grpc.GNMI.Path prefix_ = null;
+      private com.cisco.stbarth.netconf.grpc.GNMI.Path prefix_;
       private com.google.protobuf.SingleFieldBuilderV3<
           com.cisco.stbarth.netconf.grpc.GNMI.Path, com.cisco.stbarth.netconf.grpc.GNMI.Path.Builder, com.cisco.stbarth.netconf.grpc.GNMI.PathOrBuilder> prefixBuilder_;
       /**
@@ -22276,6 +23275,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Path prefix = 1;</code>
+       * @return Whether the prefix field is set.
        */
       public boolean hasPrefix() {
         return prefixBuilder_ != null || prefix_ != null;
@@ -22286,6 +23286,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Path prefix = 1;</code>
+       * @return The prefix.
        */
       public com.cisco.stbarth.netconf.grpc.GNMI.Path getPrefix() {
         if (prefixBuilder_ == null) {
@@ -22423,9 +23424,9 @@ public final class GNMI {
       private java.util.List<com.cisco.stbarth.netconf.grpc.GNMI.Path> delete_ =
         java.util.Collections.emptyList();
       private void ensureDeleteIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+        if (!((bitField0_ & 0x00000001) != 0)) {
           delete_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMI.Path>(delete_);
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000001;
          }
       }
 
@@ -22619,7 +23620,7 @@ public final class GNMI {
       public Builder clearDelete() {
         if (deleteBuilder_ == null) {
           delete_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000001);
           onChanged();
         } else {
           deleteBuilder_.clear();
@@ -22724,7 +23725,7 @@ public final class GNMI {
           deleteBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.cisco.stbarth.netconf.grpc.GNMI.Path, com.cisco.stbarth.netconf.grpc.GNMI.Path.Builder, com.cisco.stbarth.netconf.grpc.GNMI.PathOrBuilder>(
                   delete_,
-                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  ((bitField0_ & 0x00000001) != 0),
                   getParentForChildren(),
                   isClean());
           delete_ = null;
@@ -22735,9 +23736,9 @@ public final class GNMI {
       private java.util.List<com.cisco.stbarth.netconf.grpc.GNMI.Update> replace_ =
         java.util.Collections.emptyList();
       private void ensureReplaceIsMutable() {
-        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+        if (!((bitField0_ & 0x00000002) != 0)) {
           replace_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMI.Update>(replace_);
-          bitField0_ |= 0x00000004;
+          bitField0_ |= 0x00000002;
          }
       }
 
@@ -22931,7 +23932,7 @@ public final class GNMI {
       public Builder clearReplace() {
         if (replaceBuilder_ == null) {
           replace_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000002);
           onChanged();
         } else {
           replaceBuilder_.clear();
@@ -23036,7 +24037,7 @@ public final class GNMI {
           replaceBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.cisco.stbarth.netconf.grpc.GNMI.Update, com.cisco.stbarth.netconf.grpc.GNMI.Update.Builder, com.cisco.stbarth.netconf.grpc.GNMI.UpdateOrBuilder>(
                   replace_,
-                  ((bitField0_ & 0x00000004) == 0x00000004),
+                  ((bitField0_ & 0x00000002) != 0),
                   getParentForChildren(),
                   isClean());
           replace_ = null;
@@ -23047,9 +24048,9 @@ public final class GNMI {
       private java.util.List<com.cisco.stbarth.netconf.grpc.GNMI.Update> update_ =
         java.util.Collections.emptyList();
       private void ensureUpdateIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+        if (!((bitField0_ & 0x00000004) != 0)) {
           update_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMI.Update>(update_);
-          bitField0_ |= 0x00000008;
+          bitField0_ |= 0x00000004;
          }
       }
 
@@ -23243,7 +24244,7 @@ public final class GNMI {
       public Builder clearUpdate() {
         if (updateBuilder_ == null) {
           update_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000004);
           onChanged();
         } else {
           updateBuilder_.clear();
@@ -23348,7 +24349,7 @@ public final class GNMI {
           updateBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.cisco.stbarth.netconf.grpc.GNMI.Update, com.cisco.stbarth.netconf.grpc.GNMI.Update.Builder, com.cisco.stbarth.netconf.grpc.GNMI.UpdateOrBuilder>(
                   update_,
-                  ((bitField0_ & 0x00000008) == 0x00000008),
+                  ((bitField0_ & 0x00000004) != 0),
                   getParentForChildren(),
                   isClean());
           update_ = null;
@@ -23359,9 +24360,9 @@ public final class GNMI {
       private java.util.List<com.cisco.stbarth.netconf.grpc.GNMIExt.Extension> extension_ =
         java.util.Collections.emptyList();
       private void ensureExtensionIsMutable() {
-        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+        if (!((bitField0_ & 0x00000008) != 0)) {
           extension_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMIExt.Extension>(extension_);
-          bitField0_ |= 0x00000010;
+          bitField0_ |= 0x00000008;
          }
       }
 
@@ -23566,7 +24567,7 @@ public final class GNMI {
       public Builder clearExtension() {
         if (extensionBuilder_ == null) {
           extension_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
+          bitField0_ = (bitField0_ & ~0x00000008);
           onChanged();
         } else {
           extensionBuilder_.clear();
@@ -23678,18 +24679,20 @@ public final class GNMI {
           extensionBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.cisco.stbarth.netconf.grpc.GNMIExt.Extension, com.cisco.stbarth.netconf.grpc.GNMIExt.Extension.Builder, com.cisco.stbarth.netconf.grpc.GNMIExt.ExtensionOrBuilder>(
                   extension_,
-                  ((bitField0_ & 0x00000010) == 0x00000010),
+                  ((bitField0_ & 0x00000008) != 0),
                   getParentForChildren(),
                   isClean());
           extension_ = null;
         }
         return extensionBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -23711,11 +24714,12 @@ public final class GNMI {
 
     private static final com.google.protobuf.Parser<SetRequest>
         PARSER = new com.google.protobuf.AbstractParser<SetRequest>() {
+      @java.lang.Override
       public SetRequest parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new SetRequest(input, extensionRegistry);
+        return new SetRequest(input, extensionRegistry);
       }
     };
 
@@ -23728,6 +24732,7 @@ public final class GNMI {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.GNMI.SetRequest getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -23744,6 +24749,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path prefix = 1;</code>
+     * @return Whether the prefix field is set.
      */
     boolean hasPrefix();
     /**
@@ -23752,6 +24758,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path prefix = 1;</code>
+     * @return The prefix.
      */
     com.cisco.stbarth.netconf.grpc.GNMI.Path getPrefix();
     /**
@@ -23818,6 +24825,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Error message = 3 [deprecated = true];</code>
+     * @return Whether the message field is set.
      */
     @java.lang.Deprecated boolean hasMessage();
     /**
@@ -23826,6 +24834,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Error message = 3 [deprecated = true];</code>
+     * @return The message.
      */
     @java.lang.Deprecated com.cisco.stbarth.netconf.grpc.GNMI.Error getMessage();
     /**
@@ -23843,6 +24852,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>int64 timestamp = 4;</code>
+     * @return The timestamp.
      */
     long getTimestamp();
 
@@ -23919,8 +24929,14 @@ public final class GNMI {
     }
     private SetResponse() {
       response_ = java.util.Collections.emptyList();
-      timestamp_ = 0L;
       extension_ = java.util.Collections.emptyList();
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new SetResponse();
     }
 
     @java.lang.Override
@@ -23933,6 +24949,9 @@ public final class GNMI {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -23944,13 +24963,6 @@ public final class GNMI {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               com.cisco.stbarth.netconf.grpc.GNMI.Path.Builder subBuilder = null;
               if (prefix_ != null) {
@@ -23965,9 +24977,9 @@ public final class GNMI {
               break;
             }
             case 18: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
                 response_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMI.UpdateResult>();
-                mutable_bitField0_ |= 0x00000002;
+                mutable_bitField0_ |= 0x00000001;
               }
               response_.add(
                   input.readMessage(com.cisco.stbarth.netconf.grpc.GNMI.UpdateResult.parser(), extensionRegistry));
@@ -23992,12 +25004,19 @@ public final class GNMI {
               break;
             }
             case 42: {
-              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
                 extension_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMIExt.Extension>();
-                mutable_bitField0_ |= 0x00000010;
+                mutable_bitField0_ |= 0x00000002;
               }
               extension_.add(
                   input.readMessage(com.cisco.stbarth.netconf.grpc.GNMIExt.Extension.parser(), extensionRegistry));
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -24008,10 +25027,10 @@ public final class GNMI {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
           response_ = java.util.Collections.unmodifiableList(response_);
         }
-        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+        if (((mutable_bitField0_ & 0x00000002) != 0)) {
           extension_ = java.util.Collections.unmodifiableList(extension_);
         }
         this.unknownFields = unknownFields.build();
@@ -24023,6 +25042,7 @@ public final class GNMI {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_SetResponse_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_SetResponse_fieldAccessorTable
@@ -24030,7 +25050,6 @@ public final class GNMI {
               com.cisco.stbarth.netconf.grpc.GNMI.SetResponse.class, com.cisco.stbarth.netconf.grpc.GNMI.SetResponse.Builder.class);
     }
 
-    private int bitField0_;
     public static final int PREFIX_FIELD_NUMBER = 1;
     private com.cisco.stbarth.netconf.grpc.GNMI.Path prefix_;
     /**
@@ -24039,6 +25058,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path prefix = 1;</code>
+     * @return Whether the prefix field is set.
      */
     public boolean hasPrefix() {
       return prefix_ != null;
@@ -24049,6 +25069,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path prefix = 1;</code>
+     * @return The prefix.
      */
     public com.cisco.stbarth.netconf.grpc.GNMI.Path getPrefix() {
       return prefix_ == null ? com.cisco.stbarth.netconf.grpc.GNMI.Path.getDefaultInstance() : prefix_;
@@ -24132,6 +25153,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Error message = 3 [deprecated = true];</code>
+     * @return Whether the message field is set.
      */
     @java.lang.Deprecated public boolean hasMessage() {
       return message_ != null;
@@ -24142,6 +25164,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Error message = 3 [deprecated = true];</code>
+     * @return The message.
      */
     @java.lang.Deprecated public com.cisco.stbarth.netconf.grpc.GNMI.Error getMessage() {
       return message_ == null ? com.cisco.stbarth.netconf.grpc.GNMI.Error.getDefaultInstance() : message_;
@@ -24165,6 +25188,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>int64 timestamp = 4;</code>
+     * @return The timestamp.
      */
     public long getTimestamp() {
       return timestamp_;
@@ -24231,6 +25255,7 @@ public final class GNMI {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -24240,6 +25265,7 @@ public final class GNMI {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (prefix_ != null) {
@@ -24260,6 +25286,7 @@ public final class GNMI {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -24300,25 +25327,24 @@ public final class GNMI {
       }
       com.cisco.stbarth.netconf.grpc.GNMI.SetResponse other = (com.cisco.stbarth.netconf.grpc.GNMI.SetResponse) obj;
 
-      boolean result = true;
-      result = result && (hasPrefix() == other.hasPrefix());
+      if (hasPrefix() != other.hasPrefix()) return false;
       if (hasPrefix()) {
-        result = result && getPrefix()
-            .equals(other.getPrefix());
+        if (!getPrefix()
+            .equals(other.getPrefix())) return false;
       }
-      result = result && getResponseList()
-          .equals(other.getResponseList());
-      result = result && (hasMessage() == other.hasMessage());
+      if (!getResponseList()
+          .equals(other.getResponseList())) return false;
+      if (hasMessage() != other.hasMessage()) return false;
       if (hasMessage()) {
-        result = result && getMessage()
-            .equals(other.getMessage());
+        if (!getMessage()
+            .equals(other.getMessage())) return false;
       }
-      result = result && (getTimestamp()
-          == other.getTimestamp());
-      result = result && getExtensionList()
-          .equals(other.getExtensionList());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (getTimestamp()
+          != other.getTimestamp()) return false;
+      if (!getExtensionList()
+          .equals(other.getExtensionList())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -24422,6 +25448,7 @@ public final class GNMI {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -24429,6 +25456,7 @@ public final class GNMI {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.GNMI.SetResponse prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -24462,6 +25490,7 @@ public final class GNMI {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_SetResponse_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_SetResponse_fieldAccessorTable
@@ -24486,6 +25515,7 @@ public final class GNMI {
           getExtensionFieldBuilder();
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         if (prefixBuilder_ == null) {
@@ -24496,7 +25526,7 @@ public final class GNMI {
         }
         if (responseBuilder_ == null) {
           response_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000001);
         } else {
           responseBuilder_.clear();
         }
@@ -24510,22 +25540,25 @@ public final class GNMI {
 
         if (extensionBuilder_ == null) {
           extension_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
+          bitField0_ = (bitField0_ & ~0x00000002);
         } else {
           extensionBuilder_.clear();
         }
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_SetResponse_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.SetResponse getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.SetResponse.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.SetResponse build() {
         com.cisco.stbarth.netconf.grpc.GNMI.SetResponse result = buildPartial();
         if (!result.isInitialized()) {
@@ -24534,19 +25567,19 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.SetResponse buildPartial() {
         com.cisco.stbarth.netconf.grpc.GNMI.SetResponse result = new com.cisco.stbarth.netconf.grpc.GNMI.SetResponse(this);
         int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
         if (prefixBuilder_ == null) {
           result.prefix_ = prefix_;
         } else {
           result.prefix_ = prefixBuilder_.build();
         }
         if (responseBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          if (((bitField0_ & 0x00000001) != 0)) {
             response_ = java.util.Collections.unmodifiableList(response_);
-            bitField0_ = (bitField0_ & ~0x00000002);
+            bitField0_ = (bitField0_ & ~0x00000001);
           }
           result.response_ = response_;
         } else {
@@ -24559,45 +25592,51 @@ public final class GNMI {
         }
         result.timestamp_ = timestamp_;
         if (extensionBuilder_ == null) {
-          if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          if (((bitField0_ & 0x00000002) != 0)) {
             extension_ = java.util.Collections.unmodifiableList(extension_);
-            bitField0_ = (bitField0_ & ~0x00000010);
+            bitField0_ = (bitField0_ & ~0x00000002);
           }
           result.extension_ = extension_;
         } else {
           result.extension_ = extensionBuilder_.build();
         }
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.GNMI.SetResponse) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.GNMI.SetResponse)other);
@@ -24616,7 +25655,7 @@ public final class GNMI {
           if (!other.response_.isEmpty()) {
             if (response_.isEmpty()) {
               response_ = other.response_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000001);
             } else {
               ensureResponseIsMutable();
               response_.addAll(other.response_);
@@ -24629,7 +25668,7 @@ public final class GNMI {
               responseBuilder_.dispose();
               responseBuilder_ = null;
               response_ = other.response_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000001);
               responseBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getResponseFieldBuilder() : null;
@@ -24648,7 +25687,7 @@ public final class GNMI {
           if (!other.extension_.isEmpty()) {
             if (extension_.isEmpty()) {
               extension_ = other.extension_;
-              bitField0_ = (bitField0_ & ~0x00000010);
+              bitField0_ = (bitField0_ & ~0x00000002);
             } else {
               ensureExtensionIsMutable();
               extension_.addAll(other.extension_);
@@ -24661,7 +25700,7 @@ public final class GNMI {
               extensionBuilder_.dispose();
               extensionBuilder_ = null;
               extension_ = other.extension_;
-              bitField0_ = (bitField0_ & ~0x00000010);
+              bitField0_ = (bitField0_ & ~0x00000002);
               extensionBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getExtensionFieldBuilder() : null;
@@ -24675,10 +25714,12 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -24698,7 +25739,7 @@ public final class GNMI {
       }
       private int bitField0_;
 
-      private com.cisco.stbarth.netconf.grpc.GNMI.Path prefix_ = null;
+      private com.cisco.stbarth.netconf.grpc.GNMI.Path prefix_;
       private com.google.protobuf.SingleFieldBuilderV3<
           com.cisco.stbarth.netconf.grpc.GNMI.Path, com.cisco.stbarth.netconf.grpc.GNMI.Path.Builder, com.cisco.stbarth.netconf.grpc.GNMI.PathOrBuilder> prefixBuilder_;
       /**
@@ -24707,6 +25748,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Path prefix = 1;</code>
+       * @return Whether the prefix field is set.
        */
       public boolean hasPrefix() {
         return prefixBuilder_ != null || prefix_ != null;
@@ -24717,6 +25759,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Path prefix = 1;</code>
+       * @return The prefix.
        */
       public com.cisco.stbarth.netconf.grpc.GNMI.Path getPrefix() {
         if (prefixBuilder_ == null) {
@@ -24854,9 +25897,9 @@ public final class GNMI {
       private java.util.List<com.cisco.stbarth.netconf.grpc.GNMI.UpdateResult> response_ =
         java.util.Collections.emptyList();
       private void ensureResponseIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+        if (!((bitField0_ & 0x00000001) != 0)) {
           response_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMI.UpdateResult>(response_);
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000001;
          }
       }
 
@@ -25061,7 +26104,7 @@ public final class GNMI {
       public Builder clearResponse() {
         if (responseBuilder_ == null) {
           response_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000001);
           onChanged();
         } else {
           responseBuilder_.clear();
@@ -25173,7 +26216,7 @@ public final class GNMI {
           responseBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.cisco.stbarth.netconf.grpc.GNMI.UpdateResult, com.cisco.stbarth.netconf.grpc.GNMI.UpdateResult.Builder, com.cisco.stbarth.netconf.grpc.GNMI.UpdateResultOrBuilder>(
                   response_,
-                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  ((bitField0_ & 0x00000001) != 0),
                   getParentForChildren(),
                   isClean());
           response_ = null;
@@ -25181,7 +26224,7 @@ public final class GNMI {
         return responseBuilder_;
       }
 
-      private com.cisco.stbarth.netconf.grpc.GNMI.Error message_ = null;
+      private com.cisco.stbarth.netconf.grpc.GNMI.Error message_;
       private com.google.protobuf.SingleFieldBuilderV3<
           com.cisco.stbarth.netconf.grpc.GNMI.Error, com.cisco.stbarth.netconf.grpc.GNMI.Error.Builder, com.cisco.stbarth.netconf.grpc.GNMI.ErrorOrBuilder> messageBuilder_;
       /**
@@ -25190,6 +26233,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Error message = 3 [deprecated = true];</code>
+       * @return Whether the message field is set.
        */
       @java.lang.Deprecated public boolean hasMessage() {
         return messageBuilder_ != null || message_ != null;
@@ -25200,6 +26244,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Error message = 3 [deprecated = true];</code>
+       * @return The message.
        */
       @java.lang.Deprecated public com.cisco.stbarth.netconf.grpc.GNMI.Error getMessage() {
         if (messageBuilder_ == null) {
@@ -25341,6 +26386,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>int64 timestamp = 4;</code>
+       * @return The timestamp.
        */
       public long getTimestamp() {
         return timestamp_;
@@ -25351,6 +26397,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>int64 timestamp = 4;</code>
+       * @param value The timestamp to set.
+       * @return This builder for chaining.
        */
       public Builder setTimestamp(long value) {
         
@@ -25364,6 +26412,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>int64 timestamp = 4;</code>
+       * @return This builder for chaining.
        */
       public Builder clearTimestamp() {
         
@@ -25375,9 +26424,9 @@ public final class GNMI {
       private java.util.List<com.cisco.stbarth.netconf.grpc.GNMIExt.Extension> extension_ =
         java.util.Collections.emptyList();
       private void ensureExtensionIsMutable() {
-        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+        if (!((bitField0_ & 0x00000002) != 0)) {
           extension_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMIExt.Extension>(extension_);
-          bitField0_ |= 0x00000010;
+          bitField0_ |= 0x00000002;
          }
       }
 
@@ -25582,7 +26631,7 @@ public final class GNMI {
       public Builder clearExtension() {
         if (extensionBuilder_ == null) {
           extension_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
+          bitField0_ = (bitField0_ & ~0x00000002);
           onChanged();
         } else {
           extensionBuilder_.clear();
@@ -25694,18 +26743,20 @@ public final class GNMI {
           extensionBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.cisco.stbarth.netconf.grpc.GNMIExt.Extension, com.cisco.stbarth.netconf.grpc.GNMIExt.Extension.Builder, com.cisco.stbarth.netconf.grpc.GNMIExt.ExtensionOrBuilder>(
                   extension_,
-                  ((bitField0_ & 0x00000010) == 0x00000010),
+                  ((bitField0_ & 0x00000002) != 0),
                   getParentForChildren(),
                   isClean());
           extension_ = null;
         }
         return extensionBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -25727,11 +26778,12 @@ public final class GNMI {
 
     private static final com.google.protobuf.Parser<SetResponse>
         PARSER = new com.google.protobuf.AbstractParser<SetResponse>() {
+      @java.lang.Override
       public SetResponse parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new SetResponse(input, extensionRegistry);
+        return new SetResponse(input, extensionRegistry);
       }
     };
 
@@ -25744,6 +26796,7 @@ public final class GNMI {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.GNMI.SetResponse getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -25763,6 +26816,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>int64 timestamp = 1 [deprecated = true];</code>
+     * @return The timestamp.
      */
     @java.lang.Deprecated long getTimestamp();
 
@@ -25772,6 +26826,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path path = 2;</code>
+     * @return Whether the path field is set.
      */
     boolean hasPath();
     /**
@@ -25780,6 +26835,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path path = 2;</code>
+     * @return The path.
      */
     com.cisco.stbarth.netconf.grpc.GNMI.Path getPath();
     /**
@@ -25797,6 +26853,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Error message = 3 [deprecated = true];</code>
+     * @return Whether the message field is set.
      */
     @java.lang.Deprecated boolean hasMessage();
     /**
@@ -25805,6 +26862,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Error message = 3 [deprecated = true];</code>
+     * @return The message.
      */
     @java.lang.Deprecated com.cisco.stbarth.netconf.grpc.GNMI.Error getMessage();
     /**
@@ -25822,6 +26880,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.UpdateResult.Operation op = 4;</code>
+     * @return The enum numeric value on the wire for op.
      */
     int getOpValue();
     /**
@@ -25830,6 +26889,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.UpdateResult.Operation op = 4;</code>
+     * @return The op.
      */
     com.cisco.stbarth.netconf.grpc.GNMI.UpdateResult.Operation getOp();
   }
@@ -25852,8 +26912,14 @@ public final class GNMI {
       super(builder);
     }
     private UpdateResult() {
-      timestamp_ = 0L;
       op_ = 0;
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new UpdateResult();
     }
 
     @java.lang.Override
@@ -25866,7 +26932,9 @@ public final class GNMI {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -25877,13 +26945,6 @@ public final class GNMI {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
 
               timestamp_ = input.readInt64();
@@ -25921,6 +26982,13 @@ public final class GNMI {
               op_ = rawValue;
               break;
             }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -25938,6 +27006,7 @@ public final class GNMI {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_UpdateResult_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_UpdateResult_fieldAccessorTable
@@ -26024,6 +27093,8 @@ public final class GNMI {
       }
 
       /**
+       * @param value The numeric wire value of the corresponding enum entry.
+       * @return The enum associated with the given numeric wire value.
        * @deprecated Use {@link #forNumber(int)} instead.
        */
       @java.lang.Deprecated
@@ -26031,6 +27102,10 @@ public final class GNMI {
         return forNumber(value);
       }
 
+      /**
+       * @param value The numeric wire value of the corresponding enum entry.
+       * @return The enum associated with the given numeric wire value.
+       */
       public static Operation forNumber(int value) {
         switch (value) {
           case 0: return INVALID;
@@ -26100,6 +27175,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>int64 timestamp = 1 [deprecated = true];</code>
+     * @return The timestamp.
      */
     @java.lang.Deprecated public long getTimestamp() {
       return timestamp_;
@@ -26113,6 +27189,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path path = 2;</code>
+     * @return Whether the path field is set.
      */
     public boolean hasPath() {
       return path_ != null;
@@ -26123,6 +27200,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path path = 2;</code>
+     * @return The path.
      */
     public com.cisco.stbarth.netconf.grpc.GNMI.Path getPath() {
       return path_ == null ? com.cisco.stbarth.netconf.grpc.GNMI.Path.getDefaultInstance() : path_;
@@ -26146,6 +27224,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Error message = 3 [deprecated = true];</code>
+     * @return Whether the message field is set.
      */
     @java.lang.Deprecated public boolean hasMessage() {
       return message_ != null;
@@ -26156,6 +27235,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Error message = 3 [deprecated = true];</code>
+     * @return The message.
      */
     @java.lang.Deprecated public com.cisco.stbarth.netconf.grpc.GNMI.Error getMessage() {
       return message_ == null ? com.cisco.stbarth.netconf.grpc.GNMI.Error.getDefaultInstance() : message_;
@@ -26179,6 +27259,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.UpdateResult.Operation op = 4;</code>
+     * @return The enum numeric value on the wire for op.
      */
     public int getOpValue() {
       return op_;
@@ -26189,13 +27270,16 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.UpdateResult.Operation op = 4;</code>
+     * @return The op.
      */
     public com.cisco.stbarth.netconf.grpc.GNMI.UpdateResult.Operation getOp() {
+      @SuppressWarnings("deprecation")
       com.cisco.stbarth.netconf.grpc.GNMI.UpdateResult.Operation result = com.cisco.stbarth.netconf.grpc.GNMI.UpdateResult.Operation.valueOf(op_);
       return result == null ? com.cisco.stbarth.netconf.grpc.GNMI.UpdateResult.Operation.UNRECOGNIZED : result;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -26205,6 +27289,7 @@ public final class GNMI {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (timestamp_ != 0L) {
@@ -26222,6 +27307,7 @@ public final class GNMI {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -26258,22 +27344,21 @@ public final class GNMI {
       }
       com.cisco.stbarth.netconf.grpc.GNMI.UpdateResult other = (com.cisco.stbarth.netconf.grpc.GNMI.UpdateResult) obj;
 
-      boolean result = true;
-      result = result && (getTimestamp()
-          == other.getTimestamp());
-      result = result && (hasPath() == other.hasPath());
+      if (getTimestamp()
+          != other.getTimestamp()) return false;
+      if (hasPath() != other.hasPath()) return false;
       if (hasPath()) {
-        result = result && getPath()
-            .equals(other.getPath());
+        if (!getPath()
+            .equals(other.getPath())) return false;
       }
-      result = result && (hasMessage() == other.hasMessage());
+      if (hasMessage() != other.hasMessage()) return false;
       if (hasMessage()) {
-        result = result && getMessage()
-            .equals(other.getMessage());
+        if (!getMessage()
+            .equals(other.getMessage())) return false;
       }
-      result = result && op_ == other.op_;
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (op_ != other.op_) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -26371,6 +27456,7 @@ public final class GNMI {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -26378,6 +27464,7 @@ public final class GNMI {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.GNMI.UpdateResult prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -26407,6 +27494,7 @@ public final class GNMI {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_UpdateResult_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_UpdateResult_fieldAccessorTable
@@ -26429,6 +27517,7 @@ public final class GNMI {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         timestamp_ = 0L;
@@ -26450,15 +27539,18 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_UpdateResult_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.UpdateResult getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.UpdateResult.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.UpdateResult build() {
         com.cisco.stbarth.netconf.grpc.GNMI.UpdateResult result = buildPartial();
         if (!result.isInitialized()) {
@@ -26467,6 +27559,7 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.UpdateResult buildPartial() {
         com.cisco.stbarth.netconf.grpc.GNMI.UpdateResult result = new com.cisco.stbarth.netconf.grpc.GNMI.UpdateResult(this);
         result.timestamp_ = timestamp_;
@@ -26485,32 +27578,39 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.GNMI.UpdateResult) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.GNMI.UpdateResult)other);
@@ -26539,10 +27639,12 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -26571,6 +27673,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>int64 timestamp = 1 [deprecated = true];</code>
+       * @return The timestamp.
        */
       @java.lang.Deprecated public long getTimestamp() {
         return timestamp_;
@@ -26584,6 +27687,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>int64 timestamp = 1 [deprecated = true];</code>
+       * @param value The timestamp to set.
+       * @return This builder for chaining.
        */
       @java.lang.Deprecated public Builder setTimestamp(long value) {
         
@@ -26600,6 +27705,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>int64 timestamp = 1 [deprecated = true];</code>
+       * @return This builder for chaining.
        */
       @java.lang.Deprecated public Builder clearTimestamp() {
         
@@ -26608,7 +27714,7 @@ public final class GNMI {
         return this;
       }
 
-      private com.cisco.stbarth.netconf.grpc.GNMI.Path path_ = null;
+      private com.cisco.stbarth.netconf.grpc.GNMI.Path path_;
       private com.google.protobuf.SingleFieldBuilderV3<
           com.cisco.stbarth.netconf.grpc.GNMI.Path, com.cisco.stbarth.netconf.grpc.GNMI.Path.Builder, com.cisco.stbarth.netconf.grpc.GNMI.PathOrBuilder> pathBuilder_;
       /**
@@ -26617,6 +27723,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Path path = 2;</code>
+       * @return Whether the path field is set.
        */
       public boolean hasPath() {
         return pathBuilder_ != null || path_ != null;
@@ -26627,6 +27734,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Path path = 2;</code>
+       * @return The path.
        */
       public com.cisco.stbarth.netconf.grpc.GNMI.Path getPath() {
         if (pathBuilder_ == null) {
@@ -26761,7 +27869,7 @@ public final class GNMI {
         return pathBuilder_;
       }
 
-      private com.cisco.stbarth.netconf.grpc.GNMI.Error message_ = null;
+      private com.cisco.stbarth.netconf.grpc.GNMI.Error message_;
       private com.google.protobuf.SingleFieldBuilderV3<
           com.cisco.stbarth.netconf.grpc.GNMI.Error, com.cisco.stbarth.netconf.grpc.GNMI.Error.Builder, com.cisco.stbarth.netconf.grpc.GNMI.ErrorOrBuilder> messageBuilder_;
       /**
@@ -26770,6 +27878,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Error message = 3 [deprecated = true];</code>
+       * @return Whether the message field is set.
        */
       @java.lang.Deprecated public boolean hasMessage() {
         return messageBuilder_ != null || message_ != null;
@@ -26780,6 +27889,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Error message = 3 [deprecated = true];</code>
+       * @return The message.
        */
       @java.lang.Deprecated public com.cisco.stbarth.netconf.grpc.GNMI.Error getMessage() {
         if (messageBuilder_ == null) {
@@ -26921,6 +28031,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.UpdateResult.Operation op = 4;</code>
+       * @return The enum numeric value on the wire for op.
        */
       public int getOpValue() {
         return op_;
@@ -26931,6 +28042,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.UpdateResult.Operation op = 4;</code>
+       * @param value The enum numeric value on the wire for op to set.
+       * @return This builder for chaining.
        */
       public Builder setOpValue(int value) {
         op_ = value;
@@ -26943,8 +28056,10 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.UpdateResult.Operation op = 4;</code>
+       * @return The op.
        */
       public com.cisco.stbarth.netconf.grpc.GNMI.UpdateResult.Operation getOp() {
+        @SuppressWarnings("deprecation")
         com.cisco.stbarth.netconf.grpc.GNMI.UpdateResult.Operation result = com.cisco.stbarth.netconf.grpc.GNMI.UpdateResult.Operation.valueOf(op_);
         return result == null ? com.cisco.stbarth.netconf.grpc.GNMI.UpdateResult.Operation.UNRECOGNIZED : result;
       }
@@ -26954,6 +28069,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.UpdateResult.Operation op = 4;</code>
+       * @param value The op to set.
+       * @return This builder for chaining.
        */
       public Builder setOp(com.cisco.stbarth.netconf.grpc.GNMI.UpdateResult.Operation value) {
         if (value == null) {
@@ -26970,6 +28087,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.UpdateResult.Operation op = 4;</code>
+       * @return This builder for chaining.
        */
       public Builder clearOp() {
         
@@ -26977,11 +28095,13 @@ public final class GNMI {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -27003,11 +28123,12 @@ public final class GNMI {
 
     private static final com.google.protobuf.Parser<UpdateResult>
         PARSER = new com.google.protobuf.AbstractParser<UpdateResult>() {
+      @java.lang.Override
       public UpdateResult parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new UpdateResult(input, extensionRegistry);
+        return new UpdateResult(input, extensionRegistry);
       }
     };
 
@@ -27020,6 +28141,7 @@ public final class GNMI {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.GNMI.UpdateResult getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -27036,6 +28158,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path prefix = 1;</code>
+     * @return Whether the prefix field is set.
      */
     boolean hasPrefix();
     /**
@@ -27044,6 +28167,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path prefix = 1;</code>
+     * @return The prefix.
      */
     com.cisco.stbarth.netconf.grpc.GNMI.Path getPrefix();
     /**
@@ -27105,6 +28229,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.GetRequest.DataType type = 3;</code>
+     * @return The enum numeric value on the wire for type.
      */
     int getTypeValue();
     /**
@@ -27113,6 +28238,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.GetRequest.DataType type = 3;</code>
+     * @return The type.
      */
     com.cisco.stbarth.netconf.grpc.GNMI.GetRequest.DataType getType();
 
@@ -27122,6 +28248,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Encoding encoding = 5;</code>
+     * @return The enum numeric value on the wire for encoding.
      */
     int getEncodingValue();
     /**
@@ -27130,6 +28257,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Encoding encoding = 5;</code>
+     * @return The encoding.
      */
     com.cisco.stbarth.netconf.grpc.GNMI.Encoding getEncoding();
 
@@ -27256,6 +28384,13 @@ public final class GNMI {
     }
 
     @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new GetRequest();
+    }
+
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return this.unknownFields;
@@ -27265,6 +28400,9 @@ public final class GNMI {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -27276,13 +28414,6 @@ public final class GNMI {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               com.cisco.stbarth.netconf.grpc.GNMI.Path.Builder subBuilder = null;
               if (prefix_ != null) {
@@ -27297,9 +28428,9 @@ public final class GNMI {
               break;
             }
             case 18: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
                 path_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMI.Path>();
-                mutable_bitField0_ |= 0x00000002;
+                mutable_bitField0_ |= 0x00000001;
               }
               path_.add(
                   input.readMessage(com.cisco.stbarth.netconf.grpc.GNMI.Path.parser(), extensionRegistry));
@@ -27318,21 +28449,28 @@ public final class GNMI {
               break;
             }
             case 50: {
-              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
                 useModels_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMI.ModelData>();
-                mutable_bitField0_ |= 0x00000010;
+                mutable_bitField0_ |= 0x00000002;
               }
               useModels_.add(
                   input.readMessage(com.cisco.stbarth.netconf.grpc.GNMI.ModelData.parser(), extensionRegistry));
               break;
             }
             case 58: {
-              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+              if (!((mutable_bitField0_ & 0x00000004) != 0)) {
                 extension_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMIExt.Extension>();
-                mutable_bitField0_ |= 0x00000020;
+                mutable_bitField0_ |= 0x00000004;
               }
               extension_.add(
                   input.readMessage(com.cisco.stbarth.netconf.grpc.GNMIExt.Extension.parser(), extensionRegistry));
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -27343,13 +28481,13 @@ public final class GNMI {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
           path_ = java.util.Collections.unmodifiableList(path_);
         }
-        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+        if (((mutable_bitField0_ & 0x00000002) != 0)) {
           useModels_ = java.util.Collections.unmodifiableList(useModels_);
         }
-        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
+        if (((mutable_bitField0_ & 0x00000004) != 0)) {
           extension_ = java.util.Collections.unmodifiableList(extension_);
         }
         this.unknownFields = unknownFields.build();
@@ -27361,6 +28499,7 @@ public final class GNMI {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_GetRequest_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_GetRequest_fieldAccessorTable
@@ -27459,6 +28598,8 @@ public final class GNMI {
       }
 
       /**
+       * @param value The numeric wire value of the corresponding enum entry.
+       * @return The enum associated with the given numeric wire value.
        * @deprecated Use {@link #forNumber(int)} instead.
        */
       @java.lang.Deprecated
@@ -27466,6 +28607,10 @@ public final class GNMI {
         return forNumber(value);
       }
 
+      /**
+       * @param value The numeric wire value of the corresponding enum entry.
+       * @return The enum associated with the given numeric wire value.
+       */
       public static DataType forNumber(int value) {
         switch (value) {
           case 0: return ALL;
@@ -27524,7 +28669,6 @@ public final class GNMI {
       // @@protoc_insertion_point(enum_scope:gnmi.GetRequest.DataType)
     }
 
-    private int bitField0_;
     public static final int PREFIX_FIELD_NUMBER = 1;
     private com.cisco.stbarth.netconf.grpc.GNMI.Path prefix_;
     /**
@@ -27533,6 +28677,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path prefix = 1;</code>
+     * @return Whether the prefix field is set.
      */
     public boolean hasPrefix() {
       return prefix_ != null;
@@ -27543,6 +28688,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Path prefix = 1;</code>
+     * @return The prefix.
      */
     public com.cisco.stbarth.netconf.grpc.GNMI.Path getPrefix() {
       return prefix_ == null ? com.cisco.stbarth.netconf.grpc.GNMI.Path.getDefaultInstance() : prefix_;
@@ -27621,6 +28767,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.GetRequest.DataType type = 3;</code>
+     * @return The enum numeric value on the wire for type.
      */
     public int getTypeValue() {
       return type_;
@@ -27631,8 +28778,10 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.GetRequest.DataType type = 3;</code>
+     * @return The type.
      */
     public com.cisco.stbarth.netconf.grpc.GNMI.GetRequest.DataType getType() {
+      @SuppressWarnings("deprecation")
       com.cisco.stbarth.netconf.grpc.GNMI.GetRequest.DataType result = com.cisco.stbarth.netconf.grpc.GNMI.GetRequest.DataType.valueOf(type_);
       return result == null ? com.cisco.stbarth.netconf.grpc.GNMI.GetRequest.DataType.UNRECOGNIZED : result;
     }
@@ -27645,6 +28794,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Encoding encoding = 5;</code>
+     * @return The enum numeric value on the wire for encoding.
      */
     public int getEncodingValue() {
       return encoding_;
@@ -27655,8 +28805,10 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Encoding encoding = 5;</code>
+     * @return The encoding.
      */
     public com.cisco.stbarth.netconf.grpc.GNMI.Encoding getEncoding() {
+      @SuppressWarnings("deprecation")
       com.cisco.stbarth.netconf.grpc.GNMI.Encoding result = com.cisco.stbarth.netconf.grpc.GNMI.Encoding.valueOf(encoding_);
       return result == null ? com.cisco.stbarth.netconf.grpc.GNMI.Encoding.UNRECOGNIZED : result;
     }
@@ -27777,6 +28929,7 @@ public final class GNMI {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -27786,6 +28939,7 @@ public final class GNMI {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (prefix_ != null) {
@@ -27809,6 +28963,7 @@ public final class GNMI {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -27853,22 +29008,21 @@ public final class GNMI {
       }
       com.cisco.stbarth.netconf.grpc.GNMI.GetRequest other = (com.cisco.stbarth.netconf.grpc.GNMI.GetRequest) obj;
 
-      boolean result = true;
-      result = result && (hasPrefix() == other.hasPrefix());
+      if (hasPrefix() != other.hasPrefix()) return false;
       if (hasPrefix()) {
-        result = result && getPrefix()
-            .equals(other.getPrefix());
+        if (!getPrefix()
+            .equals(other.getPrefix())) return false;
       }
-      result = result && getPathList()
-          .equals(other.getPathList());
-      result = result && type_ == other.type_;
-      result = result && encoding_ == other.encoding_;
-      result = result && getUseModelsList()
-          .equals(other.getUseModelsList());
-      result = result && getExtensionList()
-          .equals(other.getExtensionList());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (!getPathList()
+          .equals(other.getPathList())) return false;
+      if (type_ != other.type_) return false;
+      if (encoding_ != other.encoding_) return false;
+      if (!getUseModelsList()
+          .equals(other.getUseModelsList())) return false;
+      if (!getExtensionList()
+          .equals(other.getExtensionList())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -27973,6 +29127,7 @@ public final class GNMI {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -27980,6 +29135,7 @@ public final class GNMI {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.GNMI.GetRequest prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -28012,6 +29168,7 @@ public final class GNMI {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_GetRequest_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_GetRequest_fieldAccessorTable
@@ -28037,6 +29194,7 @@ public final class GNMI {
           getExtensionFieldBuilder();
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         if (prefixBuilder_ == null) {
@@ -28047,7 +29205,7 @@ public final class GNMI {
         }
         if (pathBuilder_ == null) {
           path_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000001);
         } else {
           pathBuilder_.clear();
         }
@@ -28057,28 +29215,31 @@ public final class GNMI {
 
         if (useModelsBuilder_ == null) {
           useModels_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
+          bitField0_ = (bitField0_ & ~0x00000002);
         } else {
           useModelsBuilder_.clear();
         }
         if (extensionBuilder_ == null) {
           extension_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000020);
+          bitField0_ = (bitField0_ & ~0x00000004);
         } else {
           extensionBuilder_.clear();
         }
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_GetRequest_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.GetRequest getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.GetRequest.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.GetRequest build() {
         com.cisco.stbarth.netconf.grpc.GNMI.GetRequest result = buildPartial();
         if (!result.isInitialized()) {
@@ -28087,19 +29248,19 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.GetRequest buildPartial() {
         com.cisco.stbarth.netconf.grpc.GNMI.GetRequest result = new com.cisco.stbarth.netconf.grpc.GNMI.GetRequest(this);
         int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
         if (prefixBuilder_ == null) {
           result.prefix_ = prefix_;
         } else {
           result.prefix_ = prefixBuilder_.build();
         }
         if (pathBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          if (((bitField0_ & 0x00000001) != 0)) {
             path_ = java.util.Collections.unmodifiableList(path_);
-            bitField0_ = (bitField0_ & ~0x00000002);
+            bitField0_ = (bitField0_ & ~0x00000001);
           }
           result.path_ = path_;
         } else {
@@ -28108,54 +29269,60 @@ public final class GNMI {
         result.type_ = type_;
         result.encoding_ = encoding_;
         if (useModelsBuilder_ == null) {
-          if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          if (((bitField0_ & 0x00000002) != 0)) {
             useModels_ = java.util.Collections.unmodifiableList(useModels_);
-            bitField0_ = (bitField0_ & ~0x00000010);
+            bitField0_ = (bitField0_ & ~0x00000002);
           }
           result.useModels_ = useModels_;
         } else {
           result.useModels_ = useModelsBuilder_.build();
         }
         if (extensionBuilder_ == null) {
-          if (((bitField0_ & 0x00000020) == 0x00000020)) {
+          if (((bitField0_ & 0x00000004) != 0)) {
             extension_ = java.util.Collections.unmodifiableList(extension_);
-            bitField0_ = (bitField0_ & ~0x00000020);
+            bitField0_ = (bitField0_ & ~0x00000004);
           }
           result.extension_ = extension_;
         } else {
           result.extension_ = extensionBuilder_.build();
         }
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.GNMI.GetRequest) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.GNMI.GetRequest)other);
@@ -28174,7 +29341,7 @@ public final class GNMI {
           if (!other.path_.isEmpty()) {
             if (path_.isEmpty()) {
               path_ = other.path_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000001);
             } else {
               ensurePathIsMutable();
               path_.addAll(other.path_);
@@ -28187,7 +29354,7 @@ public final class GNMI {
               pathBuilder_.dispose();
               pathBuilder_ = null;
               path_ = other.path_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000001);
               pathBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getPathFieldBuilder() : null;
@@ -28206,7 +29373,7 @@ public final class GNMI {
           if (!other.useModels_.isEmpty()) {
             if (useModels_.isEmpty()) {
               useModels_ = other.useModels_;
-              bitField0_ = (bitField0_ & ~0x00000010);
+              bitField0_ = (bitField0_ & ~0x00000002);
             } else {
               ensureUseModelsIsMutable();
               useModels_.addAll(other.useModels_);
@@ -28219,7 +29386,7 @@ public final class GNMI {
               useModelsBuilder_.dispose();
               useModelsBuilder_ = null;
               useModels_ = other.useModels_;
-              bitField0_ = (bitField0_ & ~0x00000010);
+              bitField0_ = (bitField0_ & ~0x00000002);
               useModelsBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getUseModelsFieldBuilder() : null;
@@ -28232,7 +29399,7 @@ public final class GNMI {
           if (!other.extension_.isEmpty()) {
             if (extension_.isEmpty()) {
               extension_ = other.extension_;
-              bitField0_ = (bitField0_ & ~0x00000020);
+              bitField0_ = (bitField0_ & ~0x00000004);
             } else {
               ensureExtensionIsMutable();
               extension_.addAll(other.extension_);
@@ -28245,7 +29412,7 @@ public final class GNMI {
               extensionBuilder_.dispose();
               extensionBuilder_ = null;
               extension_ = other.extension_;
-              bitField0_ = (bitField0_ & ~0x00000020);
+              bitField0_ = (bitField0_ & ~0x00000004);
               extensionBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getExtensionFieldBuilder() : null;
@@ -28259,10 +29426,12 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -28282,7 +29451,7 @@ public final class GNMI {
       }
       private int bitField0_;
 
-      private com.cisco.stbarth.netconf.grpc.GNMI.Path prefix_ = null;
+      private com.cisco.stbarth.netconf.grpc.GNMI.Path prefix_;
       private com.google.protobuf.SingleFieldBuilderV3<
           com.cisco.stbarth.netconf.grpc.GNMI.Path, com.cisco.stbarth.netconf.grpc.GNMI.Path.Builder, com.cisco.stbarth.netconf.grpc.GNMI.PathOrBuilder> prefixBuilder_;
       /**
@@ -28291,6 +29460,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Path prefix = 1;</code>
+       * @return Whether the prefix field is set.
        */
       public boolean hasPrefix() {
         return prefixBuilder_ != null || prefix_ != null;
@@ -28301,6 +29471,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Path prefix = 1;</code>
+       * @return The prefix.
        */
       public com.cisco.stbarth.netconf.grpc.GNMI.Path getPrefix() {
         if (prefixBuilder_ == null) {
@@ -28438,9 +29609,9 @@ public final class GNMI {
       private java.util.List<com.cisco.stbarth.netconf.grpc.GNMI.Path> path_ =
         java.util.Collections.emptyList();
       private void ensurePathIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+        if (!((bitField0_ & 0x00000001) != 0)) {
           path_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMI.Path>(path_);
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000001;
          }
       }
 
@@ -28634,7 +29805,7 @@ public final class GNMI {
       public Builder clearPath() {
         if (pathBuilder_ == null) {
           path_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000001);
           onChanged();
         } else {
           pathBuilder_.clear();
@@ -28739,7 +29910,7 @@ public final class GNMI {
           pathBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.cisco.stbarth.netconf.grpc.GNMI.Path, com.cisco.stbarth.netconf.grpc.GNMI.Path.Builder, com.cisco.stbarth.netconf.grpc.GNMI.PathOrBuilder>(
                   path_,
-                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  ((bitField0_ & 0x00000001) != 0),
                   getParentForChildren(),
                   isClean());
           path_ = null;
@@ -28754,6 +29925,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.GetRequest.DataType type = 3;</code>
+       * @return The enum numeric value on the wire for type.
        */
       public int getTypeValue() {
         return type_;
@@ -28764,6 +29936,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.GetRequest.DataType type = 3;</code>
+       * @param value The enum numeric value on the wire for type to set.
+       * @return This builder for chaining.
        */
       public Builder setTypeValue(int value) {
         type_ = value;
@@ -28776,8 +29950,10 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.GetRequest.DataType type = 3;</code>
+       * @return The type.
        */
       public com.cisco.stbarth.netconf.grpc.GNMI.GetRequest.DataType getType() {
+        @SuppressWarnings("deprecation")
         com.cisco.stbarth.netconf.grpc.GNMI.GetRequest.DataType result = com.cisco.stbarth.netconf.grpc.GNMI.GetRequest.DataType.valueOf(type_);
         return result == null ? com.cisco.stbarth.netconf.grpc.GNMI.GetRequest.DataType.UNRECOGNIZED : result;
       }
@@ -28787,6 +29963,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.GetRequest.DataType type = 3;</code>
+       * @param value The type to set.
+       * @return This builder for chaining.
        */
       public Builder setType(com.cisco.stbarth.netconf.grpc.GNMI.GetRequest.DataType value) {
         if (value == null) {
@@ -28803,6 +29981,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.GetRequest.DataType type = 3;</code>
+       * @return This builder for chaining.
        */
       public Builder clearType() {
         
@@ -28818,6 +29997,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Encoding encoding = 5;</code>
+       * @return The enum numeric value on the wire for encoding.
        */
       public int getEncodingValue() {
         return encoding_;
@@ -28828,6 +30008,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Encoding encoding = 5;</code>
+       * @param value The enum numeric value on the wire for encoding to set.
+       * @return This builder for chaining.
        */
       public Builder setEncodingValue(int value) {
         encoding_ = value;
@@ -28840,8 +30022,10 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Encoding encoding = 5;</code>
+       * @return The encoding.
        */
       public com.cisco.stbarth.netconf.grpc.GNMI.Encoding getEncoding() {
+        @SuppressWarnings("deprecation")
         com.cisco.stbarth.netconf.grpc.GNMI.Encoding result = com.cisco.stbarth.netconf.grpc.GNMI.Encoding.valueOf(encoding_);
         return result == null ? com.cisco.stbarth.netconf.grpc.GNMI.Encoding.UNRECOGNIZED : result;
       }
@@ -28851,6 +30035,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Encoding encoding = 5;</code>
+       * @param value The encoding to set.
+       * @return This builder for chaining.
        */
       public Builder setEncoding(com.cisco.stbarth.netconf.grpc.GNMI.Encoding value) {
         if (value == null) {
@@ -28867,6 +30053,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Encoding encoding = 5;</code>
+       * @return This builder for chaining.
        */
       public Builder clearEncoding() {
         
@@ -28878,9 +30065,9 @@ public final class GNMI {
       private java.util.List<com.cisco.stbarth.netconf.grpc.GNMI.ModelData> useModels_ =
         java.util.Collections.emptyList();
       private void ensureUseModelsIsMutable() {
-        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+        if (!((bitField0_ & 0x00000002) != 0)) {
           useModels_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMI.ModelData>(useModels_);
-          bitField0_ |= 0x00000010;
+          bitField0_ |= 0x00000002;
          }
       }
 
@@ -29074,7 +30261,7 @@ public final class GNMI {
       public Builder clearUseModels() {
         if (useModelsBuilder_ == null) {
           useModels_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000010);
+          bitField0_ = (bitField0_ & ~0x00000002);
           onChanged();
         } else {
           useModelsBuilder_.clear();
@@ -29179,7 +30366,7 @@ public final class GNMI {
           useModelsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.cisco.stbarth.netconf.grpc.GNMI.ModelData, com.cisco.stbarth.netconf.grpc.GNMI.ModelData.Builder, com.cisco.stbarth.netconf.grpc.GNMI.ModelDataOrBuilder>(
                   useModels_,
-                  ((bitField0_ & 0x00000010) == 0x00000010),
+                  ((bitField0_ & 0x00000002) != 0),
                   getParentForChildren(),
                   isClean());
           useModels_ = null;
@@ -29190,9 +30377,9 @@ public final class GNMI {
       private java.util.List<com.cisco.stbarth.netconf.grpc.GNMIExt.Extension> extension_ =
         java.util.Collections.emptyList();
       private void ensureExtensionIsMutable() {
-        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+        if (!((bitField0_ & 0x00000004) != 0)) {
           extension_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMIExt.Extension>(extension_);
-          bitField0_ |= 0x00000020;
+          bitField0_ |= 0x00000004;
          }
       }
 
@@ -29397,7 +30584,7 @@ public final class GNMI {
       public Builder clearExtension() {
         if (extensionBuilder_ == null) {
           extension_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000020);
+          bitField0_ = (bitField0_ & ~0x00000004);
           onChanged();
         } else {
           extensionBuilder_.clear();
@@ -29509,18 +30696,20 @@ public final class GNMI {
           extensionBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.cisco.stbarth.netconf.grpc.GNMIExt.Extension, com.cisco.stbarth.netconf.grpc.GNMIExt.Extension.Builder, com.cisco.stbarth.netconf.grpc.GNMIExt.ExtensionOrBuilder>(
                   extension_,
-                  ((bitField0_ & 0x00000020) == 0x00000020),
+                  ((bitField0_ & 0x00000004) != 0),
                   getParentForChildren(),
                   isClean());
           extension_ = null;
         }
         return extensionBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -29542,11 +30731,12 @@ public final class GNMI {
 
     private static final com.google.protobuf.Parser<GetRequest>
         PARSER = new com.google.protobuf.AbstractParser<GetRequest>() {
+      @java.lang.Override
       public GetRequest parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new GetRequest(input, extensionRegistry);
+        return new GetRequest(input, extensionRegistry);
       }
     };
 
@@ -29559,6 +30749,7 @@ public final class GNMI {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.GNMI.GetRequest getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -29619,6 +30810,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Error error = 2 [deprecated = true];</code>
+     * @return Whether the error field is set.
      */
     @java.lang.Deprecated boolean hasError();
     /**
@@ -29627,6 +30819,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Error error = 2 [deprecated = true];</code>
+     * @return The error.
      */
     @java.lang.Deprecated com.cisco.stbarth.netconf.grpc.GNMI.Error getError();
     /**
@@ -29712,6 +30905,13 @@ public final class GNMI {
     }
 
     @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new GetResponse();
+    }
+
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return this.unknownFields;
@@ -29721,6 +30921,9 @@ public final class GNMI {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -29732,15 +30935,8 @@ public final class GNMI {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
-              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
                 notification_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMI.Notification>();
                 mutable_bitField0_ |= 0x00000001;
               }
@@ -29762,12 +30958,19 @@ public final class GNMI {
               break;
             }
             case 26: {
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
                 extension_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMIExt.Extension>();
-                mutable_bitField0_ |= 0x00000004;
+                mutable_bitField0_ |= 0x00000002;
               }
               extension_.add(
                   input.readMessage(com.cisco.stbarth.netconf.grpc.GNMIExt.Extension.parser(), extensionRegistry));
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -29778,10 +30981,10 @@ public final class GNMI {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
           notification_ = java.util.Collections.unmodifiableList(notification_);
         }
-        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+        if (((mutable_bitField0_ & 0x00000002) != 0)) {
           extension_ = java.util.Collections.unmodifiableList(extension_);
         }
         this.unknownFields = unknownFields.build();
@@ -29793,6 +30996,7 @@ public final class GNMI {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_GetResponse_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_GetResponse_fieldAccessorTable
@@ -29800,7 +31004,6 @@ public final class GNMI {
               com.cisco.stbarth.netconf.grpc.GNMI.GetResponse.class, com.cisco.stbarth.netconf.grpc.GNMI.GetResponse.Builder.class);
     }
 
-    private int bitField0_;
     public static final int NOTIFICATION_FIELD_NUMBER = 1;
     private java.util.List<com.cisco.stbarth.netconf.grpc.GNMI.Notification> notification_;
     /**
@@ -29864,6 +31067,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Error error = 2 [deprecated = true];</code>
+     * @return Whether the error field is set.
      */
     @java.lang.Deprecated public boolean hasError() {
       return error_ != null;
@@ -29874,6 +31078,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>.gnmi.Error error = 2 [deprecated = true];</code>
+     * @return The error.
      */
     @java.lang.Deprecated public com.cisco.stbarth.netconf.grpc.GNMI.Error getError() {
       return error_ == null ? com.cisco.stbarth.netconf.grpc.GNMI.Error.getDefaultInstance() : error_;
@@ -29950,6 +31155,7 @@ public final class GNMI {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -29959,6 +31165,7 @@ public final class GNMI {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       for (int i = 0; i < notification_.size(); i++) {
@@ -29973,6 +31180,7 @@ public final class GNMI {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -30005,18 +31213,17 @@ public final class GNMI {
       }
       com.cisco.stbarth.netconf.grpc.GNMI.GetResponse other = (com.cisco.stbarth.netconf.grpc.GNMI.GetResponse) obj;
 
-      boolean result = true;
-      result = result && getNotificationList()
-          .equals(other.getNotificationList());
-      result = result && (hasError() == other.hasError());
+      if (!getNotificationList()
+          .equals(other.getNotificationList())) return false;
+      if (hasError() != other.hasError()) return false;
       if (hasError()) {
-        result = result && getError()
-            .equals(other.getError());
+        if (!getError()
+            .equals(other.getError())) return false;
       }
-      result = result && getExtensionList()
-          .equals(other.getExtensionList());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (!getExtensionList()
+          .equals(other.getExtensionList())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -30113,6 +31320,7 @@ public final class GNMI {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -30120,6 +31328,7 @@ public final class GNMI {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.GNMI.GetResponse prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -30150,6 +31359,7 @@ public final class GNMI {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_GetResponse_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_GetResponse_fieldAccessorTable
@@ -30174,6 +31384,7 @@ public final class GNMI {
           getExtensionFieldBuilder();
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         if (notificationBuilder_ == null) {
@@ -30190,22 +31401,25 @@ public final class GNMI {
         }
         if (extensionBuilder_ == null) {
           extension_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000002);
         } else {
           extensionBuilder_.clear();
         }
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_GetResponse_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.GetResponse getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.GetResponse.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.GetResponse build() {
         com.cisco.stbarth.netconf.grpc.GNMI.GetResponse result = buildPartial();
         if (!result.isInitialized()) {
@@ -30214,12 +31428,12 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.GetResponse buildPartial() {
         com.cisco.stbarth.netconf.grpc.GNMI.GetResponse result = new com.cisco.stbarth.netconf.grpc.GNMI.GetResponse(this);
         int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
         if (notificationBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          if (((bitField0_ & 0x00000001) != 0)) {
             notification_ = java.util.Collections.unmodifiableList(notification_);
             bitField0_ = (bitField0_ & ~0x00000001);
           }
@@ -30233,45 +31447,51 @@ public final class GNMI {
           result.error_ = errorBuilder_.build();
         }
         if (extensionBuilder_ == null) {
-          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          if (((bitField0_ & 0x00000002) != 0)) {
             extension_ = java.util.Collections.unmodifiableList(extension_);
-            bitField0_ = (bitField0_ & ~0x00000004);
+            bitField0_ = (bitField0_ & ~0x00000002);
           }
           result.extension_ = extension_;
         } else {
           result.extension_ = extensionBuilder_.build();
         }
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.GNMI.GetResponse) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.GNMI.GetResponse)other);
@@ -30316,7 +31536,7 @@ public final class GNMI {
           if (!other.extension_.isEmpty()) {
             if (extension_.isEmpty()) {
               extension_ = other.extension_;
-              bitField0_ = (bitField0_ & ~0x00000004);
+              bitField0_ = (bitField0_ & ~0x00000002);
             } else {
               ensureExtensionIsMutable();
               extension_.addAll(other.extension_);
@@ -30329,7 +31549,7 @@ public final class GNMI {
               extensionBuilder_.dispose();
               extensionBuilder_ = null;
               extension_ = other.extension_;
-              bitField0_ = (bitField0_ & ~0x00000004);
+              bitField0_ = (bitField0_ & ~0x00000002);
               extensionBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getExtensionFieldBuilder() : null;
@@ -30343,10 +31563,12 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -30369,7 +31591,7 @@ public final class GNMI {
       private java.util.List<com.cisco.stbarth.netconf.grpc.GNMI.Notification> notification_ =
         java.util.Collections.emptyList();
       private void ensureNotificationIsMutable() {
-        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+        if (!((bitField0_ & 0x00000001) != 0)) {
           notification_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMI.Notification>(notification_);
           bitField0_ |= 0x00000001;
          }
@@ -30670,7 +31892,7 @@ public final class GNMI {
           notificationBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.cisco.stbarth.netconf.grpc.GNMI.Notification, com.cisco.stbarth.netconf.grpc.GNMI.Notification.Builder, com.cisco.stbarth.netconf.grpc.GNMI.NotificationOrBuilder>(
                   notification_,
-                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  ((bitField0_ & 0x00000001) != 0),
                   getParentForChildren(),
                   isClean());
           notification_ = null;
@@ -30678,7 +31900,7 @@ public final class GNMI {
         return notificationBuilder_;
       }
 
-      private com.cisco.stbarth.netconf.grpc.GNMI.Error error_ = null;
+      private com.cisco.stbarth.netconf.grpc.GNMI.Error error_;
       private com.google.protobuf.SingleFieldBuilderV3<
           com.cisco.stbarth.netconf.grpc.GNMI.Error, com.cisco.stbarth.netconf.grpc.GNMI.Error.Builder, com.cisco.stbarth.netconf.grpc.GNMI.ErrorOrBuilder> errorBuilder_;
       /**
@@ -30687,6 +31909,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Error error = 2 [deprecated = true];</code>
+       * @return Whether the error field is set.
        */
       @java.lang.Deprecated public boolean hasError() {
         return errorBuilder_ != null || error_ != null;
@@ -30697,6 +31920,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>.gnmi.Error error = 2 [deprecated = true];</code>
+       * @return The error.
        */
       @java.lang.Deprecated public com.cisco.stbarth.netconf.grpc.GNMI.Error getError() {
         if (errorBuilder_ == null) {
@@ -30834,9 +32058,9 @@ public final class GNMI {
       private java.util.List<com.cisco.stbarth.netconf.grpc.GNMIExt.Extension> extension_ =
         java.util.Collections.emptyList();
       private void ensureExtensionIsMutable() {
-        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+        if (!((bitField0_ & 0x00000002) != 0)) {
           extension_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMIExt.Extension>(extension_);
-          bitField0_ |= 0x00000004;
+          bitField0_ |= 0x00000002;
          }
       }
 
@@ -31041,7 +32265,7 @@ public final class GNMI {
       public Builder clearExtension() {
         if (extensionBuilder_ == null) {
           extension_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000002);
           onChanged();
         } else {
           extensionBuilder_.clear();
@@ -31153,18 +32377,20 @@ public final class GNMI {
           extensionBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.cisco.stbarth.netconf.grpc.GNMIExt.Extension, com.cisco.stbarth.netconf.grpc.GNMIExt.Extension.Builder, com.cisco.stbarth.netconf.grpc.GNMIExt.ExtensionOrBuilder>(
                   extension_,
-                  ((bitField0_ & 0x00000004) == 0x00000004),
+                  ((bitField0_ & 0x00000002) != 0),
                   getParentForChildren(),
                   isClean());
           extension_ = null;
         }
         return extensionBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -31186,11 +32412,12 @@ public final class GNMI {
 
     private static final com.google.protobuf.Parser<GetResponse>
         PARSER = new com.google.protobuf.AbstractParser<GetResponse>() {
+      @java.lang.Override
       public GetResponse parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new GetResponse(input, extensionRegistry);
+        return new GetResponse(input, extensionRegistry);
       }
     };
 
@@ -31203,6 +32430,7 @@ public final class GNMI {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.GNMI.GetResponse getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -31285,6 +32513,13 @@ public final class GNMI {
     }
 
     @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new CapabilityRequest();
+    }
+
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return this.unknownFields;
@@ -31294,6 +32529,9 @@ public final class GNMI {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -31305,20 +32543,20 @@ public final class GNMI {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
-              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
                 extension_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMIExt.Extension>();
                 mutable_bitField0_ |= 0x00000001;
               }
               extension_.add(
                   input.readMessage(com.cisco.stbarth.netconf.grpc.GNMIExt.Extension.parser(), extensionRegistry));
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -31329,7 +32567,7 @@ public final class GNMI {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
           extension_ = java.util.Collections.unmodifiableList(extension_);
         }
         this.unknownFields = unknownFields.build();
@@ -31341,6 +32579,7 @@ public final class GNMI {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_CapabilityRequest_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_CapabilityRequest_fieldAccessorTable
@@ -31409,6 +32648,7 @@ public final class GNMI {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -31418,6 +32658,7 @@ public final class GNMI {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       for (int i = 0; i < extension_.size(); i++) {
@@ -31426,6 +32667,7 @@ public final class GNMI {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -31450,11 +32692,10 @@ public final class GNMI {
       }
       com.cisco.stbarth.netconf.grpc.GNMI.CapabilityRequest other = (com.cisco.stbarth.netconf.grpc.GNMI.CapabilityRequest) obj;
 
-      boolean result = true;
-      result = result && getExtensionList()
-          .equals(other.getExtensionList());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (!getExtensionList()
+          .equals(other.getExtensionList())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -31543,6 +32784,7 @@ public final class GNMI {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -31550,6 +32792,7 @@ public final class GNMI {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.GNMI.CapabilityRequest prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -31579,6 +32822,7 @@ public final class GNMI {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_CapabilityRequest_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_CapabilityRequest_fieldAccessorTable
@@ -31602,6 +32846,7 @@ public final class GNMI {
           getExtensionFieldBuilder();
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         if (extensionBuilder_ == null) {
@@ -31613,15 +32858,18 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_CapabilityRequest_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.CapabilityRequest getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.CapabilityRequest.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.CapabilityRequest build() {
         com.cisco.stbarth.netconf.grpc.GNMI.CapabilityRequest result = buildPartial();
         if (!result.isInitialized()) {
@@ -31630,11 +32878,12 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.CapabilityRequest buildPartial() {
         com.cisco.stbarth.netconf.grpc.GNMI.CapabilityRequest result = new com.cisco.stbarth.netconf.grpc.GNMI.CapabilityRequest(this);
         int from_bitField0_ = bitField0_;
         if (extensionBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          if (((bitField0_ & 0x00000001) != 0)) {
             extension_ = java.util.Collections.unmodifiableList(extension_);
             bitField0_ = (bitField0_ & ~0x00000001);
           }
@@ -31646,32 +32895,39 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.GNMI.CapabilityRequest) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.GNMI.CapabilityRequest)other);
@@ -31714,10 +32970,12 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -31740,7 +32998,7 @@ public final class GNMI {
       private java.util.List<com.cisco.stbarth.netconf.grpc.GNMIExt.Extension> extension_ =
         java.util.Collections.emptyList();
       private void ensureExtensionIsMutable() {
-        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+        if (!((bitField0_ & 0x00000001) != 0)) {
           extension_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMIExt.Extension>(extension_);
           bitField0_ |= 0x00000001;
          }
@@ -32059,18 +33317,20 @@ public final class GNMI {
           extensionBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.cisco.stbarth.netconf.grpc.GNMIExt.Extension, com.cisco.stbarth.netconf.grpc.GNMIExt.Extension.Builder, com.cisco.stbarth.netconf.grpc.GNMIExt.ExtensionOrBuilder>(
                   extension_,
-                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  ((bitField0_ & 0x00000001) != 0),
                   getParentForChildren(),
                   isClean());
           extension_ = null;
         }
         return extensionBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -32092,11 +33352,12 @@ public final class GNMI {
 
     private static final com.google.protobuf.Parser<CapabilityRequest>
         PARSER = new com.google.protobuf.AbstractParser<CapabilityRequest>() {
+      @java.lang.Override
       public CapabilityRequest parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new CapabilityRequest(input, extensionRegistry);
+        return new CapabilityRequest(input, extensionRegistry);
       }
     };
 
@@ -32109,6 +33370,7 @@ public final class GNMI {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.GNMI.CapabilityRequest getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -32169,6 +33431,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>repeated .gnmi.Encoding supported_encodings = 2;</code>
+     * @return A list containing the supportedEncodings.
      */
     java.util.List<com.cisco.stbarth.netconf.grpc.GNMI.Encoding> getSupportedEncodingsList();
     /**
@@ -32177,6 +33440,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>repeated .gnmi.Encoding supported_encodings = 2;</code>
+     * @return The count of supportedEncodings.
      */
     int getSupportedEncodingsCount();
     /**
@@ -32185,6 +33449,8 @@ public final class GNMI {
      * </pre>
      *
      * <code>repeated .gnmi.Encoding supported_encodings = 2;</code>
+     * @param index The index of the element to return.
+     * @return The supportedEncodings at the given index.
      */
     com.cisco.stbarth.netconf.grpc.GNMI.Encoding getSupportedEncodings(int index);
     /**
@@ -32193,6 +33459,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>repeated .gnmi.Encoding supported_encodings = 2;</code>
+     * @return A list containing the enum numeric values on the wire for supportedEncodings.
      */
     java.util.List<java.lang.Integer>
     getSupportedEncodingsValueList();
@@ -32202,6 +33469,8 @@ public final class GNMI {
      * </pre>
      *
      * <code>repeated .gnmi.Encoding supported_encodings = 2;</code>
+     * @param index The index of the value to return.
+     * @return The enum numeric value on the wire of supportedEncodings at the given index.
      */
     int getSupportedEncodingsValue(int index);
 
@@ -32211,6 +33480,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string gNMI_version = 3;</code>
+     * @return The gNMIVersion.
      */
     java.lang.String getGNMIVersion();
     /**
@@ -32219,6 +33489,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string gNMI_version = 3;</code>
+     * @return The bytes for gNMIVersion.
      */
     com.google.protobuf.ByteString
         getGNMIVersionBytes();
@@ -32298,6 +33569,13 @@ public final class GNMI {
     }
 
     @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new CapabilityResponse();
+    }
+
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return this.unknownFields;
@@ -32307,6 +33585,9 @@ public final class GNMI {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -32318,15 +33599,8 @@ public final class GNMI {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
-              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
                 supportedModels_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMI.ModelData>();
                 mutable_bitField0_ |= 0x00000001;
               }
@@ -32336,7 +33610,7 @@ public final class GNMI {
             }
             case 16: {
               int rawValue = input.readEnum();
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
                 supportedEncodings_ = new java.util.ArrayList<java.lang.Integer>();
                 mutable_bitField0_ |= 0x00000002;
               }
@@ -32348,7 +33622,7 @@ public final class GNMI {
               int oldLimit = input.pushLimit(length);
               while(input.getBytesUntilLimit() > 0) {
                 int rawValue = input.readEnum();
-                if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                if (!((mutable_bitField0_ & 0x00000002) != 0)) {
                   supportedEncodings_ = new java.util.ArrayList<java.lang.Integer>();
                   mutable_bitField0_ |= 0x00000002;
                 }
@@ -32364,12 +33638,19 @@ public final class GNMI {
               break;
             }
             case 34: {
-              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+              if (!((mutable_bitField0_ & 0x00000004) != 0)) {
                 extension_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMIExt.Extension>();
-                mutable_bitField0_ |= 0x00000008;
+                mutable_bitField0_ |= 0x00000004;
               }
               extension_.add(
                   input.readMessage(com.cisco.stbarth.netconf.grpc.GNMIExt.Extension.parser(), extensionRegistry));
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -32380,13 +33661,13 @@ public final class GNMI {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
           supportedModels_ = java.util.Collections.unmodifiableList(supportedModels_);
         }
-        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+        if (((mutable_bitField0_ & 0x00000002) != 0)) {
           supportedEncodings_ = java.util.Collections.unmodifiableList(supportedEncodings_);
         }
-        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+        if (((mutable_bitField0_ & 0x00000004) != 0)) {
           extension_ = java.util.Collections.unmodifiableList(extension_);
         }
         this.unknownFields = unknownFields.build();
@@ -32398,6 +33679,7 @@ public final class GNMI {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_CapabilityResponse_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_CapabilityResponse_fieldAccessorTable
@@ -32405,7 +33687,6 @@ public final class GNMI {
               com.cisco.stbarth.netconf.grpc.GNMI.CapabilityResponse.class, com.cisco.stbarth.netconf.grpc.GNMI.CapabilityResponse.Builder.class);
     }
 
-    private int bitField0_;
     public static final int SUPPORTED_MODELS_FIELD_NUMBER = 1;
     private java.util.List<com.cisco.stbarth.netconf.grpc.GNMI.ModelData> supportedModels_;
     /**
@@ -32468,6 +33749,7 @@ public final class GNMI {
             new com.google.protobuf.Internal.ListAdapter.Converter<
                 java.lang.Integer, com.cisco.stbarth.netconf.grpc.GNMI.Encoding>() {
               public com.cisco.stbarth.netconf.grpc.GNMI.Encoding convert(java.lang.Integer from) {
+                @SuppressWarnings("deprecation")
                 com.cisco.stbarth.netconf.grpc.GNMI.Encoding result = com.cisco.stbarth.netconf.grpc.GNMI.Encoding.valueOf(from);
                 return result == null ? com.cisco.stbarth.netconf.grpc.GNMI.Encoding.UNRECOGNIZED : result;
               }
@@ -32478,6 +33760,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>repeated .gnmi.Encoding supported_encodings = 2;</code>
+     * @return A list containing the supportedEncodings.
      */
     public java.util.List<com.cisco.stbarth.netconf.grpc.GNMI.Encoding> getSupportedEncodingsList() {
       return new com.google.protobuf.Internal.ListAdapter<
@@ -32489,6 +33772,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>repeated .gnmi.Encoding supported_encodings = 2;</code>
+     * @return The count of supportedEncodings.
      */
     public int getSupportedEncodingsCount() {
       return supportedEncodings_.size();
@@ -32499,6 +33783,8 @@ public final class GNMI {
      * </pre>
      *
      * <code>repeated .gnmi.Encoding supported_encodings = 2;</code>
+     * @param index The index of the element to return.
+     * @return The supportedEncodings at the given index.
      */
     public com.cisco.stbarth.netconf.grpc.GNMI.Encoding getSupportedEncodings(int index) {
       return supportedEncodings_converter_.convert(supportedEncodings_.get(index));
@@ -32509,6 +33795,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>repeated .gnmi.Encoding supported_encodings = 2;</code>
+     * @return A list containing the enum numeric values on the wire for supportedEncodings.
      */
     public java.util.List<java.lang.Integer>
     getSupportedEncodingsValueList() {
@@ -32520,6 +33807,8 @@ public final class GNMI {
      * </pre>
      *
      * <code>repeated .gnmi.Encoding supported_encodings = 2;</code>
+     * @param index The index of the value to return.
+     * @return The enum numeric value on the wire of supportedEncodings at the given index.
      */
     public int getSupportedEncodingsValue(int index) {
       return supportedEncodings_.get(index);
@@ -32534,6 +33823,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string gNMI_version = 3;</code>
+     * @return The gNMIVersion.
      */
     public java.lang.String getGNMIVersion() {
       java.lang.Object ref = gNMIVersion_;
@@ -32553,6 +33843,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string gNMI_version = 3;</code>
+     * @return The bytes for gNMIVersion.
      */
     public com.google.protobuf.ByteString
         getGNMIVersionBytes() {
@@ -32629,6 +33920,7 @@ public final class GNMI {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -32638,6 +33930,7 @@ public final class GNMI {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
@@ -32660,6 +33953,7 @@ public final class GNMI {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -32703,16 +33997,15 @@ public final class GNMI {
       }
       com.cisco.stbarth.netconf.grpc.GNMI.CapabilityResponse other = (com.cisco.stbarth.netconf.grpc.GNMI.CapabilityResponse) obj;
 
-      boolean result = true;
-      result = result && getSupportedModelsList()
-          .equals(other.getSupportedModelsList());
-      result = result && supportedEncodings_.equals(other.supportedEncodings_);
-      result = result && getGNMIVersion()
-          .equals(other.getGNMIVersion());
-      result = result && getExtensionList()
-          .equals(other.getExtensionList());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (!getSupportedModelsList()
+          .equals(other.getSupportedModelsList())) return false;
+      if (!supportedEncodings_.equals(other.supportedEncodings_)) return false;
+      if (!getGNMIVersion()
+          .equals(other.getGNMIVersion())) return false;
+      if (!getExtensionList()
+          .equals(other.getExtensionList())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -32811,6 +34104,7 @@ public final class GNMI {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -32818,6 +34112,7 @@ public final class GNMI {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.GNMI.CapabilityResponse prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -32847,6 +34142,7 @@ public final class GNMI {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_CapabilityResponse_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_CapabilityResponse_fieldAccessorTable
@@ -32871,6 +34167,7 @@ public final class GNMI {
           getExtensionFieldBuilder();
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         if (supportedModelsBuilder_ == null) {
@@ -32885,22 +34182,25 @@ public final class GNMI {
 
         if (extensionBuilder_ == null) {
           extension_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000004);
         } else {
           extensionBuilder_.clear();
         }
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_CapabilityResponse_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.CapabilityResponse getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.CapabilityResponse.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.CapabilityResponse build() {
         com.cisco.stbarth.netconf.grpc.GNMI.CapabilityResponse result = buildPartial();
         if (!result.isInitialized()) {
@@ -32909,12 +34209,12 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.CapabilityResponse buildPartial() {
         com.cisco.stbarth.netconf.grpc.GNMI.CapabilityResponse result = new com.cisco.stbarth.netconf.grpc.GNMI.CapabilityResponse(this);
         int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
         if (supportedModelsBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          if (((bitField0_ & 0x00000001) != 0)) {
             supportedModels_ = java.util.Collections.unmodifiableList(supportedModels_);
             bitField0_ = (bitField0_ & ~0x00000001);
           }
@@ -32922,52 +34222,58 @@ public final class GNMI {
         } else {
           result.supportedModels_ = supportedModelsBuilder_.build();
         }
-        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        if (((bitField0_ & 0x00000002) != 0)) {
           supportedEncodings_ = java.util.Collections.unmodifiableList(supportedEncodings_);
           bitField0_ = (bitField0_ & ~0x00000002);
         }
         result.supportedEncodings_ = supportedEncodings_;
         result.gNMIVersion_ = gNMIVersion_;
         if (extensionBuilder_ == null) {
-          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          if (((bitField0_ & 0x00000004) != 0)) {
             extension_ = java.util.Collections.unmodifiableList(extension_);
-            bitField0_ = (bitField0_ & ~0x00000008);
+            bitField0_ = (bitField0_ & ~0x00000004);
           }
           result.extension_ = extension_;
         } else {
           result.extension_ = extensionBuilder_.build();
         }
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.GNMI.CapabilityResponse) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.GNMI.CapabilityResponse)other);
@@ -33023,7 +34329,7 @@ public final class GNMI {
           if (!other.extension_.isEmpty()) {
             if (extension_.isEmpty()) {
               extension_ = other.extension_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000004);
             } else {
               ensureExtensionIsMutable();
               extension_.addAll(other.extension_);
@@ -33036,7 +34342,7 @@ public final class GNMI {
               extensionBuilder_.dispose();
               extensionBuilder_ = null;
               extension_ = other.extension_;
-              bitField0_ = (bitField0_ & ~0x00000008);
+              bitField0_ = (bitField0_ & ~0x00000004);
               extensionBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getExtensionFieldBuilder() : null;
@@ -33050,10 +34356,12 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -33076,7 +34384,7 @@ public final class GNMI {
       private java.util.List<com.cisco.stbarth.netconf.grpc.GNMI.ModelData> supportedModels_ =
         java.util.Collections.emptyList();
       private void ensureSupportedModelsIsMutable() {
-        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+        if (!((bitField0_ & 0x00000001) != 0)) {
           supportedModels_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMI.ModelData>(supportedModels_);
           bitField0_ |= 0x00000001;
          }
@@ -33377,7 +34685,7 @@ public final class GNMI {
           supportedModelsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.cisco.stbarth.netconf.grpc.GNMI.ModelData, com.cisco.stbarth.netconf.grpc.GNMI.ModelData.Builder, com.cisco.stbarth.netconf.grpc.GNMI.ModelDataOrBuilder>(
                   supportedModels_,
-                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  ((bitField0_ & 0x00000001) != 0),
                   getParentForChildren(),
                   isClean());
           supportedModels_ = null;
@@ -33388,7 +34696,7 @@ public final class GNMI {
       private java.util.List<java.lang.Integer> supportedEncodings_ =
         java.util.Collections.emptyList();
       private void ensureSupportedEncodingsIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+        if (!((bitField0_ & 0x00000002) != 0)) {
           supportedEncodings_ = new java.util.ArrayList<java.lang.Integer>(supportedEncodings_);
           bitField0_ |= 0x00000002;
         }
@@ -33399,6 +34707,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>repeated .gnmi.Encoding supported_encodings = 2;</code>
+       * @return A list containing the supportedEncodings.
        */
       public java.util.List<com.cisco.stbarth.netconf.grpc.GNMI.Encoding> getSupportedEncodingsList() {
         return new com.google.protobuf.Internal.ListAdapter<
@@ -33410,6 +34719,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>repeated .gnmi.Encoding supported_encodings = 2;</code>
+       * @return The count of supportedEncodings.
        */
       public int getSupportedEncodingsCount() {
         return supportedEncodings_.size();
@@ -33420,6 +34730,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>repeated .gnmi.Encoding supported_encodings = 2;</code>
+       * @param index The index of the element to return.
+       * @return The supportedEncodings at the given index.
        */
       public com.cisco.stbarth.netconf.grpc.GNMI.Encoding getSupportedEncodings(int index) {
         return supportedEncodings_converter_.convert(supportedEncodings_.get(index));
@@ -33430,6 +34742,9 @@ public final class GNMI {
        * </pre>
        *
        * <code>repeated .gnmi.Encoding supported_encodings = 2;</code>
+       * @param index The index to set the value at.
+       * @param value The supportedEncodings to set.
+       * @return This builder for chaining.
        */
       public Builder setSupportedEncodings(
           int index, com.cisco.stbarth.netconf.grpc.GNMI.Encoding value) {
@@ -33447,6 +34762,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>repeated .gnmi.Encoding supported_encodings = 2;</code>
+       * @param value The supportedEncodings to add.
+       * @return This builder for chaining.
        */
       public Builder addSupportedEncodings(com.cisco.stbarth.netconf.grpc.GNMI.Encoding value) {
         if (value == null) {
@@ -33463,6 +34780,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>repeated .gnmi.Encoding supported_encodings = 2;</code>
+       * @param values The supportedEncodings to add.
+       * @return This builder for chaining.
        */
       public Builder addAllSupportedEncodings(
           java.lang.Iterable<? extends com.cisco.stbarth.netconf.grpc.GNMI.Encoding> values) {
@@ -33479,6 +34798,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>repeated .gnmi.Encoding supported_encodings = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearSupportedEncodings() {
         supportedEncodings_ = java.util.Collections.emptyList();
@@ -33492,6 +34812,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>repeated .gnmi.Encoding supported_encodings = 2;</code>
+       * @return A list containing the enum numeric values on the wire for supportedEncodings.
        */
       public java.util.List<java.lang.Integer>
       getSupportedEncodingsValueList() {
@@ -33503,6 +34824,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>repeated .gnmi.Encoding supported_encodings = 2;</code>
+       * @param index The index of the value to return.
+       * @return The enum numeric value on the wire of supportedEncodings at the given index.
        */
       public int getSupportedEncodingsValue(int index) {
         return supportedEncodings_.get(index);
@@ -33513,6 +34836,9 @@ public final class GNMI {
        * </pre>
        *
        * <code>repeated .gnmi.Encoding supported_encodings = 2;</code>
+       * @param index The index of the value to return.
+       * @return The enum numeric value on the wire of supportedEncodings at the given index.
+       * @return This builder for chaining.
        */
       public Builder setSupportedEncodingsValue(
           int index, int value) {
@@ -33527,6 +34853,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>repeated .gnmi.Encoding supported_encodings = 2;</code>
+       * @param value The enum numeric value on the wire for supportedEncodings to add.
+       * @return This builder for chaining.
        */
       public Builder addSupportedEncodingsValue(int value) {
         ensureSupportedEncodingsIsMutable();
@@ -33540,6 +34868,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>repeated .gnmi.Encoding supported_encodings = 2;</code>
+       * @param values The enum numeric values on the wire for supportedEncodings to add.
+       * @return This builder for chaining.
        */
       public Builder addAllSupportedEncodingsValue(
           java.lang.Iterable<java.lang.Integer> values) {
@@ -33558,6 +34888,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string gNMI_version = 3;</code>
+       * @return The gNMIVersion.
        */
       public java.lang.String getGNMIVersion() {
         java.lang.Object ref = gNMIVersion_;
@@ -33577,6 +34908,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string gNMI_version = 3;</code>
+       * @return The bytes for gNMIVersion.
        */
       public com.google.protobuf.ByteString
           getGNMIVersionBytes() {
@@ -33597,6 +34929,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>string gNMI_version = 3;</code>
+       * @param value The gNMIVersion to set.
+       * @return This builder for chaining.
        */
       public Builder setGNMIVersion(
           java.lang.String value) {
@@ -33614,6 +34948,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string gNMI_version = 3;</code>
+       * @return This builder for chaining.
        */
       public Builder clearGNMIVersion() {
         
@@ -33627,6 +34962,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>string gNMI_version = 3;</code>
+       * @param value The bytes for gNMIVersion to set.
+       * @return This builder for chaining.
        */
       public Builder setGNMIVersionBytes(
           com.google.protobuf.ByteString value) {
@@ -33643,9 +34980,9 @@ public final class GNMI {
       private java.util.List<com.cisco.stbarth.netconf.grpc.GNMIExt.Extension> extension_ =
         java.util.Collections.emptyList();
       private void ensureExtensionIsMutable() {
-        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+        if (!((bitField0_ & 0x00000004) != 0)) {
           extension_ = new java.util.ArrayList<com.cisco.stbarth.netconf.grpc.GNMIExt.Extension>(extension_);
-          bitField0_ |= 0x00000008;
+          bitField0_ |= 0x00000004;
          }
       }
 
@@ -33850,7 +35187,7 @@ public final class GNMI {
       public Builder clearExtension() {
         if (extensionBuilder_ == null) {
           extension_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000008);
+          bitField0_ = (bitField0_ & ~0x00000004);
           onChanged();
         } else {
           extensionBuilder_.clear();
@@ -33962,18 +35299,20 @@ public final class GNMI {
           extensionBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.cisco.stbarth.netconf.grpc.GNMIExt.Extension, com.cisco.stbarth.netconf.grpc.GNMIExt.Extension.Builder, com.cisco.stbarth.netconf.grpc.GNMIExt.ExtensionOrBuilder>(
                   extension_,
-                  ((bitField0_ & 0x00000008) == 0x00000008),
+                  ((bitField0_ & 0x00000004) != 0),
                   getParentForChildren(),
                   isClean());
           extension_ = null;
         }
         return extensionBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -33995,11 +35334,12 @@ public final class GNMI {
 
     private static final com.google.protobuf.Parser<CapabilityResponse>
         PARSER = new com.google.protobuf.AbstractParser<CapabilityResponse>() {
+      @java.lang.Override
       public CapabilityResponse parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new CapabilityResponse(input, extensionRegistry);
+        return new CapabilityResponse(input, extensionRegistry);
       }
     };
 
@@ -34012,6 +35352,7 @@ public final class GNMI {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.GNMI.CapabilityResponse getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -34028,6 +35369,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string name = 1;</code>
+     * @return The name.
      */
     java.lang.String getName();
     /**
@@ -34036,6 +35378,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string name = 1;</code>
+     * @return The bytes for name.
      */
     com.google.protobuf.ByteString
         getNameBytes();
@@ -34046,6 +35389,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string organization = 2;</code>
+     * @return The organization.
      */
     java.lang.String getOrganization();
     /**
@@ -34054,6 +35398,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string organization = 2;</code>
+     * @return The bytes for organization.
      */
     com.google.protobuf.ByteString
         getOrganizationBytes();
@@ -34064,6 +35409,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string version = 3;</code>
+     * @return The version.
      */
     java.lang.String getVersion();
     /**
@@ -34072,6 +35418,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string version = 3;</code>
+     * @return The bytes for version.
      */
     com.google.protobuf.ByteString
         getVersionBytes();
@@ -34103,6 +35450,13 @@ public final class GNMI {
     }
 
     @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new ModelData();
+    }
+
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return this.unknownFields;
@@ -34112,7 +35466,9 @@ public final class GNMI {
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
-      int mutable_bitField0_ = 0;
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -34123,13 +35479,6 @@ public final class GNMI {
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
@@ -34146,6 +35495,13 @@ public final class GNMI {
               java.lang.String s = input.readStringRequireUtf8();
 
               version_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -34165,6 +35521,7 @@ public final class GNMI {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_ModelData_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_ModelData_fieldAccessorTable
@@ -34180,6 +35537,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string name = 1;</code>
+     * @return The name.
      */
     public java.lang.String getName() {
       java.lang.Object ref = name_;
@@ -34199,6 +35557,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string name = 1;</code>
+     * @return The bytes for name.
      */
     public com.google.protobuf.ByteString
         getNameBytes() {
@@ -34222,6 +35581,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string organization = 2;</code>
+     * @return The organization.
      */
     public java.lang.String getOrganization() {
       java.lang.Object ref = organization_;
@@ -34241,6 +35601,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string organization = 2;</code>
+     * @return The bytes for organization.
      */
     public com.google.protobuf.ByteString
         getOrganizationBytes() {
@@ -34264,6 +35625,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string version = 3;</code>
+     * @return The version.
      */
     public java.lang.String getVersion() {
       java.lang.Object ref = version_;
@@ -34283,6 +35645,7 @@ public final class GNMI {
      * </pre>
      *
      * <code>string version = 3;</code>
+     * @return The bytes for version.
      */
     public com.google.protobuf.ByteString
         getVersionBytes() {
@@ -34299,6 +35662,7 @@ public final class GNMI {
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -34308,6 +35672,7 @@ public final class GNMI {
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (!getNameBytes().isEmpty()) {
@@ -34322,6 +35687,7 @@ public final class GNMI {
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -34351,15 +35717,14 @@ public final class GNMI {
       }
       com.cisco.stbarth.netconf.grpc.GNMI.ModelData other = (com.cisco.stbarth.netconf.grpc.GNMI.ModelData) obj;
 
-      boolean result = true;
-      result = result && getName()
-          .equals(other.getName());
-      result = result && getOrganization()
-          .equals(other.getOrganization());
-      result = result && getVersion()
-          .equals(other.getVersion());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+      if (!getName()
+          .equals(other.getName())) return false;
+      if (!getOrganization()
+          .equals(other.getOrganization())) return false;
+      if (!getVersion()
+          .equals(other.getVersion())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
     }
 
     @java.lang.Override
@@ -34450,6 +35815,7 @@ public final class GNMI {
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -34457,6 +35823,7 @@ public final class GNMI {
     public static Builder newBuilder(com.cisco.stbarth.netconf.grpc.GNMI.ModelData prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -34488,6 +35855,7 @@ public final class GNMI {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_ModelData_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_ModelData_fieldAccessorTable
@@ -34510,6 +35878,7 @@ public final class GNMI {
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         name_ = "";
@@ -34521,15 +35890,18 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.internal_static_gnmi_ModelData_descriptor;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.ModelData getDefaultInstanceForType() {
         return com.cisco.stbarth.netconf.grpc.GNMI.ModelData.getDefaultInstance();
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.ModelData build() {
         com.cisco.stbarth.netconf.grpc.GNMI.ModelData result = buildPartial();
         if (!result.isInitialized()) {
@@ -34538,6 +35910,7 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public com.cisco.stbarth.netconf.grpc.GNMI.ModelData buildPartial() {
         com.cisco.stbarth.netconf.grpc.GNMI.ModelData result = new com.cisco.stbarth.netconf.grpc.GNMI.ModelData(this);
         result.name_ = name_;
@@ -34547,32 +35920,39 @@ public final class GNMI {
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
-        return (Builder) super.clone();
+        return super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.setField(field, value);
+        return super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
+        return super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
+        return super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
+        return super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
+        return super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof com.cisco.stbarth.netconf.grpc.GNMI.ModelData) {
           return mergeFrom((com.cisco.stbarth.netconf.grpc.GNMI.ModelData)other);
@@ -34601,10 +35981,12 @@ public final class GNMI {
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -34630,6 +36012,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string name = 1;</code>
+       * @return The name.
        */
       public java.lang.String getName() {
         java.lang.Object ref = name_;
@@ -34649,6 +36032,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string name = 1;</code>
+       * @return The bytes for name.
        */
       public com.google.protobuf.ByteString
           getNameBytes() {
@@ -34669,6 +36053,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>string name = 1;</code>
+       * @param value The name to set.
+       * @return This builder for chaining.
        */
       public Builder setName(
           java.lang.String value) {
@@ -34686,6 +36072,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string name = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearName() {
         
@@ -34699,6 +36086,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>string name = 1;</code>
+       * @param value The bytes for name to set.
+       * @return This builder for chaining.
        */
       public Builder setNameBytes(
           com.google.protobuf.ByteString value) {
@@ -34719,6 +36108,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string organization = 2;</code>
+       * @return The organization.
        */
       public java.lang.String getOrganization() {
         java.lang.Object ref = organization_;
@@ -34738,6 +36128,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string organization = 2;</code>
+       * @return The bytes for organization.
        */
       public com.google.protobuf.ByteString
           getOrganizationBytes() {
@@ -34758,6 +36149,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>string organization = 2;</code>
+       * @param value The organization to set.
+       * @return This builder for chaining.
        */
       public Builder setOrganization(
           java.lang.String value) {
@@ -34775,6 +36168,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string organization = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearOrganization() {
         
@@ -34788,6 +36182,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>string organization = 2;</code>
+       * @param value The bytes for organization to set.
+       * @return This builder for chaining.
        */
       public Builder setOrganizationBytes(
           com.google.protobuf.ByteString value) {
@@ -34808,6 +36204,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string version = 3;</code>
+       * @return The version.
        */
       public java.lang.String getVersion() {
         java.lang.Object ref = version_;
@@ -34827,6 +36224,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string version = 3;</code>
+       * @return The bytes for version.
        */
       public com.google.protobuf.ByteString
           getVersionBytes() {
@@ -34847,6 +36245,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>string version = 3;</code>
+       * @param value The version to set.
+       * @return This builder for chaining.
        */
       public Builder setVersion(
           java.lang.String value) {
@@ -34864,6 +36264,7 @@ public final class GNMI {
        * </pre>
        *
        * <code>string version = 3;</code>
+       * @return This builder for chaining.
        */
       public Builder clearVersion() {
         
@@ -34877,6 +36278,8 @@ public final class GNMI {
        * </pre>
        *
        * <code>string version = 3;</code>
+       * @param value The bytes for version to set.
+       * @return This builder for chaining.
        */
       public Builder setVersionBytes(
           com.google.protobuf.ByteString value) {
@@ -34889,11 +36292,13 @@ public final class GNMI {
         onChanged();
         return this;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
+        return super.setUnknownFields(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -34915,11 +36320,12 @@ public final class GNMI {
 
     private static final com.google.protobuf.Parser<ModelData>
         PARSER = new com.google.protobuf.AbstractParser<ModelData>() {
+      @java.lang.Override
       public ModelData parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ModelData(input, extensionRegistry);
+        return new ModelData(input, extensionRegistry);
       }
     };
 
@@ -34932,6 +36338,7 @@ public final class GNMI {
       return PARSER;
     }
 
+    @java.lang.Override
     public com.cisco.stbarth.netconf.grpc.GNMI.ModelData getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -35101,7 +36508,7 @@ public final class GNMI {
       "ic\030\006 \001(\010\"u\n\006Update\022\030\n\004path\030\001 \001(\0132\n.gnmi." +
       "Path\022\036\n\005value\030\002 \001(\0132\013.gnmi.ValueB\002\030\001\022\035\n\003" +
       "val\030\003 \001(\0132\020.gnmi.TypedValue\022\022\n\nduplicate" +
-      "s\030\004 \001(\r\"\345\002\n\nTypedValue\022\024\n\nstring_val\030\001 \001",
+      "s\030\004 \001(\r\"\345\002\n\nTypedValue\022\024\n\nstring_val\030\001 \001" +
       "(\tH\000\022\021\n\007int_val\030\002 \001(\003H\000\022\022\n\010uint_val\030\003 \001(" +
       "\004H\000\022\022\n\010bool_val\030\004 \001(\010H\000\022\023\n\tbytes_val\030\005 \001" +
       "(\014H\000\022\023\n\tfloat_val\030\006 \001(\002H\000\022&\n\013decimal_val" +
@@ -35111,7 +36518,7 @@ public final class GNMI {
       "l\030\n \001(\014H\000\022\027\n\rjson_ietf_val\030\013 \001(\014H\000\022\023\n\tas" +
       "cii_val\030\014 \001(\tH\000\022\025\n\013proto_bytes\030\r \001(\014H\000B\007" +
       "\n\005value\"Y\n\004Path\022\023\n\007element\030\001 \003(\tB\002\030\001\022\016\n\006" +
-      "origin\030\002 \001(\t\022\034\n\004elem\030\003 \003(\0132\016.gnmi.PathEl",
+      "origin\030\002 \001(\t\022\034\n\004elem\030\003 \003(\0132\016.gnmi.PathEl" +
       "em\022\016\n\006target\030\004 \001(\t\"j\n\010PathElem\022\014\n\004name\030\001" +
       " \001(\t\022$\n\003key\030\002 \003(\0132\027.gnmi.PathElem.KeyEnt" +
       "ry\032*\n\010KeyEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001" +
@@ -35121,7 +36528,7 @@ public final class GNMI {
       ".google.protobuf.Any:\002\030\001\".\n\tDecimal64\022\016\n" +
       "\006digits\030\001 \001(\003\022\021\n\tprecision\030\002 \001(\r\"0\n\013Scal" +
       "arArray\022!\n\007element\030\001 \003(\0132\020.gnmi.TypedVal" +
-      "ue\"\262\001\n\020SubscribeRequest\022+\n\tsubscribe\030\001 \001",
+      "ue\"\262\001\n\020SubscribeRequest\022+\n\tsubscribe\030\001 \001" +
       "(\0132\026.gnmi.SubscriptionListH\000\022\032\n\004poll\030\003 \001" +
       "(\0132\n.gnmi.PollH\000\022\"\n\007aliases\030\004 \001(\0132\017.gnmi" +
       ".AliasListH\000\022&\n\textension\030\005 \003(\0132\023.gnmi_e" +
@@ -35131,7 +36538,7 @@ public final class GNMI {
       "error\030\004 \001(\0132\013.gnmi.ErrorB\002\030\001H\000\022&\n\textens" +
       "ion\030\005 \003(\0132\023.gnmi_ext.ExtensionB\n\n\010respon" +
       "se\"\327\002\n\020SubscriptionList\022\032\n\006prefix\030\001 \001(\0132" +
-      "\n.gnmi.Path\022(\n\014subscription\030\002 \003(\0132\022.gnmi",
+      "\n.gnmi.Path\022(\n\014subscription\030\002 \003(\0132\022.gnmi" +
       ".Subscription\022\023\n\013use_aliases\030\003 \001(\010\022\035\n\003qo" +
       "s\030\004 \001(\0132\020.gnmi.QOSMarking\022)\n\004mode\030\005 \001(\0162" +
       "\033.gnmi.SubscriptionList.Mode\022\031\n\021allow_ag" +
@@ -35141,7 +36548,7 @@ public final class GNMI {
       "STREAM\020\000\022\010\n\004ONCE\020\001\022\010\n\004POLL\020\002\"\237\001\n\014Subscri" +
       "ption\022\030\n\004path\030\001 \001(\0132\n.gnmi.Path\022$\n\004mode\030" +
       "\002 \001(\0162\026.gnmi.SubscriptionMode\022\027\n\017sample_" +
-      "interval\030\003 \001(\004\022\032\n\022suppress_redundant\030\004 \001",
+      "interval\030\003 \001(\004\022\032\n\022suppress_redundant\030\004 \001" +
       "(\010\022\032\n\022heartbeat_interval\030\005 \001(\004\"\035\n\nQOSMar" +
       "king\022\017\n\007marking\030\001 \001(\r\"0\n\005Alias\022\030\n\004path\030\001" +
       " \001(\0132\n.gnmi.Path\022\r\n\005alias\030\002 \001(\t\"\'\n\tAlias" +
@@ -35151,7 +36558,7 @@ public final class GNMI {
       "2\014.gnmi.Update\022\034\n\006update\030\004 \003(\0132\014.gnmi.Up" +
       "date\022&\n\textension\030\005 \003(\0132\023.gnmi_ext.Exten" +
       "sion\"\254\001\n\013SetResponse\022\032\n\006prefix\030\001 \001(\0132\n.g" +
-      "nmi.Path\022$\n\010response\030\002 \003(\0132\022.gnmi.Update",
+      "nmi.Path\022$\n\010response\030\002 \003(\0132\022.gnmi.Update" +
       "Result\022 \n\007message\030\003 \001(\0132\013.gnmi.ErrorB\002\030\001" +
       "\022\021\n\ttimestamp\030\004 \001(\003\022&\n\textension\030\005 \003(\0132\023" +
       ".gnmi_ext.Extension\"\312\001\n\014UpdateResult\022\025\n\t" +
@@ -35161,7 +36568,7 @@ public final class GNMI {
       "n\"=\n\tOperation\022\013\n\007INVALID\020\000\022\n\n\006DELETE\020\001\022" +
       "\013\n\007REPLACE\020\002\022\n\n\006UPDATE\020\003\"\227\002\n\nGetRequest\022" +
       "\032\n\006prefix\030\001 \001(\0132\n.gnmi.Path\022\030\n\004path\030\002 \003(" +
-      "\0132\n.gnmi.Path\022\'\n\004type\030\003 \001(\0162\031.gnmi.GetRe",
+      "\0132\n.gnmi.Path\022\'\n\004type\030\003 \001(\0162\031.gnmi.GetRe" +
       "quest.DataType\022 \n\010encoding\030\005 \001(\0162\016.gnmi." +
       "Encoding\022#\n\nuse_models\030\006 \003(\0132\017.gnmi.Mode" +
       "lData\022&\n\textension\030\007 \003(\0132\023.gnmi_ext.Exte" +
@@ -35171,7 +36578,7 @@ public final class GNMI {
       "ion\022\036\n\005error\030\002 \001(\0132\013.gnmi.ErrorB\002\030\001\022&\n\te" +
       "xtension\030\003 \003(\0132\023.gnmi_ext.Extension\";\n\021C" +
       "apabilityRequest\022&\n\textension\030\001 \003(\0132\023.gn" +
-      "mi_ext.Extension\"\252\001\n\022CapabilityResponse\022",
+      "mi_ext.Extension\"\252\001\n\022CapabilityResponse\022" +
       ")\n\020supported_models\030\001 \003(\0132\017.gnmi.ModelDa" +
       "ta\022+\n\023supported_encodings\030\002 \003(\0162\016.gnmi.E" +
       "ncoding\022\024\n\014gNMI_version\030\003 \001(\t\022&\n\textensi" +
@@ -35181,7 +36588,7 @@ public final class GNMI {
       "\005BYTES\020\001\022\t\n\005PROTO\020\002\022\t\n\005ASCII\020\003\022\r\n\tJSON_I" +
       "ETF\020\004*A\n\020SubscriptionMode\022\022\n\016TARGET_DEFI" +
       "NED\020\000\022\r\n\tON_CHANGE\020\001\022\n\n\006SAMPLE\020\0022\343\001\n\004gNM" +
-      "I\022A\n\014Capabilities\022\027.gnmi.CapabilityReque",
+      "I\022A\n\014Capabilities\022\027.gnmi.CapabilityReque" +
       "st\032\030.gnmi.CapabilityResponse\022*\n\003Get\022\020.gn" +
       "mi.GetRequest\032\021.gnmi.GetResponse\022*\n\003Set\022" +
       "\020.gnmi.SetRequest\032\021.gnmi.SetResponse\022@\n\t" +
@@ -35191,21 +36598,13 @@ public final class GNMI {
       "om.cisco.stbarth.netconf.grpcB\004GNMI\312>\0050." +
       "7.0b\006proto3"
     };
-    com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
-    com.google.protobuf.Descriptors.FileDescriptor
+    descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.google.protobuf.AnyProto.getDescriptor(),
           com.google.protobuf.DescriptorProtos.getDescriptor(),
           com.cisco.stbarth.netconf.grpc.GNMIExt.getDescriptor(),
-        }, assigner);
+        });
     internal_static_gnmi_Notification_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_gnmi_Notification_fieldAccessorTable = new
