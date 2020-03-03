@@ -18,24 +18,32 @@
 
 package com.cisco.stbarth.netconf.anc;
 
-import com.jcraft.jsch.ChannelSubsystem;
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.JSchException;
-import com.jcraft.jsch.Session;
+import org.apache.sshd.client.SshClient;
+import org.apache.sshd.client.channel.ChannelSubsystem;
+import org.apache.sshd.client.future.AuthFuture;
+import org.apache.sshd.client.future.ConnectFuture;
+import org.apache.sshd.client.future.OpenFuture;
+import org.apache.sshd.client.keyverifier.AcceptAllServerKeyVerifier;
+import org.apache.sshd.client.keyverifier.RejectAllServerKeyVerifier;
+import org.apache.sshd.client.keyverifier.RequiredServerKeyVerifier;
+import org.apache.sshd.client.keyverifier.ServerKeyVerifier;
+import org.apache.sshd.client.session.ClientSession;
+import org.apache.sshd.common.session.SessionHeartbeatController.HeartbeatType;
 
 import java.io.IOException;
+import java.security.KeyPair;
+import java.security.PublicKey;
+import java.util.concurrent.TimeUnit;
 
 public class NetconfSSHClient extends NetconfClient {
-    private Session session;
+    private SshClient client;
     private String hostname;
     private String username;
     private String password;
-    private String keyfile;
-    private String keyfilePassphrase;
-    private boolean strictHostKeyChecking = true;
+    private KeyPair keypair;
+    private ServerKeyVerifier verifier = RejectAllServerKeyVerifier.INSTANCE;
     private int port;
-    private int timeout;
-    private int keepalive;
+    private int timeout = 5000;
 
     /**
      * Create a new NETCONF connection to the given server
@@ -50,6 +58,10 @@ public class NetconfSSHClient extends NetconfClient {
         this.hostname = hostname;
         this.port = port;
         this.username = username;
+
+        client = SshClient.setUpDefaultClient();
+        client.setSessionHeartbeat(HeartbeatType.IGNORE, TimeUnit.MILLISECONDS, 5000);
+        client.start();
     }
 
     /**
@@ -73,17 +85,27 @@ public class NetconfSSHClient extends NetconfClient {
      * @param keepalive interval in milliseconds
      */
     public void setKeepalive(int keepalive) {
-        this.keepalive = keepalive;
+        if (keepalive <= 0)
+            client.setSessionHeartbeat(HeartbeatType.NONE, TimeUnit.MILLISECONDS, 0);
+        else
+            client.setSessionHeartbeat(HeartbeatType.IGNORE, TimeUnit.MILLISECONDS, keepalive);
     }
 
     /**
-     * Use a private key to authenticate and use the password (if given) to decrypt it.
-     * @param keyFile
-     * @param keyFilePassphrase
+     * Use a private key to authenticate.
      */
-    public void setKeyFile(String keyFile, String keyFilePassphrase) {
-        this.keyfile = keyFile;
-        this.keyfilePassphrase = keyFilePassphrase;
+    public void setKeyPair(KeyPair keypair) {
+        this.keypair = keypair;
+    }
+
+    /**
+     * Set SSH host key to verify
+     * 
+     * @param key
+     */
+    public void setServerKey(PublicKey key) {
+        verifier = new RequiredServerKeyVerifier(key);
+        setStrictHostKeyChecking(true);
     }
 
     /**
@@ -94,7 +116,11 @@ public class NetconfSSHClient extends NetconfClient {
      * @param strictHostKeyChecking
      */
     public void setStrictHostKeyChecking(boolean strictHostKeyChecking) {
-        this.strictHostKeyChecking = strictHostKeyChecking;
+        if (strictHostKeyChecking) {
+            client.setServerKeyVerifier(verifier);
+        } else {
+            client.setServerKeyVerifier(AcceptAllServerKeyVerifier.INSTANCE);
+        }
     }
 
     /**
@@ -102,37 +128,43 @@ public class NetconfSSHClient extends NetconfClient {
      * @return
      * @throws NetconfException.ProtocolException
      */
-    public NetconfSession createSession() throws NetconfException.ProtocolException {
+    public synchronized NetconfSession createSession() throws NetconfException.ProtocolException {
+        ClientSession session;
         try {
-            if (session == null || !session.isConnected()) {
-                JSch jSch = new JSch();
+            ConnectFuture connect = client.connect(this.username, this.hostname, this.port);
+            connect.verify(timeout);
+            session = connect.getSession();
+        } catch (IOException e) {
+            throw new NetconfException.ProtocolException(e);
+        }
 
-                if (keyfile != null && keyfilePassphrase != null)
-                    jSch.addIdentity(keyfile, keyfilePassphrase);
-                else if (keyfile != null)
-                    jSch.addIdentity(keyfile);
+        if (keypair != null)
+            session.addPublicKeyIdentity(keypair);
 
-                session = jSch.getSession(username, hostname, port);
-                session.setDaemonThread(true);
-                session.setTimeout(timeout);
-                session.setServerAliveInterval(keepalive);
-                session.setConfig("StrictHostKeyChecking", strictHostKeyChecking ? "yes" : "no");
+        if (password != null)
+            session.addPasswordIdentity(password);
 
-                if (password != null)
-                    session.setPassword(password);
+        try {
+            AuthFuture auth = session.auth().verify(timeout);
+            if (!auth.isSuccess())
+                throw auth.getException();
 
-                session.connect();
-            }
+            ChannelSubsystem channel = session.createSubsystemChannel("netconf");
+            OpenFuture open = channel.open().verify(timeout);
+            if (!open.isOpened())
+                throw open.getException();
 
-            ChannelSubsystem channel = (ChannelSubsystem)session.openChannel("subsystem");
-            channel.setSubsystem("netconf");
             NetconfSession netconfSession = new NetconfSession(
-                    this, channel.getInputStream(), channel.getOutputStream(), channel::disconnect);
-            channel.connect();
+                    this, channel.getInvertedOut(), channel.getInvertedIn(), session::close);
             netconfSession.hello();
             return netconfSession;
-        } catch (JSchException | IOException e) {
-            throw new NetconfException.ProtocolException(e);
+        } catch (Throwable e) {
+            try {
+                session.close();
+            } catch (IOException f) {}
+
+            throw (e instanceof NetconfException.ProtocolException) ?
+                (NetconfException.ProtocolException)e : new NetconfException.ProtocolException(e);
         }
     }
 
@@ -140,6 +172,6 @@ public class NetconfSSHClient extends NetconfClient {
      * Close the NETCONF connection to the server including any remaining sessions.
      */
     public void close() {
-        session.disconnect();
+        client.stop();
     }
 }
