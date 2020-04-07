@@ -50,7 +50,8 @@ public class NetconfException extends Exception {
 
         public RPCException(XMLElement rpcReply) {
             super(rpcReply.getFirst("rpc-error").map(x -> x.getText("error-tag")).orElse("") + ": " +
-                    rpcReply.getFirst("rpc-error").map(x -> x.getText("error-message")).orElse(""));
+                    rpcReply.getFirst("rpc-error").map(x -> x.getText("error-message")).orElse("") + " (" +
+                    rpcReply.getFirst("rpc-error").map(x -> x.getText("error-info")).orElse("") + ")");
             this.rpcReply = rpcReply;
         }
 
