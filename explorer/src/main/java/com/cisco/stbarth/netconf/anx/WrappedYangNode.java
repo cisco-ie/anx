@@ -86,11 +86,38 @@ class WrappedYangNode {
         return caption;
     }
 
-    String getSensorPath() {
+    String getSensorPath(boolean keyed, XMLElement data) {
         String path = name;
-        for (WrappedYangNode node = this.parent; node != null; node = node.parent)
-            if (!(node.node instanceof CaseSchemaNode) && !(node.node instanceof ChoiceSchemaNode))
-                path = node.name + (node.module != null ? ':' : '/') + path;
+        if (keyed && node instanceof ListSchemaNode) {
+            // For lists, we need to include key leafs
+            for (QName key : ((ListSchemaNode)node).getKeyDefinition()) {
+                String value = '{' + key.getLocalName() + '}';
+                if (data != null)
+                    value = data.getTextOrDefault(key.getNamespace().toString(), key.getLocalName(), value);
+                path = path + "[" + key.getLocalName() + "=" + value + "]";
+            }
+        }
+
+        for (WrappedYangNode node = this.parent; node != null; node = node.parent) {
+            if (node.node instanceof CaseSchemaNode || node.node instanceof ChoiceSchemaNode)
+                continue;
+
+            if (data != null)
+                data = data.getParent();
+
+            String keys = "";
+            if (keyed && node.node instanceof ListSchemaNode) {
+                // For lists, we need to include key leafs
+                for (QName key : ((ListSchemaNode)(node.node)).getKeyDefinition()) {
+                    String value = '{' + key.getLocalName() + '}';
+                    if (data != null)
+                        value = data.getTextOrDefault(key.getNamespace().toString(), key.getLocalName(), value);
+                    keys = keys + "[" + key.getLocalName() + "=" + value + "]";
+                }
+            }
+
+            path = node.name + keys + (node.module != null ? ':' : '/') + path;
+        }
         return path;
     }
 

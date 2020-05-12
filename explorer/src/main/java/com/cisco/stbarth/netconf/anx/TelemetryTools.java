@@ -202,7 +202,7 @@ public class TelemetryTools {
             WrappedYangNode node = view.selectedNode;
             if (node.getNode() instanceof LeafSchemaNode || node.getNode() instanceof LeafListSchemaNode)
                 node = node.getParent();
-            path.setValue(node.getSensorPath());
+            path.setValue(node.getSensorPath(false, null));
         }
 
         HorizontalLayout buttonLayout = new HorizontalLayout();

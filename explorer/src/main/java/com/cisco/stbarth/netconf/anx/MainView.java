@@ -456,7 +456,7 @@ public final class MainView extends VerticalLayout implements View {
         // Expand up to 50 direct filter matches from data tree
         if (moduleFilter.isEmpty() && fieldFilter.isEmpty()) {
             for (WrappedYangNode node : schemaTree.getSelectedItems()) {
-                String path = node.getSensorPath();
+                String path = node.getSensorPath(false, null);
                 List<String> paths = Arrays.asList(path.substring(path.indexOf(':') + 1).split("/"));
                 remain = expandXMLSelected(dataTree, data.getRootItems(), paths, remain);
             }
@@ -590,7 +590,8 @@ public final class MainView extends VerticalLayout implements View {
             parameters.add(new AbstractMap.SimpleEntry<>("Keys", keys));
 
         parameters.add(new AbstractMap.SimpleEntry<>("XPath", node.getXPath()));
-        parameters.add(new AbstractMap.SimpleEntry<>("Telemetry Path", node.getSensorPath()));
+        parameters.add(new AbstractMap.SimpleEntry<>("Sensor Path", node.getSensorPath(false, null)));
+        parameters.add(new AbstractMap.SimpleEntry<>("Filter Path", node.getSensorPath(true, selectedData)));
         parameters.add(new AbstractMap.SimpleEntry<>("Maagic Path", node.getMaagic(false)));
         parameters.add(new AbstractMap.SimpleEntry<>("Maagic QPath", node.getMaagic(true)));
 

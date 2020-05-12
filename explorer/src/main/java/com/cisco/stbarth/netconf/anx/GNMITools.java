@@ -80,7 +80,7 @@ public class GNMITools {
 
     void updateNode(WrappedYangNode node) {
         if (path != null)
-            path.setValue(node.getSensorPath());
+            path.setValue(node.getSensorPath(false, null));
     }
 
     private void showSubscribe(int port, String path, String interval) {
