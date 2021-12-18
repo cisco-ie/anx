@@ -20,11 +20,6 @@ package com.cisco.stbarth.netconf.anx;
 
 import com.cisco.stbarth.netconf.grpc.GRPCClient;
 import com.cisco.stbarth.netconf.grpc.GRPCClient.SubscriptionEncoding;
-import com.jcraft.jsch.Channel;
-import com.jcraft.jsch.ChannelExec;
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.JSchException;
-import com.jcraft.jsch.Session;
 import com.cisco.stbarth.netconf.grpc.GRPCClient.GRPCException;
 import com.cisco.stbarth.netconf.grpc.GRPCClient.GRPCClientSecurity;
 import com.cisco.stbarth.netconf.anc.*;
@@ -39,10 +34,19 @@ import elemental.json.impl.JsonUtil;
 import org.opendaylight.yangtools.yang.model.api.LeafListSchemaNode;
 import org.opendaylight.yangtools.yang.model.api.LeafSchemaNode;
 
+import org.apache.sshd.client.SshClient;
+import org.apache.sshd.client.channel.ChannelExec;
+import org.apache.sshd.client.future.AuthFuture;
+import org.apache.sshd.client.future.ConnectFuture;
+import org.apache.sshd.client.future.OpenFuture;
+import org.apache.sshd.client.keyverifier.AcceptAllServerKeyVerifier;
+import org.apache.sshd.client.session.ClientSession;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -413,36 +417,45 @@ public class TelemetryTools {
         UI.getCurrent().addWindow(liveWindow);
     }
 
-    List<String> execSSHCommand(String command) throws JSchException, IOException {
-        JSch jSch = new JSch();
-
+    List<String> execSSHCommand(String command) throws Exception {
         Window loadingWindow = showLoadingWindow("SSH exec: " + command);
 
-        Session session = jSch.getSession(view.username, view.host, 22);
-        session.setDaemonThread(true);
-        session.setTimeout(3600000);
-        session.setServerAliveInterval(15000);
-        session.setConfig("StrictHostKeyChecking", "no");
-        session.setPassword(view.password);
         try {
-            session.connect();
+            int timeout = 5000;
 
-            Channel channel = session.openChannel("exec");
-            ((ChannelExec)channel).setCommand(command);
-            channel.setInputStream(null);
-            InputStream input = channel.getInputStream();
-            channel.connect();
+            SshClient client = SshClient.setUpDefaultClient();
+            client.setServerKeyVerifier(AcceptAllServerKeyVerifier.INSTANCE);
+            client.start();
+
+            ConnectFuture connect = client.connect(view.username, view.host, 22);
+            connect.verify(timeout);
+
+            ClientSession session = connect.getSession();
+            session.addPasswordIdentity(view.password);
+
+            AuthFuture auth = session.auth().verify(timeout);
+            if (!auth.isSuccess())
+                throw (Exception)auth.getException();
+
+            ChannelExec channel = session.createExecChannel(command);
+            channel.open().verify(timeout);
+
+            InputStream input = channel.getInvertedOut();
+            OutputStream output = channel.getInvertedIn();
+            output.close();
+
             List<String> result = new BufferedReader(new InputStreamReader(input)).lines().collect(Collectors.toList());
 
-            channel.disconnect();
-            session.disconnect();
+            channel.close();
+            session.close();
+            client.stop();
             return result;
         } finally {
             loadingWindow.close();
         }
     }
 
-    Map<String,Set<String>> getSearchTerms(String command) throws JSchException, IOException {
+    Map<String,Set<String>> getSearchTerms(String command) throws Exception {
         Pattern pattern = Pattern.compile("'([^']+)': [0-9']");
         TreeMap<String,Set<String>> terms = new TreeMap<>();
         for (String describeLine: execSSHCommand("schema-describe " + command)) {
@@ -529,7 +542,7 @@ public class TelemetryTools {
                     "No results have been found, sorry!");
                 resultHelp.setSizeFull();
                 resultLayout.addComponentAsFirst(resultHelp);
-            } catch (JSchException | IOException e) {
+            } catch (Exception e) {
                 Notification.show("Failed to execute SSH command: " + e.getMessage(), Notification.Type.ERROR_MESSAGE);
                 e.printStackTrace();
                 return;
