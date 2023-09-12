@@ -15,7 +15,7 @@ This is a graphical explorer for YANG models supported by a NETCONF device or se
 
 You can easily build and run using docker:
 * `docker build -t netconf-explorer .`
-* `docker run --name netconf-exlorer -d -p 9269:8080 netconf-explorer`
+* `docker run --name netconf-explorer -d -p 9269:8080 netconf-explorer`
 
 If you have docker-compose installed this can be shortened to:
 * `docker-compose up -d`
